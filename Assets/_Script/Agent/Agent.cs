@@ -1,7 +1,4 @@
-﻿using System;
-using _Script.Agent.FSM;
-using _Script.Agent.Modules;
-using _Script.ScriptableObject;
+﻿using _Script.Agent.Modules;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,9 +11,6 @@ namespace _Script.Agent
         
         public UnityEvent OnHit;
         public UnityEvent OnDeath;
-
-        protected AgentStateMachine _stateMachine;
-        [SerializeField] protected StateListSO stateList;
 
         public bool IsDead { get; protected set; }
         protected HealthModule Health { get; private set; }
@@ -39,9 +33,7 @@ namespace _Script.Agent
         protected override void AfterInitialize()
         {
             base.AfterInitialize();
-            
-            if(_stateMachine == null)
-                _stateMachine = new AgentStateMachine(this, stateList.states);
+
             Health.OnHealthChanged += HandleHealthChaged;
         }
 
@@ -54,16 +46,5 @@ namespace _Script.Agent
         }
 
         protected abstract void HandleHealthChaged(float prevHealth, float currentHealth, float max);
-        
-        private void Update()
-        {
-            if (_stateMachine == null)
-            {
-                _stateMachine = new AgentStateMachine(this, stateList.states);
-            }
-            _stateMachine.UpdateStateMachine();
-        }
-        public AgentState GetCurrentState() => _stateMachine.CurrentState;
-        public void ChangeState(int nextState) => _stateMachine.ChangeState(nextState);
     }
 }
