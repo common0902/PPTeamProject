@@ -20,8 +20,11 @@ namespace _Script.Agent.Modules
         {
             transform.eulerAngles = newAngle;
         }
-
+        
         public void PlayAnimation(int hash, int layer = -1, float normalizedTime = 0) => _animator.Play(hash, layer, normalizedTime);
+
+        public void PlayCrossFade(int clipHash, float normalizedTime, float fadeDuration, int layer = 0)
+            => _animator.CrossFadeInFixedTime(clipHash, fadeDuration, layer, normalizedTime);
         public void SetBool(AnimationHashSO hash, bool value) => _animator.SetBool(hash.AnimationHash, value);
         public void SetFloat(AnimationHashSO hash, float value) => _animator.SetFloat(hash.AnimationHash, value);
         public void SetInt(AnimationHashSO hash, int value) => _animator.SetInteger(hash.AnimationHash, value);

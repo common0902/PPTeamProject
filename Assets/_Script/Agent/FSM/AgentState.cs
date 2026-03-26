@@ -1,5 +1,4 @@
-using System.Runtime.InteropServices;
-using _Script.Agent.Modules;
+﻿using _Script.Agent.Modules;
 using _Script.ScriptableObject;
 
 namespace _Script.Agent.FSM
@@ -10,6 +9,7 @@ namespace _Script.Agent.FSM
         protected bool _isTriggerCall;
         
         protected IRenderer _renderer;
+        protected AnimationHashSO _animationHash;
 
         public AgentState(Agent agent, AnimationHashSO hash) //ParamSO도 받아와야함.
         {
@@ -21,7 +21,7 @@ namespace _Script.Agent.FSM
 
         public virtual void Enter()
         {
-            
+            //_renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0);
         }
 
         public virtual void Update()
