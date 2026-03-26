@@ -4,6 +4,7 @@ using _Script.ScriptableObject;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
@@ -48,6 +49,10 @@ namespace _Works._JYG._Script.Enemy.FSM
                     , Time.deltaTime * 2f);
             }
 
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                _enemy.ChangeState((int)EnemyState.CHASE);
+            }
             //여기서 만약 타겟을 시야각으로 발견했다면 chase state로 바뀐다.
         }
     }

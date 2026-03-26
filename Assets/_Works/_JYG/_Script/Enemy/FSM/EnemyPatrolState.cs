@@ -3,6 +3,8 @@ using _Script.Agent.FSM;
 using _Script.ScriptableObject;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
@@ -32,6 +34,11 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _patrolSystem.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
+            }
+
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                _enemy.ChangeState((int)EnemyState.CHASE);
             }
         }
 

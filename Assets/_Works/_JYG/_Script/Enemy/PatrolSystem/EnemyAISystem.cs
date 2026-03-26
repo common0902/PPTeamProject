@@ -15,7 +15,7 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
         public NavMeshAgent Navmesh { get; private set; }
 
         private int _minusRatio = 1;                //인덱스가 감소하는 값
-        private int _routeIndex = 0;                //다음 에너미 경로 인덱스
+        private int _routeIndex = -1;                //다음 에너미 경로 인덱스
 
         [field: SerializeField] public bool IsReturnRoute { get; private set; } = true;
         //에너미의 Index가 0으로 바로 초기화 될지, 천천히 1씩 감소할지
@@ -30,7 +30,7 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
             Navmesh = _agent.GetComponent<NavMeshAgent>();
             Debug.Assert(Navmesh != null, $"Owner에 Navmesh가 존재하지 않습니다! {gameObject.name}.");
             
-            _currentRoute = enemyPatrolRouteList[_routeIndex];
+            _currentRoute = enemyPatrolRouteList[0];
             PrevEnemyRoute = _currentRoute;
 
         }
