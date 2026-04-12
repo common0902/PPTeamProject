@@ -22,6 +22,7 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             base.Enter();
             _patrolSystem.Navmesh.isStopped = false;
+            Debug.Log("PATROL!");
         }
 
         public override void Update()

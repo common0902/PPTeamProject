@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 807358e1ce5f4d58888dc8191d1b67c3, type: 3}
-  m_Name: Enemy Chase state
+  m_Name: Enemy Attack state
   m_EditorClassIdentifier: Assembly-CSharp::_Script.Agent.FSM.StateSO
-  stateName: CHASE
-  className: _Works._JYG._Script.Enemy.FSM.EnemyChaseState
-  stateIndex: 2
-  stateParam: {fileID: 11400000, guid: 9039ac9ab1c5a9d4c8b422157a6e9a21, type: 2}
+  stateName: ATTACK
+  className: _Works._JYG._Script.Enemy.FSM.EnemyAttackState
+  stateIndex: 3
+  stateParam: {fileID: 11400000, guid: 2b98ce6ecac62024090d2b49ab30d24b, type: 2}

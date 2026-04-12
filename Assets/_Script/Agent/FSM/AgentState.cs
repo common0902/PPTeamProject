@@ -22,11 +22,11 @@ namespace _Script.Agent.FSM
         public virtual void Enter()
         {
             //_renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0);
+            _isTriggerCall = false;
         }
 
         public virtual void Update()
         {
-            _isTriggerCall = false;
         }
 
         public virtual void Exit()

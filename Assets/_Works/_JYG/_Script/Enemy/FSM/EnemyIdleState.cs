@@ -30,6 +30,8 @@ namespace _Works._JYG._Script.Enemy.FSM
             _currentRoute = _patrolSystem.CurrentRoute();
             _lastEnterTime = Time.time;
             _searchTime = _currentRoute.waitTime;
+
+            Debug.Log("IDLE!");
         }
 
         public override void Update()
