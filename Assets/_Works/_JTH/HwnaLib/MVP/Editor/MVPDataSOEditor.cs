@@ -85,7 +85,6 @@ namespace MVP.Editor
             _methodDropdown.RegisterValueChangedCallback(HandleModuleMethodChange);
             EventCallback<ChangeEvent<object>> handleSave = (ChangeEvent<object> _) =>
             {
-                _targetData.backupFormDataList = _targetData.formDataList;
                 EditorUtility.SetDirty(_targetData);
                 AssetDatabase.SaveAssetIfDirty(_targetData);
             };
