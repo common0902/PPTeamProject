@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 
-namespace MVP.System
+namespace HwanLib.MVP.System
 {
     public abstract class BasePresenter : MonoBehaviour
     {
+        [SerializeField] private MVPDataSO dataSO;
         private BaseView _view;
         private IModel _model;
 
@@ -14,8 +15,7 @@ namespace MVP.System
 
         private void Awake()
         {
-            _view.InitializeView(gameObject);
-            _model.InitializeModule();
+            GenerateViewAndModel();
 
             //Module에서 메서드 찾아서 Delegate로 변환 -> 메서드 이름을 키로 하여 저장
             Type dataType = typeof(BaseUIData);
@@ -27,6 +27,7 @@ namespace MVP.System
                 if ((method.ReturnType == dataType &&
                     method.GetParameters()[0].ParameterType == dataType) == true)
                 {
+                    // MehtodInfo엔 구현에 대한 정보가 없기 때문에 메서드가 있는 클래스의 객체를 넣어주어야 한다.
                     ModuleMethodDict.Add(method.Name, 
                         (Func<BaseUIData, BaseUIData>)method.CreateDelegate(delegateType, _model));
                 }
@@ -37,7 +38,21 @@ namespace MVP.System
         {
             _view.OnInteractiveObject += ApplyChangedValue;
         }
-        
+
+        private void OnDisable()
+        {
+            _view.OnInteractiveObject -= ApplyChangedValue;
+        }
+
+        private void GenerateViewAndModel()
+        {
+            _view = Activator.CreateInstance(dataSO.viewType) as BaseView;
+            _model = Activator.CreateInstance(dataSO.modelType) as IModel;
+            
+            _view.InitializeView(gameObject, dataSO.formDataList);
+            _model.InitializeModule();
+        }
+
         private BaseUIData ApplyChangedValue(string propertieName, BaseUIData value)
         {
             return ModuleMethodDict[propertieName]?.Invoke(value);

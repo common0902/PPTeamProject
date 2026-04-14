@@ -1,17 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace MVP.System
+namespace HwanLib.MVP.System
 {
     public abstract class BaseView
     {
         public InteractiveObject OnInteractiveObject;
 
-        public void InitializeView(GameObject root)
+        public void InitializeView(GameObject root, List<FormData> formDataList)
         {
-            BaseForm[] objects = root.GetComponentsInChildren<BaseForm>();
-            foreach (BaseForm obj in objects)
+            Transform[] children = root.GetComponentsInChildren<Transform>();
+            foreach (Transform child in children)
             {
-                // obj.Initialize(OnInteractiveObject);
+                foreach (FormData formData in formDataList)
+                {
+                    if (child.gameObject == formData.formObject)
+                    {
+                        BaseForm form = formData.addComponentMethod.Invoke(child.gameObject);
+                        // child.gameObject.AddComponent()
+                    }
+                }
             }
         }
     }

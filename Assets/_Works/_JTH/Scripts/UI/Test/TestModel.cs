@@ -1,4 +1,4 @@
-using MVP.System;
+using HwanLib.MVP.System;
 
 namespace _Works._JTH.Scripts.UI.Test
 {
@@ -7,11 +7,6 @@ namespace _Works._JTH.Scripts.UI.Test
         public void InitializeModule()
         {
             throw new System.NotImplementedException();
-        }
-
-        public BaseUIData DAAA(BaseUIData a)
-        {
-            return new BaseUIData();
         }
     }
 }

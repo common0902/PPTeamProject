@@ -1,6 +1,8 @@
-namespace MVP.System
+using UnityEngine;
+
+namespace HwanLib.MVP.System
 {
-    public abstract class BaseForm
+    public abstract class BaseForm : MonoBehaviour
     {
         public string TargetMethodName { get; private set; }
         
@@ -11,9 +13,11 @@ namespace MVP.System
             _onInteractiveObject = onInteractiveObject;
         }
 
-        protected T OnInteractive<T>(T value) where T : BaseUIData
+        protected TForm OnInteractive<TForm>(TForm value) where TForm : BaseUIData
         {
-            return _onInteractiveObject?.Invoke(TargetMethodName, value) as T;
+            return _onInteractiveObject?.Invoke(TargetMethodName, value) as TForm;
         }
+
+        public abstract BaseForm AddComponentToObject(GameObject childGameObject);
     }
 }

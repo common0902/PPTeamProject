@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using MVP.System;
+using HwanLib.MVP.System;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace MVP.Editor
+namespace HwanLib.MVP.Editor
 {
     [CustomEditor(typeof(MVPDataSO))]
     public class MVPDataSOEditor : UnityEditor.Editor
@@ -116,8 +116,8 @@ namespace MVP.Editor
             if (evt.newValue != evt.previousValue)
             {
                 _targetData.formDataList = null;
-                _targetData.modelTypeName = null;
-                _targetData.viewTypeName = null;
+                _targetData.SetType(true, null, null) ;
+                _targetData.SetType(false, null, null) ;
                 _targetData.parentPrefab = presenter;
             }
 
@@ -132,20 +132,21 @@ namespace MVP.Editor
         }
         
         private void HandleModelTypeNameChange(ChangeEvent<string> modelTypeName)
-        {
-            _targetData.modelTypeName = modelTypeName.newValue;
+        { 
+            _targetData.SetType(true, _uiAssembly.GetType(modelTypeName.newValue), modelTypeName.newValue);
             CheckFormContainerActive();
         }
 
         private void HandleViewTypeNameChange(ChangeEvent<string> viewTypeName)
         {
-            _targetData.viewTypeName = viewTypeName.newValue;
+            _targetData.SetType(false, _uiAssembly.GetType(viewTypeName.newValue), viewTypeName.newValue);
             CheckFormContainerActive();
         }
 
         private void HandleFormTypeChange(ChangeEvent<string> formType)
         {
-            CurrentFormData.formType = formType.newValue;
+            string formTypeName = formType.newValue;
+            CurrentFormData.SetType(_uiAssembly.GetType(formTypeName), formTypeName);
         }
 
         private void CheckTypeNameContainerActive()
@@ -203,7 +204,7 @@ namespace MVP.Editor
 
         private void FillFormTypeDropdown(DropdownField field)
         {
-            IEnumerable<string> choices = GetTypeNames(typeof(InteractiveObject));
+            IEnumerable<string> choices = GetTypeNames(typeof(BaseForm));
             
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -276,8 +277,10 @@ namespace MVP.Editor
 
         private void UpdateTypeNameDropdowns()
         {
-            UpdateFieldDropdown(_modelTypeNameDropdown, ref _targetData.modelTypeName);
-            UpdateFieldDropdown(_viewTypeNameDropdown, ref _targetData.viewTypeName);
+            UpdateFieldDropdown(_modelTypeNameDropdown, 
+                () => _targetData.SetType(true, null, null), _targetData.modelTypeName);
+            UpdateFieldDropdown(_viewTypeNameDropdown, 
+                () => _targetData.SetType(false, null, null), _targetData.viewTypeName);
         }
 
         private void UpdateFormDropdowns()
@@ -299,7 +302,8 @@ namespace MVP.Editor
             if (CurrentFormData != null)
             {
                 UpdateFieldDropdown(_methodDropdown, ref CurrentFormData.targetMethodName);
-                UpdateFieldDropdown(_formTypeDropdown, ref CurrentFormData.formType);
+                UpdateFieldDropdown(_formTypeDropdown,
+                    () => CurrentFormData.SetType(null, null), CurrentFormData.formTypeName);
             }
         }
         
@@ -312,6 +316,21 @@ namespace MVP.Editor
             } else if (_targetData != null)
             {
                 value = null;
+                EditorUtility.SetDirty(_targetData);
+            }
+            
+            AssetDatabase.SaveAssetIfDirty(_targetData);
+        }
+                
+        private void UpdateFieldDropdown(DropdownField field, Action setNullAction, string typeName)
+        {
+            if (_targetData != null && !string.IsNullOrEmpty(typeName)
+                                    && field.choices.Contains(typeName))
+            {
+                field.SetValueWithoutNotify(typeName);
+            } else if (_targetData != null)
+            {
+                setNullAction?.Invoke();
                 EditorUtility.SetDirty(_targetData);
             }
             

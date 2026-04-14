@@ -1,4 +1,4 @@
-namespace MVP.System
+namespace HwanLib.MVP.System
 {
     public class ModelData
     {
