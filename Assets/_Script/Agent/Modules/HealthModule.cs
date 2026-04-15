@@ -26,9 +26,9 @@ namespace _Script.Agent.Modules
             }
         }
 
-        public void Initialize(ModuleOwner moduleAgent)
+        public void Initialize(ModuleOwner moduleOwner)
         {
-            _moduleAgent = moduleAgent;
+            _moduleAgent = moduleOwner;
         }
 
         public void LateInitialize(ModuleOwner moduleAgent)

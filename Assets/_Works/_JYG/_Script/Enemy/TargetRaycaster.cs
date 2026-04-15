@@ -10,11 +10,11 @@ namespace _Works._JYG._Script.Enemy
         private ModuleOwner _owner;
         private GameObject _player;
         [field: SerializeField] public float Range { get; private set; } = 80f;
-        public GameObject Target{ get; private set; }
+        public GameObject TargetPlayer{ get; private set; }
         [SerializeField] private LayerMask targetMask;
-        public void Initialize(ModuleOwner moduleAgent)
+        public void Initialize(ModuleOwner moduleOwner)
         {
-            _owner = moduleAgent;
+            _owner = moduleOwner;
             _player = GameManager.Instance.Player;
         }
 
@@ -29,20 +29,20 @@ namespace _Works._JYG._Script.Enemy
             Debug.DrawRay(ray.origin, ray.direction * Range, Color.cyan);                            // 
             if (Physics.Raycast(ray, out RaycastHit hit, Range, targetMask))                                // 레이캐스트로 Target찾기.
             {
-                Target = hit.transform.gameObject;
+                TargetPlayer = hit.transform.gameObject;
                 return;
             }
-            Target = null;
+            TargetPlayer = null;
         }
 
         public bool TryGetTarget(out GameObject target) //TryGetComponent 참고함. Target 있으면 반환
         {
-            target = Target;
-            return Target != null;
+            target = TargetPlayer;
+            return TargetPlayer != null;
         }
         public bool TryGetTarget()                      //Target이 존재만 한다면 True 반환
         {
-            return Target != null;
+            return TargetPlayer != null;
         }
 
         private void OnDrawGizmosSelected()

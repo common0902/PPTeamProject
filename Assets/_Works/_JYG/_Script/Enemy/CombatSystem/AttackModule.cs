@@ -11,9 +11,9 @@ public class AttackModule : MonoBehaviour, IModule
     public event Action OnAttackEnd;
 
     private TargetRaycaster _targetRaycaster;
-    public void Initialize(ModuleOwner moduleAgent)
+    public void Initialize(ModuleOwner moduleOwner)
     {
-        _targetRaycaster = moduleAgent.GetModule<TargetRaycaster>();
+        _targetRaycaster = moduleOwner.GetModule<TargetRaycaster>();
     }
 
 

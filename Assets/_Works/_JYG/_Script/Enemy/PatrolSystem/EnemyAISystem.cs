@@ -24,9 +24,9 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
         public EnemyRoute PrevEnemyRoute { get; private set; }
         private EnemyRoute _currentRoute;
 
-        public void Initialize(ModuleOwner owner)
+        public void Initialize(ModuleOwner moduleOwner)
         {
-            _agent = owner as Agent;
+            _agent = moduleOwner as Agent;
             Navmesh = _agent.GetComponent<NavMeshAgent>();
             Debug.Assert(Navmesh != null, $"Owner에 Navmesh가 존재하지 않습니다! {gameObject.name}.");
             
