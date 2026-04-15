@@ -8,5 +8,10 @@ namespace _Works._JTH.Scripts.UI.Test
         {
             throw new System.NotImplementedException();
         }
+
+        public BaseUIData SDKJF(BaseUIData _targetData)
+        {
+            return null;
+        }
     }
 }

@@ -6,7 +6,7 @@ namespace HwanLib.MVP.System
     {
         private InteractiveObject _onInteractiveObject;
 
-        private void InitializeForm(InteractiveObject onInteractiveObject)
+        public void InitializeForm(InteractiveObject onInteractiveObject)
         {
             _onInteractiveObject = onInteractiveObject;
         }

@@ -11,12 +11,22 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
   m_Name: Event Container DataSO
-  m_EditorClassIdentifier: MVPSystem_Assembly::MVP.System.MVPDataSO
-  parentPrefab: {fileID: 2972762988213016153, guid: 8143d370e92822b468a2b5f63a605c3e, type: 3}
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.MVPDataSO
+  parentPrefab: {fileID: 5014438649365088193, guid: a5d2342f31c476b458721b4b9904d280, type: 3}
   formDataList:
-  - formObject: {fileID: 8973085167761158780, guid: 8143d370e92822b468a2b5f63a605c3e, type: 3}
-    targetMethodName: AAA
-    formType: 
-  modelTypeName: TestModel1
-  viewTypeName: TestView2
-  selectedChildIndex: 0
+    list:
+    - gameObjectName: F_sdfs
+      targetMethodName: SDKJF
+      formTypeName: ButtonForm
+    - gameObjectName: F_sdfs (1)
+      targetMethodName: SDKJF
+      formTypeName: DFJKFDForm
+    - gameObjectName: F_sdfs (2)
+      targetMethodName: 
+      formTypeName: 
+    - gameObjectName: F_sdfs (3)
+      targetMethodName: 
+      formTypeName: 
+  modelTypeName: TestModel
+  viewTypeName: TestView
+  selectedChildName: F_sdfs (2)

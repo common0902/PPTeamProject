@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Linq;
+using HwanLib.MVP.System.AddFormComponent;
 using UnityEngine;
 
 namespace HwanLib.MVP.System
@@ -7,18 +9,16 @@ namespace HwanLib.MVP.System
     {
         public InteractiveObject OnInteractiveObject;
 
-        public void InitializeView(GameObject root, List<FormData> formDataList)
+        public void InitializeView(GameObject root, MVPDataSO dataSO)
         {
             Transform[] children = root.GetComponentsInChildren<Transform>();
             foreach (Transform child in children)
             {
-                foreach (FormData formData in formDataList)
+                if (dataSO.GetFormDataKeys().Contains(child.name))
                 {
-                    if (child.gameObject == formData.formObject)
-                    {
-                        BaseForm form = formData.addComponentMethod.Invoke(child.gameObject);
-                        // child.gameObject.AddComponent()
-                    }
+                    BaseForm form = child.gameObject
+                        .AddFormComponent(dataSO.GetFormData(child.name).formTypeName);
+                    form.InitializeForm(OnInteractiveObject);
                 }
             }
         }

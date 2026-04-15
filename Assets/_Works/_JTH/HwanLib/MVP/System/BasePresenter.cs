@@ -34,28 +34,28 @@ namespace HwanLib.MVP.System
             }
         }
 
-        private void OnEnable()
+        protected virtual void OnEnable()
         {
             _view.OnInteractiveObject += ApplyChangedValue;
         }
 
-        private void OnDisable()
+        protected virtual void OnDisable()
         {
             _view.OnInteractiveObject -= ApplyChangedValue;
         }
 
         private void GenerateViewAndModel()
         {
-            _view = Activator.CreateInstance(dataSO.viewType) as BaseView;
-            _model = Activator.CreateInstance(dataSO.modelType) as IModel;
+            _view = Activator.CreateInstance(dataSO.GetViewType()) as BaseView;
+            _model = Activator.CreateInstance(dataSO.GetModelType()) as IModel;
             
-            _view.InitializeView(gameObject, dataSO.formDataList);
+            _view.InitializeView(gameObject, dataSO);
             _model.InitializeModule();
         }
 
         private BaseUIData ApplyChangedValue(GameObject sender, BaseUIData value)
         {
-            // string methodName = dataSO.formDataList[]
+            // string methodName = dataSO.formDataDict[]
             return ModuleMethodDict[sender.name]?.Invoke(value);
         }
     }

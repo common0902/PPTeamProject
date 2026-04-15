@@ -24,15 +24,14 @@ namespace HwanLib.MVP.Editor
         private DropdownField _methodDropdown;
         private VisualElement _typeNameContainer;
         private VisualElement _formDataContainer;
-        private Dictionary<string, int> _formIndexDict;
         
-        private FormData CurrentFormData
+        private FormData CurrentForm
         {
             get
             {
-                if (_targetData.formDataList.Count == 0)
+                if (string.IsNullOrEmpty(_targetData.selectedChildName))
                     return null;
-                return _targetData.formDataList[_targetData.selectedChildIndex];
+                return _targetData.GetFormData(_targetData.selectedChildName);
             }
         }
 
@@ -60,7 +59,7 @@ namespace HwanLib.MVP.Editor
             _childDropdown.RegisterValueChangedCallback(HandleChildObjectChange);
             _formTypeDropdown.RegisterValueChangedCallback(HandleFormTypeChange);
             _methodDropdown.RegisterValueChangedCallback(HandleModuleMethodChange);
-            EventCallback<ChangeEvent<object>> handleSave = (ChangeEvent<object> _) =>
+            EventCallback<ChangeEvent<object>> handleSave = _ =>
             {
                 EditorUtility.SetDirty(_targetData);
                 AssetDatabase.SaveAssetIfDirty(_targetData);
@@ -92,9 +91,10 @@ namespace HwanLib.MVP.Editor
 
             if (evt.newValue != evt.previousValue)
             {
-                _targetData.formDataList = null;
-                _targetData.SetType(true, null, null) ;
-                _targetData.SetType(false, null, null) ;
+                _targetData.ResetFormData();
+                _targetData.modelTypeName = null;
+                _targetData.modelTypeName = null;
+                _targetData.selectedChildName = null;
                 _targetData.parentPrefab = presenter;
             }
 
@@ -103,27 +103,30 @@ namespace HwanLib.MVP.Editor
 
         private void HandleChildObjectChange(ChangeEvent<string> childObjectName)
         {
-            _targetData.selectedChildIndex = _formIndexDict[childObjectName.newValue];
-            
+            _targetData.selectedChildName = childObjectName.newValue;
             UpdateFormDropdowns();
         }
         
         private void HandleModelTypeNameChange(ChangeEvent<string> modelTypeName)
         { 
-            _targetData.SetType(true, EditorInfo.UIAssembly.GetType(modelTypeName.newValue), modelTypeName.newValue);
+            _targetData.modelTypeName = modelTypeName.newValue;
             CheckFormContainerActive();
         }
 
         private void HandleViewTypeNameChange(ChangeEvent<string> viewTypeName)
         {
-            _targetData.SetType(false, EditorInfo.UIAssembly.GetType(viewTypeName.newValue), viewTypeName.newValue);
+            _targetData.viewTypeName = viewTypeName.newValue;
             CheckFormContainerActive();
         }
 
         private void HandleFormTypeChange(ChangeEvent<string> formType)
         {
-            string formTypeName = formType.newValue;
-            CurrentFormData.SetType(EditorInfo.UIAssembly.GetType(formTypeName), formTypeName);
+            CurrentForm.formTypeName = formType.newValue;
+        }
+
+        private void HandleModuleMethodChange(ChangeEvent<string> methodName)
+        {
+            CurrentForm.targetMethodName = methodName.newValue;
         }
 
         private void CheckTypeNameContainerActive()
@@ -147,32 +150,32 @@ namespace HwanLib.MVP.Editor
         private void CheckFormContainerActive()
         {
             if (string.IsNullOrEmpty(_targetData.modelTypeName) || string.IsNullOrEmpty(_targetData.viewTypeName) 
-                                                                || _targetData.parentPrefab == null)
+                                      || _targetData.parentPrefab == null)
             {
                 _formDataContainer.style.display = DisplayStyle.None;
                 return;
             }
             
             FillChildObjectDropdown(_childDropdown);
+            if (string.IsNullOrEmpty(_targetData.selectedChildName)
+                && _childDropdown.choices.Contains(_targetData.selectedChildName))
+            {
+                _targetData.selectedChildName = _childDropdown.choices.FirstOrDefault();
+            }
 
-            if (CurrentFormData != null)
+            if (CurrentForm != null)
             {
                 FillTargetMethodNameDropdown(_methodDropdown);
                 FillFormTypeDropdown(_formTypeDropdown);
-                UpdateFormDropdowns();
+                UpdateFormDropdowns(); 
             }
-            
-            _formDataContainer.style.display = DisplayStyle.Flex;
-        }
 
-        private void HandleModuleMethodChange(ChangeEvent<string> methodName)
-        {
-            CurrentFormData.targetMethodName = methodName.newValue;
+            _formDataContainer.style.display = DisplayStyle.Flex;
         }
 
         private void FillTypeNameDropdown(DropdownField field, Type fieldType)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(fieldType);
+            IEnumerable<string> choices = EditorInfo.GetTypeNames(fieldType, true);
             
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -181,7 +184,7 @@ namespace HwanLib.MVP.Editor
 
         private void FillFormTypeDropdown(DropdownField field)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(typeof(BaseForm));
+            IEnumerable<string> choices = EditorInfo.GetTypeNames(typeof(BaseForm), false);
             
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -190,51 +193,42 @@ namespace HwanLib.MVP.Editor
         
         private void FillChildObjectDropdown(DropdownField field)
         {
-            _targetData.formDataList ??= new List<FormData>();
-            _formIndexDict = new Dictionary<string, int>();
-            
             IEnumerable<string> choices = _targetData.parentPrefab.GetComponentsInChildren<Transform>()
                 .Where(child => child.gameObject.name.Contains("F_"))
-                .Select(child =>
-                {
-                    if (_targetData.formDataList
-                        .TrueForAll(data => data.formObject != child.gameObject))
-                    {
-                        FormData formData = new FormData();
-                        _targetData.formDataList.Add(formData);
-                        formData.formObject = child.gameObject;
-                    }
-                    int idx = _targetData.formDataList.Count - 1;
-                    _formIndexDict.Add(_targetData.formDataList[idx].formObject.name, idx);
-                    return child.name;
-                });
+                .Select(child => child.name);
+
+            List<FormData> formList = _targetData.GetFormDataArray().ToList();
+            List<FormData> newFormList = new();
             
-            List<string> childNamesList = new List<string>();
-                
-            foreach (string choice in _formIndexDict.Keys)
+            foreach (string formName in choices)
             {
-                if (!childNamesList.Contains(choice))
-                    childNamesList.Add(choice);
-                else
+                bool shouldAppend = true;
+                
+                foreach (var form in formList)
                 {
-                    EditorUtility.DisplayDialog("Error",
-                        "같은 이름의 인터렉티브 오브젝트가 2개 이상 존재합니다.", "OK");
-                    _targetData.parentPrefab = null;
-                    _uiPrefabObjectField.SetValueWithoutNotify(null);
-            
-                    return;
+                    if (formName == form.gameObjectName)
+                    {
+                        newFormList.Add(form);
+                        shouldAppend = false;
+                    }
+                }
+                
+                if (shouldAppend == true)
+                {
+                    FormData form = new() { gameObjectName = formName };
+                    newFormList.Add(form);
                 }
             }
-
+            
+            _targetData.SetFormDataList(newFormList);
+            
             field.choices.Clear();
             field.choices.AddRange(choices);
-            field.SetValueWithoutNotify(null);
         }
-
+        
         private void FillTargetMethodNameDropdown(DropdownField field)
         {
             Type dataType = typeof(BaseUIData);
-
             IEnumerable<string> choices = EditorInfo.UIAssembly.GetTypes()
                 .Where(type => type.Name == _targetData.modelTypeName)
                 .FirstOrDefault()
@@ -242,45 +236,24 @@ namespace HwanLib.MVP.Editor
                 .Where(method => method.ReturnType == dataType &&
                                  method.GetParameters()[0].ParameterType == dataType)
                 .Select(method => method.Name);
-
-            if (choices.Count() == 0)
-                EditorUtility.DisplayDialog("Error",
-                    "모듈에 메서드가 존재하지 않습니다.", "OK");
             
             field.choices.Clear();
             field.choices.AddRange(choices);
-            field.SetValueWithoutNotify(null);
         }
 
         private void UpdateTypeNameDropdowns()
         {
-            UpdateFieldDropdown(_modelTypeNameDropdown, 
-                () => _targetData.SetType(true, null, null), _targetData.modelTypeName);
-            UpdateFieldDropdown(_viewTypeNameDropdown, 
-                () => _targetData.SetType(false, null, null), _targetData.viewTypeName);
+            UpdateFieldDropdown(_modelTypeNameDropdown, ref _targetData.modelTypeName);
+            UpdateFieldDropdown(_viewTypeNameDropdown, ref _targetData.viewTypeName);
         }
 
         private void UpdateFormDropdowns()
         {
-            if (_targetData != null && 
-                
-                _childDropdown.choices.Contains(CurrentFormData.formObject.name))
+            if (CurrentForm != null)
             {
-                _childDropdown.SetValueWithoutNotify(CurrentFormData.formObject.name);
-            } else if (_targetData != null && _targetData.selectedChildIndex != 0)
-            {
-                _targetData.selectedChildIndex = 0;
-                _childDropdown.SetValueWithoutNotify(CurrentFormData.formObject.name);
-                EditorUtility.SetDirty(_targetData);
-            }
-            
-            AssetDatabase.SaveAssetIfDirty(_targetData);
-
-            if (CurrentFormData != null)
-            {
-                UpdateFieldDropdown(_methodDropdown, ref CurrentFormData.targetMethodName);
-                UpdateFieldDropdown(_formTypeDropdown,
-                    () => CurrentFormData.SetType(null, null), CurrentFormData.formTypeName);
+                UpdateFieldDropdown(_childDropdown, ref _targetData.selectedChildName);
+                UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName);
+                UpdateFieldDropdown(_methodDropdown, ref CurrentForm.targetMethodName);
             }
         }
         
@@ -290,24 +263,10 @@ namespace HwanLib.MVP.Editor
                                     && field.choices.Contains(value))
             {
                 field.SetValueWithoutNotify(value);
-            } else if (_targetData != null)
+            } else if (_targetData != null && string.IsNullOrEmpty(value))
             {
                 value = null;
-                EditorUtility.SetDirty(_targetData);
-            }
-            
-            AssetDatabase.SaveAssetIfDirty(_targetData);
-        }
-                
-        private void UpdateFieldDropdown(DropdownField field, Action setNullAction, string typeName)
-        {
-            if (_targetData != null && !string.IsNullOrEmpty(typeName)
-                                    && field.choices.Contains(typeName))
-            {
-                field.SetValueWithoutNotify(typeName);
-            } else if (_targetData != null)
-            {
-                setNullAction?.Invoke();
+                field.SetValueWithoutNotify(null);
                 EditorUtility.SetDirty(_targetData);
             }
             

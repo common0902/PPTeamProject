@@ -4,6 +4,6 @@ namespace _Works._JTH.Scripts.UI.Test
 {
     public class TestPresenter : BasePresenter
     {
-        
+        private int a;
     }
 }

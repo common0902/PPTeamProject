@@ -7,30 +7,78 @@ namespace HwanLib.MVP.System
     [CreateAssetMenu(fileName = "Event Container DataSO", menuName = "UI/MVP/Event Container DataSO")]
     public class MVPDataSO : ScriptableObject
     {
-        [HideInInspector] public BasePresenter parentPrefab;
-        [ReadOnly] public List<FormData> formDataList;
+        [HideInInspector] public BasePresenter parentPrefab; 
+        [ReadOnly] [SerializeField] private FormDataList formDataList;
 
-        public string modelTypeName { get; private set; }
-        public string viewTypeName { get; private set; }
-        public Type modelType { get; private set; }
-        public Type viewType { get; private set; }
-
-        public void SetType(bool isModelType, Type type, string name)
+        // Type은 직렬화가 되지 않기 때문에 저장이 안됨. 그래서 string으로 직렬화하고 
+        [HideInInspector] public string modelTypeName;
+        [HideInInspector] public string viewTypeName;
+        
+        public Type GetViewType() => EditorInfo.GetType(EditorInfo.UIAssembly, viewTypeName);
+        public Type GetModelType() => EditorInfo.GetType(EditorInfo.UIAssembly, modelTypeName);
+        
+        public FormData GetFormData(string key)
         {
-            if (isModelType == true)
+            formDataList ??= new FormDataList();
+            
+            foreach (FormData formData in formDataList.list)
             {
-                modelType = type;
-                modelTypeName = name;
+                if (formData.gameObjectName == key)
+                    return formData;
             }
-            else
+
+            return null;
+        }
+
+        public void SetFormDataList(List<FormData> formDataList)
+        {
+            this.formDataList.list = formDataList;
+        }
+
+        public List<string> GetFormDataKeys()
+        {
+            formDataList ??= new FormDataList();
+            
+            List<string> keys = new List<string>();
+
+            foreach (FormData formData in formDataList.list)
             {
-                viewType = type;
-                viewTypeName = name;
+                keys.Add(formData.gameObjectName);
             }
+
+            return keys;
+        }
+
+        public void RemoveFormData(string key)
+        {
+            formDataList ??= new FormDataList();
+
+            for (int i = 0; i < formDataList.list.Count; i++)
+            {
+                if (formDataList.list[i].gameObjectName == key)
+                    formDataList.list.RemoveAt(i);
+            }
+        }
+
+        public FormData[] GetFormDataArray()
+        { 
+            formDataList ??= new FormDataList();
+            return formDataList.list.ToArray();
+        }
+
+        public void ResetFormData()
+        {
+            formDataList = null;
         }
         
         #if UNITY_EDITOR
-        [HideInInspector] public int selectedChildIndex = 0;
+        [HideInInspector] public string selectedChildName;
         #endif
+        
+        [Serializable]
+        public class FormDataList
+        {
+            public List<FormData> list;
+        }
     }
 }
