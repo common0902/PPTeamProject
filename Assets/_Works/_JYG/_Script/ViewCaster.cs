@@ -37,17 +37,20 @@ namespace _Works._JYG._Script
         {
 
             float ang = Mathf.Acos(Vector3.Dot(transform.forward, (_player.transform.position - transform.position).normalized)) * Mathf.Rad2Deg;
-            if (Mathf.Abs(ang) <= (angle / 2) && _targetRaycaster.TryGetTarget()) // 적이 +angle, -angle보다 안쪽 각도에 존재한다면, Action 실행
+            if (_targetRaycaster.TryGetTarget())
             {
-                if (Vector3.Distance(transform.position, _targetRaycaster.TargetPlayer.transform.position) <= distance)
+                if (Vector3.Distance(transform.position, _targetRaycaster.TargetPlayer.transform.position) <= distance) // 적이 +angle, -angle보다 안쪽 각도에 존재한다면, Action 실행
                 {
-                    Debug.Log("Detected Enemy!");
-                    Debug.Log("Enemy Angle is " + ang);
+                    if (Mathf.Abs(ang) <= angle / 2)
+                    {
+                        Debug.Log("Detected Enemy!");
+                        Debug.Log("Enemy Angle is " + ang);
+                    }
                 }
-            }
-            else
-            {
-                Debug.Log("Not Anything.");
+                else
+                {
+                    Debug.Log("Can't Attach.");
+                }
             }
             
             float radian = (angle + transform.parent.eulerAngles.y) * Mathf.Deg2Rad;
