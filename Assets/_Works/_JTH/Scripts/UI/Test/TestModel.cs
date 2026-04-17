@@ -4,12 +4,12 @@ namespace _Works._JTH.Scripts.UI.Test
 {
     public class TestModel : IModel
     {
-        public void InitializeModule()
+        public void InitializeData()
         {
             throw new System.NotImplementedException();
         }
 
-        public BaseUIData SDKJF(BaseUIData _targetData)
+        public ChangedData SDKJF(ChangedData _targetData)
         {
             return null;
         }
