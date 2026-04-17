@@ -10,11 +10,9 @@ namespace _Works._JYG._Script.Enemy.FSM
     public class EnemyAttackState : AgentState
     {
         private GameObject _player;
-        private AbstractEnemy _enemy;
         public EnemyAttackState(Agent agent, AnimationHashSO hash) : base(agent, hash)
         {
             _player = GameManager.Instance.Player;
-            _enemy = agent as AbstractEnemy;
         }
 
         public override void Enter()

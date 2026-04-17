@@ -12,11 +12,8 @@ namespace _Works._JYG._Script.Enemy.FSM
         private IAISystem _navmesh;
         private GameObject _player; //나중에 Player Component로 대체해야한다.
         private TargetRaycaster _targetCaster;
-        private AbstractEnemy _enemy;
         public EnemyChaseState(Agent agent, AnimationHashSO hash) : base(agent, hash)
         {
-            _enemy = agent as AbstractEnemy;
-
             _player = GameManager.Instance.Player;
             Debug.Assert(_player != null, $"Player를 찾지 못했음. {agent.gameObject.name}");
 
