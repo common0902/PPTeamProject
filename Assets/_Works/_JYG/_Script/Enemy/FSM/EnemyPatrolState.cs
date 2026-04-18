@@ -27,7 +27,7 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             base.Update();
             //만약 시야각에 적이 있다면 chase로 돌입.
-            //2026.04.16 기획 변경됨. IDLE로 유저에게 약간의 시간을 주고, 
+            //2026.04.16 기획 변경됨. IDLE로 유저에게 약간의 시간을 주고, Chase로 전환.
             
             //목적지와의 거리가 0.5f 차이라면 경로 재설정, Idle에서 대기
             //만약 ViewCaster (시야각)에 타겟이 찍혔다면, IDLE에서 처리.

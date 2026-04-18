@@ -11,6 +11,10 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
+        public float enemyCurrentCaution;                       //에너미의 경계 수치. 1이 되면 위험 확정 상황.
+        [SerializeField] private float enemyCautionDelay = 5f;  //위험까지 가기 위해 기다려야하는 시간초. .
+        public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay);
+
         protected override void AfterInitialize()
         {
             base.AfterInitialize();
