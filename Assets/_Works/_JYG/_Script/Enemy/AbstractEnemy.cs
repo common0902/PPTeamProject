@@ -23,7 +23,7 @@ namespace _Works._JYG._Script.Enemy
         }
         protected override void HandleHealthChaged(float prevHealth, float currentHealth, float max)
         {
-
+            
         }
 
         private void Update()
