@@ -12,7 +12,8 @@ namespace _Works._JYG._Script.Enemy
         protected AgentStateMachine _stateMachine;
 
         public float enemyCurrentCaution;                       //에너미의 경계 수치. 1이 되면 위험 확정 상황.
-        [SerializeField] private float enemyCautionDelay = 5f;  //위험까지 가기 위해 기다려야하는 시간초. .
+        public float cautionRatio = 1f;                         //에너미의 경계 수치 증가값 배율.
+        [SerializeField] private float enemyCautionDelay = 5f;  //위험까지 가기 위해 기다려야하는 시간초.
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay);
 
         protected override void AfterInitialize()
@@ -37,5 +38,15 @@ namespace _Works._JYG._Script.Enemy
         }
         public void ChangeState(int index) => _stateMachine.ChangeState(index);
         public AgentState GetCurrentState => _stateMachine.CurrentState;
+
+        public float EnemyFindPlayer()
+        {
+            if (enemyCurrentCaution >= 0)
+                enemyCurrentCaution += Time.deltaTime * cautionRatio;
+            else
+                enemyCurrentCaution = 0;
+            
+            return GetEnemyCaution;
+        }
     }
 }

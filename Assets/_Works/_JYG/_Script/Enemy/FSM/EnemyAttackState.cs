@@ -24,8 +24,10 @@ namespace _Works._JYG._Script.Enemy.FSM
 
         public override void Update()
         {
+            Vector3 lookDir = _player.transform.position - _agent.transform.position;
+            lookDir.y = 0;
             _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation
-                , Quaternion.LookRotation(_player.transform.position - _agent.transform.position) // 적을 바라보는 벡터 구하기.
+                , Quaternion.LookRotation(lookDir) // 적을 바라보는 벡터 구하기.
                 , Time.deltaTime * 5f);
 
             //공격이 모두 끝났다면 다시 chase로 돌아간다.
