@@ -39,14 +39,12 @@ namespace _Works._JYG._Script.Enemy
         public void ChangeState(int index) => _stateMachine.ChangeState(index);
         public AgentState GetCurrentState => _stateMachine.CurrentState;
 
-        public float EnemyFindPlayer()
+        public void EnemyFindPlayer()
         {
             if (enemyCurrentCaution >= 0)
                 enemyCurrentCaution += Time.deltaTime * cautionRatio;
             else
                 enemyCurrentCaution = 0;
-            
-            return GetEnemyCaution;
         }
     }
 }

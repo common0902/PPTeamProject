@@ -38,11 +38,11 @@ namespace _Works._JYG._Script.Enemy
         public bool TryGetTarget(out GameObject target) //TryGetComponent 참고함. Target 있으면 반환
         {
             target = TargetPlayer;
-            return TargetPlayer != null;
+            return TargetPlayer != null && _player == TargetPlayer;
         }
         public bool TryGetTarget()                      //Target이 존재만 한다면 True 반환
         {
-            return TargetPlayer != null;
+            return TargetPlayer != null && _player == TargetPlayer;
         }
 
         private void OnDrawGizmosSelected()
