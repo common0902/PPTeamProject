@@ -44,7 +44,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             _enemy.EnemyFindPlayer();
             if (_viewCaster.IsTargetAttached && _targetRaycaster.TryGetTarget()) //Enemy의 시야에 발각되었다! , Enemy의 타겟이 존재한다!
             {
-                _enemy.cautionRatio = 1;
+                _enemy.cautionRatio = 1; //여기서 Enemy와 Player와의 Distance를 구하고, 이를 Ratio에 적용한다.
                 
                 if (Mathf.Approximately(_enemy.GetEnemyCaution, 1)) //만약 Enemy의 경계수치가 최고조에 달했다면,
                 {
@@ -64,6 +64,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             else //Enemy의 시야범위 밖에 존재한다.
             {
                 _enemy.cautionRatio = -1;
+                // 바깥으로 나간 뒤, 3초 후부터 줄어들기 시작한다.
             }
             
             #endregion
