@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
-  m_Name: PopupUI
-  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.MVPDataSO
+  m_Name: MVPDataSO
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
   parentPrefab: {fileID: 9018258415325778279, guid: f77978312e9b4e74d8321f65638154da, type: 3}
   formDataList:
     list:
@@ -29,8 +29,8 @@ MonoBehaviour:
       targetMethodName: YesButtonClickHandler
     - childIndex: 9
       gameObjectName: F_NoBtn
-      formTypeName: 
-      targetMethodName: None
+      formTypeName: ButtonForm
+      targetMethodName: NoButtonClickHandler
   modelTypeName: PopupUIModel
   viewTypeName: PopupUIView
   selectedChildName: F_NoBtn

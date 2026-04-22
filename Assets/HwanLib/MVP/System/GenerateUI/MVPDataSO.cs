@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using HwanLib.MVP.System.BaseMVP;
 using UnityEngine;
 
-namespace HwanLib.MVP.System
+namespace HwanLib.MVP.System.GenerateUI
 {
     [CreateAssetMenu(fileName = "MVPDataSO", menuName = "UI/MVP/MVPDataSO")]
     public class MVPDataSO : ScriptableObject
@@ -79,7 +79,7 @@ namespace HwanLib.MVP.System
         [Serializable]
         public class FormDataList
         {
-            public List<FormData> list;
+            public List<FormData> list = new();
         }
     }
 }

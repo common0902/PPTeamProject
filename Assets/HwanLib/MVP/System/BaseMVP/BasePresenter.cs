@@ -1,20 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.BaseMVP
 {
     public abstract class BasePresenter : MonoBehaviour
     {
-#if UNITY_EDITOR
-        [SerializeField] private MVPDataSO _dataSO;
-
-        private void Awake()
-        {
-            InitializePresenter(_dataSO);
-        }
-#endif
         protected BaseView View;
         protected IModel Model;
 

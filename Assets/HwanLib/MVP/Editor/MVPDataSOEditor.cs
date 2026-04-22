@@ -5,6 +5,7 @@ using System.Reflection;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.GenerateUI;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -85,7 +86,11 @@ namespace HwanLib.MVP.Editor
         {
             BasePresenter presenter = evt.newValue as BasePresenter;
             if (presenter == null)
+            {
+                _targetData.parentPrefab = null;
+                CheckTypeNameContainerActive();
                 return;
+            }
             
             if (!PrefabUtility.IsPartOfPrefabAsset(presenter.gameObject))
             {
@@ -171,8 +176,7 @@ namespace HwanLib.MVP.Editor
             }
             
             FillChildObjectDropdown(_childDropdown);
-            if (string.IsNullOrEmpty(_targetData.selectedChildName)
-                && _childDropdown.choices.Contains(_targetData.selectedChildName))
+            if (string.IsNullOrEmpty(_targetData.selectedChildName))
             {
                 _targetData.selectedChildName = _childDropdown.choices.FirstOrDefault();
             }
@@ -302,21 +306,19 @@ namespace HwanLib.MVP.Editor
                                     && field.choices.Contains(value))
             {
                 field.SetValueWithoutNotify(value);
-                EditorUtility.SetDirty(_targetData);
             } 
             else if (_targetData != null && field.choices.Contains("None"))
             {
                 value = "None";
                 field.SetValueWithoutNotify(value);
-                EditorUtility.SetDirty(_targetData);
             } 
             else if (_targetData != null)
             {
                 value = null;
                 field.SetValueWithoutNotify(value);
-                EditorUtility.SetDirty(_targetData);
             }
             
+            EditorUtility.SetDirty(_targetData);
             AssetDatabase.SaveAssetIfDirty(_targetData);
         }
 

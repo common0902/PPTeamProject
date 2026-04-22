@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace HwanLib.MVP.System
+namespace HwanLib.MVP.System.GenerateUI
 {
     [Serializable]
     public class FormData

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HwanLib.MVP.System.AddFormComponent;
+using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.BaseMVP

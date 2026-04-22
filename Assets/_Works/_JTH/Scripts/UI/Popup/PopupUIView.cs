@@ -2,6 +2,7 @@
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 using UnityEngine.UI;
 
