@@ -1,25 +1,27 @@
-using HwanLib.MVP.System;
+﻿using HwanLib.MVP.System;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;
 using TMPro;
+using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
-    public class TextButtonForm : ButtonForm
+    [RequireComponent(typeof(TextMeshProUGUI))]
+    public class TextForm : BaseForm
     {
-        private TextMeshProUGUI _tmpPro;
+        private TextMeshProUGUI _text;
 
         public override void InitializeForm(int childIndex)
         {
             base.InitializeForm(childIndex);
             
-            _tmpPro = GetPartOfFormComponent<TextMeshProUGUI>();
+            _text = GetComponent<TextMeshProUGUI>();
         }
-        
+
         protected override void SetVisual(ChangedData changedData)
         {
             base.SetVisual(changedData);
-            
-            _tmpPro.text = (changedData as UIStringParam)?.Value;
+            _text.text = ((UIStringParam)changedData).Value;
         }
     }
 }

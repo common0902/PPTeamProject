@@ -12,6 +12,9 @@ namespace {0}
     {{
         public static BaseForm AddFormComponent(this GameObject gameObject, string formName)
         {{
+            if (gameObject.TryGetComponent(out BaseForm form))
+                return form;
+            
             switch (formName)
             {{{2}
                 default:

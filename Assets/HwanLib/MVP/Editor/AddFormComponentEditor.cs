@@ -1,6 +1,7 @@
 using System.Linq;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
+using HwanLib.MVP.System.BaseMVP;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -25,7 +26,7 @@ namespace HwanLib.MVP.Editor
         
             editorView.CloneTree(root);
 
-            GenerateScriptEditor generator = new(root, "AddFormComponenter"
+            _ = new GenerateScriptEditor(root, "AddFormComponenter"
                 , "AddFormComponenterPath", GenerateCode);
         }
     

@@ -2,13 +2,6 @@
     <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: column;">
         <uie:ObjectField label="UI Prefab" name="UIPrefabObjectField" type="HwanLib.MVP.System.BasePresenter, MVPSystem_Assembly"/>
         <ui:VisualElement name="TypeNameContainer" style="margin-top: 3px; margin-right: 3px; margin-bottom: 3px; margin-left: 3px;">
-            <ui:VisualElement name="EnumGenContainer" style="flex-direction: column;">
-                <ui:VisualElement name="VisualElement" style="flex-grow: 1; -unity-text-generator: standard;">
-                    <ui:Button text="📁 Select Folder" name="FolderSelectBtn"/>
-                    <ui:Label text="오브젝트 Enum을 생성할 폴더를 선택하세요." name="GenerateFolderLabel" style="flex-basis: 20px; flex-grow: 1; overflow: hidden; text-overflow: ellipsis;"/>
-                </ui:VisualElement>
-                <ui:Button text="생성" name="GenerateBtn"/>
-            </ui:VisualElement>
             <ui:Label text="Type Name" style="-unity-font-style: bold; font-size: 13px; margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px;"/>
             <ui:DropdownField label="Model Type Name" name="ModelTypeNameDropdown"/>
             <ui:DropdownField label="View Type Name" name="ViewTypeNameDropdown"/>
@@ -18,6 +11,13 @@
             <ui:DropdownField label="Child Object" name="ChildObjectDropdown"/>
             <ui:DropdownField label="Form Type" name="FormTypeDropdown"/>
             <ui:DropdownField label="Method Name" name="TargetMethodNameDropdown"/>
+            <ui:VisualElement name="EnumGenContainer" style="flex-direction: column;">
+                <ui:VisualElement name="VisualElement" style="flex-grow: 1; -unity-text-generator: standard;">
+                    <ui:Button text="📁 Select Folder" name="FolderSelectBtn"/>
+                    <ui:Label text="오브젝트 Enum을 생성할 폴더를 선택하세요." name="GenerateFolderLabel" style="flex-basis: 20px; flex-grow: 1; overflow: hidden; text-overflow: ellipsis;"/>
+                </ui:VisualElement>
+                <ui:Button text="생성" name="GenerateBtn"/>
+            </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
 </ui:UXML>

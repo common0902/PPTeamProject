@@ -1,14 +1,15 @@
 using System;
+using UnityEngine;
 
 namespace HwanLib.MVP.System
 {
     [Serializable]
     public class FormData
     {
-        public int childIndex;
-        public string targetMethodName;
-        public string formTypeName;
+        [HideInInspector] public int childIndex;
         public string gameObjectName;
+        public string formTypeName;
+        public string targetMethodName;
 
         public FormData()
         {

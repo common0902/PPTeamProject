@@ -21,10 +21,13 @@ namespace HwanLib.MVP.System
                         .SelectMany(ass => ass.GetTypes())
                         .Where(type => type.Name == "MVPAssemblyMarker")
                         .FirstOrDefault();
-            
+
                     if (targetType == null)
+                    {
                         EditorUtility.DisplayDialog("Error",
                             "타입을 찾기 위해 MVPAssemblyMarker.cs 파일이 필요합니다.", "OK");
+                        return null;
+                    }
             
                     _uiAssembly = Assembly.GetAssembly(targetType);
                 }

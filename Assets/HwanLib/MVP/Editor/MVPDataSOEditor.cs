@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
+using HwanLib.MVP.System.BaseMVP;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -26,7 +27,6 @@ namespace HwanLib.MVP.Editor
         private VisualElement _typeNameContainer;
         private VisualElement _formDataContainer;
 
-        private Dictionary<string, int> childIndexDict = new();
         private GenerateScriptEditor _scriptGenerator;
         
         private FormData CurrentForm
@@ -150,7 +150,8 @@ namespace HwanLib.MVP.Editor
             
             FillTypeNameDropdown(_modelTypeNameDropdown, typeof(IModel));
             FillTypeNameDropdown(_viewTypeNameDropdown, typeof(BaseView));
-            SetDefaultModelAndView();
+            
+            SetDefaultName();
             UpdateTypeNameDropdowns();
             
             _typeNameContainer.style.display = DisplayStyle.Flex;
@@ -161,8 +162,9 @@ namespace HwanLib.MVP.Editor
         private void CheckFormContainerActive()
         {
             //Model은 간단한 UI에선 사용하지 않을 수 있기 때문에 검사에서 제외
-            if (string.IsNullOrEmpty(_targetData.viewTypeName) 
-                                      || _targetData.parentPrefab == null)
+            if (string.IsNullOrEmpty(_targetData.viewTypeName)
+                || string.IsNullOrEmpty(_targetData.modelTypeName) 
+                || _targetData.parentPrefab == null)
             {
                 _formDataContainer.style.display = DisplayStyle.None;
                 return;
@@ -191,14 +193,13 @@ namespace HwanLib.MVP.Editor
             
             field.choices.Clear();
             field.choices.AddRange(choices);
-            field.SetValueWithoutNotify(null);
         }
 
         private void FillChildObjectDropdown(DropdownField field)
         {
             Transform[] children = _targetData.parentPrefab.GetComponentsInChildren<Transform>();
             
-            List<FormData> formList = _targetData.GetFormDataList().ToList();
+            List<FormData> formList = _targetData.GetFormDataList();
             List<FormData> newFormList = new();
             
             for (int i = 0; i < children.Length; ++i)
@@ -214,7 +215,6 @@ namespace HwanLib.MVP.Editor
                     if (child.name == form.gameObjectName)
                     {
                         form.childIndex = i;
-                        childIndexDict.Add(child.name, i);
                         newFormList.Add(form);
                         shouldAppend = false;
                     }
@@ -222,7 +222,6 @@ namespace HwanLib.MVP.Editor
                 
                 if (shouldAppend == true)
                 {
-                    childIndexDict.Add(child.name, i);
                     FormData form = new(i, child.name);
                     newFormList.Add(form);
                 }
@@ -251,23 +250,24 @@ namespace HwanLib.MVP.Editor
             IEnumerable<string> choices = EditorInfo.UIAssembly.GetTypes()
                 .Where(type => type.Name == _targetData.modelTypeName)
                 .FirstOrDefault()
-                ?.GetMethods(BindingFlags.Instance | BindingFlags.Public)
-                .Where(method => method.ReturnType == dataType &&
-                                 method.GetParameters()[0].ParameterType == dataType)
+                ?.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
+                .Where(method => (method.ReturnType == dataType 
+                                  && method.GetParameters().Length == 1
+                                  && method.GetParameters()[0].ParameterType == dataType) == true)
                 .Select(method => method.Name);
 
-            if (choices != null)
-            {
-                field.choices.Clear();
-                field.choices.AddRange(choices);
-            }
+            field.choices.Clear();
+            field.choices.Add("None");
+            field.choices.AddRange(choices);
+            field.SetValueWithoutNotify("None");
         }
 
-        private void SetDefaultModelAndView()
+        private void SetDefaultName()
         {
             if (_targetData.parentPrefab == null)
                 return;
 
+            //실제로 존재하지 않아도 Update할 때 자동으로 걸러짐
             if (string.IsNullOrEmpty(_targetData.viewTypeName))
             {
                 _targetData.viewTypeName = _targetData.parentPrefab.GetType()
@@ -302,10 +302,18 @@ namespace HwanLib.MVP.Editor
                                     && field.choices.Contains(value))
             {
                 field.SetValueWithoutNotify(value);
-            } else if (_targetData != null && string.IsNullOrEmpty(value))
+                EditorUtility.SetDirty(_targetData);
+            } 
+            else if (_targetData != null && field.choices.Contains("None"))
+            {
+                value = "None";
+                field.SetValueWithoutNotify(value);
+                EditorUtility.SetDirty(_targetData);
+            } 
+            else if (_targetData != null)
             {
                 value = null;
-                field.SetValueWithoutNotify(null);
+                field.SetValueWithoutNotify(value);
                 EditorUtility.SetDirty(_targetData);
             }
             
@@ -314,7 +322,7 @@ namespace HwanLib.MVP.Editor
 
         private string GenerateCode(string folderPath, string scriptName)
         {
-            string enumString = string.Join(",", _targetData.GetFormDataList()
+            string enumString = string.Join(", ", _targetData.GetFormDataList()
                 .Select(form => $"{form.gameObjectName.Substring("F_".Length)} = {form.childIndex}"));
 
             string nameSpace = FileUtil.GetProjectRelativePath(folderPath).Substring("Assets/".Length);
