@@ -42,7 +42,7 @@ namespace _Works._JYG._Script.Enemy
         public void EnemyFindPlayer()
         {
             if (enemyCurrentCaution >= 0)
-                enemyCurrentCaution += Time.deltaTime * cautionRatio;
+                enemyCurrentCaution += Time.deltaTime * cautionRatio; //cautionRatio : Distance비례 증가값
             else
                 enemyCurrentCaution = 0;
         }

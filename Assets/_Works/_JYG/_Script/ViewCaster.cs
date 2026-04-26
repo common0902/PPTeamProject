@@ -13,7 +13,7 @@ namespace _Works._JYG._Script
         
         private GameObject _player;
         
-        [SerializeField] private float distance;
+        [field:SerializeField] public float Distance { get; private set; }
         [SerializeField] private float angle;
         
         //public Action<
@@ -21,7 +21,7 @@ namespace _Works._JYG._Script
         private Vector3 _directionL;
         private Vector3 _directionR;
 
-        public bool IsTargetAttached { get; private set; } //적이 시야 범위 내에 들어왔는지를 감지함.
+        public bool IsTargetAttached { get; private set; } = false; //적이 시야 범위 내에 들어왔는지를 감지함.
 
 
         public void Initialize(ModuleOwner moduleOwner)
@@ -47,7 +47,7 @@ namespace _Works._JYG._Script
             if (_targetRaycaster.TryGetTarget())
             {
                 //타겟 대상이 존재한다.
-                if (Vector3.Distance(transform.position, _targetRaycaster.TargetPlayer.transform.position) <= distance) // 적이 +angle, -angle보다 안쪽 각도에 존재한다면, Action 실행
+                if (Vector3.Distance(transform.position, _targetRaycaster.TargetPlayer.transform.position) <= Distance) // 적이 +angle, -angle보다 안쪽 각도에 존재한다면, Action 실행
                 {
                     //정의한 거리 안에 타겟이 접근하였다.
                     if (Mathf.Abs(ang) <= angle / 2)
@@ -66,10 +66,10 @@ namespace _Works._JYG._Script
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.black;
-            Gizmos.DrawWireSphere(transform.position, distance);
+            Gizmos.DrawWireSphere(transform.position, Distance);
             
-            Debug.DrawRay(transform.position, _directionL.normalized * distance, Color.red);
-            Debug.DrawRay(transform.position, _directionR.normalized * distance, Color.red);
+            Debug.DrawRay(transform.position, _directionL.normalized * Distance, Color.red);
+            Debug.DrawRay(transform.position, _directionR.normalized * Distance, Color.red);
         }
     }
 }

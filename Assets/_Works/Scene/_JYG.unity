@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 350209446}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.99996686, z: 0, w: 0.008141879}
-  m_LocalPosition: {x: -8.7, y: 1.5, z: -4.33}
+  m_LocalPosition: {x: 30.72, y: 1.5, z: -2.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 379543006}
   - component: {fileID: 379543007}
   m_Layer: 7
-  m_Name: TestObj
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -395,7 +395,7 @@ MonoBehaviour:
   <stateListSO>k__BackingField: {fileID: 11400000, guid: f781bd68529cba648be9e2e0407f698f, type: 2}
   enemyCurrentCaution: 0
   cautionRatio: 1
-  enemyCautionDelay: 5
+  enemyCautionDelay: 3
 --- !u!1001 &388074823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -821,7 +821,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64606df1c46e32428cfc6b432e85e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.ViewCaster
-  distance: 8
+  <Distance>k__BackingField: 20
   angle: 150
 --- !u!1001 &1197229374
 PrefabInstance:

@@ -1,5 +1,6 @@
 ﻿using _Script.Agent;
 using _Script.Agent.Modules;
+using Unity.Cinemachine;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -49,6 +50,13 @@ namespace _Works._JYG._Script.Enemy
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.forward * Range);
+        }
+
+        public float GetDistance2Target()
+        {
+            if (TargetPlayer == null)
+                return 100f;
+            return Vector3.Distance(transform.position, TargetPlayer.transform.position);
         }
     }
 }
