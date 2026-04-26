@@ -8,7 +8,7 @@ public class AttackModule : MonoBehaviour, IModule
 {
     [field: SerializeField] public PoolManagerSO PoolManager { get; private set; }
 
-    public event Action OnAttackEnd;
+    //public event Action OnAttackEnd;
 
     private TargetRaycaster _targetRaycaster;
     public void Initialize(ModuleOwner moduleOwner)

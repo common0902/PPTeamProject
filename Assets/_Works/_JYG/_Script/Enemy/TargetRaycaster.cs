@@ -1,5 +1,6 @@
 ﻿using _Script.Agent;
 using _Script.Agent.Modules;
+using Unity.Cinemachine;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -38,17 +39,24 @@ namespace _Works._JYG._Script.Enemy
         public bool TryGetTarget(out GameObject target) //TryGetComponent 참고함. Target 있으면 반환
         {
             target = TargetPlayer;
-            return TargetPlayer != null;
+            return TargetPlayer != null && _player == TargetPlayer;
         }
         public bool TryGetTarget()                      //Target이 존재만 한다면 True 반환
         {
-            return TargetPlayer != null;
+            return TargetPlayer != null && _player == TargetPlayer;
         }
 
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.red;
             Gizmos.DrawRay(transform.position, transform.forward * Range);
+        }
+
+        public float GetDistance2Target()
+        {
+            if (TargetPlayer == null)
+                return 100f;
+            return Vector3.Distance(transform.position, TargetPlayer.transform.position);
         }
     }
 }
