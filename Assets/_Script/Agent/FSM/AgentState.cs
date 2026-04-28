@@ -21,6 +21,7 @@ namespace _Script.Agent.FSM
         public AgentState(Agent agent, AnimationHashSO hash) //ParamSO도 받아와야함.
         {
             _agent = agent;
+            _animationHash = hash;
 
             _enemy = agent as AbstractEnemy;
             
@@ -33,7 +34,7 @@ namespace _Script.Agent.FSM
 
         public virtual void Enter()
         {
-            //_renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0);
+            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0);
             _isTriggerCall = false;
         }
 

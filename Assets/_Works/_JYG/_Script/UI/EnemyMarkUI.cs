@@ -1,20 +1,23 @@
 using System;
 using System.Collections;
+using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
+using _Works._JYG._Script.Enemy;
 using _Works._JYG._Script.EventChannel.UIEvent;
 using UnityEngine;
 
 namespace _Works._JYG._Script.UI
 {
-    public class EnemyMarkUI : MonoBehaviour
+    public class EnemyMarkUI : MonoBehaviour, IModule
     {
         [field: SerializeField] public EventChannelSO IconActiveEventChannel { get; private set; }
-
         [SerializeField]
         [Range(0.1f, 5f)] private float onOffDuration;
-
-        private SpriteRenderer _spriteRenderer;
+        [field:SerializeField] public Gradient IconColorGradient { get; private set; }
         
+        private AbstractEnemy _enemy;
+        private SpriteRenderer _spriteRenderer;
+        private float _iconAlpha = 1f;
         private Camera _mainCam;
         public Camera MainCam
         {
@@ -25,13 +28,17 @@ namespace _Works._JYG._Script.UI
                 return _mainCam;
             }
         }
-
+        
+        public void Initialize(ModuleOwner moduleOwner)
+        {
+            _enemy = moduleOwner as AbstractEnemy;
+            IconActiveEventChannel.AddListener<IconActiveOff>(HandleIconOffEvent);
+            IconActiveEventChannel.AddListener<IconActiveOn>(HandleIconOnEvent);
+        }
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
             
-            IconActiveEventChannel.AddListener<IconActiveOff>(HandleIconOffEvent);
-            IconActiveEventChannel.AddListener<IconActiveOn>(HandleIconOnEvent);
         }
 
         private void HandleIconOffEvent(IconActiveOff evt)
@@ -47,19 +54,14 @@ namespace _Works._JYG._Script.UI
         private IEnumerator ChangeAlpha(bool changeToOff) //On에서 Off로 가고싶으면 true 하면 된다.
         {
             float percent = 0;
-            float currentTime = Time.time;
-            
-            Color tempColor = _spriteRenderer.color;
 
             while (percent < 1)
             {
                 percent += Time.deltaTime / onOffDuration;
                 if (changeToOff)
-                    tempColor.a = 1 - percent;
+                    _iconAlpha = 1 - percent;
                 else
-                    tempColor.a = percent;
-
-                _spriteRenderer.color = tempColor;
+                    _iconAlpha = percent;
 
                 yield return null;
             }
@@ -75,6 +77,10 @@ namespace _Works._JYG._Script.UI
         {
             transform.up = MainCam.transform.up;
             transform.forward = MainCam.transform.forward;
+
+            Color newColor = IconColorGradient.Evaluate(_enemy.GetEnemyCaution);
+            newColor.a = _iconAlpha;
+            _spriteRenderer.color = newColor;
         }
 
         [ContextMenu("OffIcons")]

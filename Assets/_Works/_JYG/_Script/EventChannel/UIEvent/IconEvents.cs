@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Works._JYG._Script.EventChannel.UIEvent
 {
-    public class IconEvents
+    public static class IconEvents
     {
         public static readonly IconActiveOn IconActiveOn = new IconActiveOn();
         public static readonly IconActiveOff IconActiveOff = new IconActiveOff();
