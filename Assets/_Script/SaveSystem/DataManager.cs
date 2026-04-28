@@ -37,12 +37,11 @@ namespace _Script.SaveSystem
         {
             DataSaveEventChannel.RemoveListener<DataSaveEvent>(HandleSavePrefEvent);
             DataSaveEventChannel.RemoveListener<DataLoadEvent>(HandleLoadPrefEvent);
-            
         }
 
         private void HandleSavePrefEvent(DataSaveEvent saveEvent)
         {
-            string saveData = GetSceneSaveData();       //Save Data : 씬 전체를 스캔떠서 ISaveable요소를 string으로 저장한다.
+            string saveData = GetSceneSaveData();       //Save Data : 씬 전체를 스캔떠서 IStorable요소를 string으로 저장한다.
             PlayerPrefs.SetString(prefKey, saveData);
             Debug.Log($"Data Save!! {saveData}");
         }
@@ -54,11 +53,11 @@ namespace _Script.SaveSystem
 
         private string GetSceneSaveData()
         {
-            IEnumerable<ISaveable> saveableObjects =
-                FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISaveable>();
+            IEnumerable<IStorable> saveableObjects =
+                FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IStorable>();
             
             List<SaveData> toSaveData = new List<SaveData>();
-            foreach (ISaveable saveable in saveableObjects)
+            foreach (IStorable saveable in saveableObjects)
             {
                 toSaveData.Add(new SaveData { Id = saveable.SaveId.Id, Data = saveable.GetSaveData() });
             }
@@ -72,7 +71,7 @@ namespace _Script.SaveSystem
 
         private void RestoreData(string json)
         {
-            IEnumerable<ISaveable> saveables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<ISaveable>();
+            IEnumerable<IRestorable> saveables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRestorable>();
             DataCollection parsedData = string.IsNullOrEmpty(json) ? new DataCollection() : JsonUtility.FromJson<DataCollection>(json);
             //json값이 비지 않았다면 (저장된 값이 이미 있다면) json값을 들고오고, 저장한다. 비어있다면 새로 판다.
 
@@ -82,7 +81,7 @@ namespace _Script.SaveSystem
             {
                 foreach (SaveData saveData in parsedData.Collection)
                 {
-                    ISaveable saveable = saveables.FirstOrDefault(s => s.SaveId.Id == saveData.Id);
+                    IRestorable saveable = saveables.FirstOrDefault(s => s.SaveId.Id == saveData.Id);
                     if (saveable != null)
                     {
                         saveable.RestoreData(saveData.Data);
