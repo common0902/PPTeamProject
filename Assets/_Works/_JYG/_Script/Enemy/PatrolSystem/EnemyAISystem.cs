@@ -33,6 +33,7 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
             _currentRoute = enemyPatrolRouteList[0];
             PrevEnemyRoute = _currentRoute;
 
+            Navmesh.speed = ((AbstractEnemy)_agent).PatrolSpeed;
         }
 
         public void SetEnemyRoute()
