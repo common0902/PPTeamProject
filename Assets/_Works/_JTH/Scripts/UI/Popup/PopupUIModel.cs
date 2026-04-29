@@ -2,6 +2,7 @@ using System;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;
+using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
@@ -21,13 +22,13 @@ namespace _Works._JTH.Scripts.UI.Popup
         
         private ChangedData NoButtonClickHandler(ChangedData _)
         {
-            _yesAction?.Invoke();
+            _noAction?.Invoke();
             return null;
         }
     
         private ChangedData YesButtonClickHandler(ChangedData _)
         {
-            _noAction?.Invoke();
+            _yesAction?.Invoke();
             return null;
         }
 
@@ -38,8 +39,7 @@ namespace _Works._JTH.Scripts.UI.Popup
         
         private ChangedData ChangePopupMessageHandler()
         {
-            UIParamData.UIStringParam.Value = _message;
-            return UIParamData.UIStringParam;
+            return UIParamData.UIStringParam.Init(_message);
         }
     }
 }

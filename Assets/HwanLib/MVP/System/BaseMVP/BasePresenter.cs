@@ -29,7 +29,13 @@ namespace HwanLib.MVP.System.BaseMVP
             
             Model = Activator.CreateInstance(dataSO.GetModelType()) as IModel;
             View = Activator.CreateInstance(dataSO.GetViewType()) as BaseView;
-
+            
+            if (Model == null || View == null)
+            {
+                Debug.LogError("Model 혹은 View의 타입을 알 수 없습니다.");
+                return;
+            }
+            
             //Module에서 메서드 찾아서 Delegate로 변환 -> 메서드 이름을 키로 하여 저장
             Type dataType = typeof(ChangedData);
             MethodInfo[] methodInfo = Model.GetType()
@@ -54,19 +60,11 @@ namespace HwanLib.MVP.System.BaseMVP
                 }
             }
 
-            if (Model is AbstractSaveDataModel saveDataModel)
-            {
-                saveDataModel.LoadData();
-            }
             View.InitializeView(gameObject, formDataList, ApplyChangedValue);
         }
 
         protected virtual void OnDestroy()
         {
-            if (Model is AbstractSaveDataModel saveDataModel)
-            {
-                saveDataModel.SaveData();
-            }
             View.OnDestroyView();
         }
 

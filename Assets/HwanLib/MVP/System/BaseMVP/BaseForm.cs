@@ -1,4 +1,3 @@
-using System.Linq;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.BaseMVP
@@ -23,11 +22,6 @@ namespace HwanLib.MVP.System.BaseMVP
         protected void OnInteractive(ChangedData changedValue) 
         {
             SetVisual(OnFormInteracted?.Invoke(_childIndex, changedValue));
-        }
-
-        protected T GetPartOfFormComponent<T>() where T : Component
-        {
-            return GetComponentsInChildren<T>().Single(compo => compo.name.Contains("f_"));
         }
     }
 }

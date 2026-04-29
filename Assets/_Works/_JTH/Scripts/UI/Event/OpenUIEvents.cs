@@ -3,7 +3,7 @@ using _Script.ScriptableObject.Event;
 
 namespace _Works._JTH.Scripts.UI.Event
 {
-    public static class UIEvents
+    public static class OpenUIEvents
     {
         public static readonly OpenPopupEvent OpenPopupEvent = new OpenPopupEvent();
     }
@@ -14,11 +14,13 @@ namespace _Works._JTH.Scripts.UI.Event
         public Action YesAction;
         public Action NoAction;
 
-        public void SetValue(string message, Action yesAction, Action noAction)
+        public OpenPopupEvent Init(string message, Action yesAction, Action noAction)
         {
             Message = message;
             YesAction = yesAction;
             NoAction = noAction;
+
+            return this;
         }
     }
 }

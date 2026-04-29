@@ -28,24 +28,24 @@ namespace _Script.SaveSystem
 
         private void Awake()
         {
-            DataSaveEventChannel.AddListener<DataSaveEvent>(HandleSavePrefEvent);
-            DataSaveEventChannel.AddListener<DataLoadEvent>(HandleLoadPrefEvent);
+            DataSaveEventChannel.AddListener<StoreDataEvent>(HandleStorePrefEvent);
+            DataSaveEventChannel.AddListener<RestoreDataEvent>(HandleRestorePrefEvent);
         }
 
 
         private void OnDestroy()
         {
-            DataSaveEventChannel.RemoveListener<DataSaveEvent>(HandleSavePrefEvent);
-            DataSaveEventChannel.RemoveListener<DataLoadEvent>(HandleLoadPrefEvent);
+            DataSaveEventChannel.RemoveListener<StoreDataEvent>(HandleStorePrefEvent);
+            DataSaveEventChannel.RemoveListener<RestoreDataEvent>(HandleRestorePrefEvent);
         }
 
-        private void HandleSavePrefEvent(DataSaveEvent saveEvent)
+        private void HandleStorePrefEvent(StoreDataEvent @event)
         {
             string saveData = GetSceneSaveData();       //Save Data : 씬 전체를 스캔떠서 IStorable요소를 string으로 저장한다.
             PlayerPrefs.SetString(prefKey, saveData);
             Debug.Log($"Data Save!! {saveData}");
         }
-        private void HandleLoadPrefEvent(DataLoadEvent evt)
+        private void HandleRestorePrefEvent(RestoreDataEvent evt)
         {
             string loadJson = PlayerPrefs.GetString(prefKey, string.Empty);
             RestoreData(loadJson);
@@ -59,7 +59,7 @@ namespace _Script.SaveSystem
             List<SaveData> toSaveData = new List<SaveData>();
             foreach (IStorable saveable in saveableObjects)
             {
-                toSaveData.Add(new SaveData { Id = saveable.SaveId.Id, Data = saveable.GetSaveData() });
+                toSaveData.Add(new SaveData { Id = saveable.SaveId.Id, Data = saveable.StoreData() });
             }
 
             toSaveData.AddRange(_unUsedData);

@@ -19,10 +19,12 @@ namespace HwanLib.MVP.System.GenerateUI
             formTypeName = "";
         }
         
-        public FormData(int childIndex, string gameObjectName)
+        public FormData(int childIndex, string gameObjectName, string defaultForm, string defaultMethod)
         {
             this.childIndex = childIndex;
             this.gameObjectName = gameObjectName;
+            formTypeName = defaultForm;
+            targetMethodName = defaultMethod;
         }
     }
 }

@@ -2,6 +2,6 @@
 {
     public interface IStorable : ISaveable
     {
-        string GetSaveData();
+        string StoreData();
     }
 }

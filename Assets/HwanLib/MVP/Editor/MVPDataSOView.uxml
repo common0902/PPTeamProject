@@ -10,13 +10,13 @@
             <ui:Label text="Form Data" name="" style="margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; -unity-font-style: bold; font-size: 13px;"/>
             <ui:DropdownField label="Child Object" name="ChildObjectDropdown"/>
             <ui:DropdownField label="Form Type" name="FormTypeDropdown"/>
-            <ui:DropdownField label="Method Name" name="TargetMethodNameDropdown"/>
+            <ui:DropdownField label="Target Method Name" name="TargetMethodNameDropdown"/>
             <ui:VisualElement name="EnumGenContainer" style="flex-direction: column;">
                 <ui:VisualElement name="VisualElement" style="flex-grow: 1; -unity-text-generator: standard;">
                     <ui:Button text="📁 Select Folder" name="FolderSelectBtn"/>
                     <ui:Label text="오브젝트 Enum을 생성할 폴더를 선택하세요." name="GenerateFolderLabel" style="flex-basis: 20px; flex-grow: 1; overflow: hidden; text-overflow: ellipsis;"/>
                 </ui:VisualElement>
-                <ui:Button text="생성" name="GenerateBtn"/>
+                <ui:Button text="Form의 Enum 생성" name="GenerateBtn"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>
