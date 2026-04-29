@@ -10,16 +10,17 @@ namespace _Works._JYG._Script.Enemy.FSM
 {
     public class EnemyPatrolState : AgentState
     {
-        private IAISystem _patrolSystem;
+        private IAISystem _navMesh;
         public EnemyPatrolState(Agent agent, AnimationHashSO hash) : base(agent, hash)
         {
-            _patrolSystem = agent.GetModule<IAISystem>();
+            _navMesh = agent.GetModule<IAISystem>();
         }
 
         public override void Enter()
         {
             base.Enter();
-            _patrolSystem.Navmesh.isStopped = false;
+            _navMesh.Navmesh.isStopped = false;
+            _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
             Debug.Log("PATROL!");
         }
 
@@ -31,9 +32,9 @@ namespace _Works._JYG._Script.Enemy.FSM
             
             //목적지와의 거리가 0.5f 차이라면 경로 재설정, Idle에서 대기
             //만약 ViewCaster (시야각)에 타겟이 찍혔다면, IDLE에서 처리.
-            if(_patrolSystem.Navmesh.remainingDistance < 0.5f || _viewCaster.IsTargetAttached)
+            if(_navMesh.Navmesh.remainingDistance < 0.5f || _viewCaster.IsTargetAttached)
             {
-                _patrolSystem.SetEnemyRoute();
+                _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
             }
             
@@ -46,7 +47,7 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Exit()
         {
             base.Exit();
-            _patrolSystem.Navmesh.isStopped = true;
+            _navMesh.Navmesh.isStopped = true;
         }
     }
 }
