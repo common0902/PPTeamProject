@@ -13,6 +13,8 @@ namespace HwanLib.MVP.System.AddFormComponent
             
             switch (formName)
             {
+                case "AccessForm":
+                    return gameObject.AddComponent<AccessForm>();
                 case "ButtonForm":
                     return gameObject.AddComponent<ButtonForm>();
                 case "DoTweenWindowForm":
@@ -22,7 +24,7 @@ namespace HwanLib.MVP.System.AddFormComponent
                 case "TextForm":
                     return gameObject.AddComponent<TextForm>();
                 default:
-                    Debug.LogErrorFormat("Unknown form name: {0}", formName);
+                    Debug.LogError(gameObject.name + ": Unknown form name: " + formName);
                     return null;
             }
         }

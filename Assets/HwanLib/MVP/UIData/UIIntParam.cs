@@ -4,6 +4,12 @@ namespace HwanLib.MVP.UIData
 {
     public class UIIntParam : ChangedData
     {
-        public static int Value;
+        public int Value;
+
+        public UIIntParam Init(int value)
+        {
+            Value = value;
+            return this;
+        }
     }
 }
