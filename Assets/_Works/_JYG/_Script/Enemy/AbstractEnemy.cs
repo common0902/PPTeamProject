@@ -3,6 +3,7 @@ using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
+using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using UnityEngine;
@@ -91,7 +92,7 @@ namespace _Works._JYG._Script.Enemy
                 _ => enemyCurrentCaution                //나머지는 변함 없음.
             };
 
-            if (evt.NextState == EnemyState.CHASE)
+            if (evt.NextState == EnemyState.CHASE && !(_stateMachine.CurrentState is EnemyAttackState))
                 SirenEffect = true;
             else if (evt.NextState == EnemyState.PATROL)
                 SirenEffect = false;

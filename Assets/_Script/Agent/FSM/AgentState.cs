@@ -12,7 +12,7 @@ namespace _Script.Agent.FSM
         protected Agent _agent;
         protected AbstractEnemy _enemy;
         protected bool _isTriggerCall;
-        
+
         protected IRenderer _renderer;
         protected AnimationHashSO _animationHash;
 
@@ -24,9 +24,9 @@ namespace _Script.Agent.FSM
             _animationHash = hash;
 
             _enemy = agent as AbstractEnemy;
-            
+
             _renderer = agent.GetModule<IRenderer>();
-            
+
             _viewCaster = agent.GetModule<ViewCaster>();
             Debug.Assert(_viewCaster != null, $"Enemy에는 ViewCaster가 필수적으로 포함되어야 합니다!");
         }
@@ -34,7 +34,7 @@ namespace _Script.Agent.FSM
 
         public virtual void Enter()
         {
-            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0);
+            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0.5f);
             _isTriggerCall = false;
         }
 
@@ -48,7 +48,6 @@ namespace _Script.Agent.FSM
 
         public virtual void Exit()
         {
-            
         }
 
         public virtual void AnimationEndTrigger() => _isTriggerCall = true;
