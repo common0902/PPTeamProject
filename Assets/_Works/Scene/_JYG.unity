@@ -189,6 +189,88 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7743067624961505362, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
   m_PrefabInstance: {fileID: 105950814}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &350209446
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 350209448}
+  - component: {fileID: 350209447}
+  - component: {fileID: 350209449}
+  - component: {fileID: 350209450}
+  m_Layer: 6
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &350209447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350209446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd30a079b644d44b8ac69bcafd0535d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  <Player>k__BackingField: {fileID: 350209446}
+--- !u!4 &350209448
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350209446}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0.99996686, z: 0, w: 0.008141879}
+  m_LocalPosition: {x: 30.72, y: 1.5, z: -2.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 179.067, z: 0}
+--- !u!114 &350209449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350209446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32370a451b0361e47925f5b3db0ab7d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TestPPPP
+--- !u!136 &350209450
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 350209446}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &379543001
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,8 +284,8 @@ GameObject:
   - component: {fileID: 379543005}
   - component: {fileID: 379543006}
   - component: {fileID: 379543007}
-  m_Layer: 0
-  m_Name: TestObj
+  m_Layer: 7
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -248,6 +330,8 @@ Transform:
   - {fileID: 1231326414}
   - {fileID: 1626619365}
   - {fileID: 2115382621}
+  - {fileID: 635169051}
+  - {fileID: 976608252}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &379543005
@@ -309,6 +393,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   <stateListSO>k__BackingField: {fileID: 11400000, guid: f781bd68529cba648be9e2e0407f698f, type: 2}
+  enemyCurrentCaution: 0
+  cautionRatio: 1
+  enemyCautionDelay: 3
 --- !u!1001 &388074823
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -537,6 +624,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9227051d58db614ea14eba78f6521be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PatrolFlag
+--- !u!1 &635169050
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 635169051}
+  - component: {fileID: 635169052}
+  m_Layer: 0
+  m_Name: TargetRaycastModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &635169051
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635169050}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 379543004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &635169052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 635169050}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af4db4db037cb6447b9f5d7c7a50a792, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.TargetRaycaster
+  <Range>k__BackingField: 80
+  targetMask:
+    serializedVersion: 2
+    m_Bits: 65
 --- !u!1 &754985036
 GameObject:
   m_ObjectHideFlags: 0
@@ -642,6 +777,52 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4a14f1648edde9d40b1f4e1b7b545c4c, type: 3}
+--- !u!1 &976608251
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 976608252}
+  - component: {fileID: 976608253}
+  m_Layer: 0
+  m_Name: ViewModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &976608252
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976608251}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.7, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 379543004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &976608253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 976608251}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f64606df1c46e32428cfc6b432e85e54, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.ViewCaster
+  <Distance>k__BackingField: 20
+  angle: 150
 --- !u!1001 &1197229374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1255,7 +1436,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1926558807}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Cameras
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2066,3 +2247,4 @@ SceneRoots:
   - {fileID: 1368449006}
   - {fileID: 1824548549}
   - {fileID: 1244141599}
+  - {fileID: 350209448}

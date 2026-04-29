@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/HwanLib/MVP/Editor/AddFormComponentEditor.uss?fileID=7433441132597879392&amp;guid=dbf80b0d785b195498621bfb46908c42&amp;type=3#AddFormComponentEditor"/>
+    <ui:VisualElement name="Container" style="flex-direction: column;">
+        <ui:VisualElement name="VisualElement" style="flex-grow: 1;">
+            <ui:Button text="📁 Select Folder" name="FolderSelectBtn"/>
+            <ui:Label text="코드파일을 생성할 폴더를 선택하세요." name="GenerateFolderLabel" style="flex-basis: 20px; flex-grow: 1; overflow: hidden; text-overflow: ellipsis;"/>
+        </ui:VisualElement>
+        <ui:Button text="생성" name="GenerateBtn"/>
+    </ui:VisualElement>
+</ui:UXML>
