@@ -8,6 +8,8 @@ public class TestStateMachineRunner : MonoBehaviour
     {
         stateMachine = new();
         stateMachine.Setup(gameObject);
+
+
     }
 
     void Update()
