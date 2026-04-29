@@ -9,9 +9,9 @@ namespace _Script.Agent.Modules
     {
         private Agent _agent;
         private Animator _animator;
-        public void Initialize(ModuleOwner moduleAgent)
+        public void Initialize(ModuleOwner moduleOwner)
         {
-            _agent = moduleAgent as Agent;
+            _agent = moduleOwner as Agent;
             _animator = GetComponent<Animator>();
             
         }

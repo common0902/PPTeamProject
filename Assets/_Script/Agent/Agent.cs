@@ -39,7 +39,7 @@ namespace _Script.Agent
 
         
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             if(Health != null)
                 Health.OnHealthChanged -= HandleHealthChaged;
