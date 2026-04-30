@@ -24,8 +24,8 @@ namespace _Works._JTH.Scripts.UI.Popup
             _windowForm = GetForm<DoTweenWindowForm>((int)PopupUIEnum.RootWindow);
             _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
             
-            AddListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            AddListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
+            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
+            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
             _windowForm.OnAnimationEnd += AnimationEndHandler;
 
             GenerateBackground();
@@ -36,8 +36,8 @@ namespace _Works._JTH.Scripts.UI.Popup
         {
             base.OnDestroyView();
             
-            RemoveListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            RemoveListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
+            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
+            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
             _windowForm.OnAnimationEnd -= AnimationEndHandler;
         }
 
@@ -57,7 +57,7 @@ namespace _Works._JTH.Scripts.UI.Popup
         private void StartCloseAnimation()
         {
             SetBackgroundActive(false);
-            
+
             _windowForm.PlayCloseAnimation();
             
             _canvasGroup.interactable = false;
@@ -70,7 +70,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 
             if (_isOpen == false)
             {
-                CloseView();
+                RootCanvas.gameObject.SetActive(false);
             }
         }
 

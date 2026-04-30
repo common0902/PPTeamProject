@@ -15,6 +15,7 @@ namespace HwanLib.MVP.Forms
         [SerializeField] protected float onClickAlpha = 0.4f;
         
         private CanvasGroup _canvasGroup;
+        protected bool Interactive;
 
         public override void InitializeForm(int childIndex)
         {
@@ -25,6 +26,8 @@ namespace HwanLib.MVP.Forms
             {
                 _canvasGroup = gameObject.AddComponent<CanvasGroup>();
             }
+
+            Interactive = true;
         }
         
         public virtual void OnPointerEnter(PointerEventData eventData)
@@ -52,6 +55,17 @@ namespace HwanLib.MVP.Forms
         public virtual void OnPointerClick(PointerEventData eventData)
         {
             OnInteractive(UIParamData.UIClickParam);
+        }
+        
+        public virtual void SetInteractive(bool value)
+        {
+            if (value == false)
+                _canvasGroup.alpha = onClickAlpha;
+            else
+                _canvasGroup.alpha = 1;
+            
+            Interactive = value;
+            _canvasGroup.blocksRaycasts = value;
         }
     }
 }

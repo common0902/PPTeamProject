@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: TitleUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 149307384065224735, guid: 20cfa0612564df24eb7a8909b7969d27, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_TitleText
+      formTypeName: AccessForm
+      targetMethodName: None
+    - childIndex: 4
+      gameObjectName: F_MainButtons
+      formTypeName: AccessForm
+      targetMethodName: None
+    - childIndex: 5
+      gameObjectName: F_PlayBtn
+      formTypeName: ButtonForm
+      targetMethodName: None
+    - childIndex: 8
+      gameObjectName: F_SettingBtn
+      formTypeName: ButtonForm
+      targetMethodName: None
+    - childIndex: 11
+      gameObjectName: F_QuitBtn
+      formTypeName: ButtonForm
+      targetMethodName: QuitBtnClickHandler
+    - childIndex: 14
+      gameObjectName: F_SelectButtons
+      formTypeName: AccessForm
+      targetMethodName: None
+    - childIndex: 15
+      gameObjectName: F_ContinueBtn
+      formTypeName: TextButtonForm
+      targetMethodName: ContinueBtnHandler
+    - childIndex: 18
+      gameObjectName: F_NewBtn
+      formTypeName: ButtonForm
+      targetMethodName: NewGameBtnClickHandler
+  modelTypeName: TitleUIModel
+  viewTypeName: TitleUIView
+  selectedChildName: F_ContinueBtn

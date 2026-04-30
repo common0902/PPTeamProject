@@ -7,7 +7,7 @@ namespace HwanLib.MVP.Forms
 {
     public class DoTweenWindowForm : BaseForm
     {
-        [SerializeField] private float openDuration = 0.35f;
+        [SerializeField] private float openDuration = 0.25f;
         [SerializeField] private float closeDuration = 0.225f;
         
         public event Action OnAnimationEnd;
@@ -40,6 +40,14 @@ namespace HwanLib.MVP.Forms
             float curDuration = transform.localScale.x * closeDuration;
             _sequence.Append(transform.DOScale(Vector3.zero, curDuration).SetEase(Ease.InBack))
                 .OnComplete(() => OnAnimationEnd?.Invoke());
+        }
+
+        private void OnDestroy()
+        {
+            if (_sequence != null)
+            {
+                _sequence.Kill();
+            }
         }
     }
 }

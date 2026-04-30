@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.Tracing;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -9,44 +10,52 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 {
     public class AbstractSabotage : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        [SerializeField] private EventChannelSO sabotageOpenEvent;
-        [SerializeField] private EventChannelSO sabotageCloseEvent;
-        // private readonly int _hash = Shader.PropertyToID("_OutlineSize");
-        // private SpriteRenderer _renderer;
-        // private MaterialPropertyBlock _matPropertyBlock;
+        [SerializeField] private EventChannelSO sabotageEvent;
+        [SerializeField] private EventChannelSO interactEvent; // 상호작용을 해야 작동할 때 필요한 이벤트 -> 나중에 추상으로 분리할거임
 
+        [SerializeField] private Color defualtOutLineColor;
+        [SerializeField] private Color interactedOutLineColor;
+        
         private Outline _outline;
         private Rigidbody _rigid;
+        private bool _isCanOpen;
         private bool _isUsed;
         
         private void Awake()
         {
-            sabotageOpenEvent.AddListener<GameEvent>(HandleOpen);
-            sabotageCloseEvent.AddListener<GameEvent>(HandleClose);
+            sabotageEvent.AddListener<TopViewEvent>(HandleOpen);
+            interactEvent.AddListener<FireSabotageEvent>(HandleInteractEvent);
             _rigid = GetComponent<Rigidbody>();
             _outline = GetComponent<Outline>();
-            // _renderer = GetComponent<SpriteRenderer>();
-            // _matPropertyBlock = new MaterialPropertyBlock();
-            // _renderer.GetPropertyBlock(_matPropertyBlock);
-            
-            _outline.enabled = false;
+
+            _outline.OutlineColor = defualtOutLineColor;
             gameObject.SetActive(false);
         }
 
-        private void HandleClose(GameEvent obj)
+        private void HandleInteractEvent(FireSabotageEvent value)
         {
-            gameObject.SetActive(false);   
+            if(value.IsInteracted)
+                _isCanOpen = true;
+            else
+                 _isCanOpen = false;
         }
 
-        private void HandleOpen(GameEvent obj)
+        private void HandleOpen(TopViewEvent evt)
         {
-            gameObject.SetActive(true);
+            if (evt.IsTopView && _isCanOpen)
+            {
+                gameObject.SetActive(true);
+            }
+            else
+            {
+                gameObject.SetActive(false);   
+            }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
             if(_isUsed) return;
-            Debug.Log("OPEN");
+            _outline.enabled = false;
             _rigid.useGravity = true;
             _isUsed = true;
         }
@@ -55,16 +64,12 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if(_isUsed) return;
             
-            _outline.enabled = true;
-            // _matPropertyBlock.SetFloat(_hash, 0.001f);
-            // _renderer.SetPropertyBlock(_matPropertyBlock);
+            _outline.OutlineColor = interactedOutLineColor;
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _outline.enabled = false;
-            // _matPropertyBlock.SetFloat(_hash, 0f);
-            // _renderer.SetPropertyBlock(_matPropertyBlock);
+            _outline.OutlineColor = defualtOutLineColor;
         }
     }
 }

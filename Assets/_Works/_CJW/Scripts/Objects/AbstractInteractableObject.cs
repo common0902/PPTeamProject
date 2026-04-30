@@ -8,7 +8,8 @@ namespace _Works._CJW.Scripts.Objects
     {
         [SerializeField] private LayerMask interactableLayer;
         [SerializeField] private float interactRange;
-        [SerializeField] private EventChannelSO interactEvent;
+        [SerializeField] private EventChannelSO interactEvent; // 플레이어가 인터렉트할거
+        
         private bool _isPlayerInRange = false;
         private Outline _outline;
 
@@ -43,14 +44,12 @@ namespace _Works._CJW.Scripts.Objects
 
         protected virtual void HandleTriggerEnterEvent()
         {
-            Debug.Log("EnterEvent");
             interactEvent.AddListener<GameEvent>(HandleInteract);
             _outline.enabled = true;
             _isPlayerInRange = true;
         } 
         protected virtual void HandleTriggerExitEvent()
         {
-            Debug.Log("ExitEvent");
             interactEvent.RemoveListener<GameEvent>(HandleInteract);
             _outline.enabled = false;
             _isPlayerInRange = false;
