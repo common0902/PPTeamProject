@@ -31,6 +31,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
             
             Debug.Log("CHASE!");
+            //Test
             if(_targetCaster.TryGetTarget(out GameObject target)) //타겟을 한번 캐스팅 해보고 안닿으면 그때 애니메이션 재생.
             //이렇게 하지 않으면 부자연스럽게 애니메이션이 끊기게 된다.
             {
