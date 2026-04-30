@@ -1,6 +1,5 @@
 ﻿using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
-using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
@@ -35,8 +34,8 @@ namespace _Works._JTH.Scripts.UI.Popup
         [ContextMenu("ShowPopup")]
         public void TestPopup()
         {
-            UIEvents.OpenPopupEvent.SetValue("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes"));
-            ShowPopup(UIEvents.OpenPopupEvent);
+            // OpenUIEvents.OpenPopupEvent.SetValue("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes"));
+            // ShowPopup(OpenUIEvents.OpenPopupEvent);
         }
         #endif
         

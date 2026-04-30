@@ -226,7 +226,7 @@ namespace HwanLib.MVP.Editor
                 
                 if (shouldAppend == true)
                 {
-                    FormData form = new(i, child.name);
+                    FormData form = new(i, child.name, "AccessForm", "None");
                     newFormList.Add(form);
                 }
             }
@@ -255,15 +255,21 @@ namespace HwanLib.MVP.Editor
                 .Where(type => type.Name == _targetData.modelTypeName)
                 .FirstOrDefault()
                 ?.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Where(method => (method.ReturnType == dataType 
-                                  && method.GetParameters().Length == 1
-                                  && method.GetParameters()[0].ParameterType == dataType) == true)
+                .Where(method =>
+                    {
+                        ParameterInfo[] parameters = method.GetParameters();
+                        return method.ReturnType == dataType
+                               && (parameters.Length == 0
+                                   || (parameters.Length == 1
+                                       && parameters[0].ParameterType == dataType));
+                    }
+                )
                 .Select(method => method.Name);
 
+            // 중복 제거는 자동으로 됨.
             field.choices.Clear();
             field.choices.Add("None");
             field.choices.AddRange(choices);
-            field.SetValueWithoutNotify("None");
         }
 
         private void SetDefaultName()
@@ -295,23 +301,23 @@ namespace HwanLib.MVP.Editor
             if (CurrentForm != null)
             {
                 UpdateFieldDropdown(_childDropdown, ref _targetData.selectedChildName);
-                UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName);
-                UpdateFieldDropdown(_methodDropdown, ref CurrentForm.targetMethodName);
+                UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName, "AccessForm");
+                UpdateFieldDropdown(_methodDropdown, ref CurrentForm.targetMethodName, "None");
             }
         }
         
-        private void UpdateFieldDropdown(DropdownField field, ref string value)
+        private void UpdateFieldDropdown(DropdownField field, ref string value, string defaultValue = null)
         {
             if (_targetData != null && !string.IsNullOrEmpty(value)
                                     && field.choices.Contains(value))
             {
                 field.SetValueWithoutNotify(value);
-            } 
-            else if (_targetData != null && field.choices.Contains("None"))
+            }
+            else if (_targetData != null && defaultValue != null)
             {
-                value = "None";
+                value = defaultValue;
                 field.SetValueWithoutNotify(value);
-            } 
+            }
             else if (_targetData != null)
             {
                 value = null;

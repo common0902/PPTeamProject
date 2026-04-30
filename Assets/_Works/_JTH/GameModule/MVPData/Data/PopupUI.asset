@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: PopupUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 9018258415325778279, guid: f77978312e9b4e74d8321f65638154da, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_RootWindow
+      formTypeName: DoTweenWindowForm
+      targetMethodName: None
+    - childIndex: 5
+      gameObjectName: F_Message
+      formTypeName: TextForm
+      targetMethodName: ChangePopupMessageHandler
+    - childIndex: 7
+      gameObjectName: F_YesBtn
+      formTypeName: ButtonForm
+      targetMethodName: YesButtonClickHandler
+    - childIndex: 10
+      gameObjectName: F_NoBtn
+      formTypeName: ButtonForm
+      targetMethodName: NoButtonClickHandler
+  modelTypeName: PopupUIModel
+  viewTypeName: PopupUIView
+  selectedChildName: F_NoBtn
