@@ -18,8 +18,9 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Enter()
         {
             base.Enter(); // _isTriggerCall = false;
-            //공격 실행, OnAttackEnd 이벤트에 AnimationEndTrigger 넣어주기.
             Debug.Log("ATTACK!");
+
+            _trigger.OnAnimationEnd += AnimationEndTrigger;
         }
 
         public override void Update()
@@ -34,13 +35,14 @@ namespace _Works._JYG._Script.Enemy.FSM
             if(_isTriggerCall)
             {
                 _enemy.ChangeState((int)EnemyState.CHASE);
+                Debug.Log("Attack End!");
             }
         }
 
         public override void Exit()
         {
-            //OnAttackEnd 이벤트에서 AnimationEndTrigger 구독 취소.
             base.Exit();
+            _trigger.OnAnimationEnd -= AnimationEndTrigger;
         }
     }
 }

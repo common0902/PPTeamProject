@@ -39,12 +39,10 @@ namespace _Works._JYG._Script.Enemy.FSM
                 {
                     Debug.Log("플레이어 찾음!!");
                     _enemy.ChangeState((int)EnemyState.ATTACK);
+                    return;
                 }
             }
-            else
-            {
-                base.Enter(); //애니메이션 재생
-            }
+            base.Enter(); //애니메이션 재생
         }
 
         public override void Update()

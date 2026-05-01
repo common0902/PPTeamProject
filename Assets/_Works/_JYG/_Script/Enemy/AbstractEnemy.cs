@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
@@ -28,6 +29,7 @@ namespace _Works._JYG._Script.Enemy
         public bool SirenEffect { get; private set; }
 
         [SerializeField] private float callingDuration = 3f;
+
         
 
         protected override void Awake()
