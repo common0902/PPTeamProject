@@ -14,7 +14,7 @@ namespace HwanLib.MVP.System.BaseMVP
         private Dictionary<int, string> _formTargetMethodDict;
         private Dictionary<string, Func<ChangedData, ChangedData>> _moduleMethodDict;
         private Dictionary<string, Func<ChangedData>> _moduleUpdateMethodDict;
-
+        
         public virtual void InitializePresenter(MVPDataSO dataSO)
         {
             List<FormData> formDataList = dataSO.GetFormDataList();

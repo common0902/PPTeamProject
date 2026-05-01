@@ -2,61 +2,62 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using UnityEditor;
+using HwanLib.MVP.System.BaseMVP;
+using UnityEngine;
 
 namespace HwanLib.MVP.System
 {
     public static class EditorInfo
     {
-        private static Assembly _uiAssembly;
+        private static Assembly[] _uiAssembly;
 
-        public static Assembly UIAssembly
+        private static Assembly[] UIAssembly
         {
             get
             {
-                if (_uiAssembly == null)
-                {
-                    Type targetType = AppDomain.CurrentDomain.GetAssemblies()
-                        .Where(ass => ass.FullName.StartsWith("UI_Assembly"))
-                        .SelectMany(ass => ass.GetTypes())
-                        .Where(type => type.Name == "MVPAssemblyMarker")
-                        .FirstOrDefault();
-
-                    if (targetType == null)
-                    {
-                        EditorUtility.DisplayDialog("Error",
-                            "타입을 찾기 위해 MVPAssemblyMarker.cs 파일이 필요합니다.", "OK");
-                        return null;
-                    }
-            
-                    _uiAssembly = Assembly.GetAssembly(targetType);
-                }
-
+                _uiAssembly = AppDomain.CurrentDomain.GetAssemblies()
+                    .Where(assembly => assembly.GetTypes().Any(type => type.IsSubclassOf(typeof(BasePresenter))
+                                       && !type.IsAbstract
+                                       && !type.IsInterface))
+                    .ToArray();
+                
                 return _uiAssembly;
             }
         }
-        
-        public static IEnumerable<string> GetTypeNames(Type baseType, bool isUIAssembly)
+
+        public static IEnumerable<Type> GetUIAssemblyTypes(Type baseType)
         {
-            Assembly assembly = isUIAssembly ? UIAssembly : Assembly.GetAssembly(typeof(EditorInfo));
-            IEnumerable<string> choices = assembly.GetTypes()
-                .Where(type => type.IsClass && !type.IsInterface && !type.IsAbstract 
-                               && baseType.IsAssignableFrom(type))
-                .Select(type => type.Name);
-            
-            return choices;
+            return UIAssembly.SelectMany(assembly => assembly.GetTypes())
+                .Where(baseType.IsAssignableFrom);
+        }
+        
+        public static IEnumerable<string> GetUIAssemblyTypeNames(Type baseType)
+        {
+            List<string> names = new List<string>();
+                
+            foreach (Assembly assembly in UIAssembly)
+            {
+                names.AddRange(assembly.GetTypes()
+                    .Where(type => type.IsClass && !type.IsInterface && !type.IsAbstract 
+                                   && baseType.IsAssignableFrom(type))
+                    .Select(type => type.Name));
+            }
+                
+            return names;
         }
 
-        public static Type GetType(Assembly assembly, string typeName)
+        public static Type GetUIAssemblyType(string typeName)
         {
-            foreach (Type type in assembly.GetTypes())
+            foreach (Assembly assembly in UIAssembly)
             {
-                if (type.Name == typeName)
-                    return type;
+                foreach (Type type in assembly.GetTypes())
+                {
+                    if (type.Name == typeName)
+                        return type;
+                }
             }
 
             return null;
         }
     }
-
 }

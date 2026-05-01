@@ -12,7 +12,9 @@ namespace HwanLib.MVP.System.BaseMVP
             _childIndex = childIndex;
         }
 
-        public void UpdateVisual() => OnInteractive(null);
+        //디폴트 매개 변수가 null이고, null을 받을 시엔 프레젠터에서 업데이트 로직에 해당하는 메서드(매개 변수가 없음)가 있다면 그걸로 넘김
+        public void UpdateVisual()
+            => SetVisual(OnFormInteracted?.Invoke(_childIndex));
 
         protected virtual void SetVisual(ChangedData data)
         {
@@ -20,8 +22,6 @@ namespace HwanLib.MVP.System.BaseMVP
         }
 
         protected void OnInteractive(ChangedData changedValue) 
-        {
-            SetVisual(OnFormInteracted?.Invoke(_childIndex, changedValue));
-        }
+            => SetVisual(OnFormInteracted?.Invoke(_childIndex, changedValue));
     }
 }
