@@ -193,7 +193,7 @@ namespace HwanLib.MVP.Editor
 
         private void FillTypeNameDropdown(DropdownField field, Type fieldType)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(fieldType, true);
+            IEnumerable<string> choices = EditorInfo.GetUIAssemblyTypeNames(fieldType);
             
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -242,7 +242,10 @@ namespace HwanLib.MVP.Editor
         
         private void FillFormTypeDropdown(DropdownField field)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(typeof(BaseForm), false);
+            IEnumerable<string> choices = Assembly.GetAssembly(typeof(BasePresenter)).GetTypes()
+                .Where(type => type.IsClass && !type.IsInterface && !type.IsAbstract 
+                               && type.IsSubclassOf(typeof(BaseForm)))
+                .Select(type => type.Name);
 
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -251,9 +254,8 @@ namespace HwanLib.MVP.Editor
         private void FillTargetMethodNameDropdown(DropdownField field)
         {
             Type dataType = typeof(ChangedData);
-            IEnumerable<string> choices = EditorInfo.UIAssembly.GetTypes()
-                .Where(type => type.Name == _targetData.modelTypeName)
-                .FirstOrDefault()
+            IEnumerable<string> choices = EditorInfo.GetUIAssemblyTypes(typeof(IModel))
+                .SingleOrDefault(type => type.Name == _targetData.modelTypeName)
                 ?.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
                 .Where(method =>
                     {

@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Reflection;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
 using HwanLib.MVP.System.BaseMVP;
@@ -32,7 +33,11 @@ namespace HwanLib.MVP.Editor
     
         private string GenerateCode(string folderPath, string scriptName)
         {
-            string[] formNames = EditorInfo.GetTypeNames(typeof(BaseForm), false).ToArray();
+            //MVP System의 Assembly에서 찾기
+            string[] formNames = Assembly.GetAssembly(typeof(BasePresenter)).GetTypes()
+                .Where(type => type.IsClass && !type.IsInterface && !type.IsAbstract 
+                               && type.IsSubclassOf(typeof(BaseForm)))
+                .Select(type => type.Name).ToArray();
             string formCase = "";
             
             foreach (var formName in formNames)
