@@ -1,4 +1,5 @@
-﻿using _Script.Agent.Modules;
+﻿using System;
+using _Script.Agent.Modules;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -14,6 +15,8 @@ namespace _Script.Agent
 
         public bool IsDead { get; protected set; }
         protected HealthModule Health { get; private set; }
+
+        public Action OnAttack;
 
         protected override void Awake()
         {
@@ -39,7 +42,7 @@ namespace _Script.Agent
 
         
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             if(Health != null)
                 Health.OnHealthChanged -= HandleHealthChaged;
