@@ -18,16 +18,6 @@ namespace _Works._JYG._Script.UI
         private AbstractEnemy _enemy;
         private SpriteRenderer _spriteRenderer;
         private float _iconAlpha = 1f;
-        private Camera _mainCam;
-        public Camera MainCam
-        {
-            get
-            {
-                if(_mainCam == null)
-                    _mainCam = Camera.main;
-                return _mainCam;
-            }
-        }
         
         public void Initialize(ModuleOwner moduleOwner)
         {
@@ -75,9 +65,6 @@ namespace _Works._JYG._Script.UI
 
         private void LateUpdate()
         {
-            transform.up = MainCam.transform.up;
-            transform.forward = MainCam.transform.forward;
-
             Color newColor = IconColorGradient.Evaluate(_enemy.GetEnemyCaution);
             newColor.a = _iconAlpha;
             _spriteRenderer.color = newColor;
