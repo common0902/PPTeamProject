@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class ButtonForm : IBaseForm, IPointerDownHandler, IPointerUpHandler
+    public class ButtonForm : BaseForm, IPointerDownHandler, IPointerUpHandler
         , IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [SerializeField] protected float fadeTime = 0.2f;
