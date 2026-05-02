@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class ButtonForm : BaseForm, IPointerDownHandler, IPointerUpHandler
+    public class ButtonForm : IBaseForm, IPointerDownHandler, IPointerUpHandler
         , IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
         [SerializeField] protected float fadeTime = 0.2f;
@@ -54,7 +54,7 @@ namespace HwanLib.MVP.Forms
         
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            OnInteractive(UIParamData.UIClickParam);
+            OnInteract(UIParamData.UIClickParam);
         }
         
         public virtual void SetInteractive(bool value)

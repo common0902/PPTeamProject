@@ -18,6 +18,8 @@ namespace HwanLib.MVP.System.GenerateUI
         public Type GetViewType() => EditorInfo.GetUIAssemblyType(viewTypeName);
         public Type GetModelType() => EditorInfo.GetUIAssemblyType(modelTypeName);
         
+        
+        #if UNITY_EDITOR
         public FormData GetFormData(string key)
         {
             formDataList ??= new FormDataList();
@@ -72,7 +74,6 @@ namespace HwanLib.MVP.System.GenerateUI
             formDataList = null;
         }
         
-        #if UNITY_EDITOR
         [HideInInspector] public string selectedChildName;
         #endif
         
