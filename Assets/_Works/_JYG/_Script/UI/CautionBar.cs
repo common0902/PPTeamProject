@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using _Script.Agent.Modules;
 using _Works._JYG._Script.Enemy;
 using UnityEngine;
@@ -9,7 +10,8 @@ namespace _Works._JYG._Script.UI
     public class CautionBar : MonoBehaviour, IModule
     {
         private AbstractEnemy _enemy;
-        [SerializeField] private Image bar; 
+        [SerializeField] private Image bar;
+        [SerializeField] private Gradient cautionGradient;
         public void Initialize(ModuleOwner moduleOwner)
         {
             _enemy = moduleOwner as AbstractEnemy;
@@ -19,6 +21,8 @@ namespace _Works._JYG._Script.UI
         {
             float caution = _enemy.GetEnemyCaution;
             bar.fillAmount = caution;
+            bar.color = cautionGradient.Evaluate(caution);
+            
             if (caution <= 0 || caution >= 1)    //Caution이 0이나 1이 되면 사라진다.
             {
                 bar.gameObject.SetActive(false);

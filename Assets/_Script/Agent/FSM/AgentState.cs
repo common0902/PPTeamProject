@@ -18,10 +18,14 @@ namespace _Script.Agent.FSM
 
         protected ViewCaster _viewCaster;
 
+        protected IAnimationTrigger _trigger;
+
         public AgentState(Agent agent, AnimationHashSO hash) //ParamSO도 받아와야함.
         {
             _agent = agent;
             _animationHash = hash;
+            
+            _trigger = agent.GetModule<IAnimationTrigger>();
 
             _enemy = agent as AbstractEnemy;
 
