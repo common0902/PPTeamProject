@@ -6,7 +6,6 @@ using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
-    [RequireComponent(typeof(TextMeshProUGUI))]
     public class TextButtonForm : ButtonForm
     {
         [SerializeField] private TextMeshProUGUI textMeshProUGUI;
