@@ -54,7 +54,7 @@ namespace HwanLib.MVP.Forms
         
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            OnInteractive(UIParamData.UIClickParam);
+            OnInteract(UIParamData.UIClickParam);
         }
         
         public virtual void SetInteractive(bool value)
