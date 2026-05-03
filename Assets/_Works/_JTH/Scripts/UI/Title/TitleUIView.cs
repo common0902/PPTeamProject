@@ -23,16 +23,19 @@ namespace _Works._JTH.Scripts.UI.Title
         private TextButtonForm _continueButton;
         private string _notSavedStageIndex;
 
-        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler)
+        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
+            UpdateForm updateFormHandler)
         {
-            base.InitializeView(root, formDataList, formInteractedHandler);
+            base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             _titleText = GetForm<AccessForm>((int)TitleUIEnum.TitleText);
             _mainButtons = GetForm<AccessForm>((int)TitleUIEnum.MainButtons);
             _selectButtons = GetForm<AccessForm>((int)TitleUIEnum.SelectButtons);
-            _continueButton = GetForm<TextButtonForm>((int)TitleUIEnum.ContinueBtn);
-
-            _continueButton.InitTextButtonForm("Not Saved");
+            _continueButton = GetForm<TextButtonForm>((int)TitleUIEnum.ContinueTxtBtn);
+            
+            _continueButton.SetTextAndButtonForm(GetForm<TextForm>((int)TitleUIEnum.ContinueTxt),
+                GetForm<ButtonForm>((int)TitleUIEnum.ContinueBtn));
+            _continueButton.SetInteractiveFalseText("Not Saved");
             
             AddFormInteractionListener(PlayBtnClickHandler, (int)TitleUIEnum.PlayBtn);
             AddFormInteractionListener(SettingBtnClickHandler, (int)TitleUIEnum.SettingBtn);

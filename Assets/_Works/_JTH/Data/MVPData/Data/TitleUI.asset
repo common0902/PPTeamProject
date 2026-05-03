@@ -18,35 +18,53 @@ MonoBehaviour:
     - childIndex: 2
       gameObjectName: F_TitleText
       formTypeName: AccessForm
-      targetMethodName: None
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
     - childIndex: 4
       gameObjectName: F_MainButtons
       formTypeName: AccessForm
-      targetMethodName: None
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
     - childIndex: 5
       gameObjectName: F_PlayBtn
       formTypeName: ButtonForm
-      targetMethodName: None
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
     - childIndex: 8
       gameObjectName: F_SettingBtn
       formTypeName: ButtonForm
-      targetMethodName: None
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
     - childIndex: 11
       gameObjectName: F_QuitBtn
       formTypeName: ButtonForm
-      targetMethodName: QuitBtnClickHandler
+      targetInteractMethodName: I_QuitBtnClickHandler
+      targetUpdateMethodName: None
     - childIndex: 14
       gameObjectName: F_SelectButtons
       formTypeName: AccessForm
-      targetMethodName: None
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
     - childIndex: 15
-      gameObjectName: F_ContinueBtn
+      gameObjectName: F_ContinueTxtBtn
       formTypeName: TextButtonForm
-      targetMethodName: ContinueBtnHandler
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+    - childIndex: 16
+      gameObjectName: F_ContinueBtn
+      formTypeName: ButtonForm
+      targetInteractMethodName: I_ContinueBtnHandler
+      targetUpdateMethodName: None
     - childIndex: 18
+      gameObjectName: F_ContinueTxt
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: U_ContinueBtnHandler
+    - childIndex: 19
       gameObjectName: F_NewBtn
       formTypeName: ButtonForm
-      targetMethodName: NewGameBtnClickHandler
+      targetInteractMethodName: I_NewGameBtnClickHandler
+      targetUpdateMethodName: None
   modelTypeName: TitleUIModel
   viewTypeName: TitleUIView
-  selectedChildName: F_ContinueBtn
+  selectedChildName: F_TitleText

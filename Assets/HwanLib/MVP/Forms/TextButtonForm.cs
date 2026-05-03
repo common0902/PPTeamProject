@@ -1,65 +1,47 @@
 using System;
 using HwanLib.MVP.System;
-using HwanLib.MVP.UIData;
-using TMPro;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
-    public class TextButtonForm : ButtonForm
+    public class TextButtonForm : BaseForm
     {
-        [SerializeField] private TextMeshProUGUI textMeshProUGUI;
+        public string Text
+        {
+            get => _textForm.Text;
+            set => _textForm.Text = value;
+        }
         
-        private string _originText;
+        private TextForm _textForm;
+        private ButtonForm _buttonForm;
         private string _savedText;
         private string _interactiveFalseText;
 
-        public string Text
+        public void SetTextAndButtonForm(TextForm textForm, ButtonForm buttonForm)
         {
-            get => textMeshProUGUI.text;
-            private set => textMeshProUGUI.text = value;
+            _textForm = textForm;
+            _buttonForm = buttonForm;
         }
-
-        public void InitTextButtonForm(string interactableFalseText)
-            => _interactiveFalseText = interactableFalseText;
         
-        public override void InitializeForm(int childIndex)
-        {
-            base.InitializeForm(childIndex);
+        public void SetInteractiveFalseText(string interactableFalseText)
+            => _interactiveFalseText = interactableFalseText;
 
-            if (textMeshProUGUI == null)
-            {
-                textMeshProUGUI = GetComponentInChildren<TextMeshProUGUI>();
-            }
-            
-            _originText = textMeshProUGUI.text;
-        }
-
-        protected override void SetVisual(ChangedData changedData)
-        {
-            base.SetVisual(changedData);
-
-            if (Interactive == true)
-            {
-                Text = String.Format(_originText, ((UIStringParam)changedData).Value);
-            }
-        }
-
-        public override void SetInteractive(bool interactive)
+        public void SetInteractive(bool interactive)
         {
             Debug.Assert(!String.IsNullOrEmpty(_interactiveFalseText), "_interactiveFalseText is empty");
             
-            if (interactive == true && Interactive == false)
+            if (interactive == true && _buttonForm.Interactive == false)
             {
-                Text = _savedText;
+                _textForm.Text = _savedText;
             }
-            else if (interactive == false && Interactive == true)
+            else if (interactive == false && _buttonForm.Interactive == true)
             {
-                _savedText = Text;
-                Text = _interactiveFalseText;
+                _savedText = _textForm.Text;
+                _textForm.Text = _interactiveFalseText;
             }
             
-            base.SetInteractive(interactive);
+            _buttonForm.SetInteractive(interactive);
         }
     }
 }

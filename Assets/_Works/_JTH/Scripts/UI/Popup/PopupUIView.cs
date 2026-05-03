@@ -17,15 +17,17 @@ namespace _Works._JTH.Scripts.UI.Popup
         private bool _isOpen;
         private CanvasGroup _canvasGroup;
 
-        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler)
+        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
+            UpdateForm updateFormHandler)
         {
-            base.InitializeView(root, formDataList, formInteractedHandler);
+            base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             _windowForm = GetForm<DoTweenWindowForm>((int)PopupUIEnum.RootWindow);
             _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
             
             AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
             AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
+
             _windowForm.OnAnimationEnd += AnimationEndHandler;
 
             GenerateBackground();

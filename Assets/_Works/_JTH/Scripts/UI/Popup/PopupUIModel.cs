@@ -19,25 +19,18 @@ namespace _Works._JTH.Scripts.UI.Popup
         }
 
         public void SetMessage(string msg) => _message = msg;
-        
-        private ChangedData NoButtonClickHandler(ChangedData _)
-        {
-            _noAction?.Invoke();
-            return null;
-        }
     
-        private ChangedData YesButtonClickHandler(ChangedData _)
+        private void I_YesButtonClickHandler(ChangedData _)
         {
             _yesAction?.Invoke();
-            return null;
-        }
-
-        private ChangedData ChangePopupMessageHandler(ChangedData _)
-        {
-            return ChangePopupMessageHandler();
         }
         
-        private ChangedData ChangePopupMessageHandler()
+        private void I_NoButtonClickHandler(ChangedData _)
+        {
+            _noAction?.Invoke();
+        }
+
+        private ChangedData U_ChangePopupMessageHandler()
         {
             return UIParamData.UIStringParam.Init(_message);
         }
