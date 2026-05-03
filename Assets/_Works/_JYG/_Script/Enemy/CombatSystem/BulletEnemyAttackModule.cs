@@ -23,6 +23,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             base.HandleAgentAttack();
             GameObject bullet = Instantiate(BulletData.BulletPrefab, FirePosition.position, Quaternion.identity);
             bullet.GetComponent<Rigidbody>().linearVelocity = (_playerTrm.position - FirePosition.position).normalized * BulletData.BulletSpeed;
+            Destroy(bullet, 2f);
         }
     }
 }

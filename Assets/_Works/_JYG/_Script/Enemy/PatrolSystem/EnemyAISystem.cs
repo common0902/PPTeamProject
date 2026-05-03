@@ -38,14 +38,18 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
 
         public void SetEnemyRoute()
         {
-            if (enemyPatrolRouteList.Count - 1 < _routeIndex + _minusRatio || 0 > _routeIndex + _minusRatio) //RouteIndex가 최대치를 벗어나거나 음수로 갔다면
+            if (IsArrived()) //도착했으면
             {
-                if (IsReturnRoute) _minusRatio *= -1;       //다시 되돌아가도록 설정했다면 Ratio를 * -1 해주어 1씩 떨어지거나 올라가도록 재설정.
-                else _routeIndex = -1;                       //경로가 0부터 시작하도록 설정했다면 Index = 0 (이후에 +1 해주니까 -1이다.)
+                if (enemyPatrolRouteList.Count - 1 < _routeIndex + _minusRatio || 0 > _routeIndex + _minusRatio) //RouteIndex가 최대치를 벗어나거나 음수로 갔다면
+                {
+                    if (IsReturnRoute) _minusRatio *= -1;       //다시 되돌아가도록 설정했다면 Ratio를 * -1 해주어 1씩 떨어지거나 올라가도록 재설정.
+                    else _routeIndex = -1;                       //경로가 0부터 시작하도록 설정했다면 Index = 0 (이후에 +1 해주니까 -1이다.)
+                }
+                _routeIndex += _minusRatio;
+                
+                PrevEnemyRoute = _currentRoute;
             }
-            _routeIndex += _minusRatio;
-
-            PrevEnemyRoute = _currentRoute;
+            
             EnemyRoute targetRoute = enemyPatrolRouteList[_routeIndex];
 
             Navmesh.SetDestination(targetRoute.flag.GetFlagPosition());             //경로 재설정
@@ -55,7 +59,8 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
 
         public void StartMove() => Navmesh.isStopped = false;
         public void StopMove() => Navmesh.isStopped = true;
-        public EnemyRoute CurrentRoute() => _currentRoute;
+        public EnemyRoute GetCurrentRoute() => _currentRoute;
+        public bool IsArrived() => Navmesh.remainingDistance <= Navmesh.stoppingDistance;
     }
 
     [Serializable]

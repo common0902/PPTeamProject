@@ -38,8 +38,8 @@ namespace _Script.Agent.FSM
 
         public virtual void Enter()
         {
-            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0.5f);
             _isTriggerCall = false;
+            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0.5f);
         }
 
         public virtual void Update()
