@@ -21,7 +21,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             base.Enter();
             _navMesh.Navmesh.isStopped = false;
             _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
-            Debug.Log("PATROL!");
         }
 
         public override void Update()
@@ -36,11 +35,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
-            }
-            
-            if (Keyboard.current.qKey.wasPressedThisFrame) //Debug Only
-            {
-                _enemy.ChangeState((int)EnemyState.CHASE);
             }
         }
 

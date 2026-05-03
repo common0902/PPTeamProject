@@ -10,9 +10,13 @@ namespace _Works._JYG._Script.Enemy.FSM
     public class EnemyAttackState : AgentState
     {
         private GameObject _player;
+
+        private TargetRaycaster _targetCaster;
         public EnemyAttackState(Agent agent, AnimationHashSO hash) : base(agent, hash)
         {
             _player = GameManager.Instance.Player;
+
+            _targetCaster = agent.GetModule<TargetRaycaster>();
         }
 
         public override void Enter()
@@ -27,22 +31,23 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             Vector3 lookDir = _player.transform.position - _agent.transform.position;
             lookDir.y = 0;
-            _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation
-                , Quaternion.LookRotation(lookDir) // 적을 바라보는 벡터 구하기.
-                , Time.deltaTime * 5f);
+            _agent.transform.rotation = Quaternion.LookRotation(lookDir);
 
             //공격이 모두 끝났다면 다시 chase로 돌아간다.
-            if(_isTriggerCall)
+            if (_isTriggerCall && _targetCaster.TargetPlayer != null)
             {
-                _enemy.ChangeState((int)EnemyState.CHASE);
-                Debug.Log("Attack End!");
+                if (!_targetCaster.TargetPlayer.TryGetComponent<TestPPPP>(out TestPPPP player))
+                {
+                    _enemy.ChangeState((int)EnemyState.CHASE);
+                    Debug.Log("Change State To Chase");
+                }
             }
         }
 
         public override void Exit()
         {
-            base.Exit();
             _trigger.OnAnimationEnd -= AnimationEndTrigger;
+            base.Exit();
         }
     }
 }
