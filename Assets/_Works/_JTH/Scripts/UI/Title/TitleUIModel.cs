@@ -34,7 +34,7 @@ namespace _Works._JTH.Scripts.UI.Title
             SavedStage = data;
         }
 
-        private void I_NewGameBtnClickHandler(ChangedData clickData)
+        private void NewGameBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(
                 OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
@@ -46,18 +46,18 @@ namespace _Works._JTH.Scripts.UI.Title
                     }, () => { }));
         }
 
-        private ChangedData U_ContinueBtnHandler()
+        private UIParam ContinueBtnHandler()
         {
             return UIParamData.UIStringParam.Init(
                 !String.IsNullOrEmpty(SavedStage) ? SavedStage : _notSavedStageIndex);
         }
         
-        private void I_ContinueBtnHandler(ChangedData clickData)
+        private void ContinueBtnHandler(UIParam clickData)
         {
             SceneManager.LoadScene(int.Parse(SavedStage));
         }
         
-        private void I_QuitBtnClickHandler(ChangedData clickData)
+        private void QuitBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(OpenUIEvents.OpenPopupEvent.Init("게임을 종료하시겠습니까?"
                 , () => Application.Quit(), () => { }));

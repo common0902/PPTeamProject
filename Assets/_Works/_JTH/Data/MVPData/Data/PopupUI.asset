@@ -24,17 +24,17 @@ MonoBehaviour:
       gameObjectName: F_Message
       formTypeName: TextForm
       targetInteractMethodName: None
-      targetUpdateMethodName: U_ChangePopupMessageHandler
+      targetUpdateMethodName: ChangePopupMessageHandler
     - childIndex: 7
       gameObjectName: F_YesBtn
       formTypeName: ButtonForm
-      targetInteractMethodName: I_YesButtonClickHandler
+      targetInteractMethodName: YesButtonClickHandler
       targetUpdateMethodName: None
     - childIndex: 10
       gameObjectName: F_NoBtn
       formTypeName: ButtonForm
-      targetInteractMethodName: I_NoButtonClickHandler
+      targetInteractMethodName: NoButtonClickHandler
       targetUpdateMethodName: None
   modelTypeName: PopupUIModel
   viewTypeName: PopupUIView
-  selectedChildName: F_RootWindow
+  selectedChildName: F_NoBtn
