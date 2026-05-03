@@ -1,3 +1,4 @@
+using System.Collections;
 using _Script.Agent.Modules;
 using _Works._JYG._Script.ScriptableObject;
 using UnityEngine;
@@ -19,11 +20,10 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
 
         protected override void HandleAgentAttack()
         {
-            Debug.Log("Enemy Shooting!!!!!!!");
             base.HandleAgentAttack();
-            GameObject bullet = Instantiate(BulletData.BulletPrefab, FirePosition.position, Quaternion.identity);
+            EnemyBullet bullet = PoolManager.Pop<EnemyBullet>(BulletData.PoolItemSO);
             bullet.GetComponent<Rigidbody>().linearVelocity = (_playerTrm.position - FirePosition.position).normalized * BulletData.BulletSpeed;
-            Destroy(bullet, 2f);
+            bullet.transform.position = FirePosition.position;
         }
     }
 }

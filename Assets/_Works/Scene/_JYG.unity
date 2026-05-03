@@ -976,6 +976,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   <Player>k__BackingField: {fileID: 350209446}
+  <PoolInitializer>k__BackingField: {fileID: 1145363442}
   <PlayerFindEventChannel>k__BackingField: {fileID: 11400000, guid: e278a6d9e9bbd3c4dba55e7801280e86, type: 2}
 --- !u!4 &350209448
 Transform:
@@ -1648,7 +1649,6 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <PoolManager>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 2036345979}
   <BulletData>k__BackingField: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
 --- !u!1 &494641284
@@ -2483,7 +2483,6 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <PoolManager>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 718524433}
   <BulletData>k__BackingField: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
 --- !u!1 &754985036
@@ -3090,7 +3089,6 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <PoolManager>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 722243073}
   <BulletData>k__BackingField: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
 --- !u!1 &1109370067 stripped
@@ -3320,6 +3318,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1113482008}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1145363441
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1145363443}
+  - component: {fileID: 1145363442}
+  m_Layer: 0
+  m_Name: PoolInitializer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1145363442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145363441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c4e8a47becdd4814ad9015ca774ece79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameLib.PoolObject.Runtime.PoolInitializer
+  <PoolManager>k__BackingField: {fileID: 11400000, guid: a96639fc05eea4246aee65ed54545a66, type: 2}
+--- !u!4 &1145363443
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1145363441}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.70592, y: 1.98658, z: -0.12908}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1157811782
 GameObject:
   m_ObjectHideFlags: 0
@@ -4546,7 +4589,6 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <PoolManager>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 2131509756}
   <BulletData>k__BackingField: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
 --- !u!4 &1540472722 stripped
@@ -5416,7 +5458,6 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <PoolManager>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 717896660}
   <BulletData>k__BackingField: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
 --- !u!1 &1754412812
@@ -7516,3 +7557,4 @@ SceneRoots:
   - {fileID: 1824548549}
   - {fileID: 1244141599}
   - {fileID: 350209448}
+  - {fileID: 1145363443}

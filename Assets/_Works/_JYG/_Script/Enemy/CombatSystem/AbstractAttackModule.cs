@@ -10,7 +10,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
     public abstract class AbstractAttackModule : MonoBehaviour, IModule
     {
         public UnityEvent AttackFeedback;
-        [field: SerializeField] public PoolManagerSO PoolManager { get; private set; }
+        public PoolManagerSO PoolManager { get; private set; }
 
         protected Agent agent;
         protected IAnimationTrigger trigger;
@@ -24,6 +24,11 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             Debug.Assert(trigger != null, $"Agent에 IAnimationTrigger가 존재하지 않습니다.");
 
             trigger.OnAttackTrigger += HandleAgentAttack;
+        }
+
+        private void Start()
+        {
+            PoolManager = GameManager.Instance.PoolInitializer.PoolManager;
         }
 
         protected virtual void OnDestroy()
