@@ -9,13 +9,15 @@ namespace HwanLib.MVP.System.GenerateUI
         [HideInInspector] public int childIndex;
         public string gameObjectName;
         public string formTypeName;
-        public string targetMethodName;
+        public string targetInteractMethodName;
+        public string targetUpdateMethodName;
 
         public FormData()
         {
             childIndex = -1;
             gameObjectName = "";
-            targetMethodName = "";
+            targetInteractMethodName = "";
+            targetUpdateMethodName = "";
             formTypeName = "";
         }
         
@@ -24,7 +26,8 @@ namespace HwanLib.MVP.System.GenerateUI
             this.childIndex = childIndex;
             this.gameObjectName = gameObjectName;
             formTypeName = defaultForm;
-            targetMethodName = defaultMethod;
+            targetInteractMethodName = defaultMethod;
+            targetUpdateMethodName = defaultMethod;
         }
     }
 }

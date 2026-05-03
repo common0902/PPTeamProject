@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using HwanLib.MVP.System.AddFormComponent;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ namespace HwanLib.MVP.System.BaseMVP
         private Dictionary<(Action, int), Action<int>> _lookup;
 
         public virtual void InitializeView(GameObject root, List<FormData> formDataList
-            , FormInteracted formInteractedHandler)
+            , FormInteracted formInteractedHandler, UpdateForm updateFormHandler)
         {
             RootCanvas = root.transform.GetChild(0).GetComponent<Canvas>();
             _formDict = new Dictionary<int, BaseForm>();
@@ -29,9 +30,17 @@ namespace HwanLib.MVP.System.BaseMVP
                 BaseForm form = child.gameObject
                     .AddFormComponent(formData.formTypeName);
                 form.InitializeForm(formData.childIndex);
-                
-                form.OnFormInteracted += OnFormInteracted;
-                form.OnFormInteracted += formInteractedHandler;
+
+                if (form is IInteractable interactable)
+                {
+                    interactable.OnFormInteracted += OnFormInteract;
+                    interactable.OnFormInteracted += formInteractedHandler;
+                }
+
+                if (form is IUpdatable updatable)
+                {
+                    updatable.OnFormUpdate += updateFormHandler;
+                }
                 
                 _formDict.Add(formData.childIndex, form);
             }
@@ -54,7 +63,10 @@ namespace HwanLib.MVP.System.BaseMVP
         {
             foreach (var form in _formDict.Values)
             {
-                form.UpdateVisual();
+                if (form is IUpdatable updatable)
+                {
+                    updatable.UpdateForm();
+                }
             }
         }
         
@@ -87,11 +99,11 @@ namespace HwanLib.MVP.System.BaseMVP
             _viewEvent -= wrappedHandler;
         }
 
-        private ChangedData OnFormInteracted(int childIndex, ChangedData _)
+        private void OnFormInteract(int childIndex, ChangedData _)
+            => _viewEvent?.Invoke(childIndex);
+
+        private ChangedData OnFormUpdate(int childIndex)
         {
-            if (_ == null)
-                return null;
-            
             _viewEvent?.Invoke(childIndex);
             return null;
         }

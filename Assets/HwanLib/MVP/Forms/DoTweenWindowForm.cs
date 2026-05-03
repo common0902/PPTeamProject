@@ -1,6 +1,7 @@
 ﻿using System;
 using DG.Tweening;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEngine;
 
 namespace HwanLib.MVP.Forms

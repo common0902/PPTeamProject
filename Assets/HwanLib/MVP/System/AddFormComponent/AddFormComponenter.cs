@@ -1,5 +1,6 @@
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.AddFormComponent

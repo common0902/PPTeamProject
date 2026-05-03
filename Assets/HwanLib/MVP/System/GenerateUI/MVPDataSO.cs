@@ -15,8 +15,8 @@ namespace HwanLib.MVP.System.GenerateUI
         [HideInInspector] public string modelTypeName;
         [HideInInspector] public string viewTypeName;
         
-        public Type GetViewType() => EditorInfo.GetUIAssemblyType(viewTypeName);
-        public Type GetModelType() => EditorInfo.GetUIAssemblyType(modelTypeName);
+        public Type GetViewType() => MVPEditorUtil.GetTypeInUIAssembly(viewTypeName);
+        public Type GetModelType() => MVPEditorUtil.GetTypeInUIAssembly(modelTypeName);
         
         
         #if UNITY_EDITOR
