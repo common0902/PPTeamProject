@@ -1,11 +1,12 @@
 ﻿using System;
 using _Script.Agent.Modules;
+using _Works._JYG._Script.Enemy.CombatSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace _Script.Agent
 {
-    public abstract class Agent : ModuleOwner //Enemy와 User가 공통적으로 가지고 있는 요소들을 Agent로 묶어서 정의.
+    public abstract class Agent : ModuleOwner, IDamageable //Enemy와 User가 공통적으로 가지고 있는 요소들을 Agent로 묶어서 정의.
     {
         //Health System
         //Attack System (Skill)
@@ -49,5 +50,11 @@ namespace _Script.Agent
         }
 
         protected abstract void HandleHealthChaged(float prevHealth, float currentHealth, float max);
+        
+        public virtual void TakeDamage(float damage, Vector3 hitDirection)
+        {
+            Health.GetDamage(damage);
+            OnHit?.Invoke();
+        }
     }
 }
