@@ -1,4 +1,4 @@
 ﻿namespace HwanLib.MVP.System
 { 
-    public delegate void FormInteracted(int childIndex, ChangedData value = null);
+    public delegate void FormInteracted(int childIndex, UIParam value = null);
 }

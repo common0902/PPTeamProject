@@ -2,7 +2,7 @@
 
 namespace HwanLib.MVP.UIData
 {
-    public class UIClickParam : ChangedData
+    public class UIClickParam : UIParam
     {
         
     }

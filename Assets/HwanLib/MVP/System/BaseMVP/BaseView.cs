@@ -99,10 +99,10 @@ namespace HwanLib.MVP.System.BaseMVP
             _viewEvent -= wrappedHandler;
         }
 
-        private void OnFormInteract(int childIndex, ChangedData _)
+        private void OnFormInteract(int childIndex, UIParam _)
             => _viewEvent?.Invoke(childIndex);
 
-        private ChangedData OnFormUpdate(int childIndex)
+        private UIParam OnFormUpdate(int childIndex)
         {
             _viewEvent?.Invoke(childIndex);
             return null;

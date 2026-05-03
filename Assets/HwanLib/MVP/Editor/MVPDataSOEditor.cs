@@ -287,15 +287,10 @@ namespace HwanLib.MVP.Editor
             IEnumerable<string> interactChoices = methods
                 ?.Where(method =>
                     {
-                        if (!method.Name.Contains("I_")) return false;
-                        
                         if (method.ReturnType == typeof(void)
                             && method.GetParameters().Length == 1
-                            && method.GetParameters()[0].ParameterType == typeof(ChangedData)) return true;
+                            && method.GetParameters()[0].ParameterType == typeof(UIParam)) return true;
                             
-                        EditorUtility.DisplayDialog("Error", $"{method.Name} 메서드의 delegate 타입이 잘못되었습니다."
-                            , "OK");
-
                         return false;
                     }
                 )
@@ -304,12 +299,8 @@ namespace HwanLib.MVP.Editor
             IEnumerable<string> updateChoice = methods
                 ?.Where(method =>
                     {
-                        if (!method.Name.Contains("U_")) return false;
-                        
-                        if (method.ReturnType == typeof(ChangedData)
+                        if (method.ReturnType == typeof(UIParam)
                             && method.GetParameters().Length == 0) return true;
-                        EditorUtility.DisplayDialog("Error", $"{method.Name} 메서드의 delegate 타입이 잘못되었습니다."
-                            , "OK");
 
                         return false;
                     }

@@ -1,4 +1,4 @@
 ﻿namespace HwanLib.MVP.System
 {
-    public delegate ChangedData UpdateForm(int childIndex);
+    public delegate UIParam UpdateForm(int childIndex);
 }

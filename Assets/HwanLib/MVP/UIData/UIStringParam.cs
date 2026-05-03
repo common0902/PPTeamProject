@@ -2,7 +2,7 @@
 
 namespace HwanLib.MVP.UIData
 {
-    public class UIStringParam : ChangedData
+    public class UIStringParam : UIParam
     {
         public string Value;
 

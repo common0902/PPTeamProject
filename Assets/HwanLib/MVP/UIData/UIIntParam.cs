@@ -2,7 +2,7 @@ using HwanLib.MVP.System;
 
 namespace HwanLib.MVP.UIData
 {
-    public class UIIntParam : ChangedData
+    public class UIIntParam : UIParam
     {
         public int Value;
 

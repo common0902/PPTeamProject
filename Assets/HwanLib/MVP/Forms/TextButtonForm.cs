@@ -22,7 +22,16 @@ namespace HwanLib.MVP.Forms
         {
             _textForm = textForm;
             _buttonForm = buttonForm;
+
+            _buttonForm.OnFormInteracted += UpdateText;
         }
+
+        private void OnDestroy()
+        {
+            _buttonForm.OnFormInteracted -= UpdateText;
+        }
+
+        private void UpdateText(int _, UIParam __) => _textForm.UpdateForm();
         
         public void SetInteractiveFalseText(string interactableFalseText)
             => _interactiveFalseText = interactableFalseText;
