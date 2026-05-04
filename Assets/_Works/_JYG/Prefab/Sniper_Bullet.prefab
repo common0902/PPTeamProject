@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4825937285448364173}
   - component: {fileID: 7737603666095783264}
   m_Layer: 8
-  m_Name: Bullet
+  m_Name: Sniper_Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,7 +114,7 @@ SphereCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.3
-  m_Center: {x: 0, y: -0.6766391, z: 0}
+  m_Center: {x: 0.5, y: 0, z: 0}
 --- !u!54 &4825937285448364173
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42fcf05e1f4c15e4584d8ecf6a29b8eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.CombatSystem.EnemyBullet
-  <PoolItem>k__BackingField: {fileID: 11400000, guid: afb0b79848d8c734fabca2b83ef37822, type: 2}
+  <PoolItem>k__BackingField: {fileID: 11400000, guid: dd3453e3ba8ffad4590ce3908f05f5d4, type: 2}
   damage: 1
 --- !u!1 &8706914261434976866
 GameObject:
