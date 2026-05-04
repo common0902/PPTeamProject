@@ -16,25 +16,40 @@ MonoBehaviour:
   formDataList:
     list:
     - childIndex: 2
-      gameObjectName: F_RootWindow
+      gameObjectName: F_Background
+      formTypeName: BackgroundForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 3
+      gameObjectName: F_Popup
       formTypeName: DoTweenWindowForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
-    - childIndex: 5
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 6
       gameObjectName: F_Message
       formTypeName: TextForm
       targetInteractMethodName: None
       targetUpdateMethodName: ChangePopupMessageHandler
-    - childIndex: 7
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 8
       gameObjectName: F_YesBtn
-      formTypeName: ButtonForm
+      formTypeName: FadeButtonForm
       targetInteractMethodName: YesButtonClickHandler
       targetUpdateMethodName: None
-    - childIndex: 10
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 11
       gameObjectName: F_NoBtn
-      formTypeName: ButtonForm
+      formTypeName: FadeButtonForm
       targetInteractMethodName: NoButtonClickHandler
       targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
   modelTypeName: PopupUIModel
   viewTypeName: PopupUIView
-  selectedChildName: F_NoBtn
+  selectedChildName: F_YesBtn

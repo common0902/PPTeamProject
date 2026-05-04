@@ -20,41 +20,78 @@ MonoBehaviour:
       formTypeName: AccessForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
     - childIndex: 4
       gameObjectName: F_MainButtons
       formTypeName: AccessForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
     - childIndex: 5
       gameObjectName: F_PlayBtn
-      formTypeName: ButtonForm
+      formTypeName: FadeButtonForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
     - childIndex: 8
       gameObjectName: F_SettingBtn
-      formTypeName: ButtonForm
-      targetInteractMethodName: None
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: SettingBtnClickHandler
       targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
     - childIndex: 11
       gameObjectName: F_QuitBtn
-      formTypeName: ButtonForm
-      targetInteractMethodName: I_QuitBtnClickHandler
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: QuitBtnClickHandler
       targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
     - childIndex: 14
       gameObjectName: F_SelectButtons
       formTypeName: AccessForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
     - childIndex: 15
-      gameObjectName: 'F_ContinueTxtBtn (Missing Prefab with guid: f69c6b1c5daf89648847601987b8b411)'
-      formTypeName: AccessForm
+      gameObjectName: F_SelectBackground
+      formTypeName: BackgroundForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
     - childIndex: 16
-      gameObjectName: F_NewBtn
-      formTypeName: ButtonForm
-      targetInteractMethodName: I_NewGameBtnClickHandler
+      gameObjectName: F_ContinueTxtBtn
+      formTypeName: TextButtonForm
+      targetInteractMethodName: None
       targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 17
+      gameObjectName: F_ContinueBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: ContinueBtnHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 19
+      gameObjectName: F_ContinueTxt
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: ContinueBtnHandler
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 20
+      gameObjectName: F_NewBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: NewGameBtnClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
   modelTypeName: TitleUIModel
   viewTypeName: TitleUIView
-  selectedChildName: F_TitleText
+  selectedChildName: F_SelectBackground

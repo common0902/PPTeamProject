@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: SettingUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 389598646035092739, guid: b2a59e2defdcb4e43a0076b73e4e18f9, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_Background
+      formTypeName: BackgroundForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 3
+      gameObjectName: F_Popup
+      formTypeName: DoTweenWindowForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 5
+      gameObjectName: F_CloseBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 11
+      gameObjectName: F_MasterSlider
+      formTypeName: SliderForm
+      targetInteractMethodName: MasterVolumeChangeHandler
+      targetUpdateMethodName: UpdateMasterVolume
+      isInteractable: 1
+      isUpdatable: 1
+    - childIndex: 19
+      gameObjectName: F_BGMSlider
+      formTypeName: SliderForm
+      targetInteractMethodName: BGMVolumeChangeHandler
+      targetUpdateMethodName: UpdateBGMVolume
+      isInteractable: 1
+      isUpdatable: 1
+    - childIndex: 27
+      gameObjectName: F_SFXSlider
+      formTypeName: SliderForm
+      targetInteractMethodName: SFXVolumeChangeHandler
+      targetUpdateMethodName: UpdateSFXVolume
+      isInteractable: 1
+      isUpdatable: 1
+    - childIndex: 32
+      gameObjectName: F_FullScreenToggle
+      formTypeName: ToggleForm
+      targetInteractMethodName: FullScreenToggleChangeHandler
+      targetUpdateMethodName: UpdateIsFullScreen
+      isInteractable: 1
+      isUpdatable: 1
+  modelTypeName: SettingUIModel
+  viewTypeName: SettingUIView
+  selectedChildName: F_CloseBtn

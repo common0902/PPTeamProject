@@ -1,6 +1,7 @@
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Script.SaveSystem
 {
@@ -15,6 +16,8 @@ namespace _Script.SaveSystem
         private void Awake()
         {
             DontDestroyOnLoad(gameObject);
+
+            SceneManager.sceneUnloaded += StoreData;
             
             StartCoroutine(RepeatSave());
         }
@@ -30,8 +33,14 @@ namespace _Script.SaveSystem
             while (true)
             {
                 yield return wait;
-                saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+                StoreData();
             }
         }
+
+        private void StoreData(Scene _)
+            => StoreData();
+        
+        private void StoreData()
+            => saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
     }
 }
