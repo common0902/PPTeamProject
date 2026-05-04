@@ -1,4 +1,6 @@
 using System;
+using _Script.ScriptableObject.Event;
+using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;

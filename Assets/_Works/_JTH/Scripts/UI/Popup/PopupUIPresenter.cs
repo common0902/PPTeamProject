@@ -8,7 +8,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 {
     public class PopupUIPresenter : BasePresenter
     {
-        [SerializeField] private EventChannelSO openPopupEvent;
+        [SerializeField] private EventChannelSO openUIEvent;
         
         private PopupUIView _popupView;
         private PopupUIModel _popupModel;
@@ -20,22 +20,22 @@ namespace _Works._JTH.Scripts.UI.Popup
             _popupView = View as PopupUIView;
             _popupModel = Model as PopupUIModel;
             
-            openPopupEvent?.AddListener<OpenPopupEvent>(ShowPopup);
+            openUIEvent?.AddListener<OpenPopupEvent>(ShowPopup);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
             
-            openPopupEvent?.RemoveListener<OpenPopupEvent>(ShowPopup);
+            openUIEvent?.RemoveListener<OpenPopupEvent>(ShowPopup);
         }
 
         #if UNITY_EDITOR
         [ContextMenu("ShowPopup")]
         public void TestPopup()
         {
-            // OpenUIEvents.OpenPopupEvent.SetValue("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes"));
-            // ShowPopup(OpenUIEvents.OpenPopupEvent);
+            ShowPopup(OpenUIEvents.OpenPopupEvent
+                .Init("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes")));
         }
         #endif
         
