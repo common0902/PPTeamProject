@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
+using HwanLib.MVP.Forms;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
@@ -25,8 +26,10 @@ namespace HwanLib.MVP.System.BaseMVP
             
             foreach (FormData form in formDataList)
             {
-                formInteractMethodDict.Add(form.childIndex, form.targetInteractMethodName);
-                formUpdateMethodDict.Add(form.childIndex, form.targetUpdateMethodName);
+                if (form.isInteractable)
+                    formInteractMethodDict.Add(form.childIndex, form.targetInteractMethodName);
+                if (form.isUpdatable)
+                    formUpdateMethodDict.Add(form.childIndex, form.targetUpdateMethodName);
             }
             
             Model = Activator.CreateInstance(dataSO.GetModelType()) as IModel;
@@ -45,7 +48,10 @@ namespace HwanLib.MVP.System.BaseMVP
             {
                 foreach (MethodInfo method in targetMethods)
                 {
-                    if (method.Name == targetMethodData.Value)
+                    if (method.Name == targetMethodData.Value
+                        && method.ReturnType == typeof(void)
+                        && method.GetParameters().Length == 1
+                        && method.GetParameters()[0].ParameterType == typeof(UIParam))
                     {
                         _moduleInteractMethodDict.Add(targetMethodData.Key
                             , method.CreateDelegate(typeof(Action<UIParam>), Model) as Action<UIParam>);
@@ -56,20 +62,20 @@ namespace HwanLib.MVP.System.BaseMVP
             
             foreach (KeyValuePair<int, string> targetMethodData in formUpdateMethodDict)
             {
-                bool hasMethod = false;
+                if (targetMethodData.Value == "Not Selected") 
+                    Debug.LogWarning($"Updatable을 상속한 Form이 메서드와 연결되어 있지 않습니다. ChildIndex: {targetMethodData.Key}");
+                
                 foreach (MethodInfo method in targetMethods)
                 {
-                    if (method.Name == targetMethodData.Value)
+                    if (method.Name == targetMethodData.Value
+                        && method.ReturnType == typeof(UIParam)
+                        && method.GetParameters().Length == 0)
                     {
                         _moduleUpdateMethodDict.Add(targetMethodData.Key, 
                             method.CreateDelegate(typeof(Func<UIParam>), Model) as Func<UIParam>);
-                        hasMethod = true;
                         break;
                     }
                 }
-
-                if (hasMethod == false) 
-                    Debug.LogWarning("해당하는 ");
             }
 
             View.InitializeView(gameObject, formDataList, InteractedHandler, UpdateHandler);
@@ -94,9 +100,9 @@ namespace HwanLib.MVP.System.BaseMVP
             {
                 return updateMethod?.Invoke();
             }
-
+            
             // Interact 이벤트는 View에서 사용할 수도 있지만 Update 이벤트는 무조건 Model과 연결되어 있어야한다.
-            Debug.LogWarning("메서드가 연결되지 않은 Updatable Form이 Update되었습니다.");
+            Debug.LogWarning($"메서드가 연결되지 않은 Updatable Form이 Update되었습니다. ChildIndex: {childIndex}");
             return null;
         }
     }

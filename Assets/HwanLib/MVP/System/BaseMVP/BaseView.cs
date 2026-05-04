@@ -29,7 +29,7 @@ namespace HwanLib.MVP.System.BaseMVP
                 
                 BaseForm form = child.gameObject
                     .AddFormComponent(formData.formTypeName);
-                form.InitializeForm(formData.childIndex);
+                form.ChildIndex = formData.childIndex;
 
                 if (form is IInteractable interactable)
                 {
