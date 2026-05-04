@@ -32,7 +32,8 @@ namespace HwanLib.MVP.Editor
         private VisualElement _formDataContainer;
 
         private GenerateScriptEditor _scriptGenerator;
-        
+        private const string _defaultMethodsName = "None";
+
         private FormData CurrentForm
         {
             get
@@ -147,17 +148,39 @@ namespace HwanLib.MVP.Editor
 
         private void SetTargetMethodsDisplayStyle()
         {
-            Type formType = Assembly.GetAssembly(typeof(AccessForm)).GetTypes()
-                .Single(type => type.Name == CurrentForm.formTypeName);
-            bool isInteractable = typeof(IInteractable)
-                .IsAssignableFrom(formType);
-            bool isUpdatable = typeof(IUpdatable)
-                .IsAssignableFrom(formType);
+            CurrentForm.SetBool();
+            
+            if (CurrentForm.isInteractable)
+                _interactMethodDropdown.style.display = DisplayStyle.Flex;
+            else
+            {
+                _interactMethodDropdown.style.display = DisplayStyle.None;
+                CurrentForm.targetInteractMethodName = _defaultMethodsName;
+            }
 
-            _interactMethodDropdown.style.display = isInteractable ? DisplayStyle.Flex : DisplayStyle.None;
-            _updateMethodDropdown.style.display = isUpdatable ? DisplayStyle.Flex : DisplayStyle.None;
-            CurrentForm.targetInteractMethodName = isInteractable ? CurrentForm.targetInteractMethodName : "None";
-            CurrentForm.targetUpdateMethodName = isUpdatable ? CurrentForm.targetUpdateMethodName : "None";
+            if (CurrentForm.isUpdatable)
+            {
+                _updateMethodDropdown.style.display = DisplayStyle.Flex;
+                _updateMethodDropdown.choices = _updateMethodDropdown.choices
+                    .Replace(_defaultMethodsName, "Not Selected")
+                    .ToList();
+                if (CurrentForm.targetUpdateMethodName == _defaultMethodsName)
+                    CurrentForm.targetUpdateMethodName = "Not Selected";
+                UpdateFieldDropdown(_updateMethodDropdown
+                    , ref CurrentForm.targetUpdateMethodName
+                    , "Not Selected");
+            }
+            else
+            {
+                _updateMethodDropdown.style.display = DisplayStyle.None;
+                CurrentForm.targetUpdateMethodName = _defaultMethodsName;
+                _updateMethodDropdown.choices = _updateMethodDropdown.choices
+                    .Replace("Not Selected", _defaultMethodsName)
+                    .ToList();    
+                UpdateFieldDropdown(_updateMethodDropdown
+                    , ref CurrentForm.targetUpdateMethodName
+                    , _defaultMethodsName);
+            }
         }
 
         private void HandleInteractMethodChange(ChangeEvent<string> methodName)
@@ -253,7 +276,7 @@ namespace HwanLib.MVP.Editor
                 
                 if (shouldAppend == true)
                 {
-                    FormData form = new(i, child.name, "AccessForm", "None");
+                    FormData form = new(i, child.name, "AccessForm", _defaultMethodsName);
                     newFormList.Add(form);
                 }
             }
@@ -309,11 +332,11 @@ namespace HwanLib.MVP.Editor
 
             // 중복 제거는 자동으로 됨.
             interactField.choices.Clear();
-            interactField.choices.Add("None");
+            interactField.choices.Add(_defaultMethodsName);
             interactField.choices.AddRange(interactChoices);
             
             updateField.choices.Clear();
-            updateField.choices.Add("None");
+            updateField.choices.Add(_defaultMethodsName);
             updateField.choices.AddRange(updateChoice);
         }
         
@@ -347,9 +370,10 @@ namespace HwanLib.MVP.Editor
             {
                 UpdateFieldDropdown(_childDropdown, ref _targetData.selectedChildName);
                 UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName, "AccessForm");
+
                 SetTargetMethodsDisplayStyle();
-                UpdateFieldDropdown(_interactMethodDropdown, ref CurrentForm.targetInteractMethodName, "None");
-                UpdateFieldDropdown(_updateMethodDropdown, ref CurrentForm.targetUpdateMethodName, "None");
+                UpdateFieldDropdown(_interactMethodDropdown, ref CurrentForm.targetInteractMethodName, _defaultMethodsName);
+                UpdateFieldDropdown(_updateMethodDropdown, ref CurrentForm.targetUpdateMethodName, _defaultMethodsName);
             }
         }
         
@@ -360,8 +384,11 @@ namespace HwanLib.MVP.Editor
             {
                 field.SetValueWithoutNotify(value);
             }
-            else if (_targetData != null && defaultValue != null)
+            else if (_targetData != null && !string.IsNullOrEmpty(defaultValue)
+                                         && field.choices.Contains(defaultValue))
             {
+                if (defaultValue == "Not Selected")
+                    Debug.Log(!string.IsNullOrEmpty(value));
                 value = defaultValue;
                 field.SetValueWithoutNotify(value);
             }
