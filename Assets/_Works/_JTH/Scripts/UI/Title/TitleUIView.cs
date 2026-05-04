@@ -13,15 +13,13 @@ namespace _Works._JTH.Scripts.UI.Title
         {
             Default,
             Select,
-            Setting,
         }
 
         private TitleState _currentState;
         private AccessForm _titleText;
         private AccessForm _mainButtons;
         private AccessForm _selectButtons;
-        private TextButtonForm _continueButton;
-        private string _notSavedStageIndex;
+        private TextButtonForm _continueTxtBtn;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
@@ -31,35 +29,31 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleText = GetForm<AccessForm>((int)TitleUIEnum.TitleText);
             _mainButtons = GetForm<AccessForm>((int)TitleUIEnum.MainButtons);
             _selectButtons = GetForm<AccessForm>((int)TitleUIEnum.SelectButtons);
-            _continueButton = GetForm<TextButtonForm>((int)TitleUIEnum.ContinueTxtBtn);
+            _continueTxtBtn = GetForm<TextButtonForm>((int)TitleUIEnum.ContinueTxtBtn);
             
-            _continueButton.SetTextAndButtonForm(GetForm<TextForm>((int)TitleUIEnum.ContinueTxt),
-                GetForm<ButtonForm>((int)TitleUIEnum.ContinueBtn));
-            _continueButton.SetInteractiveFalseText("Not Saved");
+            _continueTxtBtn.SetTextAndButtonForm(GetForm<TextForm>((int)TitleUIEnum.ContinueTxt),
+                GetForm<FadeButtonForm>((int)TitleUIEnum.ContinueBtn));
+            _continueTxtBtn.SetInteractiveFalseText("Not Saved");
             
             AddFormInteractionListener(PlayBtnClickHandler, (int)TitleUIEnum.PlayBtn);
-            AddFormInteractionListener(SettingBtnClickHandler, (int)TitleUIEnum.SettingBtn);
+            AddFormInteractionListener(BackgroundClickHandler, (int)TitleUIEnum.SelectBackground);
             
             UpdateState(TitleState.Default);
             
             OpenView();
         }
         
-        public void InitTitleView(string notSavedStageIndex)
-            => _notSavedStageIndex = notSavedStageIndex;
-
         public override void UpdateView()
         {
-            _continueButton.SetInteractive(true);
             base.UpdateView();
 
-            if (_continueButton.Text.Contains($"Day{_notSavedStageIndex}"))
+            if (_continueTxtBtn.Text.Contains("Day-1"))
             {
-                _continueButton.SetInteractive(false);
+                _continueTxtBtn.SetInteractive(false);
             }
             else
             {
-                _continueButton.SetInteractive(true);
+                _continueTxtBtn.SetInteractive(true);
             }
         }
         
@@ -68,7 +62,6 @@ namespace _Works._JTH.Scripts.UI.Title
             base.OnDestroyView();
             
             RemoveFormInteractionListener(PlayBtnClickHandler, (int)TitleUIEnum.PlayBtn);
-            RemoveFormInteractionListener(SettingBtnClickHandler, (int)TitleUIEnum.SettingBtn);
         }
 
         private void UpdateState(TitleState state)
@@ -87,12 +80,10 @@ namespace _Works._JTH.Scripts.UI.Title
                 case TitleState.Select:
                     _selectButtons.gameObject.SetActive(true);
                     break;
-                case TitleState.Setting:
-                    break;
             }
         }
 
         private void PlayBtnClickHandler() => UpdateState(TitleState.Select);
-        private void SettingBtnClickHandler() => UpdateState(TitleState.Setting);
+        private void BackgroundClickHandler() => UpdateState(TitleState.Default);
     }
 }

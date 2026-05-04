@@ -10,9 +10,7 @@ namespace _Works._JTH.Scripts.UI.Title
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private EventChannelSO saveChannel;
         [SerializeField] private int stageStartIndex = 1;
-            
-        private readonly string _notSavedStageIndex = "-1";
-        
+
         private TitleUIView _titleView;
         private TitleUIModel _titleModel;
 
@@ -23,8 +21,7 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleView = (TitleUIView)View;
             _titleModel = (TitleUIModel)Model;
 
-            _titleView.InitTitleView(_notSavedStageIndex);
-            _titleModel.InitTitleModel(_notSavedStageIndex, stageStartIndex);
+            _titleModel.InitTitleModel(stageStartIndex);
             
             _titleModel.SetPopupEventChannel(openUIChannel, saveChannel);
         }
