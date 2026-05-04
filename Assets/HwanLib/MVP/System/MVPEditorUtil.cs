@@ -61,5 +61,11 @@ namespace HwanLib.MVP.System
             var invalidChars = new[] {'<', '>'};
             return method.Name.Any(invalidChars.Contains);
         }
+        
+        public static IEnumerable<string> Replace(this IEnumerable<string> enumerable, string prevValue, string newValue)
+        {
+            return enumerable.Select(value => value == prevValue ? newValue : value);
+        }
+        
     }
 }

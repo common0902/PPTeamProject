@@ -4,7 +4,7 @@ namespace HwanLib.MVP.System.AddFormComponent
     {
         public static string AddFormComponenterFormat =
 @"using HwanLib.MVP.Forms;
-using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEngine;
 
 namespace {0}

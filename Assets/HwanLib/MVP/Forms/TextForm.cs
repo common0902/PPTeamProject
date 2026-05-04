@@ -17,20 +17,19 @@ namespace HwanLib.MVP.Forms
         }
 
         private TextMeshProUGUI _textMeshProUGUI;
+        private string _originalText;
 
-        public override void InitializeForm(int childIndex)
+        public void Awake()
         {
-            base.InitializeForm(childIndex);
-            
             _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+            _originalText = _textMeshProUGUI.text;
         }
 
         protected override void UpdateVisual(UIParam data)
         {
             string text = ((UIStringParam)data)?.Value;
-            
             if (!String.IsNullOrEmpty(text))
-                Text = String.Format(Text, text);
+                Text = String.Format(_originalText, text);
         }
     }
 }

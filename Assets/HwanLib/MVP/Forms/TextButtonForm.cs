@@ -7,28 +7,23 @@ namespace HwanLib.MVP.Forms
 {
     public class TextButtonForm : BaseForm
     {
-        public string Text
-        {
-            get => _textForm.Text;
-            set => _textForm.Text = value;
-        }
+        public string Text => _textForm.Text;
         
         private TextForm _textForm;
-        private ButtonForm _buttonForm;
-        private string _savedText;
+        private FadeButtonForm _fadeButtonForm;
         private string _interactiveFalseText;
 
-        public void SetTextAndButtonForm(TextForm textForm, ButtonForm buttonForm)
+        public void SetTextAndButtonForm(TextForm textForm, FadeButtonForm fadeButtonForm)
         {
             _textForm = textForm;
-            _buttonForm = buttonForm;
+            _fadeButtonForm = fadeButtonForm;
 
-            _buttonForm.OnFormInteracted += UpdateText;
+            _fadeButtonForm.OnFormInteracted += UpdateText;
         }
 
         private void OnDestroy()
         {
-            _buttonForm.OnFormInteracted -= UpdateText;
+            _fadeButtonForm.OnFormInteracted -= UpdateText;
         }
 
         private void UpdateText(int _, UIParam __) => _textForm.UpdateForm();
@@ -40,17 +35,12 @@ namespace HwanLib.MVP.Forms
         {
             Debug.Assert(!String.IsNullOrEmpty(_interactiveFalseText), "_interactiveFalseText is empty");
             
-            if (interactive == true && _buttonForm.Interactive == false)
+            if (interactive == false)
             {
-                _textForm.Text = _savedText;
-            }
-            else if (interactive == false && _buttonForm.Interactive == true)
-            {
-                _savedText = _textForm.Text;
                 _textForm.Text = _interactiveFalseText;
             }
             
-            _buttonForm.SetInteractive(interactive);
+            _fadeButtonForm.SetInteractive(interactive);
         }
     }
 }

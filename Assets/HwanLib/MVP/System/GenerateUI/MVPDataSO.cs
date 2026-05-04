@@ -17,9 +17,15 @@ namespace HwanLib.MVP.System.GenerateUI
         
         public Type GetViewType() => MVPEditorUtil.GetTypeInUIAssembly(viewTypeName);
         public Type GetModelType() => MVPEditorUtil.GetTypeInUIAssembly(modelTypeName);
-        
+
+        public List<FormData> GetFormDataList()
+        { 
+            formDataList ??= new FormDataList();
+            return formDataList.list;
+        }
         
         #if UNITY_EDITOR
+        
         public FormData GetFormData(string key)
         {
             formDataList ??= new FormDataList();
@@ -61,12 +67,6 @@ namespace HwanLib.MVP.System.GenerateUI
                 if (formDataList.list[i].gameObjectName == key)
                     formDataList.list.RemoveAt(i);
             }
-        }
-
-        public List<FormData> GetFormDataList()
-        { 
-            formDataList ??= new FormDataList();
-            return formDataList.list;
         }
 
         public void ResetFormData()
