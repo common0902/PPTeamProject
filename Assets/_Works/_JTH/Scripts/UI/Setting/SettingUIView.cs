@@ -23,6 +23,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
             
             AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
+            AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
 
             _windowForm.OnAnimationEnd += AnimationEndHandler;
 
@@ -34,6 +35,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             base.OnDestroyView();
             
             RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
+            RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
             _windowForm.OnAnimationEnd -= AnimationEndHandler;
         }
 
