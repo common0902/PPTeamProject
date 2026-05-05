@@ -7,7 +7,7 @@ using UnityEngine.Events;
 
 namespace _Works._JYG._Script.Enemy.CombatSystem
 {
-    public abstract class AbstractAttackModule : MonoBehaviour, IModule
+    public abstract class AbstractAttackModule : MonoBehaviour, IModule, IAfterInitialize
     {
         public UnityEvent AttackFeedback;
         public PoolManagerSO PoolManager { get; private set; }
@@ -22,9 +22,13 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             //agent.OnAttack += HandleAgentAttack;
             trigger = agent.GetModule<IAnimationTrigger>();
             Debug.Assert(trigger != null, $"Agent에 IAnimationTrigger가 존재하지 않습니다.");
-
+        }
+        
+        public void LateInitialize(ModuleOwner moduleAgent)
+        {
             trigger.OnAttackTrigger += HandleAgentAttack;
         }
+        
 
         private void Start()
         {

@@ -36,14 +36,14 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             Debug.Log($"맵이 유효하지 않거나 뚫려있어 LifeTime에 의해 EnemyBullet({gameObject.name})이 제거되었습니다.");
             _poolManager.Push(this);
         }
-
-        private void OnTriggerEnter(Collider other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.TryGetComponent<IDamageable>(out IDamageable damageable))
+            if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
                 damageable.TakeDamage(damage, Vector3.forward);
             }
-            
+
+            Debug.Log("Hit!");
             StopAllCoroutines();
             _poolManager.Push(this);
         }
