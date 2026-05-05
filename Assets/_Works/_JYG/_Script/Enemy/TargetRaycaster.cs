@@ -46,11 +46,11 @@ namespace _Works._JYG._Script.Enemy
             return TargetPlayer != null && _player == TargetPlayer;
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.red;
-            Gizmos.DrawRay(transform.position, transform.forward * Range);
-        }
+        // private void OnDrawGizmosSelected()
+        // {
+        //     Gizmos.color = Color.red;
+        //     Gizmos.DrawRay(transform.position, transform.forward * Range);
+        // }
 
         public float GetDistance2Target()
         {
