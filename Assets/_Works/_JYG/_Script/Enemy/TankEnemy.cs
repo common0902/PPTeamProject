@@ -14,8 +14,10 @@ namespace _Works._JYG._Script.Enemy
             if (Vector3.Dot(transform.forward, hitDirection) > shieldAngle / 2)
             {
                 //Block Sound Play
+                Debug.Log("Block!!!!");
                 return;
             }
+            Debug.Log($"아야; {damage}, 방향은 {hitDirection}");
             base.TakeDamage(damage, hitDirection);
         }
 
