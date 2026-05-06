@@ -19,7 +19,7 @@ namespace _Works._JYG._Script.Test
         {
             if (Keyboard.current.hKey.wasPressedThisFrame)
             {
-                Target.TakeDamage(1f, transform.forward);
+                Target.TakeDamage(1f, transform.forward, transform.position);
             }
         }
     }

@@ -72,7 +72,7 @@ namespace _Script.Agent
 
         protected abstract void HandleHealthChaged(float prevHealth, float currentHealth, float max);
         
-        public virtual void TakeDamage(float damage, Vector3 hitDirection)
+        public virtual void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
         {
             Health.GetDamage(damage);
             IsHit = true;
