@@ -13,7 +13,7 @@ namespace _Script.Tools
         //Awake에서는 구독이 일어난다 Awake에서는 구독이 일어난다 Awake에서는 구독이 일어난다 Awake에서는 구독이 일어난다 Awake에서는 구독이 일어난다 
         private void Start()
         {
-            SaveDataEventChannelSO.RaiseEvent(DataEvents.DataLoadEvent);
+            SaveDataEventChannelSO.RaiseEvent(SaveEvents.RestoreDataEvent);
         }
     }
 }

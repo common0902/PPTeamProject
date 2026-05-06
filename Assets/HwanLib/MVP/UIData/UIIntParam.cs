@@ -2,8 +2,14 @@ using HwanLib.MVP.System;
 
 namespace HwanLib.MVP.UIData
 {
-    public class UIIntParam : ChangedData
+    public class UIIntParam : UIParam
     {
-        public static int Value;
+        public int Value;
+
+        public UIIntParam Init(int value)
+        {
+            Value = value;
+            return this;
+        }
     }
 }

@@ -1,5 +1,5 @@
 using HwanLib.MVP.Forms;
-using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.AddFormComponent
@@ -13,16 +13,23 @@ namespace HwanLib.MVP.System.AddFormComponent
             
             switch (formName)
             {
-                case "ButtonForm":
-                    return gameObject.AddComponent<ButtonForm>();
+                case "AccessForm":
+                    return gameObject.AddComponent<AccessForm>();
+                case "BackgroundForm":
+                    return gameObject.AddComponent<BackgroundForm>();
+                case "FadeButtonForm":
+                    return gameObject.AddComponent<FadeButtonForm>();
                 case "DoTweenWindowForm":
                     return gameObject.AddComponent<DoTweenWindowForm>();
+                case "SliderForm":
+                    return gameObject.AddComponent<SliderForm>();
                 case "TextButtonForm":
                     return gameObject.AddComponent<TextButtonForm>();
                 case "TextForm":
                     return gameObject.AddComponent<TextForm>();
+                case "ToggleForm":
+                    return gameObject.AddComponent<ToggleForm>();
                 default:
-                    Debug.LogErrorFormat("Unknown form name: {0}", formName);
                     return null;
             }
         }

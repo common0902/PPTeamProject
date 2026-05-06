@@ -1,6 +1,5 @@
 ﻿using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
-using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
@@ -9,7 +8,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 {
     public class PopupUIPresenter : BasePresenter
     {
-        [SerializeField] private EventChannelSO openPopupEvent;
+        [SerializeField] private EventChannelSO openUIEvent;
         
         private PopupUIView _popupView;
         private PopupUIModel _popupModel;
@@ -21,22 +20,22 @@ namespace _Works._JTH.Scripts.UI.Popup
             _popupView = View as PopupUIView;
             _popupModel = Model as PopupUIModel;
             
-            openPopupEvent?.AddListener<OpenPopupEvent>(ShowPopup);
+            openUIEvent?.AddListener<OpenPopupEvent>(ShowPopup);
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
             
-            openPopupEvent?.RemoveListener<OpenPopupEvent>(ShowPopup);
+            openUIEvent?.RemoveListener<OpenPopupEvent>(ShowPopup);
         }
 
         #if UNITY_EDITOR
         [ContextMenu("ShowPopup")]
         public void TestPopup()
         {
-            UIEvents.OpenPopupEvent.SetValue("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes"));
-            ShowPopup(UIEvents.OpenPopupEvent);
+            ShowPopup(OpenUIEvents.OpenPopupEvent
+                .Init("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes")));
         }
         #endif
         

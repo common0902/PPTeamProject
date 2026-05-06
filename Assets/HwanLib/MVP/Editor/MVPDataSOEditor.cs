@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEditor;
 using UnityEditor.UIElements;
@@ -24,12 +26,14 @@ namespace HwanLib.MVP.Editor
         private DropdownField _viewTypeNameDropdown;
         private DropdownField _childDropdown;
         private DropdownField _formTypeDropdown;
-        private DropdownField _methodDropdown;
+        private DropdownField _interactMethodDropdown;
+        private DropdownField _updateMethodDropdown;
         private VisualElement _typeNameContainer;
         private VisualElement _formDataContainer;
 
         private GenerateScriptEditor _scriptGenerator;
-        
+        private const string _defaultMethodsName = "None";
+
         private FormData CurrentForm
         {
             get
@@ -53,7 +57,8 @@ namespace HwanLib.MVP.Editor
             _viewTypeNameDropdown = root.Q<DropdownField>("ViewTypeNameDropdown");
             _childDropdown = root.Q<DropdownField>("ChildObjectDropdown");
             _formTypeDropdown = root.Q<DropdownField>("FormTypeDropdown");
-            _methodDropdown = root.Q<DropdownField>("TargetMethodNameDropdown");
+            _interactMethodDropdown = root.Q<DropdownField>("TargetInteractMethodNameDropdown");
+            _updateMethodDropdown = root.Q<DropdownField>("TargetUpdateMethodNameDropdown");
             _uiPrefabObjectField = root.Q<ObjectField>("UIPrefabObjectField");
             _typeNameContainer = root.Q<VisualElement>("TypeNameContainer");
             _formDataContainer = root.Q<VisualElement>("FormDataContainer");
@@ -63,7 +68,8 @@ namespace HwanLib.MVP.Editor
             _uiPrefabObjectField.RegisterValueChangedCallback(HandleUIPrefab);
             _childDropdown.RegisterValueChangedCallback(HandleChildObjectChange);
             _formTypeDropdown.RegisterValueChangedCallback(HandleFormTypeChange);
-            _methodDropdown.RegisterValueChangedCallback(HandleModuleMethodChange);
+            _interactMethodDropdown.RegisterValueChangedCallback(HandleInteractMethodChange);
+            _updateMethodDropdown.RegisterValueChangedCallback(HandleUpdateMethodChange);
 
             if (_targetData.parentPrefab != null)
             {
@@ -112,7 +118,7 @@ namespace HwanLib.MVP.Editor
 
             _scriptGenerator.FileName = _targetData.parentPrefab.name + "Form";
             _scriptGenerator.PrefsName = _scriptGenerator.FileName + "Path";
-            
+
             CheckTypeNameContainerActive();
         }
 
@@ -137,11 +143,54 @@ namespace HwanLib.MVP.Editor
         private void HandleFormTypeChange(ChangeEvent<string> formType)
         {
             CurrentForm.formTypeName = formType.newValue;
+            SetTargetMethodsDisplayStyle();
         }
 
-        private void HandleModuleMethodChange(ChangeEvent<string> methodName)
+        private void SetTargetMethodsDisplayStyle()
         {
-            CurrentForm.targetMethodName = methodName.newValue;
+            CurrentForm.SetBool();
+            
+            if (CurrentForm.isInteractable)
+                _interactMethodDropdown.style.display = DisplayStyle.Flex;
+            else
+            {
+                _interactMethodDropdown.style.display = DisplayStyle.None;
+                CurrentForm.targetInteractMethodName = _defaultMethodsName;
+            }
+
+            if (CurrentForm.isUpdatable)
+            {
+                _updateMethodDropdown.style.display = DisplayStyle.Flex;
+                _updateMethodDropdown.choices = _updateMethodDropdown.choices
+                    .Replace(_defaultMethodsName, "Not Selected")
+                    .ToList();
+                if (CurrentForm.targetUpdateMethodName == _defaultMethodsName)
+                    CurrentForm.targetUpdateMethodName = "Not Selected";
+                UpdateFieldDropdown(_updateMethodDropdown
+                    , ref CurrentForm.targetUpdateMethodName
+                    , "Not Selected");
+            }
+            else
+            {
+                _updateMethodDropdown.style.display = DisplayStyle.None;
+                CurrentForm.targetUpdateMethodName = _defaultMethodsName;
+                _updateMethodDropdown.choices = _updateMethodDropdown.choices
+                    .Replace("Not Selected", _defaultMethodsName)
+                    .ToList();    
+                UpdateFieldDropdown(_updateMethodDropdown
+                    , ref CurrentForm.targetUpdateMethodName
+                    , _defaultMethodsName);
+            }
+        }
+
+        private void HandleInteractMethodChange(ChangeEvent<string> methodName)
+        {
+            CurrentForm.targetInteractMethodName = methodName.newValue;
+        }
+        
+        private void HandleUpdateMethodChange(ChangeEvent<string> methodName)
+        {
+            CurrentForm.targetUpdateMethodName = methodName.newValue;
         }
 
         private void CheckTypeNameContainerActive()
@@ -152,7 +201,7 @@ namespace HwanLib.MVP.Editor
                 CheckFormContainerActive();
                 return;
             }
-            
+
             FillTypeNameDropdown(_modelTypeNameDropdown, typeof(IModel));
             FillTypeNameDropdown(_viewTypeNameDropdown, typeof(BaseView));
             
@@ -174,26 +223,27 @@ namespace HwanLib.MVP.Editor
                 _formDataContainer.style.display = DisplayStyle.None;
                 return;
             }
-            
+
             FillChildObjectDropdown(_childDropdown);
-            if (string.IsNullOrEmpty(_targetData.selectedChildName))
+            if (string.IsNullOrEmpty(_targetData.selectedChildName) 
+                || !_childDropdown.choices.Contains(_targetData.selectedChildName))
             {
                 _targetData.selectedChildName = _childDropdown.choices.FirstOrDefault();
             }
 
             if (CurrentForm != null)
             {
-                FillTargetMethodNameDropdown(_methodDropdown);
+                FillTargetMethodsNameDropdown(_interactMethodDropdown, _updateMethodDropdown);
                 FillFormTypeDropdown(_formTypeDropdown);
-                UpdateFormDropdowns(); 
+                UpdateFormDropdowns();
             }
-
+            
             _formDataContainer.style.display = DisplayStyle.Flex;
         }
 
         private void FillTypeNameDropdown(DropdownField field, Type fieldType)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(fieldType, true);
+            IEnumerable<string> choices = MVPEditorUtil.GetTypeNamesInUIAssembly(fieldType);
             
             field.choices.Clear();
             field.choices.AddRange(choices);
@@ -226,7 +276,7 @@ namespace HwanLib.MVP.Editor
                 
                 if (shouldAppend == true)
                 {
-                    FormData form = new(i, child.name);
+                    FormData form = new(i, child.name, "AccessForm", _defaultMethodsName);
                     newFormList.Add(form);
                 }
             }
@@ -242,30 +292,54 @@ namespace HwanLib.MVP.Editor
         
         private void FillFormTypeDropdown(DropdownField field)
         {
-            IEnumerable<string> choices = EditorInfo.GetTypeNames(typeof(BaseForm), false);
+            Assembly formAssembly = Assembly.GetAssembly(typeof(AccessForm));
+            IEnumerable<string> choices = MVPEditorUtil.GetAssignedTypesInAssembly(typeof(BaseForm), formAssembly)
+                .Select(type => type.Name);
 
             field.choices.Clear();
             field.choices.AddRange(choices);
         }
         
-        private void FillTargetMethodNameDropdown(DropdownField field)
+        private void FillTargetMethodsNameDropdown(DropdownField interactField, DropdownField updateField)
         {
-            Type dataType = typeof(ChangedData);
-            IEnumerable<string> choices = EditorInfo.UIAssembly.GetTypes()
-                .Where(type => type.Name == _targetData.modelTypeName)
-                .FirstOrDefault()
+            IEnumerable<MethodInfo> methods = MVPEditorUtil.GetTypesInUIAssembly(typeof(IModel))
+                .SingleOrDefault(type => type.Name == _targetData.modelTypeName)
                 ?.GetMethods(BindingFlags.Instance | BindingFlags.NonPublic)
-                .Where(method => (method.ReturnType == dataType 
-                                  && method.GetParameters().Length == 1
-                                  && method.GetParameters()[0].ParameterType == dataType) == true)
+                .Where(method => !method.IsAnonymous());
+
+            IEnumerable<string> interactChoices = methods
+                ?.Where(method =>
+                    {
+                        if (method.ReturnType == typeof(void)
+                            && method.GetParameters().Length == 1
+                            && method.GetParameters()[0].ParameterType == typeof(UIParam)) return true;
+                            
+                        return false;
+                    }
+                )
+                .Select(method => method.Name);
+            
+            IEnumerable<string> updateChoice = methods
+                ?.Where(method =>
+                    {
+                        if (method.ReturnType == typeof(UIParam)
+                            && method.GetParameters().Length == 0) return true;
+
+                        return false;
+                    }
+                )
                 .Select(method => method.Name);
 
-            field.choices.Clear();
-            field.choices.Add("None");
-            field.choices.AddRange(choices);
-            field.SetValueWithoutNotify("None");
+            // 중복 제거는 자동으로 됨.
+            interactField.choices.Clear();
+            interactField.choices.Add(_defaultMethodsName);
+            interactField.choices.AddRange(interactChoices);
+            
+            updateField.choices.Clear();
+            updateField.choices.Add(_defaultMethodsName);
+            updateField.choices.AddRange(updateChoice);
         }
-
+        
         private void SetDefaultName()
         {
             if (_targetData.parentPrefab == null)
@@ -295,23 +369,29 @@ namespace HwanLib.MVP.Editor
             if (CurrentForm != null)
             {
                 UpdateFieldDropdown(_childDropdown, ref _targetData.selectedChildName);
-                UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName);
-                UpdateFieldDropdown(_methodDropdown, ref CurrentForm.targetMethodName);
+                UpdateFieldDropdown(_formTypeDropdown, ref CurrentForm.formTypeName, "AccessForm");
+
+                SetTargetMethodsDisplayStyle();
+                UpdateFieldDropdown(_interactMethodDropdown, ref CurrentForm.targetInteractMethodName, _defaultMethodsName);
+                UpdateFieldDropdown(_updateMethodDropdown, ref CurrentForm.targetUpdateMethodName, _defaultMethodsName);
             }
         }
         
-        private void UpdateFieldDropdown(DropdownField field, ref string value)
+        private void UpdateFieldDropdown(DropdownField field, ref string value, string defaultValue = null)
         {
             if (_targetData != null && !string.IsNullOrEmpty(value)
                                     && field.choices.Contains(value))
             {
                 field.SetValueWithoutNotify(value);
-            } 
-            else if (_targetData != null && field.choices.Contains("None"))
+            }
+            else if (_targetData != null && !string.IsNullOrEmpty(defaultValue)
+                                         && field.choices.Contains(defaultValue))
             {
-                value = "None";
+                if (defaultValue == "Not Selected")
+                    Debug.Log(!string.IsNullOrEmpty(value));
+                value = defaultValue;
                 field.SetValueWithoutNotify(value);
-            } 
+            }
             else if (_targetData != null)
             {
                 value = null;

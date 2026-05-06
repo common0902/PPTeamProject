@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
@@ -21,13 +22,16 @@ namespace _Works._JYG._Script.Enemy
         public float enemyCurrentCaution;                       //에너미의 경계 수치. 1이 되면 위험 확정 상황.
         public float cautionRatio = 1f;                         //에너미의 경계 수치 증가값 배율.
         [SerializeField] private float enemyCautionDelay = 5f;  //위험까지 가기 위해 기다려야하는 시간초.
-        
+
+        [field: SerializeField] public float AttackDistance { get; private set; } = 15f;
+
         [field: SerializeField] public float PatrolSpeed { get; private set; } = 1.5f;    //Patrol 상태일 때 사용되는 걷는 속도
         [field: SerializeField] public float ChaseSpeed { get; private set; } = 2.5f;     //Chase 상태일 때 사용되는 뛰는 속도
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay); //0과 1로 표현하는 Enemy 경계수치
         public bool SirenEffect { get; private set; }
 
         [SerializeField] private float callingDuration = 3f;
+
         
 
         protected override void Awake()
@@ -57,7 +61,7 @@ namespace _Works._JYG._Script.Enemy
             
         }
 
-        private void Update()
+        protected override void Update()
         {
             if (_stateMachine != null)
                 _stateMachine.UpdateStateMachine();
@@ -118,5 +122,10 @@ namespace _Works._JYG._Script.Enemy
         
         #endregion
 
+        private void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.gold;
+            Gizmos.DrawRay(transform.position, transform.forward.normalized * AttackDistance);
+        }
     }
 }

@@ -15,8 +15,16 @@ namespace HwanLib.MVP.System.GenerateUI
         [HideInInspector] public string modelTypeName;
         [HideInInspector] public string viewTypeName;
         
-        public Type GetViewType() => EditorInfo.GetType(EditorInfo.UIAssembly, viewTypeName);
-        public Type GetModelType() => EditorInfo.GetType(EditorInfo.UIAssembly, modelTypeName);
+        public Type GetViewType() => MVPEditorUtil.GetTypeInUIAssembly(viewTypeName);
+        public Type GetModelType() => MVPEditorUtil.GetTypeInUIAssembly(modelTypeName);
+
+        public List<FormData> GetFormDataList()
+        { 
+            formDataList ??= new FormDataList();
+            return formDataList.list;
+        }
+        
+        #if UNITY_EDITOR
         
         public FormData GetFormData(string key)
         {
@@ -61,18 +69,11 @@ namespace HwanLib.MVP.System.GenerateUI
             }
         }
 
-        public List<FormData> GetFormDataList()
-        { 
-            formDataList ??= new FormDataList();
-            return formDataList.list;
-        }
-
         public void ResetFormData()
         {
             formDataList = null;
         }
         
-        #if UNITY_EDITOR
         [HideInInspector] public string selectedChildName;
         #endif
         

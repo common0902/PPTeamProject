@@ -25,24 +25,22 @@ namespace _Works._JYG._Script.Enemy.FSM
         }
         public override void Enter()
         {
-            base.Enter();
             _navmesh.Navmesh.isStopped = false;
             _navmesh.Navmesh.speed = _enemy.ChaseSpeed;
             
             _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
-            
-            Debug.Log("CHASE!");
+            base.Enter(); //애니메이션 재생
         }
 
         public override void Update()
         {
             _navmesh.Navmesh.SetDestination(_player.transform.position);
 
-            if(_targetCaster.TryGetTarget(out GameObject target))
+            if(_targetCaster.TryGetTarget(out GameObject target))//Target Caster에 감지되었다.
             {
-                if(target.TryGetComponent<TestPPPP>(out TestPPPP test))
+                if(target.TryGetComponent<TestPPPP>(out TestPPPP test) 
+                   && Vector3.Distance(_enemy.transform.position, target.transform.position) <= _enemy.AttackDistance)
                 {
-                    Debug.Log("플레이어 찾음!!");
                     _enemy.ChangeState((int)EnemyState.ATTACK);
                 }
             }

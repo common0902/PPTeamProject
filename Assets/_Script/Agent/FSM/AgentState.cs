@@ -18,10 +18,14 @@ namespace _Script.Agent.FSM
 
         protected ViewCaster _viewCaster;
 
+        protected IAnimationTrigger _trigger;
+
         public AgentState(Agent agent, AnimationHashSO hash) //ParamSO도 받아와야함.
         {
             _agent = agent;
             _animationHash = hash;
+            
+            _trigger = agent.GetModule<IAnimationTrigger>();
 
             _enemy = agent as AbstractEnemy;
 
@@ -34,8 +38,8 @@ namespace _Script.Agent.FSM
 
         public virtual void Enter()
         {
-            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0.5f);
             _isTriggerCall = false;
+            _renderer.PlayCrossFade(_animationHash.AnimationHash, 0, 0.5f);
         }
 
         public virtual void Update()

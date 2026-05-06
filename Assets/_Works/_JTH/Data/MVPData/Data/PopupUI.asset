@@ -1,0 +1,55 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: PopupUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 9018258415325778279, guid: f77978312e9b4e74d8321f65638154da, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_Background
+      formTypeName: BackgroundForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 3
+      gameObjectName: F_Popup
+      formTypeName: DoTweenWindowForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 6
+      gameObjectName: F_Message
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: ChangePopupMessageHandler
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 8
+      gameObjectName: F_YesBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: YesButtonClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 11
+      gameObjectName: F_NoBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: NoButtonClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+  modelTypeName: PopupUIModel
+  viewTypeName: PopupUIView
+  selectedChildName: F_YesBtn
