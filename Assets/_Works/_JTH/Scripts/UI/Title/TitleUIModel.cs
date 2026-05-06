@@ -1,5 +1,4 @@
 ﻿using System;
-using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System;
@@ -16,13 +15,14 @@ namespace _Works._JTH.Scripts.UI.Title
 
         private EventChannelSO _openUIChannel;
         private EventChannelSO _saveChannel;
-        private string _notSavedStageIndex;
         private int _stageStartIndex;
 
-        public void InitTitleModel(string notSavedStageIndex, int stageStartIndex)
+        public void InitTitleModel(int stageStartIndex)
+            => _stageStartIndex = stageStartIndex;
+
+        public override void SetDefaultData()
         {
-            _notSavedStageIndex = notSavedStageIndex;
-            _stageStartIndex = stageStartIndex;
+            SavedStage = "-1";
         }
 
         public override string StoreData()
@@ -35,45 +35,48 @@ namespace _Works._JTH.Scripts.UI.Title
             SavedStage = data;
         }
 
-        private ChangedData NewGameBtnClickHandler(ChangedData clickData)
+        public void SetPopupEventChannel(EventChannelSO openUIChannel, EventChannelSO saveChannel)
+        {
+            _openUIChannel = openUIChannel;
+            _saveChannel = saveChannel;
+        }
+        
+        private void NewGameBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(
                 OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
                     , () =>
                     {
-                        SavedStage = _notSavedStageIndex;
+                        SavedStage = "-1";
                         _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
                         SceneManager.LoadScene(_stageStartIndex);
                     }, () => { }));
-            
-            return null;
         }
 
-        private ChangedData ContinueBtnHandler()
+        private UIParam ContinueBtnHandler()
         {
             return UIParamData.UIStringParam.Init(
-                !String.IsNullOrEmpty(SavedStage) ? SavedStage : _notSavedStageIndex);
+                !String.IsNullOrEmpty(SavedStage) ? SavedStage : "-1");
         }
         
-        private ChangedData ContinueBtnHandler(ChangedData clickData)
+        private void ContinueBtnHandler(UIParam clickData)
         {
             SceneManager.LoadScene(int.Parse(SavedStage));
-            
-            return ContinueBtnHandler();
         }
         
-        private ChangedData QuitBtnClickHandler(ChangedData clickData)
+        private void QuitBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(OpenUIEvents.OpenPopupEvent.Init("게임을 종료하시겠습니까?"
-                , () => Application.Quit(), () => { }));
-
-            return null;
+                , () =>
+                {
+                    _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+                    Application.Quit();
+                }, () => { }));
         }
-
-        public void SetPopupEventChannel(EventChannelSO openUIChannel, EventChannelSO saveChannel)
+        
+        private void SettingBtnClickHandler(UIParam _)
         {
-            _openUIChannel = openUIChannel;
-            _saveChannel = saveChannel;
+            _openUIChannel.RaiseEvent(OpenUIEvents.OpenSettingEvent);
         }
     }
 }

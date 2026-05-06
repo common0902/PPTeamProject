@@ -15,6 +15,12 @@ namespace _Script.Agent
         public UnityEvent OnDeath;
 
         public bool IsDead { get; protected set; }
+        public bool IsHit { get; private set; }
+        public bool IsHitFinished { get; private set; }
+
+        [SerializeField] private float hitDuration = 0.5f; // Inspector에서 조절 가능
+        private float _hitTimer;
+
         protected HealthModule Health { get; private set; }
 
         public Action OnAttack;
@@ -41,7 +47,22 @@ namespace _Script.Agent
             Health.OnHealthChanged += HandleHealthChaged;
         }
 
-        
+        protected virtual void Update()
+        {
+            if (!IsHit) return;
+
+            _hitTimer -= Time.deltaTime;
+
+            if (_hitTimer <= 0f)
+            {
+                IsHit = false;
+                IsHitFinished = true;
+            }
+            else
+            {
+                IsHitFinished = false;
+            }
+        }
 
         protected virtual void OnDestroy()
         {
@@ -54,7 +75,13 @@ namespace _Script.Agent
         public virtual void TakeDamage(float damage, Vector3 hitDirection)
         {
             Health.GetDamage(damage);
+            IsHit = true;
+            IsHitFinished = false;
+            _hitTimer = hitDuration;
             OnHit?.Invoke();
         }
+
+        // IsHit 해제하는 메서드
+        public void ClearHit() => IsHit = false;
     }
 }

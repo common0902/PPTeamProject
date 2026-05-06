@@ -6,6 +6,7 @@ namespace _Works._JTH.Scripts.UI.Event
     public static class OpenUIEvents
     {
         public static readonly OpenPopupEvent OpenPopupEvent = new OpenPopupEvent();
+        public static readonly OpenSettingEvent OpenSettingEvent = new OpenSettingEvent();
     }
 
     public class OpenPopupEvent : GameEvent
@@ -22,5 +23,10 @@ namespace _Works._JTH.Scripts.UI.Event
 
             return this;
         }
+    }
+
+    public class OpenSettingEvent : GameEvent
+    {
+        
     }
 }

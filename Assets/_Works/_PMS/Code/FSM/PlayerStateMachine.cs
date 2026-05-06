@@ -1,31 +1,44 @@
-﻿//using System.Xml;
-//using UnityEngine;
+﻿using System.Xml;
+using UnityEngine;
 
-//public class PlayerStateMachine : MonoStateMachine<PlayerController>
-//{
-//    protected override void AddStates()
-//    {
-//        AddState<EntityDefaultState>();
-//        AddState<RollingState>();
-//        AddState<DeadState>();
-//    }
+public class PlayerStateMachine : MonoStateMachine<PlayerController>
+{
+    // Player의 레이어별 상태 추가
+    protected override void AddStates()
+    {
+        // 레이어 0: 이동 관련한 로직
+        AddState<PlayerIdleState>();
+        AddState<PlayerWalkState>();
+        AddState<PlayerRunState>();
 
-//    protected override void MakeTransitions()
-//    {
-//        // Default 상태에서 롤링이 켜지면 롤링으로
-//        MakeTransition<EntityDefaultState, RollingState>(state => Owner.Movement?.IsRolling ?? false);
+        // 레이어 1: 행동에 대한 로직
+        AddState<PlayerNoneState>(1);
+        AddState<PlayerAttackState>(1);
+        AddState<PlayerHitState>(1);
+        AddState<PlayerDeadState>(1);
+        
+    }
 
-//        // Rolling 상태에서 롤링이 꺼지면 디폴트로
-//        MakeTransition<RollingState, EntityDefaultState>(state => !Owner.Movement.IsRolling);
+    protected override void MakeTransitions()
+    {
+        // 레이어 0 - 이동
+        MakeTransition<PlayerIdleState, PlayerWalkState>(state => Owner.MoveInput.magnitude > 0.1f);
 
-//        // Dead 상태에서 죽음이 해제 되면 디폴트로
-//        MakeTransition<DeadState, EntityDefaultState>(state => !Owner.IsDead);
+        MakeTransition<PlayerWalkState, PlayerIdleState>(state => Owner.MoveInput.magnitude <= 0.1f);
 
-//        //언제든 디폴트 상태로 가라는 명령을 받으면 이동
-//        MakeAnyTransition<EntityDefaultState>(EntityStateCommand.ToDefaultState);
-//        //언제든 사망하면 Dead로 이동
-//        MakeAnyTransition<DeadState>(state => Owner.IsDead);
-//    }
-//}
+        MakeTransition<PlayerWalkState, PlayerRunState>(state => Owner.IsRunning);
 
-//    }
+        MakeTransition<PlayerRunState, PlayerWalkState>(state => !Owner.IsRunning);
+
+        MakeTransition<PlayerRunState, PlayerIdleState>(state => Owner.Movement.Velocity.magnitude <= 0.1f);
+
+        // 레이어 1 - 행동
+        MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
+
+        MakeAnyTransition<PlayerHitState>(state => !Owner.IsDead && Owner.IsHit, layer: 1);
+
+        MakeTransition<PlayerHitState, PlayerNoneState>(state => Owner.IsHitFinished, layer: 1);
+    }
+}
+
+    

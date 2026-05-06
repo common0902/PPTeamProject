@@ -1,5 +1,4 @@
-using HwanLib.MVP.System.BaseMVP;
-using HwanLib.MVP.UIData;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -7,57 +6,61 @@ using UnityEngine.EventSystems;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class ButtonForm : BaseForm, IPointerDownHandler, IPointerUpHandler
-        , IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+    public class FadeButtonForm : AbstractClickForm, IPointerDownHandler, IPointerUpHandler
+        , IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected float fadeTime = 0.2f;
         [SerializeField] protected float onHoverAlpha = 0.6f;
         [SerializeField] protected float onClickAlpha = 0.4f;
-        
+
         private CanvasGroup _canvasGroup;
-        protected bool Interactive;
+        public bool Interactive { get; private set; }
 
-        public override void InitializeForm(int childIndex)
+        public void Awake()
         {
-            base.InitializeForm(childIndex);
-            
             _canvasGroup = GetComponent<CanvasGroup>();
-            if (_canvasGroup == null)
-            {
-                _canvasGroup = gameObject.AddComponent<CanvasGroup>();
-            }
-
+        
             Interactive = true;
         }
         
-        public virtual void OnPointerEnter(PointerEventData eventData)
+        public void OnPointerEnter(PointerEventData eventData)
         {
+            if (_canvasGroup.interactable == false) return;
+            
             StopAllCoroutines();
             StartCoroutine(UIUtil.FadeOut(_canvasGroup, onHoverAlpha, fadeTime));
         }
 
-        public virtual void OnPointerExit(PointerEventData eventData)
+        public void OnPointerExit(PointerEventData eventData)
         {
+            if (_canvasGroup.interactable == false) return;
+            
             StopAllCoroutines();
             StartCoroutine(UIUtil.FadeIn(_canvasGroup, 1.0f, fadeTime));
         }
 
-        public virtual void OnPointerDown(PointerEventData eventData)
+        public void OnPointerDown(PointerEventData eventData)
         {
+            if (_canvasGroup.interactable == false) return;
+            
             _canvasGroup.alpha = onClickAlpha;
         }
 
-        public virtual void OnPointerUp(PointerEventData eventData)
+        public void OnPointerUp(PointerEventData eventData)
         {
+            if (_canvasGroup.interactable == false) return;
+            
             _canvasGroup.alpha = 1.0f;
         }
-        
-        public virtual void OnPointerClick(PointerEventData eventData)
+
+        public override void OnPointerClick(PointerEventData eventData)
         {
-            OnInteractive(UIParamData.UIClickParam);
+            if (_canvasGroup.interactable == false) return;
+            
+            base.OnPointerClick(eventData);
         }
-        
-        public virtual void SetInteractive(bool value)
+
+        public void SetInteractive(bool value)
         {
             if (value == false)
                 _canvasGroup.alpha = onClickAlpha;
@@ -65,7 +68,7 @@ namespace HwanLib.MVP.Forms
                 _canvasGroup.alpha = 1;
             
             Interactive = value;
-            _canvasGroup.blocksRaycasts = value;
+            _canvasGroup.interactable = value;
         }
     }
 }

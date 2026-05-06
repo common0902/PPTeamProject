@@ -21,6 +21,7 @@ namespace HwanLib.MVP.System.SaveMVP
             base.InitializePresenter(dataSO);
             
             Model = base.Model as AbstractSaveableModel;
+            Model.SetDefaultData();
         }
 
         public string StoreData()

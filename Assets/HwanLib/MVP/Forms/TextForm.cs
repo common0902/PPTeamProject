@@ -1,6 +1,6 @@
 ﻿using System;
 using HwanLib.MVP.System;
-using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.UIData;
 using TMPro;
 using UnityEngine;
@@ -8,7 +8,7 @@ using UnityEngine;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class TextForm : BaseForm
+    public class TextForm : AbstractVisualForm, IUpdatable
     {
         public string Text
         {
@@ -17,18 +17,19 @@ namespace HwanLib.MVP.Forms
         }
 
         private TextMeshProUGUI _textMeshProUGUI;
+        private string _originalText;
 
-        public override void InitializeForm(int childIndex)
+        public void Awake()
         {
-            base.InitializeForm(childIndex);
-            
             _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
+            _originalText = _textMeshProUGUI.text;
         }
 
-        protected override void SetVisual(ChangedData changedData)
+        protected override void UpdateVisual(UIParam data)
         {
-            base.SetVisual(changedData);
-            Text = String.Format(Text, ((UIStringParam)changedData).Value);
+            string text = ((UIStringParam)data)?.Value;
+            if (!String.IsNullOrEmpty(text))
+                Text = String.Format(_originalText, text);
         }
     }
 }
