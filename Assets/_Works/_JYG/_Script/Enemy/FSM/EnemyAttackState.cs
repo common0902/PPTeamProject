@@ -22,7 +22,6 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Enter()
         {
             base.Enter(); // _isTriggerCall = false;
-            Debug.Log("ATTACK!");
 
             _trigger.OnAnimationEnd += AnimationEndTrigger;
         }

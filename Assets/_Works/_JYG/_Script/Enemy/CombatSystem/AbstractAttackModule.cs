@@ -38,7 +38,8 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         protected virtual void OnDestroy()
         {
             //agent.OnAttack -= HandleAgentAttack;
-            trigger.OnAttackTrigger -= HandleAgentAttack;
+            if(trigger != null)
+                trigger.OnAttackTrigger -= HandleAgentAttack;
         }
 
         protected virtual void HandleAgentAttack()
