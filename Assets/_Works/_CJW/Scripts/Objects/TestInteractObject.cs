@@ -7,20 +7,10 @@ namespace _Works._CJW.Scripts.Objects
     public class TestInteractObject : AbstractInteractableObject
     {
         [SerializeField] private EventChannelSO testEvent;
-        protected override void HandleTriggerEnterEvent()
+        public override void HandleInteract()
         {
-            base.HandleTriggerEnterEvent();
-        }
-
-        protected override void HandleInteract(GameEvent evt)
-        {
-            base.HandleInteract(evt);
-            testEvent.RaiseEvent(InteractEvent.FireSabotage.Init(true));
-        }
-
-        protected override void HandleTriggerExitEvent()
-        {
-            base.HandleTriggerExitEvent();
+            base.HandleInteract();
+            Debug.Log("Interact Test Debug");
         }
     }
 }

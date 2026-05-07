@@ -5,6 +5,11 @@ public class PlayerMovement : MonoBehaviour, IModule
 {
     [SerializeField] private float moveSpeed = 8f, gravity = -9.8f;
 
+    [SerializeField] private float runSpeedMultiplier = 1.5f; // 달리기 배수
+
+    private float _currentSpeedMultiplier = 1f; // 현재 스피드 배수
+
+
     private Vector3 _velocity;
     private float _verticalVelocity;
     private Vector3 _movementDirection;
@@ -47,6 +52,9 @@ public class PlayerMovement : MonoBehaviour, IModule
         Move();
     }
 
+    public void SetRunMultiplier(bool isRun)
+        => _currentSpeedMultiplier = isRun ? runSpeedMultiplier : 1f;
+
     private void CalculateMovement()
     {
         if (CanManualMove)
@@ -54,7 +62,7 @@ public class PlayerMovement : MonoBehaviour, IModule
         else
             _velocity = _autoVelocity;
 
-        _velocity *= moveSpeed * Time.fixedDeltaTime;
+        _velocity *= moveSpeed * _currentSpeedMultiplier * Time.fixedDeltaTime;
 
         if (_velocity.sqrMagnitude > 0)
         {

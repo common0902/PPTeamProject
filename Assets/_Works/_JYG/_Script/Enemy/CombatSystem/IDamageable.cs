@@ -9,6 +9,6 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         /// </summary>
         /// <param name="damage">입는 데미지 값</param>
         /// <param name="hitDirection">공격 시전자의 forward Vector</param>
-        public void TakeDamage(float damage, Vector3 hitDirection);
+        public void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition);
     }
 }
