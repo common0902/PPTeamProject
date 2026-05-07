@@ -61,7 +61,7 @@ namespace _Works._JYG._Script.Enemy
             
         }
 
-        private void Update()
+        protected override void Update()
         {
             if (_stateMachine != null)
                 _stateMachine.UpdateStateMachine();

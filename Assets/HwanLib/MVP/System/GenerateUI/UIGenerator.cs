@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Tracing;
-using HwanLib.MVP.System.BaseMVP;
+﻿using HwanLib.MVP.System.BaseMVP;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.GenerateUI
