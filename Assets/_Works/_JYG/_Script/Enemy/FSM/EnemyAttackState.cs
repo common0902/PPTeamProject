@@ -22,8 +22,14 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Enter()
         {
             base.Enter(); // _isTriggerCall = false;
-
+            _enemy.SetCanRotate(false);
             _trigger.OnAnimationEnd += AnimationEndTrigger;
+            _trigger.OnAnimationEnd += EnemyRotateReset;
+        }
+
+        private void EnemyRotateReset()
+        {
+            _enemy.SetCanRotate(true);
         }
 
         public override void Update()
@@ -31,9 +37,10 @@ namespace _Works._JYG._Script.Enemy.FSM
             Vector3 lookDir = _player.transform.position - _agent.transform.position;
             lookDir.y = 0;
             _agent.transform.rotation = Quaternion.LookRotation(lookDir);
-
             //공격이 모두 끝났다면 다시 chase로 돌아간다.
-            if (_isTriggerCall && _targetCaster.TargetPlayer != null)
+            if (_isTriggerCall 
+                && (_targetCaster.TargetPlayer != null 
+                || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance))
             {
                 if (!_targetCaster.TargetPlayer.TryGetComponent<TestPPPP>(out TestPPPP player))
                 {
@@ -46,6 +53,7 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Exit()
         {
             _trigger.OnAnimationEnd -= AnimationEndTrigger;
+            _trigger.OnAnimationEnd -= EnemyRotateReset;
             base.Exit();
         }
     }

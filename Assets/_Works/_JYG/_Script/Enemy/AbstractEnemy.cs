@@ -7,6 +7,7 @@ using _Script.ScriptableObject.Event;
 using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 namespace _Works._JYG._Script.Enemy
@@ -29,10 +30,14 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] public float ChaseSpeed { get; private set; } = 2.5f;     //Chase 상태일 때 사용되는 뛰는 속도
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay); //0과 1로 표현하는 Enemy 경계수치
         public bool SirenEffect { get; private set; }
+        public bool CanRotate { get; private set; }
 
         [SerializeField] private float callingDuration = 3f;
 
-        
+        [field: SerializeField] public SoundClipSO PlayerFoundSound { get; private set; }
+        [field: SerializeField] public SoundClipSO HitSound { get; private set; }
+
+
 
         protected override void Awake()
         {
@@ -75,6 +80,13 @@ namespace _Works._JYG._Script.Enemy
 
         public void ChangeState(int index) => _stateMachine.ChangeState(index);
         public AgentState GetCurrentState => _stateMachine.CurrentState;
+        public void SetCanRotate(bool canRotate) => CanRotate = canRotate;
+
+        public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
+        {
+            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, HitSound));
+            base.TakeDamage(damage, hitDirection, attackerPosition);
+        }
 
         public void EnemyFindPlayer()
         {
@@ -113,6 +125,8 @@ namespace _Works._JYG._Script.Enemy
 
         private IEnumerator StartCalling(float t)
         {
+            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, PlayerFoundSound));
+            
             yield return new WaitForSeconds(t);
             if (!IsDead && !SirenEffect)
             {

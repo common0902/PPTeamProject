@@ -360,6 +360,7 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
+  <AttackSound>k__BackingField: {fileID: 0}
   <FirePosition>k__BackingField: {fileID: 1407947725471480045}
   <BulletData>k__BackingField: {fileID: 11400000, guid: b142bc3dae87b5b41a72f24a8fbe735d, type: 2}
 --- !u!1 &5660689300149651207
@@ -513,14 +514,19 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
+  hitDuration: 0.5
+  <SoundEventChannel>k__BackingField: {fileID: 0}
   <PlayerFindEventChannel>k__BackingField: {fileID: 11400000, guid: e278a6d9e9bbd3c4dba55e7801280e86, type: 2}
   <stateListSO>k__BackingField: {fileID: 11400000, guid: f781bd68529cba648be9e2e0407f698f, type: 2}
   enemyCurrentCaution: 0
   cautionRatio: 1
   enemyCautionDelay: 3
+  <AttackDistance>k__BackingField: 15
   <PatrolSpeed>k__BackingField: 1.5
   <ChaseSpeed>k__BackingField: 2.5
   callingDuration: 5
+  <PlayerFoundSound>k__BackingField: {fileID: 0}
+  <HitSound>k__BackingField: {fileID: 0}
 --- !u!1 &5770631333871572798
 GameObject:
   m_ObjectHideFlags: 0
