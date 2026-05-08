@@ -27,6 +27,7 @@ namespace HwanLib.MVP.Forms
             _sequence = DOTween.Sequence();
             float curDuration = Mathf.Clamp01(1 - transform.localScale.x) * openDuration;
             _sequence.Append(transform.DOScale(Vector3.one, curDuration).SetEase(Ease.InCirc))
+                .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     transform.localScale = Vector3.one;
@@ -46,6 +47,7 @@ namespace HwanLib.MVP.Forms
             _sequence = DOTween.Sequence();
             float curDuration = transform.localScale.x * closeDuration;
             _sequence.Append(transform.DOScale(Vector3.zero, curDuration).SetEase(Ease.InBack))
+                .SetUpdate(true)
                 .OnComplete(() =>
                 {
                     transform.localScale = Vector3.zero;
