@@ -4,6 +4,7 @@ using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Rendering;
 using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
@@ -17,6 +18,7 @@ namespace _Works._JYG._Script.Enemy
     {
         [Header("SO Settings")]
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
+        [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
@@ -141,6 +143,7 @@ namespace _Works._JYG._Script.Enemy
             if (!IsDead && !SirenEffect)
             {
                 PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.EnemyChangeState.Init(EnemyState.CHASE));
+                PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.SirenCameraEffect);
             }
         }
         
