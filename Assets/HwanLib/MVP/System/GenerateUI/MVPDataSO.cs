@@ -43,32 +43,7 @@ namespace HwanLib.MVP.System.GenerateUI
         {
             formDataList.list = formList;
         }
-
-        public List<string> GetFormDataKeys()
-        {
-            formDataList ??= new FormDataList();
-            
-            List<string> keys = new List<string>();
-
-            foreach (FormData formData in formDataList.list)
-            {
-                keys.Add(formData.gameObjectName);
-            }
-
-            return keys;
-        }
-
-        public void RemoveFormData(string key)
-        {
-            formDataList ??= new FormDataList();
-
-            for (int i = 0; i < formDataList.list.Count; i++)
-            {
-                if (formDataList.list[i].gameObjectName == key)
-                    formDataList.list.RemoveAt(i);
-            }
-        }
-
+        
         public void ResetFormData()
         {
             formDataList = null;
@@ -78,7 +53,7 @@ namespace HwanLib.MVP.System.GenerateUI
         #endif
         
         [Serializable]
-        public class FormDataList
+        private class FormDataList
         {
             public List<FormData> list = new();
         }

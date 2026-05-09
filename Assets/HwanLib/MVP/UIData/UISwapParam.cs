@@ -4,13 +4,15 @@ namespace HwanLib.MVP.UIData
 {
     public class UISwapParam : UIParam
     {
-        public int Item1;
-        public int Item2;
+        public int ItemEnum;
+        public int TargetIndex;
 
-        public void Init(int item1, int item2)
+        public UISwapParam Init(int itemEnum, int targetIndex)
         {
-            Item1 = item1;
-            Item2 = item2;
+            ItemEnum = itemEnum;
+            TargetIndex = targetIndex;
+
+            return this;
         }
     }
 }

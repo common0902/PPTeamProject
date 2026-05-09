@@ -70,6 +70,14 @@ namespace HwanLib.MVP.System.BaseMVP
             }
         }
         
+        public void UpdateForm(int childEnum)
+        {
+            if (_formDict.TryGetValue(childEnum, out BaseForm form) && form is IUpdatable updatable)
+                updatable.UpdateForm();
+            else
+                Debug.LogWarning("Updatable을 상속하지 않은 Form은 Update할 수 없습니다.");
+        }
+        
         protected T GetForm<T>(int childEnum) where T : BaseForm
         {
             return _formDict[childEnum] as T;
