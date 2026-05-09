@@ -12,9 +12,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 {
     public class Sabotage : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
+        [Header("Sabotage Data")]
         [SerializeField] private SabotageDataSo sabotageData; // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
+        [Header("Event Channel")]
+        [SerializeField] private EventChannelSO cameraEvent;
         [SerializeField] private EventChannelSO sabotageEvent;
         [SerializeField] private EventChannelSO interactEvent; // 상호작용을 해야 작동할 때 필요한 이벤트
+        [Header("Info")]
         [SerializeField] private Color defaultOutLineColor;
         [SerializeField] private Color interactedOutLineColor;
         [SerializeField] private GameObject visualObject;
@@ -23,14 +27,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private  bool isLocked = false; // 사보타지가 잠금 해제되었는지 여부
         private AbstractSabotageEvent _targetEvent;
         private Outline _outline;
-        private Rigidbody _rigid;
         private bool _isUsed = false;
 
         
         private void Awake()
         {
-            sabotageEvent.AddListener<TopViewEvent>(HandleOpen);
-            _rigid = GetComponent<Rigidbody>();
+            cameraEvent.AddListener<TopViewEvent>(HandleOpen);
+            interactEvent.AddListener<UnlockEvent>(HandleUnlock);
             _outline = GetComponentInChildren<Outline>();
 
             Debug.Log(_outline);
@@ -40,11 +43,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void Start()
         {
-            Debug.Log(targetEventName);
             _targetEvent = typeof(SabotageEvents).GetField(targetEventName,
                 BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as AbstractSabotageEvent;
             
-            interactEvent.AddListener<UnlockEvent>(HandleUnlock);
         }
 
         private void HandleUnlock(UnlockEvent evt)
@@ -54,6 +55,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
                && evt.TargetSabotageData == sabotageData)
             {
                 isLocked = true;
+                interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
+                
                 Debug.Log($"{targetEventName} 사보타지 해금");
             }
         }
@@ -99,7 +102,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         
         private void OnDestroy()
         {
-            sabotageEvent.RemoveListener<TopViewEvent>(HandleOpen);
+            cameraEvent.RemoveListener<TopViewEvent>(HandleOpen);
             interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
         }
     }

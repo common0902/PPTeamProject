@@ -10,7 +10,7 @@ namespace _Works._CJW.Scripts
     public class CameraController : MonoBehaviour
     {
         [Header("Event Channel")]
-        [SerializeField] private EventChannelSO sabotageEvent;
+        [SerializeField] private EventChannelSO cameraEvent;
         [Header("Camera Setting")]
         [SerializeField] private float defaultHeight;
         [SerializeField] private float resultHeight;
@@ -32,13 +32,10 @@ namespace _Works._CJW.Scripts
             _thirdPersonFollow = _camera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
         
             Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
-        
-            _thirdPersonFollow.VerticalArmLength = defaultHeight;
-            _rootTrs = GameObject.Find("CameraRoot").transform;
-            _playerTrs = GameObject.Find("Player").transform;
-            _tempTrs = new GameObject("CameraTempTransform").transform;
-            Debug.Assert(_rootTrs != null, "Player transform not found. Make sure there is a GameObject named 'CameraRoot' in the scene.");
-            Debug.Assert(_playerTrs != null, "Player transform not found. Make sure there is a GameObject named 'Player' in the scenes.");
+            
+            _rootTrs = _camera.Follow;
+            _playerTrs = _rootTrs.parent;
+            _tempTrs = new GameObject("CamTempTransform").transform;
         }
         [ContextMenu("Quad")]
         private void Test()
@@ -76,12 +73,12 @@ namespace _Works._CJW.Scripts
                     _tempTrs.rotation = Quaternion.Slerp(_tempTrs.rotation, endRotation, percent * curveValue);
                 yield return null;
             }
-            sabotageEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
+            cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
         }
     
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
-            sabotageEvent?.RaiseEvent(CameraEvent.TopViewEvent.Init(false));
+            cameraEvent?.RaiseEvent(CameraEvent.TopViewEvent.Init(false));
             float t = 0;
             float startVal = _thirdPersonFollow.VerticalArmLength;
             Quaternion endRotation = _rootTrs.rotation;

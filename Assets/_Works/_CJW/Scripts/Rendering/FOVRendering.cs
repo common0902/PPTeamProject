@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,14 +11,14 @@ namespace _Works._CJW.Scripts.Rendering
 {
     public class FOVRendering : MonoBehaviour
     {
-        // 나중에 모듈화 해서 ModuleOwner의 위치와 회전에 맞출예정
+        [SerializeField] private EventChannelSO cameraEvent;
         [SerializeField] private float maxResolution = 100f;
         [SerializeField] private LayerMask wallLayer;
         public float angle = 50f;
+        public float distance = 10;
         private List<FOVInfo> _fovInfos;
         public MeshFilter MeshFilter { get; private set; }
-        public UnityEvent OnDrawFov;
-        public float distance = 10;
+        public UnityEvent onDrawFov;
         private Mesh _mesh;
 
         private void Awake()
@@ -25,6 +27,11 @@ namespace _Works._CJW.Scripts.Rendering
             MeshFilter = GetComponent<MeshFilter>();
             _mesh = new Mesh();
             MeshFilter.mesh = _mesh;
+        }
+
+        private void Start()
+        {
+            cameraEvent.RaiseEvent(CameraEvent.RegisterFovEvent.Init(true, this));
         }
 
         private void Update()
@@ -58,7 +65,6 @@ namespace _Works._CJW.Scripts.Rendering
             _mesh.triangles = triangles;
             _mesh.RecalculateNormals();
             
-            // OnDrawFov?.Invoke();
         }
 
         private void FovCheck()
