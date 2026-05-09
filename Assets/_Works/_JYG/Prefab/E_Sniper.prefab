@@ -1002,15 +1002,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.54925966
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.16286999
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.65228
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1042,13 +1042,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6775442643578517744, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
       propertyPath: m_Name
-      value: FoveRenderer
+      value: FovRenderer
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6775442643578517744, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 6643172016713568710}
   m_SourcePrefab: {fileID: 100100000, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
+--- !u!1 &3058339964225323562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6775442643578517744, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
+  m_PrefabInstance: {fileID: 8391986016953563866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6643172016713568710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058339964225323562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d668764c12247b6b7f1a1fb4a19362e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.CombineRender
+  cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
 --- !u!4 &3215521826141618834 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}

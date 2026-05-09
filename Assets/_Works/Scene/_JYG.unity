@@ -178,19 +178,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
   m_PrefabInstance: {fileID: 6221689814555710059}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &79969383
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 79969378}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d668764c12247b6b7f1a1fb4a19362e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.CombineRender
-  cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
 --- !u!1 &102124196
 GameObject:
   m_ObjectHideFlags: 0
@@ -2814,10 +2801,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 79969383}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
 --- !u!1001 &7134338899976382502
 PrefabInstance:
