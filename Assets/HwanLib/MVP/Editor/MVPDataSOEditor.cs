@@ -387,8 +387,6 @@ namespace HwanLib.MVP.Editor
             else if (_targetData != null && !string.IsNullOrEmpty(defaultValue)
                                          && field.choices.Contains(defaultValue))
             {
-                if (defaultValue == "Not Selected")
-                    Debug.Log(!string.IsNullOrEmpty(value));
                 value = defaultValue;
                 field.SetValueWithoutNotify(value);
             }

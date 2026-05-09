@@ -10,7 +10,7 @@ namespace HwanLib.MVP.System.BaseMVP.Form
         
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            OnFormInteracted?.Invoke(ChildIndex, UIParamData.UIClickParam);
+            OnFormInteracted?.Invoke(ChildIndex, UIParamContainer.UIClickParam);
         }
     }
 }

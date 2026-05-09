@@ -8,8 +8,6 @@ namespace _Works._JTH.Scripts.UI.Setting
 {
     public class SettingUIModel : AbstractSaveableModel
     {
-        private AudioMixer _audioMixer;
-
         private class SettingInfo
         {
             public float MasterVolume = 0.5f;
@@ -18,6 +16,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             public bool IsFullScreen = true;
         }
         
+        private AudioMixer _audioMixer;
         private SettingInfo _settingInfo;
 
         public void SetAudioMixer(AudioMixer audioMixer)
@@ -25,7 +24,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             _audioMixer = audioMixer;
         }
 
-        public override void SetDefaultData()
+        public override void SetDefaultValue()
         {
             _settingInfo = new SettingInfo();
         }
@@ -81,17 +80,17 @@ namespace _Works._JTH.Scripts.UI.Setting
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         }
 
-        private void CloseBtnClickHandler(UIParam data)
+        private void CloseBtnClickHandler(UIParam clickData)
         {
-            
+            StoreData();
         }
 
-        private UIParam UpdateMasterVolume() => UIParamData.UIFloatParam.Init(_settingInfo.MasterVolume);
+        private UIParam UpdateMasterVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.MasterVolume);
         
-        private UIParam UpdateBGMVolume() => UIParamData.UIFloatParam.Init(_settingInfo.BgmVolume);
+        private UIParam UpdateBGMVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.BgmVolume);
         
-        private UIParam UpdateSFXVolume() => UIParamData.UIFloatParam.Init(_settingInfo.SfxVolume);
+        private UIParam UpdateSFXVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.SfxVolume);
         
-        private UIParam UpdateIsFullScreen() => UIParamData.UIBoolParam.Init(_settingInfo.IsFullScreen);
+        private UIParam UpdateIsFullScreen() => UIParamContainer.UIBoolParam.Init(_settingInfo.IsFullScreen);
     }
 }
