@@ -4,27 +4,26 @@ using UnityEngine.Windows;
 public abstract class PlayerMoveBaseState : State<PlayerController>
 {
     protected PlayerMovement Movement;
-    protected PlayerInputSO Input;
+    protected Transform CameraTransform;
 
     protected override void Setup()
     {
         Movement = Entity.GetModule<PlayerMovement>();
-        Input = Entity.PlayerInput;
+        CameraTransform = Entity.CameraTransform;
     }
-
     public override void Enter()
     {
-        Input.OnMovementChange += OnMovementChange;
-        Movement.SetMovementDirection(Entity.MoveInput);
+        UpdateDirection();
+    }
+    public override void Update()
+    {
+        UpdateDirection();
     }
 
-    public override void Exit()
+    private void UpdateDirection()
     {
-        Input.OnMovementChange -= OnMovementChange;
-    }
-
-    private void OnMovementChange(Vector2 dir)
-    {
-        Movement.SetMovementDirection(dir);
+        Vector3 direction = new Vector3(Entity.MoveInput.x, 0, Entity.MoveInput.y).normalized;
+        direction = Quaternion.Euler(0, CameraTransform.eulerAngles.y, 0) * direction;
+        Movement.SetMovementDirection(direction);
     }
 }

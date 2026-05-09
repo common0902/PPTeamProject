@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
@@ -9,12 +11,14 @@ namespace _Works._CJW.Scripts.Rendering
 {
     public class FOVRendering : MonoBehaviour
     {
-        // 나중에 모듈화 해서 ModuleOwner의 위치와 회전에 맞출예정
+        [SerializeField] private EventChannelSO cameraEvent;
         [SerializeField] private float maxResolution = 100f;
+        [SerializeField] private LayerMask wallLayer;
         public float angle = 50f;
+        public float distance = 10;
         private List<FOVInfo> _fovInfos;
         public MeshFilter MeshFilter { get; private set; }
-        public UnityEvent OnDrawFov;
+        public UnityEvent onDrawFov;
         private Mesh _mesh;
 
         private void Awake()
@@ -23,6 +27,11 @@ namespace _Works._CJW.Scripts.Rendering
             MeshFilter = GetComponent<MeshFilter>();
             _mesh = new Mesh();
             MeshFilter.mesh = _mesh;
+        }
+
+        private void Start()
+        {
+            cameraEvent.RaiseEvent(CameraEvent.RegisterFovEvent.Init(true, this));
         }
 
         private void Update()
@@ -56,7 +65,6 @@ namespace _Works._CJW.Scripts.Rendering
             _mesh.triangles = triangles;
             _mesh.RecalculateNormals();
             
-            // OnDrawFov?.Invoke();
         }
 
         private void FovCheck()
@@ -67,7 +75,7 @@ namespace _Works._CJW.Scripts.Rendering
             for (int i = 0; i <= stepCount; i++)
             {
                 if(Physics.Raycast(transform.position, new Vector3(Mathf.Sin((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad),
-                    0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)), out hitTemp, 10))
+                    0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)), out hitTemp, distance, wallLayer))
                 {
                     _fovInfos.Add(new FOVInfo()
                     {
@@ -83,7 +91,7 @@ namespace _Works._CJW.Scripts.Rendering
                     {
                         Hit = false,
                         HitPoint = transform.position + new Vector3(Mathf.Sin((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad),
-                            0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)) * 10,
+                            0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)) * distance,
                         Distance = maxResolution,
                         HitAngle = transform.eulerAngles.y - angle / 2 + stepAngleSize * i
                     });

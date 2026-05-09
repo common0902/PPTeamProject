@@ -1,10 +1,7 @@
 using System;
-using _Script.ScriptableObject.Event;
-using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;
-using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
@@ -34,7 +31,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 
         private UIParam ChangePopupMessageHandler()
         {
-            return UIParamData.UIStringParam.Init(_message);
+            return UIParamContainer.UIStringParam.Init(_message);
         }
     }
 }

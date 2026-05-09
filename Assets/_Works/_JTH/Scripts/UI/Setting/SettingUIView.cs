@@ -4,7 +4,6 @@ using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
@@ -19,10 +18,11 @@ namespace _Works._JTH.Scripts.UI.Setting
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            _windowForm = GetForm<DoTweenWindowForm>((int)SettingUIEnum.Popup);
+            _windowForm = GetForm<DoTweenWindowForm>((int)SettingUIEnum.PopupWindow);
             _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
             
             AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
+            AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
 
             _windowForm.OnAnimationEnd += AnimationEndHandler;
 
@@ -34,6 +34,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             base.OnDestroyView();
             
             RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
+            RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
             _windowForm.OnAnimationEnd -= AnimationEndHandler;
         }
 

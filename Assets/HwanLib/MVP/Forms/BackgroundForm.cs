@@ -33,6 +33,7 @@ namespace HwanLib.MVP.Forms
         private void GenerateTempGameObject()
         {
             GameObject tempGameObject = new GameObject();
+            tempGameObject.name = "TempGameObject"; 
             
             tempGameObject.transform.SetParent(transform.parent, false);
             tempGameObject.transform.SetAsFirstSibling();
@@ -58,15 +59,8 @@ namespace HwanLib.MVP.Forms
         {
             Canvas rootCanvas = GetComponentInParent<Canvas>();
             
-            var bgTex = new Texture2D(1, 1);
-            bgTex.SetPixel(0, 0, _backgroundColor);
-            bgTex.Apply();
-
             var image = gameObject.AddComponent<Image>();
-            var rect = new Rect(0, 0, bgTex.width, bgTex.height);
-            var sprite = Sprite.Create(bgTex, rect, new Vector2(0.5f, 0.5f), 1);
-            image.material.mainTexture = bgTex;
-            image.sprite = sprite;
+            image.color = _backgroundColor;
 
             gameObject.transform.localScale = Vector3.one;
             gameObject.GetComponent<RectTransform>().sizeDelta = rootCanvas.GetComponent<RectTransform>().sizeDelta;
