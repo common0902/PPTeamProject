@@ -261,9 +261,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6691f0cc94764576af8b930202d877b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Box.DropItem
-  bounceHeight: 0.1
-  bounceDuration: 5
-  bounceSpeed: 2
+  bounceHeight: 1
+  bounceDuration: 2
 --- !u!1001 &105950814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -966,7 +965,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
-  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 0}
+  defualtOutLineColor: {r: 0, g: 0, b: 0, a: 1}
   interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
   targetEventName: 
 --- !u!65 &336127228
@@ -1101,6 +1100,7 @@ GameObject:
   - component: {fileID: 360168351}
   - component: {fileID: 360168350}
   - component: {fileID: 360168349}
+  - component: {fileID: 360168353}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -1204,6 +1204,26 @@ Transform:
   - {fileID: 319022946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 116.441, z: 0}
+--- !u!114 &360168353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 360168348}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 834bc80a892247f790292b55a883ef46, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.TestPlayer
+  OnHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnDeath:
+    m_PersistentCalls:
+      m_Calls: []
+  hitDuration: 0.5
+  interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
 --- !u!1 &544660756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1495,15 +1515,15 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 775049241}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5feadeeadbb94e92b57462754ba058dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.EmergencyEvent
-  transitionTime: 3
-  defaultColor: {r: 1, g: 1, b: 1, a: 1}
-  healColor: {r: 0.3372549, g: 0.9882353, b: 0.3764706, a: 1}
-  damageColor: {r: 0, g: 0, b: 0, a: 0}
+  transitionCount: 20
+  transitionTime: 0.6
+  minValue: {r: 1, g: 1, b: 1, a: 1}
+  maxValue: {r: 1, g: 0.27450982, b: 0.27450982, a: 1}
 --- !u!1 &795219080
 GameObject:
   m_ObjectHideFlags: 0
@@ -1656,9 +1676,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
-  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 0}
+  defualtOutLineColor: {r: 0, g: 0, b: 0, a: 1}
   interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
-  targetEventName: FireSabotageEvent
+  targetEventName: TestEvent
 --- !u!64 &930395313
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2222,7 +2242,7 @@ MonoBehaviour:
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
-    FieldOfView: 75
+    FieldOfView: 50
     OrthographicSize: 9.1
     NearClipPlane: 0.3
     FarClipPlane: 1000
@@ -2404,7 +2424,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_Color: {r: 0.9496855, g: 0.28371102, b: 0.28371102, a: 0.19215687}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8044,7 +8064,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 75
+  field of view: 50
   orthographic: 0
   orthographic size: 9.1
   m_Depth: -1

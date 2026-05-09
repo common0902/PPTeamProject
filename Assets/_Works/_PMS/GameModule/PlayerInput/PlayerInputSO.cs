@@ -48,6 +48,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnRun(InputAction.CallbackContext context)
     {
+        Debug.Log($"OnRun : {context.phase}");
         if (context.started)
             OnRunStarted?.Invoke();
         else if (context.canceled)

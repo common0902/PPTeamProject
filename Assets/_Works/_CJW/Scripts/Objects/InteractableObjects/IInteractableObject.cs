@@ -1,9 +1,8 @@
-using _Works._CJW.Scripts.Events;
-
-namespace _Works._CJW.Scripts.Objects
+namespace _Works._CJW.Scripts.Objects.InteractableObjects
 {
     public interface IInteractableObject
     {
+        
         bool IsPlayerInRange { get; }
         void HandleInteract();
         void SetFocused(bool focused);

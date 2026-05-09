@@ -7,12 +7,12 @@ public class PlayerIdleState : State<PlayerController>
 
     protected override void Setup()
     {
-        _movement = Entity.GetModule<PlayerMovement>();
+        _movement = Entity.GetModule<PlayerMovement>(); 
     }
 
     public override void Enter()
     {
-        _movement.SetMovementDirection(Vector2.zero);
+        _movement.SetMovementDirection(Vector3.zero);
 
     }
 }
