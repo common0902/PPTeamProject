@@ -2,6 +2,7 @@
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.MVP.System.SaveMVP;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Title
 {
@@ -10,6 +11,7 @@ namespace _Works._JTH.Scripts.UI.Title
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private EventChannelSO saveChannel;
         [SerializeField] private int stageStartIndex = 1;
+        [SerializeField] private int titleIndex = 0;
 
         private TitleUIView _titleView;
         private TitleUIModel _titleModel;
@@ -24,6 +26,9 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleModel.InitTitleModel(stageStartIndex);
             
             _titleModel.SetPopupEventChannel(openUIChannel, saveChannel);
+
+            if (SceneManager.GetActiveScene().buildIndex == titleIndex)
+                _titleView.OpenView();
         }
 
         [ContextMenu("Save")]

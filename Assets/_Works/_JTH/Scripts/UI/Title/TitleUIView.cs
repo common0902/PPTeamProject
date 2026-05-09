@@ -39,8 +39,6 @@ namespace _Works._JTH.Scripts.UI.Title
             AddFormInteractionListener(BackgroundClickHandler, (int)TitleUIEnum.SelectBackground);
             
             UpdateState(TitleState.Default);
-            
-            OpenView();
         }
         
         public override void UpdateView()
