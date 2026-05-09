@@ -11,7 +11,7 @@ namespace _Works._JTH.Scripts.UI.Title
 {
     public class TitleUIModel : AbstractSaveableModel
     {
-        public string SavedStage { get; private set; }
+        private string _savedStage;
 
         private EventChannelSO _openUIChannel;
         private EventChannelSO _saveChannel;
@@ -20,19 +20,19 @@ namespace _Works._JTH.Scripts.UI.Title
         public void InitTitleModel(int stageStartIndex)
             => _stageStartIndex = stageStartIndex;
 
-        public override void SetDefaultData()
+        public override void SetDefaultValue()
         {
-            SavedStage = "-1";
+            _savedStage = "-1";
         }
 
         public override string StoreData()
         {
-            return SavedStage;
+            return _savedStage;
         }
 
         public override void RestoreData(string data)
         {
-            SavedStage = data;
+            _savedStage = data;
         }
 
         public void SetPopupEventChannel(EventChannelSO openUIChannel, EventChannelSO saveChannel)
@@ -47,21 +47,21 @@ namespace _Works._JTH.Scripts.UI.Title
                 OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
                     , () =>
                     {
-                        SavedStage = "-1";
+                        _savedStage = "-1";
                         _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
                         SceneManager.LoadScene(_stageStartIndex);
                     }, () => { }));
         }
 
-        private UIParam ContinueBtnHandler()
+        private UIParam ContinueTextHandler()
         {
-            return UIParamData.UIStringParam.Init(
-                !String.IsNullOrEmpty(SavedStage) ? SavedStage : "-1");
+            return UIParamContainer.UIStringParam.Init(
+                !String.IsNullOrEmpty(_savedStage) ? _savedStage : "-1");
         }
         
         private void ContinueBtnHandler(UIParam clickData)
         {
-            SceneManager.LoadScene(int.Parse(SavedStage));
+            SceneManager.LoadScene(int.Parse(_savedStage));
         }
         
         private void QuitBtnClickHandler(UIParam clickData)
@@ -74,7 +74,7 @@ namespace _Works._JTH.Scripts.UI.Title
                 }, () => { }));
         }
         
-        private void SettingBtnClickHandler(UIParam _)
+        private void SettingBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(OpenUIEvents.OpenSettingEvent);
         }

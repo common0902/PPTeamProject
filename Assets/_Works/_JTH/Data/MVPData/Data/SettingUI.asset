@@ -20,10 +20,10 @@ MonoBehaviour:
       formTypeName: BackgroundForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
-      isInteractable: 0
+      isInteractable: 1
       isUpdatable: 0
     - childIndex: 3
-      gameObjectName: F_Popup
+      gameObjectName: F_PopupWindow
       formTypeName: DoTweenWindowForm
       targetInteractMethodName: None
       targetUpdateMethodName: None
@@ -32,7 +32,7 @@ MonoBehaviour:
     - childIndex: 5
       gameObjectName: F_CloseBtn
       formTypeName: FadeButtonForm
-      targetInteractMethodName: None
+      targetInteractMethodName: CloseBtnClickHandler
       targetUpdateMethodName: None
       isInteractable: 1
       isUpdatable: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
       gameObjectName: F_BGMSlider
       formTypeName: SliderForm
       targetInteractMethodName: BGMVolumeChangeHandler
-      targetUpdateMethodName: UpdateBGMVolume
+      targetUpdateMethodName: UpdateSFXVolume
       isInteractable: 1
       isUpdatable: 1
     - childIndex: 27
@@ -66,4 +66,4 @@ MonoBehaviour:
       isUpdatable: 1
   modelTypeName: SettingUIModel
   viewTypeName: SettingUIView
-  selectedChildName: F_CloseBtn
+  selectedChildName: F_FullScreenToggle
