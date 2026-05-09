@@ -17,22 +17,25 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private EventChannelSO interactEvent; // 상호작용을 해야 작동할 때 필요한 이벤트
         [SerializeField] private Color defaultOutLineColor;
         [SerializeField] private Color interactedOutLineColor;
+        [SerializeField] private GameObject visualObject;
         
         [SerializeField] public string targetEventName;
-        [SerializeField] private  bool isUnlocked = false; // 사보타지가 잠금 해제되었는지 여부
+        [SerializeField] private  bool isLocked = false; // 사보타지가 잠금 해제되었는지 여부
         private AbstractSabotageEvent _targetEvent;
         private Outline _outline;
         private Rigidbody _rigid;
-        private bool _isUsed;
+        private bool _isUsed = false;
 
         
         private void Awake()
         {
             sabotageEvent.AddListener<TopViewEvent>(HandleOpen);
             _rigid = GetComponent<Rigidbody>();
-            _outline = GetComponent<Outline>();
+            _outline = GetComponentInChildren<Outline>();
 
+            Debug.Log(_outline);
             _outline.OutlineColor = defaultOutLineColor;
+            visualObject.SetActive(false);
         }
 
         private void Start()
@@ -46,11 +49,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleUnlock(UnlockEvent evt)
         {
-            if(isUnlocked == false
+            if(isLocked == false
                && evt.TargetSabotageData != null 
                && evt.TargetSabotageData == sabotageData)
             {
-                isUnlocked = true;
+                isLocked = true;
                 Debug.Log($"{targetEventName} 사보타지 해금");
             }
         }
@@ -58,24 +61,24 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleOpen(TopViewEvent evt)
         {
-            if (evt.IsTopView && isUnlocked)
+            if (evt.IsTopView && isLocked)
             {
-                gameObject.SetActive(true);
+                visualObject.SetActive(true);
                 return;
             }
-            if (evt.IsTopView && !isUnlocked)
+            if (evt.IsTopView && !isLocked)
             {
                 Debug.Log("사용할 수 없음");
             }
             else
             {
-                gameObject.SetActive(false);
+                visualObject.SetActive(false);
             }
         }
 
         public void OnPointerClick(PointerEventData eventData)
         {
-            if(_isUsed || !isUnlocked) return; 
+            if(_isUsed || !isLocked) return; 
     
             _outline.enabled = false;
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
@@ -83,8 +86,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
+            Debug.Log("Enter");
             if(_isUsed) return;
-            
+
             _outline.OutlineColor = interactedOutLineColor;
         }
 

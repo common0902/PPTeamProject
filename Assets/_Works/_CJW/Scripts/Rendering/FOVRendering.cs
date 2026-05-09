@@ -11,11 +11,12 @@ namespace _Works._CJW.Scripts.Rendering
     {
         // 나중에 모듈화 해서 ModuleOwner의 위치와 회전에 맞출예정
         [SerializeField] private float maxResolution = 100f;
-        [SerializeField] private float angle = 50f;
+        [SerializeField] private LayerMask wallLayer;
+        public float angle = 50f;
         private List<FOVInfo> _fovInfos;
-        private Coroutine _coroutine;
         public MeshFilter MeshFilter { get; private set; }
         public UnityEvent OnDrawFov;
+        public float distance = 10;
         private Mesh _mesh;
 
         private void Awake()
@@ -68,7 +69,7 @@ namespace _Works._CJW.Scripts.Rendering
             for (int i = 0; i <= stepCount; i++)
             {
                 if(Physics.Raycast(transform.position, new Vector3(Mathf.Sin((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad),
-                    0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)), out hitTemp, 10))
+                    0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)), out hitTemp, distance, wallLayer))
                 {
                     _fovInfos.Add(new FOVInfo()
                     {
@@ -84,7 +85,7 @@ namespace _Works._CJW.Scripts.Rendering
                     {
                         Hit = false,
                         HitPoint = transform.position + new Vector3(Mathf.Sin((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad),
-                            0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)) * 10,
+                            0, Mathf.Cos((transform.eulerAngles.y - angle / 2 + stepAngleSize * i) * Mathf.Deg2Rad)) * distance,
                         Distance = maxResolution,
                         HitAngle = transform.eulerAngles.y - angle / 2 + stepAngleSize * i
                     });

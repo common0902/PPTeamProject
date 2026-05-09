@@ -51,6 +51,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             }
         }
 
+        [ContextMenu("Interact")]
         public virtual void HandleInteract()
         {
             interactEvent.RaiseEvent(InteractEvents.InteractEvent); // 상호작용 이벤트 발생하도록
