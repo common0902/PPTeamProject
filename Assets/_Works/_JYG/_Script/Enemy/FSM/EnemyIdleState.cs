@@ -57,7 +57,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             
                 _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation
                     , Quaternion.LookRotation(lookDir) 
-                    , Time.deltaTime * 5f);
+                    , Time.deltaTime * _enemy.RotateSpeed);
                 //에너미를 플레이어 방향으로 회전시킨다. 이거 자주 쓰여서 따로 함수로 따로 빼야할듯.
                 return; //모든 에너미의 행동을 멈추어야 한다.
             }

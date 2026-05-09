@@ -4,9 +4,12 @@ using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
+using _Works._CJW.Scripts.Rendering;
 using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 namespace _Works._JYG._Script.Enemy
@@ -15,6 +18,7 @@ namespace _Works._JYG._Script.Enemy
     {
         [Header("SO Settings")]
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
+        [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
@@ -27,17 +31,30 @@ namespace _Works._JYG._Script.Enemy
 
         [field: SerializeField] public float PatrolSpeed { get; private set; } = 1.5f;    //Patrol 상태일 때 사용되는 걷는 속도
         [field: SerializeField] public float ChaseSpeed { get; private set; } = 2.5f;     //Chase 상태일 때 사용되는 뛰는 속도
+        [field: SerializeField] public float RotateSpeed { get; private set; } = 5f;     //Chase 상태일 때 사용되는 뛰는 속도
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay); //0과 1로 표현하는 Enemy 경계수치
         public bool SirenEffect { get; private set; }
+        public bool CanRotate { get; private set; }
 
         [SerializeField] private float callingDuration = 3f;
 
-        
+        [field: SerializeField] public SoundClipSO PlayerFoundSound { get; private set; }
+        [field: SerializeField] public SoundClipSO HitSound { get; private set; }
+
+        private FOVRendering _fovRenderer;
 
         protected override void Awake()
         {
             base.Awake();
             PlayerFindEventChannel.AddListener<EnemyChangeState>(HandleEnemyChange);
+            _fovRenderer = GetComponentInChildren<FOVRendering>();
+        }
+
+        private void Start()
+        {
+            ViewCaster view = GetModule<ViewCaster>();
+            _fovRenderer.angle = view.Angle;
+            _fovRenderer.distance = view.Distance;
         }
 
         protected override void Initialize()
@@ -75,6 +92,13 @@ namespace _Works._JYG._Script.Enemy
 
         public void ChangeState(int index) => _stateMachine.ChangeState(index);
         public AgentState GetCurrentState => _stateMachine.CurrentState;
+        public void SetCanRotate(bool canRotate) => CanRotate = canRotate;
+
+        public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
+        {
+            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, HitSound));
+            base.TakeDamage(damage, hitDirection, attackerPosition);
+        }
 
         public void EnemyFindPlayer()
         {
@@ -113,10 +137,13 @@ namespace _Works._JYG._Script.Enemy
 
         private IEnumerator StartCalling(float t)
         {
+            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, PlayerFoundSound));
+            
             yield return new WaitForSeconds(t);
             if (!IsDead && !SirenEffect)
             {
                 PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.EnemyChangeState.Init(EnemyState.CHASE));
+                PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.SirenCameraEffect);
             }
         }
         

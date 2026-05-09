@@ -6,5 +6,6 @@ public class TestPPPP : MonoBehaviour, IDamageable
     public void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
     {
         Debug.Log($"Damage : {damage}, Dir : {hitDirection}");
+        
     }
 }

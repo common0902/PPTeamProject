@@ -10,9 +10,10 @@ namespace _Works._JYG._Script.Test
         [field: SerializeField] public GameObject TargetGameObject { get; private set; }
         [field: SerializeField] public IDamageable Target { get; private set; }
 
-        private void Awake()
+        private void Start()
         {
             Target = TargetGameObject.GetComponent<IDamageable>();
+            if(Target == null) Debug.Log("Target Is NULL!!!!!!");
         }
 
         private void Update()
