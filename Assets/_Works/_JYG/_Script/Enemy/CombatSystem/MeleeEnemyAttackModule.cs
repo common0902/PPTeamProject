@@ -5,7 +5,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
 {
     public class MeleeEnemyAttackModule : AbstractAttackModule
     {
-        [SerializeField] private Vector3 overlapOffset = Vector3.zero;
+        [SerializeField] private Transform overlapTrm;
         [SerializeField] private float radius = 2f;
         [SerializeField] private LayerMask targetLayer;
 
@@ -15,9 +15,9 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         protected override void HandleAgentAttack()
         {
             base.HandleAgentAttack();
-            
-            Ray ray = new Ray(transform.position + overlapOffset, transform.forward);
-            Physics.OverlapSphereNonAlloc(transform.position + overlapOffset, 0.2f, player, targetLayer);
+
+            player[0] = null;
+            Physics.OverlapSphereNonAlloc(overlapTrm.position, 0.2f, player, targetLayer);
             if (player[0] != null)
             {
                 if (player[0].TryGetComponent<IDamageable>(out IDamageable damageable))
@@ -29,8 +29,9 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
 
         private void OnDrawGizmosSelected()
         {
+            if (overlapTrm == null) return;
             Gizmos.color = Color.cyan;
-            Gizmos.DrawWireSphere(transform.position + overlapOffset, radius);
+            Gizmos.DrawWireSphere(overlapTrm.position, radius);
         }
     }
 }

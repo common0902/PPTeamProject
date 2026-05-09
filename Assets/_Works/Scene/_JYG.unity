@@ -513,6 +513,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d75091bacf6dc974387722fa78c6002c, type: 3}
+--- !u!1 &491758543
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 491758544}
+  m_Layer: 7
+  m_Name: OverlapTrm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &491758544
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 491758543}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6221689814555710062}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &570168885
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2424,11 +2455,15 @@ PrefabInstance:
     - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <HitSound>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
+      objectReference: {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
+    - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <RotateSpeed>k__BackingField
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <ShieldBlockSO>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
+      objectReference: {fileID: 11400000, guid: d399994b34069994db50324f0fb9a0ae, type: 2}
     - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <AttackDistance>k__BackingField
       value: 2
@@ -2436,7 +2471,7 @@ PrefabInstance:
     - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <PlayerFoundSound>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
+      objectReference: {fileID: 11400000, guid: 49ed5f6430da3d94490ed258e247070b, type: 2}
     - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <SoundEventChannel>k__BackingField
       value: 
@@ -2444,6 +2479,10 @@ PrefabInstance:
     - target: {fileID: 3888975305221621003, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: <Range>k__BackingField
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 4549408598942706521, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4940570208834840975, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2512,7 +2551,10 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 415478649112691332, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 4549408598942706521, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 491758544}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 6489768754262592516, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       insertIndex: -1
@@ -2538,12 +2580,17 @@ MonoBehaviour:
   AttackFeedback:
     m_PersistentCalls:
       m_Calls: []
-  <AttackSound>k__BackingField: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
-  overlapOffset: {x: 0, y: 0.5, z: 1}
+  <AttackSound>k__BackingField: {fileID: 11400000, guid: c54d520c575d604418b763eaa90e3f46, type: 2}
+  overlapTrm: {fileID: 491758544}
   radius: 0.6
   targetLayer:
     serializedVersion: 2
     m_Bits: 8
+--- !u!4 &6221689814555710062 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4549408598942706521, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+  m_PrefabInstance: {fileID: 6221689814555710059}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7134338899976382502
 PrefabInstance:
   m_ObjectHideFlags: 0

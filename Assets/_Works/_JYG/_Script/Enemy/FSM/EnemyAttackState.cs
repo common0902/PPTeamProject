@@ -36,13 +36,17 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             Vector3 lookDir = _player.transform.position - _agent.transform.position;
             lookDir.y = 0;
-            _agent.transform.rotation = Quaternion.LookRotation(lookDir);
+            _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation
+                , Quaternion.LookRotation(lookDir) 
+                , Time.deltaTime * _enemy.RotateSpeed);
+            
             //공격이 모두 끝났다면 다시 chase로 돌아간다.
             if (_isTriggerCall 
                 && (_targetCaster.TargetPlayer != null 
                 || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance))
             {
-                if (!_targetCaster.TargetPlayer.TryGetComponent<TestPPPP>(out TestPPPP player))
+                if (!_targetCaster.TargetPlayer.TryGetComponent<TestPPPP>(out TestPPPP player) 
+                    || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance)
                 {
                     _enemy.ChangeState((int)EnemyState.CHASE);
                     Debug.Log("Change State To Chase");

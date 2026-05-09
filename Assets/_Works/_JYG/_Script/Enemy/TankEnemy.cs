@@ -23,6 +23,7 @@ namespace _Works._JYG._Script.Enemy
                 Debug.Log("Block!!!!");
                 SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, ShieldBlockSO)); //Play Block Sound
                 return;
+                
             }
             base.TakeDamage(damage, hitDirection, attackerPosition);
         }
