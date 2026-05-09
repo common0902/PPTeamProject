@@ -21,7 +21,6 @@ namespace _Works._CJW.Scripts
         [SerializeField]private float quadViewDuration;
 
         private Transform _rootTrs;
-        private Transform _playerTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
         private CinemachineCamera _camera;
@@ -34,7 +33,7 @@ namespace _Works._CJW.Scripts
             Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
             
             _rootTrs = _camera.Follow;
-            _playerTrs = _rootTrs.parent;
+            // _playerTrs = _rootTrs;
             _tempTrs = new GameObject("CamTempTransform").transform;
         }
         [ContextMenu("Quad")]
@@ -53,7 +52,7 @@ namespace _Works._CJW.Scripts
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             _camera.Follow = _tempTrs;
-            _tempTrs.DOMove(_playerTrs.position + -(_rootTrs.forward * quadViewOffset), quadViewDuration).SetEase(transitionCurve)
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), quadViewDuration).SetEase(transitionCurve)
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
