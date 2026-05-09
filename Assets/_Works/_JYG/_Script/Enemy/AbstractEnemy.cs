@@ -50,7 +50,9 @@ namespace _Works._JYG._Script.Enemy
 
         private void Start()
         {
-            _fovRenderer.angle = GetModule<ViewCaster>().Angle;
+            ViewCaster view = GetModule<ViewCaster>();
+            _fovRenderer.angle = view.Angle;
+            _fovRenderer.distance = view.Distance;
         }
 
         protected override void Initialize()
