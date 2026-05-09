@@ -524,6 +524,7 @@ MonoBehaviour:
   <AttackDistance>k__BackingField: 15
   <PatrolSpeed>k__BackingField: 1.5
   <ChaseSpeed>k__BackingField: 2.5
+  <RotateSpeed>k__BackingField: 5
   callingDuration: 5
   <PlayerFoundSound>k__BackingField: {fileID: 0}
   <HitSound>k__BackingField: {fileID: 0}
@@ -603,7 +604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.ViewCaster
   <Distance>k__BackingField: 15
-  angle: 150
+  <Angle>k__BackingField: 160
 --- !u!1 &7819578369922147538
 GameObject:
   m_ObjectHideFlags: 0

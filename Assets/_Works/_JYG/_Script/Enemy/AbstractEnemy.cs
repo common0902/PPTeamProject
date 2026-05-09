@@ -4,6 +4,7 @@ using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Rendering;
 using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
@@ -38,12 +39,18 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] public SoundClipSO PlayerFoundSound { get; private set; }
         [field: SerializeField] public SoundClipSO HitSound { get; private set; }
 
-
+        private FOVRendering _fovRenderer;
 
         protected override void Awake()
         {
             base.Awake();
             PlayerFindEventChannel.AddListener<EnemyChangeState>(HandleEnemyChange);
+            _fovRenderer = GetComponentInChildren<FOVRendering>();
+        }
+
+        private void Start()
+        {
+            _fovRenderer.angle = GetModule<ViewCaster>().Angle;
         }
 
         protected override void Initialize()

@@ -11,9 +11,8 @@ namespace _Works._CJW.Scripts.Rendering
     {
         // 나중에 모듈화 해서 ModuleOwner의 위치와 회전에 맞출예정
         [SerializeField] private float maxResolution = 100f;
-        [SerializeField] private float angle = 50f;
+        public float angle = 50f;
         private List<FOVInfo> _fovInfos;
-        private Coroutine _coroutine;
         public MeshFilter MeshFilter { get; private set; }
         public UnityEvent OnDrawFov;
         private Mesh _mesh;
