@@ -1510,10 +1510,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5feadeeadbb94e92b57462754ba058dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.EmergencyEvent
+  playerEventChannel: {fileID: 0}
   transitionTime: 3
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   healColor: {r: 0.3372549, g: 0.9882353, b: 0.3764706, a: 1}
-  damageColor: {r: 0, g: 0, b: 0, a: 0}
+  damageColor: {r: 1, g: 0.5613208, b: 0.5613208, a: 1}
 --- !u!1 &795219080
 GameObject:
   m_ObjectHideFlags: 0
