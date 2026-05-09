@@ -27,6 +27,11 @@ namespace _Works._CJW.Scripts.Rendering
         {
             StartCoroutine(Transition(healColor, 0.35f));
         }
+
+        public void SirenTransition()
+        {
+            StartCoroutine(Transition(damageColor, 0.35f));
+        }
         
         private IEnumerator Transition(Color changeColor, float maxValue)
         {
