@@ -13,7 +13,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
     public class Sabotage : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("Sabotage Data")]
-        [SerializeField] private SabotageDataSo sabotageData; // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
+        [field: SerializeField]
+        public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
+
         [Header("Event Channel")]
         [SerializeField] private EventChannelSO cameraEvent;
         [SerializeField] private EventChannelSO sabotageEvent;
@@ -22,6 +24,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private Color defaultOutLineColor;
         [SerializeField] private Color interactedOutLineColor;
         [SerializeField] private GameObject visualObject;
+        [SerializeField] private GameObject lockedObject;
         
         [SerializeField] public string targetEventName;
         [SerializeField] private  bool isLocked = false; // 사보타지가 잠금 해제되었는지 여부
@@ -39,6 +42,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             Debug.Log(_outline);
             _outline.OutlineColor = defaultOutLineColor;
             visualObject.SetActive(false);
+            lockedObject.SetActive(false);
         }
 
         private void Start()
@@ -50,11 +54,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleUnlock(UnlockEvent evt)
         {
-            if(isLocked == false
+            if(isLocked == true
                && evt.TargetSabotageData != null 
-               && evt.TargetSabotageData == sabotageData)
+               && evt.TargetSabotageData == SabotageData)
             {
-                isLocked = true;
+                isLocked = false;
                 interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
                 
                 Debug.Log($"{targetEventName} 사보타지 해금");
@@ -64,17 +68,21 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleOpen(TopViewEvent evt)
         {
-            if (evt.IsTopView && isLocked)
+            if (evt.IsTopView && !isLocked)
             {
+                lockedObject.SetActive(false);
                 visualObject.SetActive(true);
                 return;
             }
-            if (evt.IsTopView && !isLocked)
+            if (evt.IsTopView && isLocked)
             {
                 Debug.Log("사용할 수 없음");
+                visualObject.SetActive(false);
+                lockedObject.SetActive(true);
             }
             else
             {
+                lockedObject.SetActive(false);
                 visualObject.SetActive(false);
             }
         }
