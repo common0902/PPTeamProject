@@ -28,7 +28,8 @@ namespace _Works._JYG._Script.Enemy.FSM
             _navmesh.Navmesh.isStopped = false;
             _navmesh.Navmesh.speed = _enemy.ChaseSpeed;
             
-            _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
+            if(!_enemy.SirenEffect)
+                _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
             base.Enter(); //애니메이션 재생
         }
 

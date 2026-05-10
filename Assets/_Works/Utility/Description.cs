@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class Description : MonoBehaviour
+namespace _Works.Utility
 {
-    [TextArea][SerializeField] private string description;
+    public class Description : MonoBehaviour
+    {
+        [TextArea][SerializeField] private string description;
+    }
 }
