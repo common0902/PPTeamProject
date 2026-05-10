@@ -1,12 +1,16 @@
-﻿using HwanLib.MVP.Forms.Module.Gauge;
+﻿using DG.Tweening;
+using HwanLib.MVP.Forms.Module.Gauge;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.UIData;
+using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
     public class GaugeForm : AbstractVisualForm
     {
+        [SerializeField] private float duration = 0.2f;
+        
         private GaugeType _gaugeType;
         private AbstractGauge _gauge;
 
@@ -28,7 +32,12 @@ namespace HwanLib.MVP.Forms
         {
             float ratio = ((UIFloatParam)data).Value;
             
-            _gauge.GaugeRatio = ratio;
+            _gauge.SetGauge(ratio, duration, Ease.OutQuart);
+        }
+
+        private void OnDestroy()
+        {
+            _gauge.OnDestroy();
         }
     }
 }

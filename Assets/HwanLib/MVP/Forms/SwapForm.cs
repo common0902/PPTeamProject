@@ -25,7 +25,6 @@ namespace HwanLib.MVP.Forms
             for (int i = 0; i < transform.childCount; ++i)
             {
                 RectTransform rectTrm = transform.GetChild(i).GetComponent<RectTransform>();
-                // rectTrm.gameObject.GetOrAddComponent<LayoutElement>().ignoreLayout = true;
                 _childDict.Add(i, i);
                 _currentChildren[i] = rectTrm;
             }
@@ -58,45 +57,49 @@ namespace HwanLib.MVP.Forms
 
         private void SwapItem(int itemEnum, int targetIndex)
         {
-            int currentItemIdx = _childDict[itemEnum];
-            if (currentItemIdx == targetIndex)
+            int targetItemIdx = _childDict[itemEnum];
+            if (targetItemIdx == targetIndex)
                 return;
 
-            if (!_sequence.IsActive())
-                _sequence.timeScale = 1;
-            else
+            DoMove(_sequence, targetItemIdx, targetIndex);
+
+            //Swap
+            (_currentChildren[targetIndex], _currentChildren[targetItemIdx]) 
+                = (_currentChildren[targetItemIdx], _currentChildren[targetIndex]);
+            (_childDict[targetIndex], _childDict[targetItemIdx]) 
+                = (_childDict[targetItemIdx], _childDict[targetIndex]);
+        }
+
+        private void DoMove(Sequence seq, int targetItemIdx, int targetIndex)
+        {
+            if (_sequence.IsActive() == true)
             {
-                // 남은 시간 / 원하는 시간을 timeScale에 곱하면 남은 시간이 원하는 시간동안 흐름
-                // 남은 시간은 swapDuration - (Time.time - _startSwapTime)으로 구할 수 있다.
-                float remainTime = swapDuration - (Time.time - _startSwapTime);
-                //남은 시간과 추가된 시간을 timeScale로 나눠서 앞으로 몇초가 흘러야 움직임이 끝날지 구하고, 그걸 원하는 시간으로 나눠서 곱하기
-                _sequence.timeScale *= (swapDuration + remainTime) / _sequence.timeScale / swapDuration;
+                _sequence.Complete();
+                _sequence.Kill();
             }
-            
-            _startSwapTime = Time.time;
-
-            Vector2 currentPos = _currentChildren[currentItemIdx].anchoredPosition;
+                
+            Vector2 currentPos = _currentChildren[targetItemIdx].anchoredPosition;
             Vector2 targetPos = _currentChildren[targetIndex].anchoredPosition;
-
+            
             _sequence = DOTween.Sequence();
-            _sequence.Append(_currentChildren[currentItemIdx]
-                    .DOAnchorPos(currentPos, swapDuration)
+            _sequence
+                .Append(_currentChildren[targetItemIdx]
+                    .DOAnchorPos(targetPos, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true))
                 .Join(_currentChildren[targetIndex]
-                    .DOAnchorPos(targetPos, swapDuration)
+                    .DOAnchorPos(currentPos, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true));
-
-            //Swap
-            (_currentChildren[targetIndex], _currentChildren[currentItemIdx]) 
-                = (_currentChildren[currentItemIdx], _currentChildren[targetIndex]);
         }
         
         private void OnDestroy()
         {
-            _sequence.Complete();
-            _sequence.Kill();
+            if (_sequence.IsActive() == true)
+            {
+                _sequence.Complete();
+                _sequence.Kill();
+            }
         }
     }
 }

@@ -1,29 +1,20 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
     internal abstract class AbstractGauge
     {
-        private float _gaugeRatio;
-        
-        public virtual float GaugeRatio
-        {
-            get => Mathf.Clamp01(_gaugeRatio);
-            set
-            {
-                _gaugeRatio = Mathf.Clamp01(value);
-                SetGauge();
-            }
-        }
-
         public void InitGauge(GameObject gameObject)
         {
-            Initialize(gameObject);
-            GaugeRatio = 0;
+            Init(gameObject);
+            SetGauge(1);
         }
 
-        protected abstract void Initialize(GameObject gameObject);
+        protected abstract void Init(GameObject gameObject);
 
-        protected abstract void SetGauge();
+        public abstract void SetGauge(float ratio, float duration = 0f, Ease ease = Ease.Linear);
+
+        public abstract void OnDestroy();
     }
 }

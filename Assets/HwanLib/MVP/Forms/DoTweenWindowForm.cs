@@ -57,7 +57,7 @@ namespace HwanLib.MVP.Forms
 
         private void OnDestroy()
         {
-            if (_sequence != null)
+            if (_sequence != null && _sequence.IsActive() == true)
             {
                 _sequence.Complete();
                 _sequence.Kill();

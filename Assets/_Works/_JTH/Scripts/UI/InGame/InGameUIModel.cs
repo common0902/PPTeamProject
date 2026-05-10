@@ -21,15 +21,15 @@ namespace _Works._JTH.Scripts.UI.InGame
             => UIParamContainer.UIStringParam.Init(_inGameData.RemainingBullets.ToString());
 
         private UIParam UpdateQSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxQSkillCooldown, 
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingQSkillCooldown, 
                 _inGameData.RemainingQSkillCooldown / _inGameData.MaxQSkillCooldown);
 
         private UIParam UpdateTabSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxTabSkillCooldown, 
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingTabSkillCooldown, 
                 _inGameData.RemainingTabSkillCooldown / _inGameData.MaxTabSkillCooldown);
 
         private UIParam UpdateShiftSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxShiftSkillCooldown, 
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingShiftSkillCooldown, 
                 _inGameData.RemainingShiftSkillCooldown / _inGameData.MaxShiftSkillCooldown);
 
         private UIParam UpdateHpGauge()
