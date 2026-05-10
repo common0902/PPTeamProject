@@ -10,25 +10,55 @@ namespace _Works._CJW.Scripts.Rendering
 {
     public class CombineRender : MonoBehaviour
     {
-        [SerializeField] private EventChannelSO renderEvent;
+        [SerializeField] private EventChannelSO cameraEvent;
+        private List<FOVRendering> _registeredFovs = new();
+        private MeshRenderer _meshRenderer;
         private MeshFilter _meshFilter;
 
         private void Awake()
         {
+	        _meshRenderer = GetComponent<MeshRenderer>();
             _meshFilter = GetComponent<MeshFilter>();
-			renderEvent.AddListener<TopViewEvent>(CombineMesh);
+			cameraEvent.AddListener<TopViewEvent>(CombineMesh);
+			cameraEvent.AddListener<RegisterFovEvent>(HandleRegisterFov);
         }
 
-        public void CombineMesh(TopViewEvent evt)
+        private void HandleRegisterFov(RegisterFovEvent obj)
         {
-			if(evt.IsTopView)
-            {
-				var children = GetComponentsInChildren<FOVRendering>();
-            	foreach (FOVRendering child in children)
-                	child.DrawFov();
-            
-            	// _meshFilter.mesh = MeshCombiner.CombineMesh(gameObject, children);
-			}
-        } 
+	        if (obj.IsRegistered)
+	        {
+		        _registeredFovs.Add(obj.FovRendering);
+	        }
+	        else
+	        {
+		        _registeredFovs.Remove(obj.FovRendering);
+	        }
+        }
+
+        private void CombineMesh(TopViewEvent evt)
+        {
+	        if (evt.IsTopView)
+	        {
+		        _meshRenderer.enabled = true;
+				foreach (FOVRendering child in _registeredFovs)
+				{
+					child.gameObject.SetActive(true);
+					child.DrawFov();
+				}
+		    	       
+				if(evt.IsTopView)
+            		_meshFilter.mesh = MeshCombiner.CombineMesh(gameObject, _registeredFovs);
+	        }
+	        else
+	        {
+		        _meshRenderer.enabled = false;
+	        }
+	        
+        }
+
+        private void OnDestroy()
+        {
+	        cameraEvent.RemoveListener<TopViewEvent>(CombineMesh);
+        }
     }
 }

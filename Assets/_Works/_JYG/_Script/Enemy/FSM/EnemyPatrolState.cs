@@ -1,6 +1,7 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
-    public class EnemyPatrolState : AgentState
+    public class EnemyPatrolState : AgentState, ICanMove
     {
         private IAISystem _navMesh;
         public EnemyPatrolState(Agent agent, AnimationHashSO hash) : base(agent, hash)
@@ -21,7 +22,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             base.Enter();
             _navMesh.Navmesh.isStopped = false;
             _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
-            Debug.Log("PATROL!");
         }
 
         public override void Update()
@@ -36,11 +36,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
-            }
-            
-            if (Keyboard.current.qKey.wasPressedThisFrame) //Debug Only
-            {
-                _enemy.ChangeState((int)EnemyState.CHASE);
             }
         }
 

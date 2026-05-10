@@ -1,13 +1,14 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
-    public class EnemyChaseState : AgentState
+    public class EnemyChaseState : AgentState, ICanMove
     {
         private IAISystem _navmesh;
         private GameObject _player; //나중에 Player Component로 대체해야한다.
@@ -28,32 +29,21 @@ namespace _Works._JYG._Script.Enemy.FSM
             _navmesh.Navmesh.isStopped = false;
             _navmesh.Navmesh.speed = _enemy.ChaseSpeed;
             
-            _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
-            
-            Debug.Log("CHASE!");
-            //Test
-            if(_targetCaster.TryGetTarget(out GameObject target)) //타겟을 한번 캐스팅 해보고 안닿으면 그때 애니메이션 재생.
-            //이렇게 하지 않으면 부자연스럽게 애니메이션이 끊기게 된다.
-            {
-                if(target.TryGetComponent<TestPPPP>(out TestPPPP test))
-                {
-                    Debug.Log("플레이어 찾음!!");
-                    _enemy.ChangeState((int)EnemyState.ATTACK);
-                    return;
-                }
-            }
+            if(!_enemy.SirenEffect)
+                _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
             base.Enter(); //애니메이션 재생
         }
 
         public override void Update()
         {
+            base.Update();
             _navmesh.Navmesh.SetDestination(_player.transform.position);
 
-            if(_targetCaster.TryGetTarget(out GameObject target))
+            if(_targetCaster.TryGetTarget(out GameObject target))//Target Caster에 감지되었다.
             {
-                if(target.TryGetComponent<TestPPPP>(out TestPPPP test))
+                if(target.TryGetComponent<TestPPPP>(out TestPPPP test) 
+                   && Vector3.Distance(_enemy.transform.position, target.transform.position) <= _enemy.AttackDistance)
                 {
-                    Debug.Log("플레이어 찾음!!");
                     _enemy.ChangeState((int)EnemyState.ATTACK);
                 }
             }

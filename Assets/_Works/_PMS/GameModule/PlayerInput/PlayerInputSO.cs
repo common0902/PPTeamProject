@@ -8,8 +8,8 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action<Vector2> OnMovementChange;
     public event Action OnAttackKeyPressed;
     public event Action OnJumpKeyPressed;
-    public event Action OnSitKeyPressed;
-    public event Action OnRunKeyPressed;
+    public event Action OnRunStarted;
+    public event Action OnRunCanceled;
 
     private Controls _controls;
 
@@ -48,13 +48,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        if (context.performed)
-            OnRunKeyPressed?.Invoke();
+        Debug.Log($"OnRun : {context.phase}");
+        if (context.started)
+            OnRunStarted?.Invoke();
+        else if (context.canceled)
+            OnRunCanceled?.Invoke();
     }
 
-    public void OnSit(InputAction.CallbackContext context)
-    {
-        if (context.performed)
-            OnSitKeyPressed?.Invoke();
-    }
 }

@@ -1,0 +1,69 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: InGameUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 6786894262628188776, guid: c092437db6b42b845a01dd928e05f3be, type: 3}
+  formDataList:
+    list:
+    - childIndex: 5
+      gameObjectName: F_HpGauge
+      formTypeName: GaugeForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateHpGauge
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 6
+      gameObjectName: F_HpText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateHpText
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 8
+      gameObjectName: F_WeaponField
+      formTypeName: SwapForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateWeaponSwap
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 11
+      gameObjectName: F_BulletText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateBulletText
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 19
+      gameObjectName: F_TopViewCover
+      formTypeName: CooldownForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateTopViewSkillCover
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 23
+      gameObjectName: F_SprintCover
+      formTypeName: CooldownForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateSprintSkillCover
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 26
+      gameObjectName: F_SettingButton
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: SettingBtnClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+  modelTypeName: InGameUIModel
+  viewTypeName: InGameUIView
+  selectedChildName: F_SprintCover

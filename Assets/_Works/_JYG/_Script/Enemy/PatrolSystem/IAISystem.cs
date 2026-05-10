@@ -9,7 +9,8 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
         void SetEnemyRoute();
         void StartMove();
         void StopMove();
-        EnemyRoute CurrentRoute();
+        EnemyRoute GetCurrentRoute();
         EnemyRoute PrevEnemyRoute { get; }
+        public bool IsArrived();
     }
 }

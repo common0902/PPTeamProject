@@ -15,8 +15,16 @@ namespace HwanLib.MVP.System.GenerateUI
         [HideInInspector] public string modelTypeName;
         [HideInInspector] public string viewTypeName;
         
-        public Type GetViewType() => EditorInfo.GetUIAssemblyType(viewTypeName);
-        public Type GetModelType() => EditorInfo.GetUIAssemblyType(modelTypeName);
+        public Type GetViewType() => MVPEditorUtil.GetTypeInUIAssembly(viewTypeName);
+        public Type GetModelType() => MVPEditorUtil.GetTypeInUIAssembly(modelTypeName);
+
+        public List<FormData> GetFormDataList()
+        { 
+            formDataList ??= new FormDataList();
+            return formDataList.list;
+        }
+        
+        #if UNITY_EDITOR
         
         public FormData GetFormData(string key)
         {
@@ -35,49 +43,17 @@ namespace HwanLib.MVP.System.GenerateUI
         {
             formDataList.list = formList;
         }
-
-        public List<string> GetFormDataKeys()
-        {
-            formDataList ??= new FormDataList();
-            
-            List<string> keys = new List<string>();
-
-            foreach (FormData formData in formDataList.list)
-            {
-                keys.Add(formData.gameObjectName);
-            }
-
-            return keys;
-        }
-
-        public void RemoveFormData(string key)
-        {
-            formDataList ??= new FormDataList();
-
-            for (int i = 0; i < formDataList.list.Count; i++)
-            {
-                if (formDataList.list[i].gameObjectName == key)
-                    formDataList.list.RemoveAt(i);
-            }
-        }
-
-        public List<FormData> GetFormDataList()
-        { 
-            formDataList ??= new FormDataList();
-            return formDataList.list;
-        }
-
+        
         public void ResetFormData()
         {
             formDataList = null;
         }
         
-        #if UNITY_EDITOR
         [HideInInspector] public string selectedChildName;
         #endif
         
         [Serializable]
-        public class FormDataList
+        private class FormDataList
         {
             public List<FormData> list = new();
         }

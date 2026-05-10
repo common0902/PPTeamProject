@@ -8,6 +8,7 @@ namespace _Script.Agent.Modules
     public class AgentRenderer : MonoBehaviour, IModule, IRenderer, IAnimationTrigger
     {
         private Agent _agent;
+        public Animator Animator => _animator;
         private Animator _animator;
         public void Initialize(ModuleOwner moduleOwner)
         {
@@ -20,7 +21,10 @@ namespace _Script.Agent.Modules
         {
             transform.eulerAngles = newAngle;
         }
-        
+
+        public void PlayAnimationWithSO(AnimationHashSO animationHash, float fadeDuration) =>
+            PlayCrossFade(animationHash.AnimationHash, 0, fadeDuration);
+
         public void PlayAnimation(int hash, int layer = -1, float normalizedTime = 0) => _animator.Play(hash, layer, normalizedTime);
 
         public void PlayCrossFade(int clipHash, float normalizedTime, float fadeDuration, int layer = 0)

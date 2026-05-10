@@ -7,13 +7,13 @@ namespace _Works._CJW.Scripts.Rendering
     public static class MeshCombiner
     {
             // 오브젝트의 자식 메쉬들을 Combine해서 반환하는 정적 메서드
-        public static Mesh CombineMesh(GameObject targetObj, FOVRendering[] children) 
+        public static Mesh CombineMesh(GameObject targetObj, List<FOVRendering> children) 
         {
             Mesh mesh = new Mesh();
-            CombineInstance[] combine = new CombineInstance[children.Length];
+            CombineInstance[] combine = new CombineInstance[children.Count];
 
             int vertexCount = 0;
-            for (int i = 0; i < children.Length; ++i)
+            for (int i = 0; i < children.Count; ++i)
             {
                 if(children[i] == null) continue;
 

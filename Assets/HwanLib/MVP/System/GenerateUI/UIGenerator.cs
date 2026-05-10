@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.Tracing;
-using HwanLib.MVP.System.BaseMVP;
+﻿using HwanLib.MVP.System.BaseMVP;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.GenerateUI
@@ -10,6 +9,7 @@ namespace HwanLib.MVP.System.GenerateUI
 
         private void Awake()
         {
+            DontDestroyOnLoad(gameObject);
             GenerateAllUI();
         }
 
@@ -18,7 +18,7 @@ namespace HwanLib.MVP.System.GenerateUI
             foreach (MVPDataSO dataSO in mvpDataList.mvpData)
             {
                 BasePresenter presenter = Instantiate(dataSO.parentPrefab, transform);
-                presenter.InitializePresenter(dataSO);
+                presenter.InitializePresenter(dataSO.GetFormDataList(), dataSO.GetViewType(), dataSO.GetModelType());
             }
         }
     }

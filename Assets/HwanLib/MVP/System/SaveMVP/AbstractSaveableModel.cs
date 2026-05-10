@@ -5,6 +5,7 @@ namespace HwanLib.MVP.System.SaveMVP
 {
     public abstract class AbstractSaveableModel : IModel
     {
+        public abstract void SetDefaultValue();
         public abstract string StoreData();
         public abstract void RestoreData(string data);
     }

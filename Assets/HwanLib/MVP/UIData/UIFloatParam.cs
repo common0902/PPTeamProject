@@ -1,0 +1,15 @@
+﻿using HwanLib.MVP.System;
+
+namespace HwanLib.MVP.UIData
+{
+    public class UIFloatParam : UIParam
+    {
+        public float Value;
+
+        public UIFloatParam Init(float value)
+        {
+            Value = value;
+            return this;
+        }
+    }
+}

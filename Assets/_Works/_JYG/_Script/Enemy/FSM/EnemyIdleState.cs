@@ -1,6 +1,7 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
@@ -29,15 +30,14 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             base.Enter();
             _enemy.cautionRatio = -1;
-            _currentRoute = _patrolSystem.CurrentRoute();
+            _currentRoute = _patrolSystem.GetCurrentRoute();
             _lastEnterTime = Time.time;
             _searchTime = _currentRoute.waitTime;
-            
-            Debug.Log("IDLE!");
         }
 
         public override void Update()
         {
+            base.Update();
             #region Enemy To Chase
             //여기서 만약 타겟을 시야각으로 발견했다면 chase state로 바뀐다.
             //자세한 내용은 AgentState의 Update문 참고.
@@ -53,16 +53,20 @@ namespace _Works._JYG._Script.Enemy.FSM
                 {
                     _enemy.ChangeState((int)EnemyState.CHASE); //Chase State로 옮겨간다.
                 }
-                
+
                 Vector3 lookDir = _targetRaycaster.TargetPlayer.transform.position - _agent.transform.position;
                 lookDir.y = 0;
-                
+            
                 _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation
                     , Quaternion.LookRotation(lookDir) 
-                    , Time.deltaTime * 5f);
+                    , Time.deltaTime * _enemy.RotateSpeed);
                 //에너미를 플레이어 방향으로 회전시킨다. 이거 자주 쓰여서 따로 함수로 따로 빼야할듯.
-                
                 return; //모든 에너미의 행동을 멈추어야 한다.
+            }
+            else if (_enemy.GetEnemyCaution > 0)
+            {
+                _enemy.cautionRatio = -1;
+                return; //경계치가 다 떨어질때까지 해당 방향 응시
             }
             
             #endregion
@@ -70,23 +74,16 @@ namespace _Works._JYG._Script.Enemy.FSM
             if (_lastEnterTime + _searchTime < Time.time)           //잠시 자리에 멈추고, 시간만큼 기다린다.
             {
                 _enemy.ChangeState((int)EnemyState.PATROL);
-                _enemy.cautionRatio = -1;
                 return;
             }
 
-            if (_patrolSystem.PrevEnemyRoute.setRotationFlag)
+            if (_patrolSystem.IsArrived())
             {
                 _agent.transform.rotation =
                     Quaternion.Slerp(_agent.transform.rotation
                     , _patrolSystem.PrevEnemyRoute.flag.GetFlagTransform().rotation
                     , Time.deltaTime * 2f);
             }
-
-            if (Keyboard.current.qKey.wasPressedThisFrame) // Debug Only
-            {
-                _enemy.ChangeState((int)EnemyState.CHASE);
-            }
-
         }
     }
 }

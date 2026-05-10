@@ -10,7 +10,8 @@
             <ui:Label text="Form Data" name="" style="margin-top: 4px; margin-right: 4px; margin-bottom: 4px; margin-left: 4px; -unity-font-style: bold; font-size: 13px;"/>
             <ui:DropdownField label="Child Object" name="ChildObjectDropdown"/>
             <ui:DropdownField label="Form Type" name="FormTypeDropdown"/>
-            <ui:DropdownField label="Target Method Name" name="TargetMethodNameDropdown"/>
+            <ui:DropdownField label="Interact Method" name="TargetInteractMethodNameDropdown"/>
+            <ui:DropdownField label="Update Method" name="TargetUpdateMethodNameDropdown"/>
             <ui:VisualElement name="EnumGenContainer" style="flex-direction: column;">
                 <ui:VisualElement name="VisualElement" style="flex-grow: 1; -unity-text-generator: standard;">
                     <ui:Button text="📁 Select Folder" name="FolderSelectBtn"/>

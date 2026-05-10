@@ -5,12 +5,16 @@ public class PlayerMovement : MonoBehaviour, IModule
 {
     [SerializeField] private float moveSpeed = 8f, gravity = -9.8f;
 
+    [SerializeField] private float runSpeedMultiplier = 1.5f; // 달리기 배수
+
+
+
     private Vector3 _velocity;
     private float _verticalVelocity;
     private Vector3 _movementDirection;
+    private float _currentSpeedMultiplier = 1f; // 현재 스피드 배수
     private CharacterController _characterController;
     private ModuleOwner _owner;
-    private Vector3 _autoVelocity;
 
     public bool CanManualMove { get; set; } = true;
     public Vector3 Velocity => _velocity;
@@ -22,22 +26,10 @@ public class PlayerMovement : MonoBehaviour, IModule
         _characterController = owner.GetComponent<CharacterController>();
     }
 
-    public void SetMovementVelocity(Vector3 velocity)
+    public void SetMovementDirection(Vector3 direction) => _movementDirection = direction;
+    public void SetRunMultiplier(bool isRun) 
     {
-        _autoVelocity = velocity;
-    }
-
-    public void SetMovementDirection(Vector2 movementInput)
-    {
-        Vector3 newMovement = new Vector3(movementInput.x, 0, movementInput.y).normalized;
-        _movementDirection = newMovement;
-    }
-
-    public void RotateTo(Vector3 direction)
-    {
-        if (direction.magnitude < Mathf.Epsilon) return;
-        direction.y = 0;
-        _owner.transform.forward = direction.normalized;
+        _currentSpeedMultiplier = isRun? runSpeedMultiplier : 1f;
     }
 
     private void FixedUpdate()
@@ -47,22 +39,16 @@ public class PlayerMovement : MonoBehaviour, IModule
         Move();
     }
 
+
     private void CalculateMovement()
     {
         if (CanManualMove)
             _velocity = _movementDirection;
         else
-            _velocity = _autoVelocity;
+            _velocity = Vector3.zero;
 
-        _velocity *= moveSpeed * Time.fixedDeltaTime;
+        _velocity *= moveSpeed * _currentSpeedMultiplier * Time.fixedDeltaTime;
 
-        if (_velocity.sqrMagnitude > 0)
-        {
-            float rotationSpeed = 8f;
-            Quaternion targetRotation = Quaternion.LookRotation(_velocity);
-            _owner.transform.rotation = Quaternion.Lerp(_owner.transform.rotation,
-                            targetRotation, rotationSpeed * Time.fixedDeltaTime);
-        }
     }
 
     private void ApplyGravity()

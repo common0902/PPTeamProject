@@ -1,0 +1,43 @@
+﻿using DG.Tweening;
+using HwanLib.MVP.Forms.Module.Gauge;
+using HwanLib.MVP.System;
+using HwanLib.MVP.System.BaseMVP.Form;
+using HwanLib.MVP.UIData;
+using UnityEngine;
+
+namespace HwanLib.MVP.Forms
+{
+    public class GaugeForm : AbstractVisualForm
+    {
+        [SerializeField] private float duration = 0.2f;
+        
+        private GaugeType _gaugeType;
+        private AbstractGauge _gauge;
+
+        public void InitGaugeForm(GaugeType gaugeType)
+        {
+            _gaugeType = gaugeType;
+            
+            switch (_gaugeType)
+            {
+                case GaugeType.PosY:
+                    _gauge = new PosYGauge();
+                    break;
+            }
+            
+            _gauge.InitGauge(gameObject);
+        }
+
+        protected override void UpdateVisual(UIParam data)
+        {
+            float ratio = ((UIFloatParam)data).Value;
+            
+            _gauge.SetGauge(ratio, duration, Ease.OutQuart);
+        }
+
+        private void OnDestroy()
+        {
+            _gauge.OnDestroy();
+        }
+    }
+}

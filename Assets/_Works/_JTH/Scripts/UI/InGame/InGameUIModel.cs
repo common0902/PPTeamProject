@@ -1,0 +1,61 @@
+﻿using _Script.ScriptableObject.Event;
+using _Works._JTH.Scripts.UI.Event;
+using HwanLib.MVP.System;
+using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.UIData;
+
+namespace _Works._JTH.Scripts.UI.InGame
+{
+    public class InGameUIModel : IModel
+    {
+        private EventChannelSO _openUIChannel;
+        private InGameUIData _inGameData;
+
+        public void SetEventChannel(EventChannelSO openUIChannel)
+            => _openUIChannel = openUIChannel;
+
+        private UIParam UpdateHpText()
+            => UIParamContainer.UIStringParam.Init(_inGameData.CurrentHp.ToString());
+
+        private UIParam UpdateBulletText()
+            => UIParamContainer.UIStringParam.Init(_inGameData.RemainingBullets.ToString());
+
+        private UIParam UpdateTopViewSkillCover()
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingTabSkillCooldown, 
+                _inGameData.RemainingTabSkillCooldown / _inGameData.MaxTopViewSkillCooldown);
+
+        private UIParam UpdateSprintSkillCover()
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingSprintSkillCooldown, 
+                _inGameData.RemainingSprintSkillCooldown / _inGameData.MaxSprintSkillCooldown);
+
+        private UIParam UpdateHpGauge()
+            => UIParamContainer.UIFloatParam.Init((float)_inGameData.CurrentHp / _inGameData.MaxHp);
+
+        private UIParam UpdateWeaponSwap()
+            => UIParamContainer.UISwapParam.Init((int)_inGameData.CurrentWeapon, 0);
+
+        private void SettingBtnClickHandler(UIParam clickData)
+            => _openUIChannel.RaiseEvent(OpenUIEvents.OpenSettingEvent);
+
+        public void InitializeData(InGameUIData data)
+            => _inGameData = data;
+        
+        public void SetCurrentWeapon(int weapon)
+            => _inGameData.CurrentWeapon = (InGameUIData.WeaponType)weapon;
+        
+        public void SetCurrentHp(int hp)
+            => _inGameData.CurrentHp = hp;
+                
+        public void SetTopViewSkillCooldown(float cooldown)
+            => _inGameData.RemainingTabSkillCooldown = cooldown;
+        
+        public void SetTopViewSkillCooldown()
+            => _inGameData.RemainingTabSkillCooldown = _inGameData.MaxTopViewSkillCooldown;
+        
+        public void SetSprintSkillCooldown(float cooldown)
+            => _inGameData.RemainingSprintSkillCooldown = cooldown;
+        
+        public void SetSprintSkillCooldown()
+            => _inGameData.RemainingSprintSkillCooldown = _inGameData.MaxSprintSkillCooldown;
+    }
+}

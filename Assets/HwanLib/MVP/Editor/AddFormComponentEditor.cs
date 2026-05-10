@@ -1,8 +1,10 @@
 using System.Linq;
 using System.Reflection;
+using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AddFormComponent;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -34,9 +36,8 @@ namespace HwanLib.MVP.Editor
         private string GenerateCode(string folderPath, string scriptName)
         {
             //MVP System의 Assembly에서 찾기
-            string[] formNames = Assembly.GetAssembly(typeof(BasePresenter)).GetTypes()
-                .Where(type => type.IsClass && !type.IsInterface && !type.IsAbstract 
-                               && type.IsSubclassOf(typeof(BaseForm)))
+            Assembly formAssembly = Assembly.GetAssembly(typeof(AccessForm));
+            string[] formNames = MVPEditorUtil.GetAssignedTypesInAssembly(typeof(BaseForm), formAssembly)
                 .Select(type => type.Name).ToArray();
             string formCase = "";
             

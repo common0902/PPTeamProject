@@ -6,6 +6,7 @@ namespace _Works._JYG._Script.EventChannel.SystemEvent
     public static class PlayerFindEvents
     {
         public static readonly EnemyChangeState EnemyChangeState = new EnemyChangeState();
+        public static readonly SirenCameraEffect SirenCameraEffect = new SirenCameraEffect();
     }
     public class EnemyChangeState : GameEvent
     {
@@ -17,4 +18,11 @@ namespace _Works._JYG._Script.EventChannel.SystemEvent
             return this;
         }
     }
+
+    public class SirenCameraEffect : GameEvent
+    {
+        
+    }
+    
+    
 }

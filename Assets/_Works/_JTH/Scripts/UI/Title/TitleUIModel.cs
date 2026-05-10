@@ -1,5 +1,4 @@
 ﻿using System;
-using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System;
@@ -12,68 +11,72 @@ namespace _Works._JTH.Scripts.UI.Title
 {
     public class TitleUIModel : AbstractSaveableModel
     {
-        public string SavedStage { get; private set; }
+        private string _savedStage;
 
         private EventChannelSO _openUIChannel;
         private EventChannelSO _saveChannel;
-        private string _notSavedStageIndex;
         private int _stageStartIndex;
 
-        public void InitTitleModel(string notSavedStageIndex, int stageStartIndex)
+        public void InitTitleModel(int stageStartIndex)
+            => _stageStartIndex = stageStartIndex;
+
+        public override void SetDefaultValue()
         {
-            _notSavedStageIndex = notSavedStageIndex;
-            _stageStartIndex = stageStartIndex;
+            _savedStage = "-1";
         }
 
         public override string StoreData()
         {
-            return SavedStage;
+            return _savedStage;
         }
 
         public override void RestoreData(string data)
         {
-            SavedStage = data;
-        }
-
-        private ChangedData NewGameBtnClickHandler(ChangedData clickData)
-        {
-            _openUIChannel.RaiseEvent(
-                OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
-                    , () =>
-                    {
-                        SavedStage = _notSavedStageIndex;
-                        _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
-                        SceneManager.LoadScene(_stageStartIndex);
-                    }, () => { }));
-            
-            return null;
-        }
-
-        private ChangedData ContinueBtnHandler()
-        {
-            return UIParamData.UIStringParam.Init(
-                !String.IsNullOrEmpty(SavedStage) ? SavedStage : _notSavedStageIndex);
-        }
-        
-        private ChangedData ContinueBtnHandler(ChangedData clickData)
-        {
-            SceneManager.LoadScene(int.Parse(SavedStage));
-            
-            return ContinueBtnHandler();
-        }
-        
-        private ChangedData QuitBtnClickHandler(ChangedData clickData)
-        {
-            _openUIChannel.RaiseEvent(OpenUIEvents.OpenPopupEvent.Init("게임을 종료하시겠습니까?"
-                , () => Application.Quit(), () => { }));
-
-            return null;
+            _savedStage = data;
         }
 
         public void SetPopupEventChannel(EventChannelSO openUIChannel, EventChannelSO saveChannel)
         {
             _openUIChannel = openUIChannel;
             _saveChannel = saveChannel;
+        }
+        
+        private void NewGameBtnClickHandler(UIParam clickData)
+        {
+            _openUIChannel.RaiseEvent(
+                OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
+                    , () =>
+                    {
+                        _savedStage = "-1";
+                        _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+                        SceneManager.LoadScene(_stageStartIndex);
+                    }, () => { }));
+        }
+
+        private UIParam ContinueTextHandler()
+        {
+            return UIParamContainer.UIStringParam.Init(
+                !String.IsNullOrEmpty(_savedStage) ? _savedStage : "-1");
+        }
+        
+        private void ContinueBtnHandler(UIParam clickData)
+        {
+            SceneManager.LoadScene(int.Parse(_savedStage));
+        }
+        
+        private void QuitBtnClickHandler(UIParam clickData)
+        {
+            _openUIChannel.RaiseEvent(OpenUIEvents.OpenPopupEvent.Init("게임을 종료하시겠습니까?"
+                , () =>
+                {
+                    _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+                    Application.Quit();
+                }, () => { }));
+        }
+        
+        private void SettingBtnClickHandler(UIParam clickData)
+        {
+            _openUIChannel.RaiseEvent(OpenUIEvents.OpenSettingEvent);
         }
     }
 }
