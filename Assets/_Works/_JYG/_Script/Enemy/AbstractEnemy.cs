@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using _Script.Agent;
 using _Script.Agent.FSM;
+using _Script.Agent.Modules;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
-using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Rendering;
 using _Works._JYG._Script.Enemy.FSM;
 using _Works._JYG._Script.EventChannel.SystemEvent;
@@ -40,8 +39,13 @@ namespace _Works._JYG._Script.Enemy
 
         [field: SerializeField] public SoundClipSO PlayerFoundSound { get; private set; }
         [field: SerializeField] public SoundClipSO HitSound { get; private set; }
+        
+        [field: SerializeField] public AnimationHashSO ForceXParam { get; private set; }
+        [field: SerializeField] public AnimationHashSO ForceYParam { get; private set; }
 
         private FOVRendering _fovRenderer;
+
+        private IRenderer _renderer;
 
         protected override void Awake()
         {
@@ -55,6 +59,8 @@ namespace _Works._JYG._Script.Enemy
             ViewCaster view = GetModule<ViewCaster>();
             _fovRenderer.angle = view.Angle;
             _fovRenderer.distance = view.Distance;
+            
+            _renderer = GetModule<IRenderer>();
         }
 
         protected override void Initialize()
@@ -75,7 +81,10 @@ namespace _Works._JYG._Script.Enemy
         }
         protected override void HandleHealthChaged(float prevHealth, float currentHealth, float max)
         {
-            
+            if (currentHealth <= 0)
+            {
+                ChangeState((int)EnemyState.Dead);
+            }
         }
 
         protected override void Update()
@@ -97,6 +106,19 @@ namespace _Works._JYG._Script.Enemy
         public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
         {
             SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, HitSound));
+            
+            //진짜 레전드 스파게티 코딩이네.
+            Vector3 dumpingDirection = (attackerPosition - transform.position);
+            Debug.Log("Dump D : " + dumpingDirection);
+            
+            if(Mathf.Abs(dumpingDirection.z) > Mathf.Abs(dumpingDirection.x))
+                dumpingDirection.x = 0;
+            else
+                dumpingDirection.z = 0;
+            dumpingDirection.Normalize();
+            
+            _renderer.SetFloat(ForceXParam, dumpingDirection.x);
+            _renderer.SetFloat(ForceYParam, dumpingDirection.z);
             base.TakeDamage(damage, hitDirection, attackerPosition);
         }
 
