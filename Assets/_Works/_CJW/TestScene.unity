@@ -469,7 +469,6 @@ GameObject:
   - component: {fileID: 125943817}
   - component: {fileID: 125943821}
   - component: {fileID: 125943820}
-  - component: {fileID: 125943818}
   m_Layer: 0
   m_Name: LockedVisual
   m_TagString: Untagged
@@ -486,34 +485,12 @@ Transform:
   m_GameObject: {fileID: 125943816}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.018, y: 0, z: -0.007}
+  m_LocalPosition: {x: -0.017999887, y: 0, z: -0.007000029}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1276407988}
+  m_Father: {fileID: 407346239}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!64 &125943818
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 125943816}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7196441373348368383, guid: f78ac985c8e4e1649b9e18270672bcd6, type: 3}
 --- !u!23 &125943820
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1088,10 +1065,6 @@ MonoBehaviour:
   cameraEvent: {fileID: 0}
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
-  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 0}
-  interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
-  visualObject: {fileID: 0}
-  lockedObject: {fileID: 0}
   targetEventName: 
   isLocked: 0
 --- !u!65 &336127228
@@ -1329,6 +1302,56 @@ Transform:
   - {fileID: 319022946}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 116.441, z: 0}
+--- !u!1 &407346238
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 407346239}
+  - component: {fileID: 407346240}
+  m_Layer: 0
+  m_Name: Visual
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &407346239
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407346238}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 543450651738297808}
+  - {fileID: 125943817}
+  m_Father: {fileID: 1276407988}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &407346240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 407346238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82865d62957140219f67dbfea85e5e4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.SabotageVisual
+  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 0}
+  interactedOutLineColor: {r: 0, g: 0.035513878, b: 1, a: 1}
+  visualObject: {fileID: 919132147801952106}
+  lockedObject: {fileID: 125943816}
 --- !u!1 &544660756
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,28 +1785,6 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
---- !u!64 &930395313
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 919132147801952106}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 7196441373348368383, guid: f78ac985c8e4e1649b9e18270672bcd6, type: 3}
 --- !u!1 &996056566
 GameObject:
   m_ObjectHideFlags: 0
@@ -2416,8 +2417,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 543450651738297808}
-  - {fileID: 125943817}
+  - {fileID: 407346239}
   m_Father: {fileID: 544660757}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1276407989
@@ -2432,14 +2432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
-  <SabotageData>k__BackingField: {fileID: 0}
+  <SabotageData>k__BackingField: {fileID: 11400000, guid: 30248d7186831d74b99fbf122cbfe1f7, type: 2}
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
-  defaultOutLineColor: {r: 1, g: 1, b: 1, a: 0}
-  interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
-  visualObject: {fileID: 919132147801952106}
-  lockedObject: {fileID: 125943816}
   targetEventName: FireSabotageEvent
   isLocked: 1
 --- !u!65 &1276407990
@@ -8567,7 +8563,7 @@ Transform:
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1276407988}
+  m_Father: {fileID: 407346239}
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!1 &919132147801952106
 GameObject:
@@ -8581,9 +8577,8 @@ GameObject:
   - component: {fileID: 3469287837870840437}
   - component: {fileID: 1711813854881590975}
   - component: {fileID: 930395311}
-  - component: {fileID: 930395313}
   m_Layer: 0
-  m_Name: Visual
+  m_Name: UnlockedVisual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
