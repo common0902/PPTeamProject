@@ -48,6 +48,7 @@ namespace _Script.Agent.FSM
             //IDLE, Patrol 상태에서만 View를 체크해야하고, 다른 State에서는 이미 유저의 정체가 탄로났기 때문에 base.Update()를 하지 않아야 한다.
             //시야각에 닿으면 IDLE로 넘어가고, 유저를 쳐다보아야 한다.
             //이미 IDLE이라면, Enemy의 경계수치를 높힌다.
+            if (!_enemy.IsRunning) return;
         }
 
         public virtual void Exit()
