@@ -4,6 +4,7 @@ using _Script.ScriptableObject.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.InGame
@@ -34,28 +35,32 @@ namespace _Works._JTH.Scripts.UI.InGame
         
         #if UNITY_EDITOR
 
-        [ContextMenu("TextSwap")]
-        private void TextSwap()
+        private void Update()
         {
-            _inGameModel.SetCurrentWeapon(1);
-            _inGameView.UpdateForm((int)InGameUIEnum.WeaponField);
+            if (Keyboard.current.digit1Key.wasPressedThisFrame)
+            {
+                _inGameModel.SetCurrentWeapon((int)InGameUIData.WeaponType.Sword);
+                _inGameView.UpdateForm((int)InGameUIEnum.WeaponField);
+            }
+            if (Keyboard.current.digit0Key.wasPressedThisFrame)
+            {
+                _inGameModel.SetCurrentWeapon((int)InGameUIData.WeaponType.Gun);
+                _inGameView.UpdateForm((int)InGameUIEnum.WeaponField);
+            }
+
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+            {
+                _inGameModel.SetCurrentHp(50);
+                _inGameView.UpdateForm((int)InGameUIEnum.HpText);
+                _inGameView.UpdateForm((int)InGameUIEnum.HpGauge);
+            }
+
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+            {
+                _inGameModel.SetQSkillCooldown();
+                _inGameView.UpdateForm((int)InGameUIEnum.QCover);
+            }
         }
-        
-        [ContextMenu("TextHp")]
-        private void TextHp()
-        {
-            _inGameModel.SetCurrentHp(50);
-            _inGameView.UpdateForm((int)InGameUIEnum.HpText);
-            _inGameView.UpdateForm((int)InGameUIEnum.HpGauge);
-        }
-        
-        [ContextMenu("TextCooldown")]
-        private void TextCooldown()
-        {
-            _inGameModel.SetQSkillCooldown();
-            _inGameView.UpdateForm((int)InGameUIEnum.QCover);
-        }
-        
         #endif
     }
 }
