@@ -44,27 +44,20 @@ MonoBehaviour:
       isInteractable: 0
       isUpdatable: 1
     - childIndex: 19
-      gameObjectName: F_QCover
+      gameObjectName: F_TopViewCover
       formTypeName: CooldownForm
       targetInteractMethodName: None
-      targetUpdateMethodName: UpdateQSkillCover
+      targetUpdateMethodName: UpdateTopViewSkillCover
       isInteractable: 0
       isUpdatable: 1
     - childIndex: 23
-      gameObjectName: F_TabCover
+      gameObjectName: F_SprintCover
       formTypeName: CooldownForm
       targetInteractMethodName: None
-      targetUpdateMethodName: UpdateTabSkillCover
+      targetUpdateMethodName: UpdateSprintSkillCover
       isInteractable: 0
       isUpdatable: 1
-    - childIndex: 27
-      gameObjectName: F_ShiftCover
-      formTypeName: CooldownForm
-      targetInteractMethodName: None
-      targetUpdateMethodName: UpdateShiftSkillCover
-      isInteractable: 0
-      isUpdatable: 1
-    - childIndex: 30
+    - childIndex: 26
       gameObjectName: F_SettingButton
       formTypeName: FadeButtonForm
       targetInteractMethodName: SettingBtnClickHandler
@@ -73,4 +66,4 @@ MonoBehaviour:
       isUpdatable: 0
   modelTypeName: InGameUIModel
   viewTypeName: InGameUIView
-  selectedChildName: F_SettingButton
+  selectedChildName: F_SprintCover
