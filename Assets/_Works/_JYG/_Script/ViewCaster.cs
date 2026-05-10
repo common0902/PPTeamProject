@@ -14,7 +14,7 @@ namespace _Works._JYG._Script
         private GameObject _player;
         
         [field:SerializeField] public float Distance { get; private set; }
-        [SerializeField] private float angle;
+        [field:SerializeField] public float Angle { get; private set; }
         
         //public Action<
 
@@ -39,7 +39,7 @@ namespace _Works._JYG._Script
         {
             float ang = Mathf.Acos(Vector3.Dot(transform.forward, (_player.transform.position - transform.position).normalized)) * Mathf.Rad2Deg;
             
-            float radian = (angle + transform.parent.eulerAngles.y) * Mathf.Deg2Rad; //절대적으로 시야각만 표현해주기 위한 각도.
+            float radian = (Angle + transform.parent.eulerAngles.y) * Mathf.Deg2Rad; //절대적으로 시야각만 표현해주기 위한 각도.
             _directionL = new Vector3(-Mathf.Cos(radian), 0,Mathf.Sin(radian)); //Gizmo로 그리기 위한 변수들임.
             _directionR = new Vector3(-Mathf.Cos(radian), 0,Mathf.Sin(-radian)); // 삼각함수 이용.
             
@@ -50,7 +50,7 @@ namespace _Works._JYG._Script
                 if (Vector3.Distance(transform.position, _targetRaycaster.TargetPlayer.transform.position) <= Distance) // 적이 +angle, -angle보다 안쪽 각도에 존재한다면, Action 실행
                 {
                     //정의한 거리 안에 타겟이 접근하였다.
-                    if (Mathf.Abs(ang) <= angle / 2)
+                    if (Mathf.Abs(ang) <= Angle / 2)
                     {
                         //Enemy가 시야각 안에 들어왔다.
                         IsTargetAttached = true;

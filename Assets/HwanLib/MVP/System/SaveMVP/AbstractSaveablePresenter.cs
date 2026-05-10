@@ -1,4 +1,6 @@
-﻿using _Script.SaveSystem;
+﻿using System;
+using System.Collections.Generic;
+using _Script.SaveSystem;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
@@ -11,17 +13,18 @@ namespace HwanLib.MVP.System.SaveMVP
         
         protected new AbstractSaveableModel Model;
 
-        public override void InitializePresenter(MVPDataSO dataSO)
+        public override void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
-            if (!dataSO.GetModelType().IsSubclassOf(typeof(AbstractSaveableModel)))
+            if (!modelType.IsSubclassOf(typeof(AbstractSaveableModel)))
             {
                 Debug.LogWarning("Model이 AbstractSaveableModel를 상속 받지 않았습니다.");
                 return;
             }
-            base.InitializePresenter(dataSO);
+                
+            base.InitializePresenter(formData, viewType, modelType);
             
-            Model = base.Model as AbstractSaveableModel;
-            Model.SetDefaultData();
+            Model = (AbstractSaveableModel)base.Model;
+            Model.SetDefaultValue();
         }
 
         public string StoreData()

@@ -19,7 +19,7 @@ namespace HwanLib.MVP.Forms
 
         private void SliderValueChangeHandler(float value)
         {
-            OnFormInteracted?.Invoke(ChildIndex, UIParamData.UIFloatParam.Init(value));
+            OnFormInteracted?.Invoke(ChildIndex, UIParamContainer.UIFloatParam.Init(value));
         }
 
         protected override void UpdateVisual(UIParam data)

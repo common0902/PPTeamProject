@@ -11,7 +11,7 @@ using UnityEngine.UIElements;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage.Editor
 {
-    [CustomEditor(typeof(AbstractSabotage), true)]
+    [CustomEditor(typeof(Sabotage), true)]
     public class SabotageEditor : UnityEditor.Editor
     {
         [SerializeField] private VisualTreeAsset visual = default;
@@ -31,7 +31,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Editor
 
         private void HandleChange(ChangeEvent<string> evt)
         {
-            AbstractSabotage sabotage = (AbstractSabotage)target;
+            Sabotage sabotage = (Sabotage)target;
             if(evt.previousValue == evt.newValue) return;
             sabotage.targetEventName = evt.newValue;
             _targetEvent = evt.newValue;

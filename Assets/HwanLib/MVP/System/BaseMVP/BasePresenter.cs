@@ -16,15 +16,14 @@ namespace HwanLib.MVP.System.BaseMVP
         private Dictionary<int, Action<UIParam>> _moduleInteractMethodDict;
         private Dictionary<int, Func<UIParam>> _moduleUpdateMethodDict;
         
-        public virtual void InitializePresenter(MVPDataSO dataSO)
+        public virtual void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
-            List<FormData> formDataList = dataSO.GetFormDataList();
             Dictionary<int, string> formInteractMethodDict = new Dictionary<int, string>();
             Dictionary<int, string> formUpdateMethodDict = new Dictionary<int, string>();
             _moduleInteractMethodDict = new Dictionary<int, Action<UIParam>>();
             _moduleUpdateMethodDict = new Dictionary<int, Func<UIParam>>();
             
-            foreach (FormData form in formDataList)
+            foreach (FormData form in formData)
             {
                 if (form.isInteractable)
                     formInteractMethodDict.Add(form.childIndex, form.targetInteractMethodName);
@@ -32,8 +31,8 @@ namespace HwanLib.MVP.System.BaseMVP
                     formUpdateMethodDict.Add(form.childIndex, form.targetUpdateMethodName);
             }
             
-            Model = Activator.CreateInstance(dataSO.GetModelType()) as IModel;
-            View = Activator.CreateInstance(dataSO.GetViewType()) as BaseView;
+            View = Activator.CreateInstance(viewType) as BaseView;
+            Model = Activator.CreateInstance(modelType) as IModel;
             
             if (Model == null || View == null)
             {
@@ -78,7 +77,7 @@ namespace HwanLib.MVP.System.BaseMVP
                 }
             }
 
-            View.InitializeView(gameObject, formDataList, InteractedHandler, UpdateHandler);
+            View.InitializeView(gameObject, formData, InteractedHandler, UpdateHandler);
         }
 
         protected virtual void OnDestroy()

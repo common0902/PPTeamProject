@@ -1,5 +1,6 @@
 ﻿using System;
 using _Script.Agent.Modules;
+using _Script.ScriptableObject.Event;
 using _Works._JYG._Script.Enemy.CombatSystem;
 using UnityEngine;
 using UnityEngine.Events;
@@ -23,7 +24,7 @@ namespace _Script.Agent
 
         protected HealthModule Health { get; private set; }
 
-        public Action OnAttack;
+        [field:SerializeField] public EventChannelSO SoundEventChannel { get; private set; }
 
         protected override void Awake()
         {

@@ -2,6 +2,7 @@
 using _Script.Agent;
 using _Script.Agent.Modules;
 using GameLib.PoolObject.Runtime;
+using GameLib.SoundSystem;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -11,6 +12,8 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
     {
         public UnityEvent AttackFeedback;
         public PoolManagerSO PoolManager { get; private set; }
+        
+        [field: SerializeField] public SoundClipSO AttackSound { get; private set; }
 
         protected Agent agent;
         protected IAnimationTrigger trigger;
@@ -35,15 +38,17 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             PoolManager = GameManager.Instance.PoolInitializer.PoolManager;
         }
 
-        protected virtual void OnDestroy()
+        private void OnDestroy()
         {
             //agent.OnAttack -= HandleAgentAttack;
-            trigger.OnAttackTrigger -= HandleAgentAttack;
+            if(trigger != null)
+                trigger.OnAttackTrigger -= HandleAgentAttack;
         }
 
         protected virtual void HandleAgentAttack()
         {
             AttackFeedback?.Invoke();
+            agent.SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, AttackSound));
             //pooling
         }
     }

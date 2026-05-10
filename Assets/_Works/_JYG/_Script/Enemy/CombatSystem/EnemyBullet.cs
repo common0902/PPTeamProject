@@ -42,8 +42,6 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             {
                 damageable.TakeDamage(damage, Vector3.forward, transform.position);
             }
-
-            Debug.Log("Hit!");
             StopAllCoroutines();
             _poolManager.Push(this);
         }
