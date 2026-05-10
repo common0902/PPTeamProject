@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics.Tracing;
 using System.Reflection;
+using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
@@ -10,7 +11,7 @@ using UnityEngine.EventSystems;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage
 {
-    public class Sabotage : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+    public class Sabotage : ModuleOwner, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("Sabotage Data")]
         [field: SerializeField]
@@ -21,28 +22,20 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private EventChannelSO sabotageEvent;
         [SerializeField] private EventChannelSO interactEvent; // 상호작용을 해야 작동할 때 필요한 이벤트
         [Header("Info")]
-        [SerializeField] private Color defaultOutLineColor;
-        [SerializeField] private Color interactedOutLineColor;
-        [SerializeField] private GameObject visualObject;
-        [SerializeField] private GameObject lockedObject;
+
         
         [SerializeField] public string targetEventName;
         [SerializeField] private  bool isLocked = false; // 사보타지가 잠금 해제되었는지 여부
         private AbstractSabotageEvent _targetEvent;
-        private Outline _outline;
         private bool _isUsed = false;
-
+        private SabotageVisual _visual;
         
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();   
             cameraEvent.AddListener<TopViewEvent>(HandleOpen);
             interactEvent.AddListener<UnlockEvent>(HandleUnlock);
-            _outline = GetComponentInChildren<Outline>();
-
-            Debug.Log(_outline);
-            _outline.OutlineColor = defaultOutLineColor;
-            visualObject.SetActive(false);
-            lockedObject.SetActive(false);
+            _visual = GetModule<SabotageVisual>();
         }
 
         private void Start()
@@ -70,20 +63,17 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if (evt.IsTopView && !isLocked)
             {
-                lockedObject.SetActive(false);
-                visualObject.SetActive(true);
+                _visual.HandleActivation(true, false);
                 return;
             }
             if (evt.IsTopView && isLocked)
             {
                 Debug.Log("사용할 수 없음");
-                visualObject.SetActive(false);
-                lockedObject.SetActive(true);
+                _visual.HandleActivation(false, true);
             }
             else
             {
-                lockedObject.SetActive(false);
-                visualObject.SetActive(false);
+                _visual.HandleActivation(false, false);
             }
         }
 
@@ -91,21 +81,21 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if(_isUsed || !isLocked) return; 
     
-            _outline.enabled = false;
+            _visual.HandleOutLineEnable(false);
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
             _isUsed = true;
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log("Enter");
             if(_isUsed) return;
-
-            _outline.OutlineColor = interactedOutLineColor;
+            Debug.Log("Enter");
+            
+            cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, true));
         }
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            _outline.OutlineColor = defaultOutLineColor;
+            cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, false));;
         }
         
         private void OnDestroy()
