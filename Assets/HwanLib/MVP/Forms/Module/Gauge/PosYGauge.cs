@@ -1,18 +1,27 @@
-﻿using UnityEngine;
+﻿using DG.Tweening;
+using UnityEngine;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
     internal class PosYGauge : AbstractGauge
     {
-        private Transform _targetTransform;
+        private RectTransform _targetTransform;
 
-        protected override void Initialize(GameObject gameObject)
+        protected override void Init(GameObject gameObject)
         {
-            _targetTransform = gameObject.transform;
+            _targetTransform = gameObject.GetComponent<RectTransform>();
+            _targetTransform.pivot = new Vector2(0.5f, 0);
         }
 
-        protected override void SetGauge()
-            => _targetTransform.localScale = new Vector3(_targetTransform.localScale.x,
-                GaugeRatio, _targetTransform.localScale.z);
+        public override void SetGauge(float ratio, float duration = 0, Ease ease = Ease.Linear)
+        {
+            _targetTransform.DOKill(true);
+            _targetTransform.DOScaleY(ratio, duration).SetEase(ease);
+        }
+
+        public override void OnDestroy()
+        {
+            _targetTransform.DOKill();
+        }
     }
 }

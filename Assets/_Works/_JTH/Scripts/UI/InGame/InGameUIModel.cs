@@ -20,17 +20,13 @@ namespace _Works._JTH.Scripts.UI.InGame
         private UIParam UpdateBulletText()
             => UIParamContainer.UIStringParam.Init(_inGameData.RemainingBullets.ToString());
 
-        private UIParam UpdateQSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxQSkillCooldown, 
-                _inGameData.RemainingQSkillCooldown / _inGameData.MaxQSkillCooldown);
+        private UIParam UpdateTopViewSkillCover()
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingTabSkillCooldown, 
+                _inGameData.RemainingTabSkillCooldown / _inGameData.MaxTopViewSkillCooldown);
 
-        private UIParam UpdateTabSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxTabSkillCooldown, 
-                _inGameData.RemainingTabSkillCooldown / _inGameData.MaxTabSkillCooldown);
-
-        private UIParam UpdateShiftSkillCover()
-            => UIParamContainer.UICooldownParam.Init(_inGameData.MaxShiftSkillCooldown, 
-                _inGameData.RemainingShiftSkillCooldown / _inGameData.MaxShiftSkillCooldown);
+        private UIParam UpdateSprintSkillCover()
+            => UIParamContainer.UICooldownParam.Init(_inGameData.RemainingSprintSkillCooldown, 
+                _inGameData.RemainingSprintSkillCooldown / _inGameData.MaxSprintSkillCooldown);
 
         private UIParam UpdateHpGauge()
             => UIParamContainer.UIFloatParam.Init((float)_inGameData.CurrentHp / _inGameData.MaxHp);
@@ -49,23 +45,17 @@ namespace _Works._JTH.Scripts.UI.InGame
         
         public void SetCurrentHp(int hp)
             => _inGameData.CurrentHp = hp;
-        
-        public void SetQSkillCooldown(float cooldown)
-            => _inGameData.RemainingQSkillCooldown = cooldown;
-        
-        public void SetQSkillCooldown()
-            => _inGameData.RemainingQSkillCooldown = _inGameData.MaxQSkillCooldown;
                 
-        public void SetTabSkillCooldown(float cooldown)
+        public void SetTopViewSkillCooldown(float cooldown)
             => _inGameData.RemainingTabSkillCooldown = cooldown;
         
-        public void SetTabSkillCooldown()
-            => _inGameData.RemainingTabSkillCooldown = _inGameData.MaxTabSkillCooldown;
+        public void SetTopViewSkillCooldown()
+            => _inGameData.RemainingTabSkillCooldown = _inGameData.MaxTopViewSkillCooldown;
         
-        public void SetShiftSkillCooldown(float cooldown)
-            => _inGameData.RemainingShiftSkillCooldown = cooldown;
+        public void SetSprintSkillCooldown(float cooldown)
+            => _inGameData.RemainingSprintSkillCooldown = cooldown;
         
-        public void SetShiftSkillCooldown()
-            => _inGameData.RemainingShiftSkillCooldown = _inGameData.MaxShiftSkillCooldown;
+        public void SetSprintSkillCooldown()
+            => _inGameData.RemainingSprintSkillCooldown = _inGameData.MaxSprintSkillCooldown;
     }
 }

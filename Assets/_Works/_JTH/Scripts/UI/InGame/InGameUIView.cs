@@ -16,9 +16,8 @@ namespace _Works._JTH.Scripts.UI.InGame
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             GetForm<GaugeForm>((int)InGameUIEnum.HpGauge).InitGaugeForm(GaugeType.PosY);
-            GetForm<CooldownForm>((int)InGameUIEnum.ShiftCover).InitCooldownForm(GaugeType.PosY);
-            GetForm<CooldownForm>((int)InGameUIEnum.TabCover).InitCooldownForm(GaugeType.PosY);
-            GetForm<CooldownForm>((int)InGameUIEnum.QCover).InitCooldownForm(GaugeType.PosY);
+            GetForm<CooldownForm>((int)InGameUIEnum.SprintCover).InitCooldownForm(GaugeType.PosY);
+            GetForm<CooldownForm>((int)InGameUIEnum.TopViewCover).InitCooldownForm(GaugeType.PosY);
         }
     }
 }

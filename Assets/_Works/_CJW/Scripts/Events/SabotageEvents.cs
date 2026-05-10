@@ -1,5 +1,6 @@
 using System.Numerics;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Objects.Sabotage;
 using Quaternion = UnityEngine.Quaternion;
 
 namespace _Works._CJW.Scripts.Events
@@ -9,6 +10,8 @@ namespace _Works._CJW.Scripts.Events
         public static FireSabotageEvent FireSabotageEvent = new();
     }
 
+
+    
     public abstract class AbstractSabotageEvent : GameEvent
     {
         public bool IsUsed; // 사보타지가 사용되었는지 여부
