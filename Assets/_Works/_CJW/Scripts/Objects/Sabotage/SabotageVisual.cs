@@ -17,6 +17,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         
         private Outline _outline;
         private ModuleOwner _owner;
+        
 
         public void Initialize(ModuleOwner moduleOwner)
         {
