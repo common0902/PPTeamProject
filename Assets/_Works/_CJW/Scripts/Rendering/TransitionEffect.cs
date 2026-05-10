@@ -15,7 +15,8 @@ namespace _Works._CJW.Scripts.Rendering
         [SerializeField] private float transitionTime;
         [SerializeField] private Color defaultColor;
         [SerializeField] private Color healColor;
-        [SerializeField] private Color damageColor;
+        [SerializeField] private Color sirenColor;
+        [SerializeField] private float sirenIntensity = 0.35f;
         private Volume _volume;
         private Vignette _vignette;
 
@@ -25,33 +26,58 @@ namespace _Works._CJW.Scripts.Rendering
             _volume.profile.TryGet(out _vignette);
             playerEventChannel.AddListener<SirenCameraEffect>(SirenTransition);
         }
+
+        [ContextMenu("Test")]
+        void Test()
+        {
+            StartCoroutine(Transition(sirenColor, sirenIntensity));
+        }
         
         private void SirenTransition(SirenCameraEffect evt)
         {
-            StartCoroutine(Transition(damageColor, 0.35f));
+            StartCoroutine(Transition(sirenColor, sirenIntensity));
         }
         
-        private IEnumerator Transition(Color changeColor, float maxValue)
+        private IEnumerator Transition(Color changeColor, float maxValue = 0.35f)
         {
             float t = 0;
+            float value;
             _vignette.color.value = changeColor;
             while (t < transitionTime)
             {
                 float elapsed = t / transitionTime;
-                float value = Mathf.Sin(elapsed * Mathf.PI) * maxValue; // 0 ~ 1 ~ 0
-                Debug.Log(value);
+                value = Mathf.Lerp(0, maxValue, elapsed);
+                // float value = Mathf.Sin(elapsed * Mathf.PI) * maxValue; // 0 ~ 1 ~ 0
                 _vignette.intensity.value = value;
                 t += Time.deltaTime;
                 yield return null;
             }
-
+            _vignette.intensity.value = maxValue;
+            // _vignette.color.value = defaultColor;
+        }
+        
+        private IEnumerator RollbackTransition()
+        {
+            float t = 0;
+            float value;
+            float currentValue = _vignette.intensity.value;
             _vignette.color.value = defaultColor;
+            while (t < transitionTime)
+            {
+                float elapsed = t / transitionTime;
+                value = Mathf.Lerp(currentValue, 0, elapsed);
+                _vignette.intensity.value = value;
+                t += Time.deltaTime;
+                yield return null;
+            }
+            _vignette.intensity.value = 0;
         }
 
+        
         private void OnDestroy()
         {
             
-            playerEventChannel.AddListener<SirenCameraEffect>(SirenTransition);
+            playerEventChannel.RemoveListener<SirenCameraEffect>(SirenTransition);
         }
     }
 }
