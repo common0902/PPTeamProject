@@ -11,6 +11,7 @@ namespace _Works._JTH.Scripts.UI.InGame
     public class InGameUIPresenter : BasePresenter
     {
         [SerializeField] private EventChannelSO openUIChannel;
+        [SerializeField] private EventChannelSO cameraChannel;
         [SerializeField] private int stageStartIndex;
         [SerializeField] private int stageEndIndex;
         
@@ -26,11 +27,18 @@ namespace _Works._JTH.Scripts.UI.InGame
             
             _inGameModel.SetEventChannel(openUIChannel);
             _inGameModel.InitializeData(new InGameUIData(100, 2.5f, 2.5f, 3f));
+
+            // cameraChannel.AddListener<CameraEvent>(UseTopViewSkillHandler);
             
             int currentIndex = SceneManager.GetActiveScene().buildIndex;
             if (currentIndex >= stageStartIndex && currentIndex <= stageEndIndex )
                 _inGameView.OpenView();
         }
+
+        // private void UseTopViewSkillHandler()
+        // {
+        //     _inGameView.OnViewChange();
+        // }
         
         // #if UNITY_EDITOR
         //

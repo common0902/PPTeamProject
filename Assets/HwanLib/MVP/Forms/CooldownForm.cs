@@ -1,9 +1,7 @@
-﻿using System;
-using HwanLib.MVP.Forms.Module.Gauge;
+﻿using HwanLib.MVP.Forms.Module.Gauge;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.UIData;
-using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
@@ -11,7 +9,6 @@ namespace HwanLib.MVP.Forms
     {
         private GaugeType _gaugeType;
         private AbstractGauge _cooldown;
-        private Coroutine _cooldownCoroutine;
 
         public void InitCooldownForm(GaugeType gaugeType)
         {
@@ -34,9 +31,13 @@ namespace HwanLib.MVP.Forms
             _cooldown.SetGauge(0, cooldownData.Cooldown);
         }
 
+        public void StopCooldown()
+            => _cooldown.StopCooldown();
+
+        public void StartCooldown()
+            => _cooldown.StartCooldown();
+
         private void OnDestroy()
-        {
-            _cooldown.OnDestroy();
-        }
+            => _cooldown.OnDestroy();
     }
 }

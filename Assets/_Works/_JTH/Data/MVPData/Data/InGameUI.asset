@@ -50,6 +50,13 @@ MonoBehaviour:
       targetUpdateMethodName: UpdateTopViewSkillCover
       isInteractable: 0
       isUpdatable: 1
+    - childIndex: 20
+      gameObjectName: F_SprintSkill
+      formTypeName: AccessForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
     - childIndex: 23
       gameObjectName: F_SprintCover
       formTypeName: CooldownForm
@@ -66,4 +73,4 @@ MonoBehaviour:
       isUpdatable: 0
   modelTypeName: InGameUIModel
   viewTypeName: InGameUIView
-  selectedChildName: F_SprintCover
+  selectedChildName: F_SprintSkill
