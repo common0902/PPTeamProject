@@ -1510,11 +1510,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5feadeeadbb94e92b57462754ba058dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.EmergencyEvent
-  playerEventChannel: {fileID: 0}
+  playerEventChannel: {fileID: 11400000, guid: e278a6d9e9bbd3c4dba55e7801280e86, type: 2}
   transitionTime: 3
   defaultColor: {r: 1, g: 1, b: 1, a: 1}
   healColor: {r: 0.3372549, g: 0.9882353, b: 0.3764706, a: 1}
-  damageColor: {r: 1, g: 0.5613208, b: 0.5613208, a: 1}
+  sirenColor: {r: 1, g: 0.5330188, b: 0.5330188, a: 0}
+  sirenIntensity: 0.5
 --- !u!1 &795219080
 GameObject:
   m_ObjectHideFlags: 0
