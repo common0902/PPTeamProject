@@ -516,8 +516,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   hitDuration: 0.5
-  <SoundEventChannel>k__BackingField: {fileID: 0}
+  <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
   <PlayerFindEventChannel>k__BackingField: {fileID: 11400000, guid: e278a6d9e9bbd3c4dba55e7801280e86, type: 2}
+  <SabotageEventChannel>k__BackingField: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   <stateListSO>k__BackingField: {fileID: 11400000, guid: f781bd68529cba648be9e2e0407f698f, type: 2}
   enemyCurrentCaution: 0
   cautionRatio: 1
@@ -527,8 +528,10 @@ MonoBehaviour:
   <ChaseSpeed>k__BackingField: 2.5
   <RotateSpeed>k__BackingField: 5
   callingDuration: 5
-  <PlayerFoundSound>k__BackingField: {fileID: 0}
-  <HitSound>k__BackingField: {fileID: 0}
+  <PlayerFoundSound>k__BackingField: {fileID: 11400000, guid: 49ed5f6430da3d94490ed258e247070b, type: 2}
+  <HitSound>k__BackingField: {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
+  <ForceXParam>k__BackingField: {fileID: 11400000, guid: 9b677280e9dd5504bb9dc740700cc4fd, type: 2}
+  <ForceYParam>k__BackingField: {fileID: 11400000, guid: 305fc9c946551d84d8777723461bac50, type: 2}
 --- !u!1 &5770631333871572798
 GameObject:
   m_ObjectHideFlags: 0
