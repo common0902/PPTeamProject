@@ -17,9 +17,9 @@ namespace _Works._PMS.Code.Event
 
         public class HitEvent : GameEvent
         {
-            public int Hp;
+            public float Hp;
 
-            public HitEvent Init(int hp)
+            public HitEvent Init(float hp)
             {
                 Hp = hp;
                 return this;
