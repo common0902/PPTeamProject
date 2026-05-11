@@ -5,25 +5,23 @@ using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
-namespace _Works._JTH.Scripts.UI.Popup
+namespace _Works._JTH.Scripts.UI.Tooltip
 {
-    public class PopupUIView : BaseView
+    public class TooltipUIView : BaseView
     {
+        private RectTransform _windowRectTrm;
+        
         private DoTweenWindowForm _windowForm;
         private bool _isOpen;
-        private CanvasGroup _canvasGroup;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            _windowForm = GetForm<DoTweenWindowForm>((int)PopupUIEnum.Popup);
-            _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
+            _windowForm = GetForm<DoTweenWindowForm>((int)TooltipUIEnum.Window);
+            _windowRectTrm = _windowForm.GetComponent<RectTransform>();
             
-            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
-
             _windowForm.OnAnimationEnd += AnimationEndHandler;
 
             _isOpen = false;
@@ -33,8 +31,6 @@ namespace _Works._JTH.Scripts.UI.Popup
         {
             base.OnDestroyView();
             
-            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
             _windowForm.OnAnimationEnd -= AnimationEndHandler;
         }
 
@@ -42,29 +38,34 @@ namespace _Works._JTH.Scripts.UI.Popup
         {
             base.OpenView();
             
+            _isOpen = true;
             _windowForm.PlayOpenAnimation();
-            
-            _canvasGroup.interactable = true;
-            _canvasGroup.blocksRaycasts = true;
         }
 
-        private void StartCloseAnimation()
+        public void CloseTooltip()
         {
+            if (_isOpen == true)
+                return;
+
+            _isOpen = false;
             _windowForm.PlayCloseAnimation();
-            
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
         }
         
         private void AnimationEndHandler()
         {
-            // 애니메이션 끝났을 때 켜진 것일 수도 있고 꺼진 것일 수도 있다.
-            _isOpen = !_isOpen;
-
             if (_isOpen == false)
             {
                 RootCanvas.gameObject.SetActive(false);
             }
+        }
+
+        public void OpenView(Vector2 tooltipPos)
+        {
+            if (_isOpen == true)
+                return;
+            
+            OpenView();
+            _windowRectTrm.anchoredPosition = tooltipPos;
         }
     }
 }

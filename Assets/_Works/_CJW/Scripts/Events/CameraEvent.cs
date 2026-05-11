@@ -9,6 +9,7 @@ namespace _Works._CJW.Scripts.Events
     {
         public static readonly TopViewEvent TopViewEvent = new();
         public static readonly RegisterFovEvent RegisterFovEvent = new();
+        public static readonly FocusedSabotageEvent FocusedSabotageEvent = new();
     }
 
     public class TopViewEvent : GameEvent
