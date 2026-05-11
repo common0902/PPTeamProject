@@ -1,4 +1,4 @@
-using _Script.ScriptableObject.Event;
+﻿using _Script.ScriptableObject.Event;
 using UnityEngine;
 
 namespace _Works._PMS.Code.Event
@@ -10,14 +10,20 @@ namespace _Works._PMS.Code.Event
             
         }
 
-        public class SprintEvent : GameEvent
+        public class SprintEndEvent : GameEvent
         {
         
         }
 
         public class HitEvent : GameEvent
         {
+            public int Hp;
 
+            public HitEvent Init(int hp)
+            {
+                Hp = hp;
+                return this;
+            }
         }
 
         public class BulletChange : GameEvent

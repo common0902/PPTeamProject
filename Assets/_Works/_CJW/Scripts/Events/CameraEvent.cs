@@ -1,4 +1,4 @@
-using _Script.ScriptableObject.Event;
+﻿using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
 using _Works._CJW.Scripts.Objects.Sabotage;
 using _Works._CJW.Scripts.Rendering;
