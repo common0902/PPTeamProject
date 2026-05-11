@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DG.Tweening;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,8 +11,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action OnJumpKeyPressed;
     public event Action OnRunStarted;
     public event Action OnRunCanceled;
+    public event Action OnViewMapStarted;
+    public event Action OnViewMapCanceled;
 
     private Controls _controls;
+    private bool _viewMap = false;
 
     private void OnEnable()
     {
@@ -48,11 +52,32 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnRun(InputAction.CallbackContext context)
     {
-        Debug.Log($"OnRun : {context.phase}");
         if (context.started)
             OnRunStarted?.Invoke();
         else if (context.canceled)
             OnRunCanceled?.Invoke();
     }
 
+    public void OnMap(InputAction.CallbackContext context)
+    {
+
+        if (context.performed)
+        {
+            if (!_viewMap)
+            {
+                OnViewMapStarted?.Invoke();
+                _viewMap = true;
+            }   
+            else
+            {
+                OnViewMapCanceled?.Invoke();
+                _viewMap = false;
+            }
+        }
+    }
+
+    public void OnWeaponSwap(InputAction.CallbackContext context)
+    {
+       
+    }
 }

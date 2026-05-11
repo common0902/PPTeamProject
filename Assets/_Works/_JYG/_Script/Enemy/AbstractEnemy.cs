@@ -20,6 +20,7 @@ namespace _Works._JYG._Script.Enemy
 {
     public class AbstractEnemy : Agent
     {
+        
         [Header("SO Settings")]
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }

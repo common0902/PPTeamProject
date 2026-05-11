@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
@@ -22,6 +23,16 @@ namespace HwanLib.MVP.Forms.Module.Gauge
         public override void OnDestroy()
         {
             _targetTransform.DOKill();
+        }
+
+        public override void StopCooldown()
+        {
+            _targetTransform.DOPause();
+        }
+
+        public override void StartCooldown()
+        {
+            _targetTransform.DOPlay();
         }
     }
 }

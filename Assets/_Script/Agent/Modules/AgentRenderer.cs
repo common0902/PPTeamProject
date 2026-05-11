@@ -43,5 +43,6 @@ namespace _Script.Agent.Modules
         private void AttackTrigger() => OnAttackTrigger?.Invoke();
 
         #endregion
+
     }
 }
