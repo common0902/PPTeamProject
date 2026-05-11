@@ -67,12 +67,17 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
             {
                 OnViewMapStarted?.Invoke();
                 _viewMap = true;
-            }
+            }   
             else
             {
                 OnViewMapCanceled?.Invoke();
                 _viewMap = false;
             }
         }
+    }
+
+    public void OnWeaponSwap(InputAction.CallbackContext context)
+    {
+       
     }
 }

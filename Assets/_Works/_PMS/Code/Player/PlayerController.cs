@@ -46,15 +46,15 @@ public class PlayerController : Agent
 
         var stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine?.Setup(this);
+
     }
 
+    
     protected override void Update()
     {
-        base.Update();
         UpdateRotation();
         UpdateRunCooldown();
-        
-    }
+    }   
 
     
     private void UpdateRotation()
