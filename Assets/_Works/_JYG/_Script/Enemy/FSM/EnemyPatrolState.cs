@@ -1,6 +1,7 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine.InputSystem;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
-    public class EnemyPatrolState : AgentState
+    public class EnemyPatrolState : AgentState, ICanMove
     {
         private IAISystem _navMesh;
         public EnemyPatrolState(Agent agent, AnimationHashSO hash) : base(agent, hash)

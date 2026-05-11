@@ -1,13 +1,14 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
 
 namespace _Works._JYG._Script.Enemy.FSM
 {
-    public class EnemyChaseState : AgentState
+    public class EnemyChaseState : AgentState, ICanMove
     {
         private IAISystem _navmesh;
         private GameObject _player; //나중에 Player Component로 대체해야한다.
@@ -35,6 +36,7 @@ namespace _Works._JYG._Script.Enemy.FSM
 
         public override void Update()
         {
+            base.Update();
             _navmesh.Navmesh.SetDestination(_player.transform.position);
 
             if(_targetCaster.TryGetTarget(out GameObject target))//Target Caster에 감지되었다.

@@ -34,6 +34,18 @@ namespace _Works._CJW.Scripts.Events
             return this;
         }
     }
+    public class RegisterSabotageEvent : GameEvent
+    {
+        public bool Register;// true면 현재 포커스됨
+        public Sabotage Sabotage; 
+        
+        public RegisterSabotageEvent Init(Sabotage sabotage, bool register)
+        {
+            Sabotage = sabotage;
+            Register = register;
+            return this;
+        }
+    }
     public class RegisterFovEvent : GameEvent
     {
         public bool IsRegistered; // 등록인지 해제인지

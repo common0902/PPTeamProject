@@ -4,8 +4,11 @@ using _Script.Agent.FSM;
 using _Script.Agent.Modules;
 using _Script.ScriptableObject;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Rendering;
 using _Works._JYG._Script.Enemy.FSM;
+using _Works._JYG._Script.Enemy.FSM.Tags;
+using _Works._JYG._Script.Enemy.PatrolSystem;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using GameLib.SoundSystem;
@@ -18,6 +21,7 @@ namespace _Works._JYG._Script.Enemy
         [Header("SO Settings")]
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }
+        [field: SerializeField] public EventChannelSO CameraEventChannel { get; private set; }
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
@@ -29,6 +33,7 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] public float AttackDistance { get; private set; } = 15f;
 
         [field: SerializeField] public float PatrolSpeed { get; private set; } = 1.5f;    //Patrol 상태일 때 사용되는 걷는 속도
+        [field: SerializeField] public float OnWaterSpeed { get; private set; } = 0.5f;    //Patrol 상태일 때 사용되는 걷는 속도
         [field: SerializeField] public float ChaseSpeed { get; private set; } = 2.5f;     //Chase 상태일 때 사용되는 뛰는 속도
         [field: SerializeField] public float RotateSpeed { get; private set; } = 5f;     //Chase 상태일 때 사용되는 뛰는 속도
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay); //0과 1로 표현하는 Enemy 경계수치
@@ -46,6 +51,9 @@ namespace _Works._JYG._Script.Enemy
         private FOVRendering _fovRenderer;
 
         private IRenderer _renderer;
+        private IAISystem _aiSystem;
+
+        [field: SerializeField] public bool IsRunning { get; private set; }
 
         protected override void Awake()
         {
@@ -61,6 +69,19 @@ namespace _Works._JYG._Script.Enemy
             _fovRenderer.distance = view.Distance;
             
             _renderer = GetModule<IRenderer>();
+            _aiSystem = GetModule<IAISystem>();
+            
+            CameraEventChannel.AddListener<TopViewEvent>(HandleCameraTopViewEvent);
+        }
+
+        private void HandleCameraTopViewEvent(TopViewEvent obj)
+        {
+            _renderer.Animator.speed = obj.IsTopView ? 0 : 1;
+            IsRunning = !obj.IsTopView;
+            if (GetCurrentState is ICanMove)
+            {
+                _aiSystem.Navmesh.isStopped = obj.IsTopView;
+            }
         }
 
         protected override void Initialize()
@@ -97,6 +118,7 @@ namespace _Works._JYG._Script.Enemy
         {
             base.OnDestroy();
             PlayerFindEventChannel.RemoveListener<EnemyChangeState>(HandleEnemyChange);
+            CameraEventChannel.RemoveListener<TopViewEvent>(HandleCameraTopViewEvent);
         }
 
         public void ChangeState(int index) => _stateMachine.ChangeState(index);
@@ -124,6 +146,7 @@ namespace _Works._JYG._Script.Enemy
 
         public void EnemyFindPlayer()
         {
+            if (!IsRunning) return;
             if (enemyCurrentCaution >= 0)
                 enemyCurrentCaution += Time.deltaTime * cautionRatio; //cautionRatio : Distance비례 증가값
             else
