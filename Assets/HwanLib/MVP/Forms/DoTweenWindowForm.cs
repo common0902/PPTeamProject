@@ -15,14 +15,20 @@ namespace HwanLib.MVP.Forms
 
         private Sequence _sequence;
 
+        private void Awake()
+        {
+            _sequence = DOTween.Sequence();
+        }
+
         public void PlayOpenAnimation()
         {
-            transform.localScale = Vector3.zero;
-            if (_sequence != null && _sequence.IsActive() == true)
+            if (_sequence.IsActive() == true)
             {
+                _sequence.Complete();
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
+            transform.localScale = Vector3.zero;
 
             _sequence = DOTween.Sequence();
             float curDuration = Mathf.Clamp01(1 - transform.localScale.x) * openDuration;
@@ -37,12 +43,13 @@ namespace HwanLib.MVP.Forms
         
         public void PlayCloseAnimation()
         {
-            transform.localScale = Vector3.one;
-            if (_sequence != null && _sequence.IsActive() == true)
+            if (_sequence.IsActive() == true)
             {
+                _sequence.Complete();
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
+            transform.localScale = Vector3.one;
 
             _sequence = DOTween.Sequence();
             float curDuration = transform.localScale.x * closeDuration;
@@ -57,7 +64,7 @@ namespace HwanLib.MVP.Forms
 
         private void OnDestroy()
         {
-            if (_sequence != null)
+            if (_sequence.IsActive() == true)
             {
                 _sequence.Complete();
                 _sequence.Kill();

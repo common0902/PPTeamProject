@@ -1,6 +1,7 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
 using UnityEngine;
@@ -36,6 +37,7 @@ namespace _Works._JYG._Script.Enemy.FSM
 
         public override void Update()
         {
+            base.Update();
             #region Enemy To Chase
             //여기서 만약 타겟을 시야각으로 발견했다면 chase state로 바뀐다.
             //자세한 내용은 AgentState의 Update문 참고.

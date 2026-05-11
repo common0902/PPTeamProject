@@ -58,6 +58,7 @@ namespace _Works._JTH.Scripts.UI.Popup
         
         private void AnimationEndHandler()
         {
+            // 애니메이션 끝났을 때 켜진 것일 수도 있고 꺼진 것일 수도 있다.
             _isOpen = !_isOpen;
 
             if (_isOpen == false)

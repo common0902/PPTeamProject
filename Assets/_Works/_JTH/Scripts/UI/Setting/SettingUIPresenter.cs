@@ -6,6 +6,7 @@ using HwanLib.MVP.System.GenerateUI;
 using HwanLib.MVP.System.SaveMVP;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
@@ -34,18 +35,26 @@ namespace _Works._JTH.Scripts.UI.Setting
             
             openUIEvent?.RemoveListener<OpenSettingEvent>(ShowSetting);
         }
-
-#if UNITY_EDITOR
-        [ContextMenu("TestOpen")]
-        public void TestOpen()
-        {
-            ShowSetting(OpenUIEvents.OpenSettingEvent);
-        }
-#endif
         
         private void ShowSetting(OpenSettingEvent eventData)
         {
             _settingView.OpenView();
         }
+
+#if UNITY_EDITOR
+        private void Update()
+        {
+            if (!Keyboard.current.ctrlKey.isPressed)
+                return;
+            
+            if (Keyboard.current.sKey.wasPressedThisFrame)
+                TestOpen();
+        }
+        
+        public void TestOpen()
+        {
+            ShowSetting(OpenUIEvents.OpenSettingEvent);
+        }
+#endif
     }
 }

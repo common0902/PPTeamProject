@@ -28,7 +28,7 @@ namespace HwanLib.MVP.Forms
             if (_canvasGroup.interactable == false) return;
             
             StopAllCoroutines();
-            StartCoroutine(UIUtil.FadeOut(_canvasGroup, onHoverAlpha, fadeTime));
+            StartCoroutine(UIUtil.Fade(_canvasGroup, onHoverAlpha, fadeTime));
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -36,7 +36,7 @@ namespace HwanLib.MVP.Forms
             if (_canvasGroup.interactable == false) return;
             
             StopAllCoroutines();
-            StartCoroutine(UIUtil.FadeIn(_canvasGroup, 1.0f, fadeTime));
+            StartCoroutine(UIUtil.Fade(_canvasGroup, 1.0f, fadeTime));
         }
 
         public void OnPointerDown(PointerEventData eventData)

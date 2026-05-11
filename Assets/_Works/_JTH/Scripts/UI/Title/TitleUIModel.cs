@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Title
 {
-    public class TitleUIModel : AbstractSaveableModel
+    public class TitleUIModel : ISaveableModel
     {
         private string _savedStage;
 
@@ -20,25 +20,25 @@ namespace _Works._JTH.Scripts.UI.Title
         public void InitTitleModel(int stageStartIndex)
             => _stageStartIndex = stageStartIndex;
 
-        public override void SetDefaultValue()
+        public void SetDefaultValue(EventChannelSO saveChannel)
         {
+            _saveChannel = saveChannel;
             _savedStage = "-1";
         }
 
-        public override string StoreData()
+        public string StoreData()
         {
             return _savedStage;
         }
 
-        public override void RestoreData(string data)
+        public void RestoreData(string data)
         {
             _savedStage = data;
         }
 
-        public void SetPopupEventChannel(EventChannelSO openUIChannel, EventChannelSO saveChannel)
+        public void SetPopupEventChannel(EventChannelSO openUIChannel)
         {
             _openUIChannel = openUIChannel;
-            _saveChannel = saveChannel;
         }
         
         private void NewGameBtnClickHandler(UIParam clickData)

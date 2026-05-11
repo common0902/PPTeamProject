@@ -8,7 +8,7 @@
             Sword
         }
 
-        public InGameUIData(int maxHp, float maxQSkillCooldown, float maxTabSkillCooldown, float maxShiftSkillCooldown)
+        public InGameUIData(int maxHp, float maxQSkillCooldown, float maxTopViewSkillCooldown, float maxSprintSkillCooldown)
         {
             MaxHp = maxHp;
             CurrentHp = maxHp;
@@ -17,13 +17,11 @@
 
             CurrentWeapon = WeaponType.Gun;
             
-            MaxQSkillCooldown = maxQSkillCooldown;
-            MaxTabSkillCooldown = maxTabSkillCooldown;
-            MaxShiftSkillCooldown = maxShiftSkillCooldown;
+            MaxTopViewSkillCooldown = maxTopViewSkillCooldown;
+            MaxSprintSkillCooldown = maxSprintSkillCooldown;
             
-            RemainingShiftSkillCooldown = 0;
+            RemainingSprintSkillCooldown = 0;
             RemainingTabSkillCooldown = 0;
-            RemainingQSkillCooldown = 0;
         }
         
         public int MaxHp;
@@ -33,12 +31,10 @@
         
         public WeaponType CurrentWeapon;
         
-        public float RemainingQSkillCooldown;
         public float RemainingTabSkillCooldown;
-        public float RemainingShiftSkillCooldown;
+        public float RemainingSprintSkillCooldown;
         
-        public float MaxQSkillCooldown;
-        public float MaxTabSkillCooldown;
-        public float MaxShiftSkillCooldown;
+        public float MaxTopViewSkillCooldown;
+        public float MaxSprintSkillCooldown;
     }
 }
