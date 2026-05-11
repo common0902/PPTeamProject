@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.Agent.Modules;
@@ -13,6 +14,7 @@ using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using GameLib.SoundSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Works._JYG._Script.Enemy
 {
@@ -22,6 +24,7 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO CameraEventChannel { get; private set; }
+        public UnityEvent OnWalking { get; private set; }
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
@@ -53,7 +56,7 @@ namespace _Works._JYG._Script.Enemy
         private IRenderer _renderer;
         private IAISystem _aiSystem;
 
-        [field: SerializeField] public bool IsRunning { get; private set; }
+        [field: SerializeField] public bool IsRunning { get; private set; } = true;
 
         protected override void Awake()
         {
