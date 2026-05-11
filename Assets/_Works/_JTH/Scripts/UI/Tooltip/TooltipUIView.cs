@@ -44,7 +44,7 @@ namespace _Works._JTH.Scripts.UI.Tooltip
 
         public void CloseTooltip()
         {
-            if (_isOpen == true)
+            if (_isOpen == false)
                 return;
 
             _isOpen = false;

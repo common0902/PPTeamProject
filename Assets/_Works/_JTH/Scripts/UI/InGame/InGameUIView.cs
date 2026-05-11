@@ -17,7 +17,7 @@ namespace _Works._JTH.Scripts.UI.InGame
         private AccessForm _sprintSkill;
         private AccessForm _redMarkBoard;
 
-        private RectTransform[] _redMarks;
+        private List<RectTransform> _redMarkList;
         
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
@@ -33,15 +33,11 @@ namespace _Works._JTH.Scripts.UI.InGame
             GetForm<CooldownForm>((int)InGameUIEnum.TopViewCover).InitCooldownForm(GaugeType.PosY);
         }
 
-        public void InitInGameView(RectTransform[] redMarks)
+        public void AddRedMark(RectTransform redMark)
         {
-            _redMarks = redMarks;
-            
-            foreach (var redMark in _redMarks)
-            {
-                redMark.gameObject.SetActive(false);
-                redMark.SetParent(_redMarkBoard.transform);
-            }
+            _redMarkList.Add(redMark);
+            redMark.gameObject.SetActive(false);
+            redMark.SetParent(_redMarkBoard.transform);
         }
 
         public void OnViewChange(bool isTopView)
@@ -56,7 +52,7 @@ namespace _Works._JTH.Scripts.UI.InGame
                 _weaponField.gameObject.SetActive(true);
                 _sprintSkill.gameObject.SetActive(true);
                 
-                foreach (var redMark in _redMarks)
+                foreach (var redMark in _redMarkList)
                     redMark.gameObject.SetActive(false);
             }
         }
@@ -65,12 +61,12 @@ namespace _Works._JTH.Scripts.UI.InGame
         {
             Camera cam = Camera.main;
             
-            for (int i = 0; i < _redMarks.Length; ++i)
+            for (int i = 0; i < _redMarkList.Count; ++i)
             {
                 if (sabotageRedMarkScreenPos.Length <= i)
                     return;
-                _redMarks[i].position = sabotageRedMarkScreenPos[i];
-                _redMarks[i].gameObject.SetActive(true);
+                _redMarkList[i].position = sabotageRedMarkScreenPos[i];
+                _redMarkList[i].gameObject.SetActive(true);
             }
         }
     }

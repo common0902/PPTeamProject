@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
+using _Works._CJW.Scripts.Objects.Sabotage;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
@@ -15,12 +16,14 @@ namespace _Works._JTH.Scripts.UI.InGame
     {
         [SerializeField] private GameObject redMarkPrefab;
         [SerializeField] private EventChannelSO openUIChannel;
+        [SerializeField] private EventChannelSO cameraChannel;
         [SerializeField] private int stageStartIndex;
         [SerializeField] private int stageEndIndex;
-        [SerializeField] private int sabotageCount;
         
         private InGameUIModel _inGameModel;
         private InGameUIView _inGameView;
+
+        private List<Sabotage> _sabotageList; 
 
         public override void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
@@ -31,19 +34,28 @@ namespace _Works._JTH.Scripts.UI.InGame
             
             _inGameModel.SetEventChannel(openUIChannel);
             _inGameModel.InitializeData(new InGameUIData(100, 2.5f, 2.5f, 3f));
-
-            RectTransform[] redMarks = new RectTransform[sabotageCount];
-            for (int i = 0; i < sabotageCount; ++i)
-            {
-                redMarks[i] = Instantiate(redMarkPrefab).GetComponent<RectTransform>();
-            }
-            _inGameView.InitInGameView(redMarks);
             
-            // cameraChannel.AddListener<SabotageEvent>(UseTopViewSkillHandler);
+            cameraChannel.AddListener<TopViewEvent>(UseTopViewSkillHandler);
+            cameraChannel.AddListener<RegisterSabotageEvent>(AddSabotage);
             
             int currentIndex = SceneManager.GetActiveScene().buildIndex;
             if (currentIndex >= stageStartIndex && currentIndex <= stageEndIndex )
                 _inGameView.OpenView();
+        }
+
+        private void AddSabotage(RegisterSabotageEvent data)
+        {
+            if (data.Register == false)
+                return; 
+            _inGameView.AddRedMark(Instantiate(redMarkPrefab).GetComponent<RectTransform>());
+            _sabotageList.Add(data.Sabotage);
+        }
+
+        protected override void OnDestroy()
+        {
+            cameraChannel.AddListener<TopViewEvent>(UseTopViewSkillHandler);
+            
+            base.OnDestroy();
         }
 
         private void UseTopViewSkillHandler(TopViewEvent data)
@@ -53,8 +65,7 @@ namespace _Works._JTH.Scripts.UI.InGame
                 return;
             _inGameView.SetRedMark(new Vector2[3]);
         }
-        
-        
+
 #if UNITY_EDITOR
         private void Update()
         {
