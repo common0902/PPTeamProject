@@ -1,4 +1,5 @@
-﻿using UnityEngine.AI;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace _Works._JYG._Script.Enemy.PatrolSystem
 {
@@ -12,5 +13,6 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
         EnemyRoute GetCurrentRoute();
         EnemyRoute PrevEnemyRoute { get; }
         public bool IsArrived();
+        void RouteRePath(Vector3 newPosition);
     }
 }

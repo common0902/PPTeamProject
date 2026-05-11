@@ -9,6 +9,10 @@ namespace GameLib.SoundSystem
         public AudioClip audioClip;
         public bool isLoop = false;
         public bool randomizePitch = false;
+        
+        public bool isSpatialBlend = false;
+        public float minDistance = 1f;
+        public float maxDistance = 500f;
 
         [Range(0.1f, 1f)] public float randomPitchModifier = 0.1f;
         [Range(0.1f, 2f)] public float volume = 1f;

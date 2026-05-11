@@ -363,6 +363,37 @@ MonoBehaviour:
   <AttackSound>k__BackingField: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
   <FirePosition>k__BackingField: {fileID: 1407947725471480045}
   <BulletData>k__BackingField: {fileID: 11400000, guid: b142bc3dae87b5b41a72f24a8fbe735d, type: 2}
+--- !u!1 &5414176758800769425
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1569725073075805654}
+  m_Layer: 0
+  m_Name: FootTrm
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1569725073075805654
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5414176758800769425}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6493635833518080735}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5660689300149651207
 GameObject:
   m_ObjectHideFlags: 0
@@ -450,6 +481,7 @@ Transform:
   - {fileID: 2426549642767089673}
   - {fileID: 5437469740012955992}
   - {fileID: 3215521826141618834}
+  - {fileID: 1569725073075805654}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &5240183988128465524
@@ -534,7 +566,7 @@ MonoBehaviour:
   <HitSound>k__BackingField: {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
   <ForceXParam>k__BackingField: {fileID: 11400000, guid: 9b677280e9dd5504bb9dc740700cc4fd, type: 2}
   <ForceYParam>k__BackingField: {fileID: 11400000, guid: 305fc9c946551d84d8777723461bac50, type: 2}
-  <IsRunning>k__BackingField: 0
+  <IsRunning>k__BackingField: 1
 --- !u!1 &5770631333871572798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1129,6 +1161,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8628174741300113303, guid: 565bebae8541e93459890f00ad716d8e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4190446868751691738}
+    - targetCorrespondingSourceObject: {fileID: 8628174741300113303, guid: 565bebae8541e93459890f00ad716d8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1398793805128521670}
   m_SourcePrefab: {fileID: 100100000, guid: 565bebae8541e93459890f00ad716d8e, type: 3}
 --- !u!4 &177775404121526380 stripped
 Transform:
@@ -1170,6 +1205,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de5e9f53a2e4dae80c7ee1a3410a598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Script.Agent.Modules.AgentRenderer
+--- !u!114 &1398793805128521670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665483146628123350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdf9c5617463204cb63f5e6f428ba48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.Audio.StepAudioPlayer
+  <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  <FootTrm>k__BackingField: {fileID: 1569725073075805654}
+  stepSoundClips:
+  - {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
+  - {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
+  - {fileID: 11400000, guid: c54d520c575d604418b763eaa90e3f46, type: 2}
 --- !u!4 &2631398846251514799 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6486785575751130862, guid: 565bebae8541e93459890f00ad716d8e, type: 3}
