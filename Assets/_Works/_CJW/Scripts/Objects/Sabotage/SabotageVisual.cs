@@ -45,6 +45,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             visualObject.SetActive(visual);
             lockedObject.SetActive(lockVisual);
+            Debug.Log(visualObject.activeSelf);
         }
 
         public void HandleOutLineEnable(bool enable)
