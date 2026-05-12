@@ -5,6 +5,8 @@ using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
+using _Works._CJW.Scripts.Objects.Sabotage.Functions;
+using NUnit.Framework.Constraints;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -93,6 +95,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             _functionModule.UseFunction();
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
             IsUsed = true;
+            
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
@@ -100,7 +103,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             Debug.Log("Enter");
             
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, true));
-        }
+            ShouldMark = false;
+        }   
 
         public void OnPointerExit(PointerEventData eventData)
         {
