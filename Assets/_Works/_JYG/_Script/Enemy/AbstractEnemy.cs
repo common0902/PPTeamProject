@@ -55,7 +55,7 @@ namespace _Works._JYG._Script.Enemy
         private FOVRendering _fovRenderer;
 
         private IRenderer _renderer;
-        private IAISystem _aiSystem;
+        public IAISystem AiSystem { get; private set; }
 
         [field: SerializeField] public bool IsRunning { get; private set; } = true;
 
@@ -73,7 +73,7 @@ namespace _Works._JYG._Script.Enemy
             _fovRenderer.distance = view.Distance;
             
             _renderer = GetModule<IRenderer>();
-            _aiSystem = GetModule<IAISystem>();
+            AiSystem = GetModule<IAISystem>();
             
             CameraEventChannel.AddListener<TopViewEvent>(HandleCameraTopViewEvent);
         }
@@ -84,7 +84,7 @@ namespace _Works._JYG._Script.Enemy
             IsRunning = !obj.IsTopView;
             if (GetCurrentState is ICanMove)
             {
-                _aiSystem.Navmesh.isStopped = obj.IsTopView;
+                AiSystem.Navmesh.isStopped = obj.IsTopView;
             }
         }
 
