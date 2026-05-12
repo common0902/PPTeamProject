@@ -1,51 +1,50 @@
 ﻿using _Script.ScriptableObject.Event;
-using UnityEngine;
 
 namespace _Works._PMS.Code.Event
 {
-    public class PlayerEvents : MonoBehaviour
+    public static class PlayerEvents
     {
-        public static class OpenUIEvents
-        {
-            
-        }
+        public static SprintEndEvent SprintEndEvent = new SprintEndEvent();
+        public static HitEvent HitEvent = new HitEvent();
+        public static BulletChangeEvent BulletChangeEvent = new BulletChangeEvent();
+        public static WeaponChangeEvent WeaponChangeEvent = new WeaponChangeEvent();
+    }
 
-        public class SprintEndEvent : GameEvent
-        {
+    public class SprintEndEvent : GameEvent
+    {
         
-        }
+    }
 
-        public class HitEvent : GameEvent
+    public class HitEvent : GameEvent
+    {
+        public float Hp;
+
+        public HitEvent Init(float hp)
         {
-            public float Hp;
-
-            public HitEvent Init(float hp)
-            {
-                Hp = hp;
-                return this;
-            }
+            Hp = hp;
+            return this;
         }
+    }
 
-        public class BulletChange : GameEvent
+    public class BulletChangeEvent : GameEvent
+    {
+        public int Bullet;
+
+        public BulletChangeEvent Init(int bullet)
         {
-            public int Bullet;
-
-            public BulletChange Init(int bullet)
-            {
-                Bullet = bullet;
-                return this;
-            }
+            Bullet = bullet;
+            return this;
         }
+    }
 
-        public class WeaponChange : GameEvent
+    public class WeaponChangeEvent : GameEvent
+    {
+        public bool IsGun;
+
+        public WeaponChangeEvent Init(bool isGun)
         {
-            public bool IsGun;
-
-            public WeaponChange Init(bool isGun)
-            {
-                IsGun = isGun;
-                return this;
-            }
+            IsGun = isGun;
+            return this;
         }
     }
 }

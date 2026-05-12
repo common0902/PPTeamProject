@@ -65,7 +65,14 @@ namespace _Works._JTH.Scripts.UI.Tooltip
                 return;
             
             OpenView();
-            _windowRectTrm.anchoredPosition = tooltipPos;
+            
+            // 오른쪽에 있으면 길이 / 2만큼 왼쪽으로 이동, 반대면 반대로 이동
+            // 위에 있으면 높이 / 2 만큼 아래로 이동, 반대면 위로 이동
+            Vector2 offset = _windowRectTrm.sizeDelta / 2;
+            Vector2 screenSize = Camera.main.ViewportToScreenPoint(Vector2.one);
+            offset.x = tooltipPos.x >= screenSize.x / 2f ? -offset.x : offset.x;
+            offset.y = tooltipPos.y >= screenSize.y / 2f ? -offset.y : offset.y;
+            _windowRectTrm.anchoredPosition = tooltipPos + offset;
         }
     }
 }

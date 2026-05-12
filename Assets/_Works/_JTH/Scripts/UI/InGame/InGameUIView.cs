@@ -57,15 +57,11 @@ namespace _Works._JTH.Scripts.UI.InGame
             }
         }
 
-        public void SetRedMark(Vector2[] sabotageRedMarkScreenPos)
+        public void SetRedMark(List<Vector2> redMarkScreenPosList)
         {
-            Camera cam = Camera.main;
-            
-            for (int i = 0; i < _redMarkList.Count; ++i)
+            for (int i = 0; i < redMarkScreenPosList.Count; ++i)
             {
-                if (sabotageRedMarkScreenPos.Length <= i)
-                    return;
-                _redMarkList[i].position = sabotageRedMarkScreenPos[i];
+                _redMarkList[i].position = redMarkScreenPosList[i];
                 _redMarkList[i].gameObject.SetActive(true);
             }
         }

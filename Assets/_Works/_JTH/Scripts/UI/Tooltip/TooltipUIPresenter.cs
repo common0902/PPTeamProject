@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.Sabotage;
+using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
@@ -34,7 +35,6 @@ namespace _Works._JTH.Scripts.UI.Tooltip
         }
 
 #if UNITY_EDITOR
-        
         private void Update()
         {
             if (!Keyboard.current.ctrlKey.isPressed)
@@ -66,8 +66,8 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             Sabotage sabotage = eventData.Sabotage;
             _tooltipModel.SetText(sabotage.SabotageData.SabotageName, 
                 sabotage.SabotageData.SabotageDesc);
-            Vector2 tooltipPos = Camera.main.WorldToScreenPoint(
-                sabotage.transform.position + new Vector3(sabotage.markBoxSize.x, 0, sabotage.markBoxSize.y));
+            
+            Vector2 tooltipPos = Camera.main.WorldToScreenPoint(sabotage.transform.position);
             _tooltipView.OpenView(tooltipPos);
         }
 
