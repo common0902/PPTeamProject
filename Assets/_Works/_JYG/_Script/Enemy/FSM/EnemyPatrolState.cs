@@ -22,7 +22,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             base.Enter();
             _navMesh.Navmesh.isStopped = false;
             _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
-            Debug.Log("Enter PatrolState");
         }
 
         public override void Update()
@@ -37,13 +36,14 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
+                Debug.Log(@$"TO Idle Cause
+NavDistance : {_navMesh.Navmesh.remainingDistance < 0.5f}
+Player Attached : {_viewCaster.IsTargetAttached}");
             }
         }
 
         public override void Exit()
         {
-            
-            Debug.Log("Exit PatrolState");
             base.Exit();
             _navMesh.Navmesh.isStopped = true;
         }

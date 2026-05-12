@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using _Works._JYG._Script.Enemy;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using Agents.FSM;
@@ -15,11 +16,18 @@ namespace _Works._JYG._Script.Test
         {
             if (Keyboard.current.iKey.wasPressedThisFrame)
             {
-                IAISystem aiSystem = TargetEnemy.AiSystem;
-                aiSystem.RouteRePath(transform.position);
-                TargetEnemy.ChangeState((int)EnemyState.PATROL);
+                StartCoroutine(SetEnemyPos());
 
             }
+        }
+
+        private IEnumerator SetEnemyPos()
+        {
+            
+            IAISystem aiSystem = TargetEnemy.AiSystem;
+            aiSystem.RouteRePath(transform.position);
+            yield return new WaitForSeconds(0.5f);  //0.5초 딜레이 안걸어주면 Path 재설정 하기 전에 Patrol에서 도착했다고 판단 해 안되네.
+            TargetEnemy.ChangeState((int)EnemyState.PATROL);
         }
     }
 }
