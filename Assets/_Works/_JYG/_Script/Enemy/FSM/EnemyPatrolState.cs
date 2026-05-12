@@ -22,6 +22,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             base.Enter();
             _navMesh.Navmesh.isStopped = false;
             _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
+            Debug.Log("Enter PatrolState");
         }
 
         public override void Update()
@@ -41,6 +42,8 @@ namespace _Works._JYG._Script.Enemy.FSM
 
         public override void Exit()
         {
+            
+            Debug.Log("Exit PatrolState");
             base.Exit();
             _navMesh.Navmesh.isStopped = true;
         }
