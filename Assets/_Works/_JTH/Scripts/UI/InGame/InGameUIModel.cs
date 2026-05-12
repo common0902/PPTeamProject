@@ -57,5 +57,8 @@ namespace _Works._JTH.Scripts.UI.InGame
         
         public void SetSprintSkillCooldown()
             => _inGameData.RemainingSprintSkillCooldown = _inGameData.MaxSprintSkillCooldown;
+
+        public void SetCurrentBullet(int dataBullet)
+            => _inGameData.RemainingBullets = dataBullet;
     }
 }

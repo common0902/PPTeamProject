@@ -535,7 +535,10 @@ PrefabInstance:
     - {fileID: 7535552867235567390, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
     - {fileID: 5235056985231103979, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1089198237}
   m_SourcePrefab: {fileID: 100100000, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
 --- !u!4 &590850856 stripped
 Transform:
@@ -873,6 +876,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1089198235 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
+  m_PrefabInstance: {fileID: 588089915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1089198237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1089198235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9de5e9f53a2e4dae80c7ee1a3410a598, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Script.Agent.Modules.AgentRenderer
 --- !u!1 &1210209813
 GameObject:
   m_ObjectHideFlags: 0
@@ -1028,6 +1048,7 @@ MonoBehaviour:
   hitDuration: 0.5
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: a8d5899067e2fd14ea0b21be69e99fae, type: 2}
   _cinemachineCamera: {fileID: 1743322845}
+  runCooldown: 2
 --- !u!1 &1628661579
 GameObject:
   m_ObjectHideFlags: 0
@@ -1082,7 +1103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1743322846}
   - component: {fileID: 1743322845}
-  - component: {fileID: 1743322844}
+  - component: {fileID: 1743322848}
   - component: {fileID: 1743322843}
   - component: {fileID: 1743322842}
   - component: {fileID: 1743322847}
@@ -1144,19 +1165,6 @@ MonoBehaviour:
       Wait: 1
       Time: 2
     Restrictions: 0
---- !u!114 &1743322844
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1743322841}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineHardLockToTarget
-  Damping: 0
 --- !u!114 &1743322845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1256,6 +1264,19 @@ MonoBehaviour:
         DecelTime: 0.2
   PlayerIndex: -1
   AutoEnableInputs: 1
+--- !u!114 &1743322848
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1743322841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36d1163fa822e8b418a0a603ec078d5c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineHardLockToTarget
+  Damping: 0
 --- !u!1 &1881920289
 GameObject:
   m_ObjectHideFlags: 0

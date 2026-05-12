@@ -1,4 +1,5 @@
-﻿using HwanLib.MVP.System;
+﻿using _Script.ScriptableObject.Event;
+using HwanLib.MVP.System;
 using HwanLib.MVP.System.SaveMVP;
 using HwanLib.MVP.UIData;
 using UnityEngine;
@@ -6,7 +7,7 @@ using UnityEngine.Audio;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
-    public class SettingUIModel : AbstractSaveableModel
+    public class SettingUIModel : ISaveableModel
     {
         private class SettingInfo
         {
@@ -16,6 +17,8 @@ namespace _Works._JTH.Scripts.UI.Setting
             public bool IsFullScreen = true;
         }
         
+        private EventChannelSO _saveChannel;
+        
         private AudioMixer _audioMixer;
         private SettingInfo _settingInfo;
 
@@ -24,17 +27,18 @@ namespace _Works._JTH.Scripts.UI.Setting
             _audioMixer = audioMixer;
         }
 
-        public override void SetDefaultValue()
+        public void SetDefaultValue(EventChannelSO saveChannel)
         {
+            _saveChannel = saveChannel;
             _settingInfo = new SettingInfo();
         }
-        
-        public override string StoreData()
+
+        public string StoreData()
         {
             return JsonUtility.ToJson(_settingInfo);
         }
 
-        public override void RestoreData(string data)
+        public void RestoreData(string data)
         {
             _settingInfo = JsonUtility.FromJson<SettingInfo>(data);
             
@@ -82,7 +86,7 @@ namespace _Works._JTH.Scripts.UI.Setting
 
         private void CloseBtnClickHandler(UIParam clickData)
         {
-            StoreData();
+            _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
 
         private UIParam UpdateMasterVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.MasterVolume);

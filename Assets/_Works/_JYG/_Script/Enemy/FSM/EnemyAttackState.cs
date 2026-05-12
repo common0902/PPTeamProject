@@ -1,6 +1,7 @@
 ﻿using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using Agents.FSM;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -34,6 +35,7 @@ namespace _Works._JYG._Script.Enemy.FSM
 
         public override void Update()
         {
+            base.Update();
             Vector3 lookDir = _player.transform.position - _agent.transform.position;
             lookDir.y = 0;
             _agent.transform.rotation = Quaternion.Slerp(_agent.transform.rotation

@@ -11,7 +11,6 @@ namespace _Works._JTH.Scripts.UI.Title
     public class TitleUIPresenter : AbstractSaveablePresenter
     {
         [SerializeField] private EventChannelSO openUIChannel;
-        [SerializeField] private EventChannelSO saveChannel;
         [SerializeField] private int stageStartIndex = 1;
         [SerializeField] private int titleIndex;
 
@@ -27,17 +26,18 @@ namespace _Works._JTH.Scripts.UI.Title
 
             _titleModel.InitTitleModel(stageStartIndex);
             
-            _titleModel.SetPopupEventChannel(openUIChannel, saveChannel);
+            _titleModel.SetPopupEventChannel(openUIChannel);
 
             if (SceneManager.GetActiveScene().buildIndex == titleIndex)
                 _titleView.OpenView();
         }
 
-        [ContextMenu("Save")]
+        #if UNITY_EDITOR
         public void Save()
         {
             RestoreData("2");
             saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
+        #endif
     }
 }

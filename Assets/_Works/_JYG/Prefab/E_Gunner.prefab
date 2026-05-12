@@ -43,6 +43,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: <AttackDistance>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1966519075931859412, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: <FirePosition>k__BackingField
       value: 
@@ -50,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: <Angle>k__BackingField
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
@@ -108,6 +116,11 @@ PrefabInstance:
       addedObject: {fileID: 3285265183181179058}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+--- !u!4 &2215542748104509798 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1569725073075805654, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+  m_PrefabInstance: {fileID: 826402590408529072}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5866501077239895663 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
@@ -267,6 +280,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3568514624660129634, guid: 12ab4121f164f444d8567e692449fc41, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4224048307672500836}
+    - targetCorrespondingSourceObject: {fileID: 3568514624660129634, guid: 12ab4121f164f444d8567e692449fc41, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1778822462349094344}
   m_SourcePrefab: {fileID: 100100000, guid: 12ab4121f164f444d8567e692449fc41, type: 3}
 --- !u!4 &1748095554031575571 stripped
 Transform:
@@ -308,6 +324,22 @@ MonoBehaviour:
   precomputeOutline: 0
   bakeKeys: []
   bakeValues: []
+--- !u!114 &1778822462349094344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1803032827662196415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdf9c5617463204cb63f5e6f428ba48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.Audio.StepAudioPlayer
+  <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  <FootTrm>k__BackingField: {fileID: 2215542748104509798}
+  stepSoundClips:
+  - {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
 --- !u!4 &3285265183181179058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 367002335881335151, guid: 12ab4121f164f444d8567e692449fc41, type: 3}

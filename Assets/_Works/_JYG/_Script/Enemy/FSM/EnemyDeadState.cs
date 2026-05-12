@@ -1,6 +1,7 @@
 using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.ScriptableObject;
+using _Works._JYG._Script.Enemy.FSM.Tags;
 using _Works._JYG._Script.Enemy.PatrolSystem;
 using UnityEngine;
 

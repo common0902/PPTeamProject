@@ -39,6 +39,18 @@ namespace GameLib.SoundSystem
             _audioSource.volume = clipData.volume;
             _audioSource.pitch = clipData.pitch;
 
+            _audioSource.spatialBlend = clipData.isSpatialBlend ? 1f : 0f;
+            if (clipData.isSpatialBlend)
+            {
+                _audioSource.maxDistance = clipData.maxDistance;
+                _audioSource.minDistance = clipData.minDistance;
+            }
+            else
+            {
+                _audioSource.maxDistance = 500f;
+                _audioSource.minDistance = 1f;
+            }
+
             if (clipData.randomizePitch)
             {
                 _audioSource.pitch += Random.Range(-clipData.randomPitchModifier, clipData.randomPitchModifier);

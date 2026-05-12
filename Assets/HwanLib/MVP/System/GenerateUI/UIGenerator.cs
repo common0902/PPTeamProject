@@ -1,4 +1,5 @@
-﻿using HwanLib.MVP.System.BaseMVP;
+﻿using System;
+using HwanLib.MVP.System.BaseMVP;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.GenerateUI

@@ -26,8 +26,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [Header("Target Event")]
         [SerializeField] public string targetEventName;
         [Header("Mark Offset")]
-        [SerializeField] private Vector3 markOffset; // 위치가 안맞을 수 있어서 오프셋 추가
-        [SerializeField] private Vector2 markBoxSize; // 마크의 상단을 맞춰줄 박스
+        [SerializeField] public Vector3 markOffset; // 위치가 안맞을 수 있어서 오프셋 추가
+        [SerializeField] public Vector2 markBoxSize; // 마크의 상단을 맞춰줄 박스
 
         [field: SerializeField] public bool IsLocked { get; private set; } = false; // 사보타지가 잠금 해제되었는지 여부
         
