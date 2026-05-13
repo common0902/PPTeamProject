@@ -51,7 +51,8 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             _tooltipModel.SetText("가스 누출", 
                 "가스를 누출시킵니다.\n\n누출된 가스에 닿는 오브젝트는\n<color=blue>둔화</color>와 <color=yellow>실명</color> 효과가 적용됩니다. ");
             Vector2 tooltipPos = Mouse.current.position.ReadValue();
-            _tooltipView.OpenView(tooltipPos);
+            _tooltipView.OpenView();
+            _tooltipView.SetPosition(tooltipPos);
         }
 #endif
         
@@ -68,10 +69,11 @@ namespace _Works._JTH.Scripts.UI.Tooltip
                 sabotage.SabotageData.SabotageDesc);
             
             Vector2 tooltipPos = Camera.main.WorldToScreenPoint(sabotage.transform.position);
-            _tooltipView.OpenView(tooltipPos);
+            _tooltipView.OpenView();
+            _tooltipView.SetPosition(tooltipPos);
         }
 
         private void CloseTooltip()
-            => _tooltipView.CloseTooltip();
+            => _tooltipView.CloseView();
     }
 }
