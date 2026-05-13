@@ -77,6 +77,10 @@ namespace HwanLib.MVP.System.BaseMVP
                 }
             }
 
+            if (View is IMultiple multipleView)
+            {
+                
+            }
             View.InitializeView(gameObject, formData, InteractedHandler, UpdateHandler);
         }
 

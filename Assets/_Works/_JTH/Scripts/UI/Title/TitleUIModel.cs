@@ -45,14 +45,24 @@ namespace _Works._JTH.Scripts.UI.Title
         {
             _openUIChannel.RaiseEvent(
                 OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
+                    , OpenTutorialPopup, () => { }));
+        }
+
+        private void OpenTutorialPopup()
+        {
+            _openUIChannel.RaiseEvent(
+                OpenUIEvents.OpenPopupEvent.Init("튜토리얼을 진행하시겠습니까?"
                     , () =>
                     {
                         _savedStage = "-1";
                         _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+                        SceneManager.LoadScene(_stageStartIndex - 1);
+                    }, () =>
+                    {
                         SceneManager.LoadScene(_stageStartIndex);
-                    }, () => { }));
+                    }));
         }
-
+        
         private UIParam ContinueTextHandler()
         {
             return UIParamContainer.UIStringParam.Init(
