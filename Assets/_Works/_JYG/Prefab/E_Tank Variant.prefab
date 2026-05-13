@@ -190,6 +190,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 8753963491209144525, guid: f1ae399013c4a594692e55be267cf3b8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8256485470980697091}
+    - targetCorrespondingSourceObject: {fileID: 8753963491209144525, guid: f1ae399013c4a594692e55be267cf3b8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1857688778601836629}
   m_SourcePrefab: {fileID: 100100000, guid: f1ae399013c4a594692e55be267cf3b8, type: 3}
 --- !u!4 &837454671718358934 stripped
 Transform:
@@ -236,6 +239,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9de5e9f53a2e4dae80c7ee1a3410a598, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Script.Agent.Modules.AgentRenderer
+--- !u!114 &1857688778601836629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075467692815343790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bdf9c5617463204cb63f5e6f428ba48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.Audio.StepAudioPlayer
+  <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  <FootTrm>k__BackingField: {fileID: 812514544627267206}
+  stepSoundClips:
+  - {fileID: 11400000, guid: bafd1cd55dfd9fc4da73357c2c7a15d4, type: 2}
+  - {fileID: 11400000, guid: ede9cdd281675064cb8489e55855ea91, type: 2}
+  - {fileID: 11400000, guid: 498f3edc5b8a8334db682526051da766, type: 2}
+  - {fileID: 11400000, guid: a40115c566ed22344aa6a37fdc862f38, type: 2}
+  - {fileID: 11400000, guid: 2a2300f310b532541be131094efb1e19, type: 2}
+  - {fileID: 11400000, guid: f760283ba165c7c46bd099da3ace4666, type: 2}
 --- !u!1001 &2201812783005018960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -337,6 +361,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 8836272516511341281}
   m_SourcePrefab: {fileID: 100100000, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+--- !u!4 &812514544627267206 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1569725073075805654, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+  m_PrefabInstance: {fileID: 2201812783005018960}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4549408598942706521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2426549642767089673, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
@@ -365,9 +394,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.TankEnemy
   OnHit:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeath:
     m_PersistentCalls:
       m_Calls: []
   <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
