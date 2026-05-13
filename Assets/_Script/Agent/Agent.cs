@@ -13,10 +13,9 @@ namespace _Script.Agent
         //Attack System (Skill)
         
         public UnityEvent OnHit;
-        public UnityEvent OnDeath;
-
-        public bool IsDead { get; protected set; }
         protected HealthModule Health { get; private set; }
+
+        public bool IsDead { get; protected set; } = false;
 
         [field:SerializeField] public EventChannelSO SoundEventChannel { get; private set; }
 
@@ -40,6 +39,12 @@ namespace _Script.Agent
             base.AfterInitialize();
 
             Health.OnHealthChanged += HandleHealthChaged;
+            Health.OnDeath.AddListener(HandleIsDeathLogic);
+        }
+
+        private void HandleIsDeathLogic()
+        {
+            IsDead = true;
         }
 
         protected virtual void Update()
@@ -48,14 +53,19 @@ namespace _Script.Agent
 
         protected virtual void OnDestroy()
         {
-            if(Health != null)
+            if (Health != null)
+            {
                 Health.OnHealthChanged -= HandleHealthChaged;
+                Health.OnDeath.RemoveListener(HandleIsDeathLogic);
+            }
         }
 
         protected abstract void HandleHealthChaged(float prevHealth, float currentHealth, float max);
         
         public virtual void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
         {
+            if (IsDead) return;
+            
             Health.GetDamage(damage);
             OnHit?.Invoke();
         }
