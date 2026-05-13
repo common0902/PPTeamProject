@@ -68,7 +68,7 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
             {
                 _routeIndex = IsReturnRoute ? enemyPatrolRouteList.Count - 1 : 0;
             }
-
+            
             Navmesh.SetDestination(newPosition);
         }
     }
