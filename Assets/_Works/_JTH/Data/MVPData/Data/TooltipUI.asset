@@ -36,6 +36,13 @@ MonoBehaviour:
       targetUpdateMethodName: UpdateDescText
       isInteractable: 0
       isUpdatable: 1
+    - childIndex: 5
+      gameObjectName: F_LockIcon
+      formTypeName: AccessForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
   modelTypeName: TooltipUIModel
   viewTypeName: TooltipUIView
-  selectedChildName: F_Title
+  selectedChildName: F_Desc

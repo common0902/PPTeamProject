@@ -22,7 +22,7 @@ namespace HwanLib.MVP.System.BaseMVP
             _formDict = new Dictionary<int, BaseForm>();
             _lookup = new Dictionary<(Action, int), Action<int>>();
             
-            Transform[] children = root.GetComponentsInChildren<Transform>();
+            Transform[] children = root.GetComponentsInChildren<Transform>(true);
             foreach (var formData in formDataList)
             {
                 Transform child = children[formData.childIndex];
@@ -52,6 +52,11 @@ namespace HwanLib.MVP.System.BaseMVP
         {
             UpdateView();
             RootCanvas.gameObject.SetActive(true);
+        }
+
+        public virtual void CloseView()
+        {
+            RootCanvas.gameObject.SetActive(false);
         }
 
         public virtual void OnDestroyView()
