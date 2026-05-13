@@ -8,14 +8,14 @@
             Sword
         }
 
-        public InGameUIData(int maxHp, float maxQSkillCooldown, float maxTopViewSkillCooldown, float maxSprintSkillCooldown)
+        public InGameUIData(int maxHp, float maxTopViewSkillCooldown, float maxSprintSkillCooldown, bool isGun)
         {
             MaxHp = maxHp;
             CurrentHp = maxHp;
 
             RemainingBullets = 0;
 
-            CurrentWeapon = WeaponType.Gun;
+            CurrentWeapon = isGun ? WeaponType.Gun : WeaponType.Sword;
             
             MaxTopViewSkillCooldown = maxTopViewSkillCooldown;
             MaxSprintSkillCooldown = maxSprintSkillCooldown;

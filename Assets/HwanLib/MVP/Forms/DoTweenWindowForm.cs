@@ -8,24 +8,30 @@ namespace HwanLib.MVP.Forms
 {
     public class DoTweenWindowForm : BaseForm
     {
-        [SerializeField] private float openDuration = 0.25f;
-        [SerializeField] private float closeDuration = 0.225f;
+        [field: SerializeField] public float OpenDuration { get; private set; } = 0.25f;
+        [field: SerializeField] public float CloseDuration { get; private set; } = 0.225f;
         
         public event Action OnAnimationEnd;
 
         private Sequence _sequence;
 
+        private void Awake()
+        {
+            _sequence = DOTween.Sequence();
+        }
+
         public void PlayOpenAnimation()
         {
-            transform.localScale = Vector3.zero;
-            if (_sequence != null && _sequence.IsActive() == true)
+            if (_sequence.IsActive() == true)
             {
+                _sequence.Complete();
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
+            transform.localScale = Vector3.zero;
 
             _sequence = DOTween.Sequence();
-            float curDuration = Mathf.Clamp01(1 - transform.localScale.x) * openDuration;
+            float curDuration = Mathf.Clamp01(1 - transform.localScale.x) * OpenDuration;
             _sequence.Append(transform.DOScale(Vector3.one, curDuration).SetEase(Ease.InCirc))
                 .SetUpdate(true)
                 .OnComplete(() =>
@@ -37,15 +43,16 @@ namespace HwanLib.MVP.Forms
         
         public void PlayCloseAnimation()
         {
-            transform.localScale = Vector3.one;
-            if (_sequence != null && _sequence.IsActive() == true)
+            if (_sequence.IsActive() == true)
             {
+                _sequence.Complete();
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
+            transform.localScale = Vector3.one;
 
             _sequence = DOTween.Sequence();
-            float curDuration = transform.localScale.x * closeDuration;
+            float curDuration = transform.localScale.x * CloseDuration;
             _sequence.Append(transform.DOScale(Vector3.zero, curDuration).SetEase(Ease.InBack))
                 .SetUpdate(true)
                 .OnComplete(() =>
@@ -57,7 +64,7 @@ namespace HwanLib.MVP.Forms
 
         private void OnDestroy()
         {
-            if (_sequence != null && _sequence.IsActive() == true)
+            if (_sequence.IsActive() == true)
             {
                 _sequence.Complete();
                 _sequence.Kill();

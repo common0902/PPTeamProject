@@ -14,8 +14,8 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
         // 레이어 1: 행동에 대한 로직
         AddState<PlayerNoneState>(1);
         AddState<PlayerAttackState>(1);
-        AddState<PlayerHitState>(1);
         AddState<PlayerDeadState>(1);
+        AddState<PlayerViewMapState>(1);
         
     }
 
@@ -23,10 +23,11 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
     {
         // 레이어 0 - 이동
         MakeTransition<PlayerIdleState, PlayerWalkState>(state => Owner.MoveInput.magnitude > 0.1f);
+        MakeTransition<PlayerIdleState, PlayerRunState>(state => Owner.MoveInput.magnitude > 0.1f && Owner.IsRunning && !Owner.IsRunCooldown);
 
         MakeTransition<PlayerWalkState, PlayerIdleState>(state => Owner.MoveInput.magnitude <= 0.1f);
 
-        MakeTransition<PlayerWalkState, PlayerRunState>(state => Owner.IsRunning);
+        MakeTransition<PlayerWalkState, PlayerRunState>(state => Owner.IsRunning && !Owner.IsRunCooldown);
 
         MakeTransition<PlayerRunState, PlayerWalkState>(state => !Owner.IsRunning);
 
@@ -35,9 +36,12 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
         // 레이어 1 - 행동
         MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
 
-        MakeAnyTransition<PlayerHitState>(state => !Owner.IsDead && Owner.IsHit, layer: 1);
+        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && Owner.IsAttackPressed, layer: 1);
 
-        MakeTransition<PlayerHitState, PlayerNoneState>(state => Owner.IsHitFinished, layer: 1);
+        MakeAnyTransition<PlayerViewMapState>(state => !Owner.IsDead && Owner.IsViewMap, layer: 1);
+
+        MakeAnyTransition<PlayerNoneState>(state => !Owner.IsDead &&  !Owner.IsAttackPressed && !Owner.IsViewMap, layer: 1);
+            
     }
 }
 

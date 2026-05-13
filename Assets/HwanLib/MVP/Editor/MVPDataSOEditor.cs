@@ -251,7 +251,7 @@ namespace HwanLib.MVP.Editor
 
         private void FillChildObjectDropdown(DropdownField field)
         {
-            Transform[] children = _targetData.parentPrefab.GetComponentsInChildren<Transform>();
+            Transform[] children = _targetData.parentPrefab.GetComponentsInChildren<Transform>(true);
             
             List<FormData> formList = _targetData.GetFormDataList();
             List<FormData> newFormList = new();

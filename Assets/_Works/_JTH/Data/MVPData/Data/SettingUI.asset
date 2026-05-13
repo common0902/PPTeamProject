@@ -18,7 +18,7 @@ MonoBehaviour:
     - childIndex: 2
       gameObjectName: F_Background
       formTypeName: BackgroundForm
-      targetInteractMethodName: None
+      targetInteractMethodName: CloseBtnClickHandler
       targetUpdateMethodName: None
       isInteractable: 1
       isUpdatable: 0
@@ -66,4 +66,4 @@ MonoBehaviour:
       isUpdatable: 1
   modelTypeName: SettingUIModel
   viewTypeName: SettingUIView
-  selectedChildName: F_FullScreenToggle
+  selectedChildName: F_CloseBtn

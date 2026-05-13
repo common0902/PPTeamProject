@@ -1,9 +1,11 @@
+using System;
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._CJW.Scripts
 {
@@ -16,6 +18,8 @@ namespace _Works._CJW.Scripts
         [SerializeField] private float resultHeight;
         [SerializeField] private float durationTime;
         [SerializeField] private AnimationCurve transitionCurve;
+        [SerializeField] private CinemachineCamera topViewCam;
+        [SerializeField] private CinemachineCamera firstViewCam;
         [Header("Quad View Setting")]
         [SerializeField] private float quadViewOffset;
         [SerializeField]private float quadViewDuration;
@@ -47,6 +51,16 @@ namespace _Works._CJW.Scripts
             StartCoroutine(TransCameraToFirstViewCoroutine());
         }
 
+        private void Update()
+        {
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+            {
+                Test();
+            }
+            if(Keyboard.current.tKey.wasPressedThisFrame)
+                Test1();
+        }
+
         private void TransCameraToQuadView()
         {
             _tempTrs.position = _rootTrs.position;
@@ -58,6 +72,9 @@ namespace _Works._CJW.Scripts
     
         private IEnumerator TransCameraToQuadViewCoroutine() // 카메라를 쿼드뷰로 변환하는 코루틴
         {
+            topViewCam.Priority.Value = 1;
+            firstViewCam.Priority.Value = 0;
+            
             float t = 0;
             float startVal = _thirdPersonFollow.VerticalArmLength; 
             Quaternion endRotation = Quaternion.Euler(0,0,0);
@@ -93,6 +110,8 @@ namespace _Works._CJW.Scripts
                 yield return null;
             }
             _camera.Follow = _rootTrs;
+            topViewCam.Priority.Value = 0;
+            firstViewCam.Priority.Value = 1;
         }
     }
 }

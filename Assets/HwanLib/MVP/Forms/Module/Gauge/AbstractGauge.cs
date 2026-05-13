@@ -1,5 +1,6 @@
 ﻿using DG.Tweening;
 using UnityEngine;
+using NotImplementedException = System.NotImplementedException;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
@@ -16,5 +17,9 @@ namespace HwanLib.MVP.Forms.Module.Gauge
         public abstract void SetGauge(float ratio, float duration = 0f, Ease ease = Ease.Linear);
 
         public abstract void OnDestroy();
+
+        public abstract void StopCooldown();
+        
+        public abstract void StartCooldown();
     }
 }

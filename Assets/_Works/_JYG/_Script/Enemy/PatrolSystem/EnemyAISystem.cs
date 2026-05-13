@@ -61,6 +61,16 @@ namespace _Works._JYG._Script.Enemy.PatrolSystem
         public void StopMove() => Navmesh.isStopped = true;
         public EnemyRoute GetCurrentRoute() => _currentRoute;
         public bool IsArrived() => Navmesh.remainingDistance <= Navmesh.stoppingDistance;
+        public void RouteRePath(Vector3 newPosition)
+        {
+            _routeIndex -= 1;
+            if (_routeIndex < 0)
+            {
+                _routeIndex = IsReturnRoute ? enemyPatrolRouteList.Count - 1 : 0;
+            }
+            
+            Navmesh.SetDestination(newPosition);
+        }
     }
 
     [Serializable]

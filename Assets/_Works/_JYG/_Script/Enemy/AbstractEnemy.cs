@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using _Script.Agent;
 using _Script.Agent.FSM;
 using _Script.Agent.Modules;
@@ -13,15 +14,18 @@ using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using GameLib.SoundSystem;
 using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Works._JYG._Script.Enemy
 {
     public class AbstractEnemy : Agent
     {
+        
         [Header("SO Settings")]
         [field: SerializeField] public EventChannelSO PlayerFindEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO SabotageEventChannel { get; private set; }
         [field: SerializeField] public EventChannelSO CameraEventChannel { get; private set; }
+        public UnityEvent OnWalking { get; private set; }
         [field: SerializeField] protected StateListSO stateListSO { get; private set; }
         protected AgentStateMachine _stateMachine;
 
@@ -51,9 +55,9 @@ namespace _Works._JYG._Script.Enemy
         private FOVRendering _fovRenderer;
 
         private IRenderer _renderer;
-        private IAISystem _aiSystem;
+        public IAISystem AiSystem { get; private set; }
 
-        [field: SerializeField] public bool IsRunning { get; private set; }
+        [field: SerializeField] public bool IsRunning { get; private set; } = true;
 
         protected override void Awake()
         {
@@ -69,7 +73,7 @@ namespace _Works._JYG._Script.Enemy
             _fovRenderer.distance = view.Distance;
             
             _renderer = GetModule<IRenderer>();
-            _aiSystem = GetModule<IAISystem>();
+            AiSystem = GetModule<IAISystem>();
             
             CameraEventChannel.AddListener<TopViewEvent>(HandleCameraTopViewEvent);
         }
@@ -80,7 +84,7 @@ namespace _Works._JYG._Script.Enemy
             IsRunning = !obj.IsTopView;
             if (GetCurrentState is ICanMove)
             {
-                _aiSystem.Navmesh.isStopped = obj.IsTopView;
+                AiSystem.Navmesh.isStopped = obj.IsTopView;
             }
         }
 

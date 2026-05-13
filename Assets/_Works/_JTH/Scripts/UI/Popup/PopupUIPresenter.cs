@@ -5,6 +5,7 @@ using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
@@ -27,19 +28,9 @@ namespace _Works._JTH.Scripts.UI.Popup
         
         protected override void OnDestroy()
         {
-            base.OnDestroy();
-            
             openUIEvent?.RemoveListener<OpenPopupEvent>(ShowPopup);
+            base.OnDestroy();
         }
-
-        #if UNITY_EDITOR
-        [ContextMenu("ShowPopup")]
-        public void TestPopup()
-        {
-            ShowPopup(OpenUIEvents.OpenPopupEvent
-                .Init("안녕하세요?", () => Debug.Log("No"), () => Debug.Log("Yes")));
-        }
-        #endif
         
         private void ShowPopup(OpenPopupEvent eventData)
         {
@@ -48,5 +39,22 @@ namespace _Works._JTH.Scripts.UI.Popup
             
             _popupView.OpenView();
         }
+
+        #if UNITY_EDITOR
+        private void Update()
+        {
+            if (!Keyboard.current.ctrlKey.isPressed)
+                return;
+            
+            if (Keyboard.current.pKey.wasPressedThisFrame)
+                TestPopup();
+        }
+
+        public void TestPopup()
+        {
+            ShowPopup(OpenUIEvents.OpenPopupEvent
+                .Init("안녕하세요?", () => Debug.Log("Yes"), () => Debug.Log("No")));
+        }
+        #endif
     }
 }

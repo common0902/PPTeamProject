@@ -7,63 +7,28 @@ using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
-    public class PopupUIView : BaseView
+    public class PopupUIView : AbstractPopupView
     {
-        private DoTweenWindowForm _windowForm;
-        private bool _isOpen;
-        private CanvasGroup _canvasGroup;
+        protected override int WindowFormIndex => (int)PopupUIEnum.Popup;
+        protected override int BackgroundFormIndex => (int)PopupUIEnum.Background;
+        protected override bool UseBackgroundForm => true;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            _windowForm = GetForm<DoTweenWindowForm>((int)PopupUIEnum.Popup);
-            _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
-            
-            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            AddFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
-
-            _windowForm.OnAnimationEnd += AnimationEndHandler;
-
-            _isOpen = false;
+            RemoveFormInteractionListener(CloseView, (int)PopupUIEnum.Background);
+            AddFormInteractionListener(CloseView, (int)PopupUIEnum.YesBtn);
+            AddFormInteractionListener(CloseView, (int)PopupUIEnum.NoBtn);
         }
 
         public override void OnDestroyView()
         {
             base.OnDestroyView();
             
-            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.YesBtn);
-            RemoveFormInteractionListener(StartCloseAnimation, (int)PopupUIEnum.NoBtn);
-            _windowForm.OnAnimationEnd -= AnimationEndHandler;
-        }
-
-        public override void OpenView()
-        {
-            base.OpenView();
-            
-            _windowForm.PlayOpenAnimation();
-            
-            _canvasGroup.interactable = true;
-            _canvasGroup.blocksRaycasts = true;
-        }
-
-        private void StartCloseAnimation()
-        {
-            _windowForm.PlayCloseAnimation();
-            
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
-        }
-        
-        private void AnimationEndHandler()
-        {
-            _isOpen = !_isOpen;
-
-            if (_isOpen == false)
-            {
-                RootCanvas.gameObject.SetActive(false);
-            }
+            RemoveFormInteractionListener(CloseView, (int)PopupUIEnum.YesBtn);
+            RemoveFormInteractionListener(CloseView, (int)PopupUIEnum.NoBtn);
         }
     }
 }

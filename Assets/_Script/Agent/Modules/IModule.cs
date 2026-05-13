@@ -8,5 +8,7 @@
         /// </summary>
         /// <param name="moduleOwner">ModuleAgent를 받아옵니다. ModuleAgent에서 GetModule을 통해 모듈을 받아오세요. </param>
         void Initialize(ModuleOwner moduleOwner);
+
+        
     }
 }
