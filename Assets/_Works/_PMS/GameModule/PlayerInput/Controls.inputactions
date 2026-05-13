@@ -43,13 +43,31 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "WeaponSwap",
+                    "name": "WeaponSwapScroll",
                     "type": "Value",
                     "id": "ea71b9f1-5499-4136-aca1-9bafe26bb6bd",
-                    "expectedControlType": "Integer",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "WeaponSwap1",
+                    "type": "Button",
+                    "id": "39bc5125-30b7-4f3c-bca0-2f230e47fdb7",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "WeaponSwap2",
+                    "type": "Button",
+                    "id": "bb19bb07-f3d8-44fb-a134-46ffe90e803c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -275,45 +293,34 @@
                 },
                 {
                     "name": "",
-                    "id": "0ecb9c40-158c-4d1b-9917-2333011ad175",
-                    "path": "<Mouse>/scroll/up",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard&Mouse",
-                    "action": "WeaponSwap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "20995288-5a65-4ed8-a100-3a432fc99cf8",
-                    "path": "<Mouse>/scroll/down",
+                    "id": "045cfcba-72ff-4d81-aa90-2ba30a7396b7",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WeaponSwap",
+                    "action": "WeaponSwapScroll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "95ae3d5f-03ba-448a-81bf-790295fd595f",
+                    "id": "d51f73c7-efb6-4746-8512-0941c5406c6e",
                     "path": "<Keyboard>/1",
                     "interactions": "",
                     "processors": "",
-                    "groups": ";Gamepad",
-                    "action": "WeaponSwap",
+                    "groups": "",
+                    "action": "WeaponSwap1",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "045cfcba-72ff-4d81-aa90-2ba30a7396b7",
+                    "id": "1d9c3626-2dcc-4187-b180-7c10943adf75",
                     "path": "<Keyboard>/2",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "WeaponSwap",
+                    "action": "WeaponSwap2",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

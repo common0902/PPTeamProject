@@ -43,6 +43,9 @@ public class PlayerController : Agent
         PlayerInput.OnViewMapStarted += OnViewMapStarted;
         PlayerInput.OnViewMapCanceled += OnViewMapCanceled;
 
+        //PlayerInput.OnWeaponSwapUp += OnWeaponSwapUp;
+        //PlayerInput.OnWeaponSwapDown += OnWeaponSwapDown;
+
 
         var stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine?.Setup(this);
@@ -85,6 +88,8 @@ public class PlayerController : Agent
         PlayerInput.OnViewMapStarted -= OnViewMapStarted;
         PlayerInput.OnViewMapCanceled -= OnViewMapCanceled;
 
+        //PlayerInput.OnWeaponSwapUp -= OnWeaponSwapUp;
+        //PlayerInput.OnWeaponSwapDown -= OnWeaponSwapDown;
     }
 
     private void OnMovementChange(Vector2 input)
@@ -114,6 +119,10 @@ public class PlayerController : Agent
     {
         IsViewMap = false;
     }
+
+    //private void OnWeaponSwapUp() => GetModule<WeaponModule>()?.SwapNext();
+
+    //private void OnWeaponSwapDown() => GetModule<WeaponModule>()?.SwapPrev();
 
     protected override void HandleHealthChaged(float prevHealth, float currentHealth, float max)
     {
