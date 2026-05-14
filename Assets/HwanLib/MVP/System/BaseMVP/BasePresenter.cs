@@ -10,8 +10,8 @@ namespace HwanLib.MVP.System.BaseMVP
 {
     public abstract class BasePresenter : MonoBehaviour
     {
-        protected BaseView View;
-        protected IModel Model;
+        protected virtual BaseView View { get; private set; }
+        protected virtual IModel Model { get; private set; }
 
         private Dictionary<int, Action<UIParam>> _moduleInteractMethodDict;
         private Dictionary<int, Func<UIParam>> _moduleUpdateMethodDict;

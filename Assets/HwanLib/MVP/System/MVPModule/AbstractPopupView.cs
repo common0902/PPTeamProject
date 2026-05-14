@@ -22,10 +22,10 @@ namespace HwanLib.MVP.System.MVPModule
         protected abstract int BackgroundFormIndex { get; }
         protected abstract bool UseBackgroundForm { get; }
 
-        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
+        public override void InitializeView(Canvas rootCanvas, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
-            base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
+            base.InitializeView(rootCanvas, formDataList, formInteractedHandler, updateFormHandler);
             
             WindowForm = GetForm<DoTweenWindowForm>(WindowFormIndex);
             BackgroundForm = UseBackgroundForm ? GetForm<BackgroundForm>(BackgroundFormIndex) : null;
