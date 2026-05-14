@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 namespace _Script.Agent.Modules
 {
@@ -9,6 +10,8 @@ namespace _Script.Agent.Modules
         
         private float _currentHealth;
         private ModuleOwner _moduleAgent;
+        
+        public UnityEvent OnDeath;
 
         [field: SerializeField] public float MaxHealth { get; private set; } = 2000f;
 
@@ -39,6 +42,11 @@ namespace _Script.Agent.Modules
         public void GetDamage(float damage)
         {
             CurrentHealth -= damage;
+            if (CurrentHealth <= 0)
+            {
+                OnDeath?.Invoke();
+                Debug.Log("Enemy Death!");
+            }
         }
 
         public void ResetHealth()

@@ -48,6 +48,14 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1966519075931859412, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: <BulletData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 2bb3fc4a904c21a4fa0b094b5627fcd5, type: 2}
+    - target: {fileID: 1966519075931859412, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: <AttackSound>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 859adf17e6868c749a8e6bdc86d358c4, type: 2}
+    - target: {fileID: 1966519075931859412, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: <FirePosition>k__BackingField
       value: 
       objectReference: {fileID: 8363757952203806188}
@@ -67,9 +75,21 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6159002009732337143, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: enemyPatrolRouteList.Array.data[0].waitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159002009732337143, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: enemyPatrolRouteList.Array.data[1].waitTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6159002009732337143, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: enemyPatrolRouteList.Array.data[2].waitTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.76
+      value: 13.447323
       objectReference: {fileID: 0}
     - target: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_LocalPosition.y
@@ -77,7 +97,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: 7.9769735
       objectReference: {fileID: 0}
     - target: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -339,7 +359,12 @@ MonoBehaviour:
   <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
   <FootTrm>k__BackingField: {fileID: 2215542748104509798}
   stepSoundClips:
-  - {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
+  - {fileID: 11400000, guid: bafd1cd55dfd9fc4da73357c2c7a15d4, type: 2}
+  - {fileID: 11400000, guid: ede9cdd281675064cb8489e55855ea91, type: 2}
+  - {fileID: 11400000, guid: 498f3edc5b8a8334db682526051da766, type: 2}
+  - {fileID: 11400000, guid: a40115c566ed22344aa6a37fdc862f38, type: 2}
+  - {fileID: 11400000, guid: 2a2300f310b532541be131094efb1e19, type: 2}
+  - {fileID: 11400000, guid: f760283ba165c7c46bd099da3ace4666, type: 2}
 --- !u!4 &3285265183181179058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 367002335881335151, guid: 12ab4121f164f444d8567e692449fc41, type: 3}

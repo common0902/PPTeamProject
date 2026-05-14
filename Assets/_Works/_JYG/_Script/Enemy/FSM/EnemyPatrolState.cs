@@ -36,9 +36,7 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
-                Debug.Log(@$"TO Idle Cause
-NavDistance : {_navMesh.Navmesh.remainingDistance < 0.5f}
-Player Attached : {_viewCaster.IsTargetAttached}");
+                Debug.Log("Patrol TO IDLE");
             }
         }
 
