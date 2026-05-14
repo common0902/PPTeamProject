@@ -1,14 +1,15 @@
 ﻿using System.Collections.Generic;
 using HwanLib.MVP.Forms;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.Utility;
 using UnityEngine;
 
-namespace HwanLib.MVP.System.BaseMVP
+namespace HwanLib.MVP.System.MVPModule
 {
-    public abstract class AbstractPopupView : BaseView, IMultiple
+    public abstract class AbstractPopupView : BaseView
     {
-        public bool CanUse => !IsOpen;
+        public bool CanUse => !RootCanvas.gameObject.activeSelf;
 
         protected DoTweenWindowForm WindowForm;
         protected BackgroundForm BackgroundForm;

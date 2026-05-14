@@ -9,7 +9,7 @@ namespace HwanLib.MVP.System.BaseMVP
 {
     public abstract class BaseView
     {
-        protected Canvas RootCanvas { get; private set; } 
+        protected Canvas RootCanvas { get; private set; }
         private Action<int> _viewEvent;
 
         private Dictionary<int, BaseForm> _formDict;
