@@ -1,6 +1,7 @@
 ﻿using System;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP.Form;
+using HwanLib.MVP.System.MVPModule.Form;
 using HwanLib.MVP.UIData;
 using TMPro;
 using UnityEngine;
@@ -8,7 +9,7 @@ using UnityEngine;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class TextForm : AbstractVisualForm, IUpdatable
+    public class TextForm : AbstractVisualForm
     {
         public string Text
         {

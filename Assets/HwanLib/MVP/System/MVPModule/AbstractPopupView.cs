@@ -2,13 +2,12 @@
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
-using HwanLib.MVP.System.MVPModule.Multiple;
 using HwanLib.Utility;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.MVPModule
 {
-    public abstract class AbstractPopupView : BaseView, IMultiple
+    public abstract class AbstractPopupView : BaseView
     {
         public bool CanUse => !RootCanvas.gameObject.activeSelf;
 
@@ -22,10 +21,10 @@ namespace HwanLib.MVP.System.MVPModule
         protected abstract int BackgroundFormIndex { get; }
         protected abstract bool UseBackgroundForm { get; }
 
-        public override void InitializeView(Canvas rootCanvas, List<FormData> formDataList, FormInteracted formInteractedHandler,
+        public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
-            base.InitializeView(rootCanvas, formDataList, formInteractedHandler, updateFormHandler);
+            base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             WindowForm = GetForm<DoTweenWindowForm>(WindowFormIndex);
             BackgroundForm = UseBackgroundForm ? GetForm<BackgroundForm>(BackgroundFormIndex) : null;
