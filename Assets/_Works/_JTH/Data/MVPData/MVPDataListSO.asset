@@ -12,9 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9bf124e1a3044f8da8b7dd0b20ccb4ef, type: 3}
   m_Name: MVPDataListSO
   m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataListSO
-  mvpData:
-  - {fileID: 11400000, guid: eae75421a206a1843bb51cc4c658a224, type: 2}
+  singleUIData:
+  - {fileID: 11400000, guid: 8aec8324e4f1ff34593f2b51d6583a98, type: 2}
   - {fileID: 11400000, guid: d70888287dd5f8947bb7948d70641bc5, type: 2}
   - {fileID: 11400000, guid: a639b6e130ff0554591e0d8f584f4ea1, type: 2}
-  - {fileID: 11400000, guid: 8aec8324e4f1ff34593f2b51d6583a98, type: 2}
   - {fileID: 11400000, guid: 092a5433bc746944aba0e7e5a7edb1ea, type: 2}
+  multiableUIData:
+  - MvpDataSO: {fileID: 11400000, guid: eae75421a206a1843bb51cc4c658a224, type: 2}
+    Count: 3

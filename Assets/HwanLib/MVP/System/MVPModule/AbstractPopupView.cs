@@ -12,10 +12,10 @@ namespace HwanLib.MVP.System.MVPModule
         public bool CanUse => !RootCanvas.gameObject.activeSelf;
 
         protected DoTweenWindowForm WindowForm;
-        protected BackgroundForm BackgroundForm;
+        private BackgroundForm _backgroundForm;
         
-        protected CanvasGroup CanvasGroup;
-        protected bool IsOpen;
+        private CanvasGroup _canvasGroup;
+        private bool _isOpen;
 
         protected abstract int WindowFormIndex { get; }
         protected abstract int BackgroundFormIndex { get; }
@@ -27,58 +27,54 @@ namespace HwanLib.MVP.System.MVPModule
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             WindowForm = GetForm<DoTweenWindowForm>(WindowFormIndex);
-            BackgroundForm = UseBackgroundForm ? GetForm<BackgroundForm>(BackgroundFormIndex) : null;
-            CanvasGroup = RootCanvas.gameObject.GetOrAddComponent<CanvasGroup>();
+            _backgroundForm = UseBackgroundForm ? GetForm<BackgroundForm>(BackgroundFormIndex) : null;
+            _canvasGroup = RootCanvas.gameObject.GetOrAddComponent<CanvasGroup>();
             
-            BackgroundForm?.SetDuration(WindowForm.OpenDuration, WindowForm.CloseDuration);
+            _backgroundForm?.SetDuration(WindowForm.OpenDuration, WindowForm.CloseDuration);
             
-            if (UseBackgroundForm) 
-                AddFormInteractionListener(CloseView, BackgroundFormIndex);
             WindowForm.OnAnimationEnd += AnimationEndHandler;
 
-            IsOpen = false;
+            _isOpen = false;
         }
 
         public override void OnDestroyView()
         {
             base.OnDestroyView();
             
-            if (UseBackgroundForm) 
-                RemoveFormInteractionListener(CloseView, BackgroundFormIndex);
             WindowForm.OnAnimationEnd -= AnimationEndHandler;
         }
 
         public override void OpenView()
         {
-            if (IsOpen == true)
+            if (_isOpen == true)
                 return;
 
             base.OpenView();
             
-            IsOpen = true;
+            _isOpen = true;
             WindowForm.PlayOpenAnimation();
-            BackgroundForm?.DoFade(true);
+            _backgroundForm?.DoFade(true);
             
-            CanvasGroup.interactable = true;
-            CanvasGroup.blocksRaycasts = true;
+            _canvasGroup.interactable = true;
+            _canvasGroup.blocksRaycasts = true;
         }
         
         public override void CloseView()
         {
-            if (IsOpen == false)
+            if (_isOpen == false)
                 return;
             
-            IsOpen = false;
+            _isOpen = false;
             WindowForm.PlayCloseAnimation();
-            BackgroundForm?.DoFade(false);
+            _backgroundForm?.DoFade(false);
             
-            CanvasGroup.interactable = false;
-            CanvasGroup.blocksRaycasts = false;
+            _canvasGroup.interactable = false;
+            _canvasGroup.blocksRaycasts = false;
         }
 
         protected void AnimationEndHandler()
         {
-            if (IsOpen == false)
+            if (_isOpen == false)
                 RootCanvas.gameObject.SetActive(false);
         }
     }

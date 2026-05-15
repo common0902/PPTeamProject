@@ -19,7 +19,6 @@ namespace _Works._JTH.Scripts.UI.Popup
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            RemoveFormInteractionListener(CloseView, (int)PopupUIEnum.Background);
             AddFormInteractionListener(CloseView, (int)PopupUIEnum.YesBtn);
             AddFormInteractionListener(CloseView, (int)PopupUIEnum.NoBtn);
         }
