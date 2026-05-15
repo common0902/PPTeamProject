@@ -12,10 +12,12 @@ namespace _Works._JTH.Scripts.UI.Title
     public class TitleUIModel : ISaveableModel
     {
         private string _savedStage;
+        private const string NotSavedStage = "-1";
 
         private EventChannelSO _openUIChannel;
         private EventChannelSO _saveChannel;
         private int _stageStartIndex;
+        private Action _popupCloseEvent;
 
         public void InitTitleModel(int stageStartIndex)
             => _stageStartIndex = stageStartIndex;
@@ -23,7 +25,7 @@ namespace _Works._JTH.Scripts.UI.Title
         public void SetDefaultValue(EventChannelSO saveChannel)
         {
             _saveChannel = saveChannel;
-            _savedStage = "-1";
+            _savedStage = NotSavedStage;
         }
 
         public string StoreData()
@@ -41,6 +43,10 @@ namespace _Works._JTH.Scripts.UI.Title
             _openUIChannel = openUIChannel;
         }
         
+        public void SetOnPopupCloseEvent(Action popupCloseEvent)
+            => _popupCloseEvent = popupCloseEvent;
+        
+        
         private void NewGameBtnClickHandler(UIParam clickData)
         {
             _openUIChannel.RaiseEvent(
@@ -54,11 +60,13 @@ namespace _Works._JTH.Scripts.UI.Title
                 OpenUIEvents.OpenPopupEvent.Init("튜토리얼을 진행하시겠습니까?"
                     , () =>
                     {
-                        _savedStage = "-1";
+                        _popupCloseEvent?.Invoke();
+                        _savedStage = NotSavedStage;
                         _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
                         SceneManager.LoadScene(_stageStartIndex - 1);
                     }, () =>
                     {
+                        _popupCloseEvent?.Invoke();
                         SceneManager.LoadScene(_stageStartIndex);
                     }));
         }
@@ -66,7 +74,7 @@ namespace _Works._JTH.Scripts.UI.Title
         private UIParam ContinueTextHandler()
         {
             return UIParamContainer.UIStringParam.Init(
-                !String.IsNullOrEmpty(_savedStage) ? _savedStage : "-1");
+                !String.IsNullOrEmpty(_savedStage) ? _savedStage : NotSavedStage);
         }
         
         private void ContinueBtnHandler(UIParam clickData)

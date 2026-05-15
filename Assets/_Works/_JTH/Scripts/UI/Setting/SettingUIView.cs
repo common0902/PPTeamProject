@@ -25,6 +25,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
             AddFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
+            AddFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
         }
 
         public override void OnDestroyView()
@@ -32,6 +33,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             base.OnDestroyView();
             
             RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
+            RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
         }
     }
 }

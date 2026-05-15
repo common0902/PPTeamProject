@@ -25,13 +25,13 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleModel = (TitleUIModel)Model;
 
             _titleModel.InitTitleModel(stageStartIndex);
-            
+            _titleModel.SetOnPopupCloseEvent(_titleView.CloseView);
             _titleModel.SetPopupEventChannel(openUIChannel);
 
             if (SceneManager.GetActiveScene().buildIndex == titleIndex)
                 _titleView.OpenView();
         }
-
+        
         #if UNITY_EDITOR
         public void Save()
         {
