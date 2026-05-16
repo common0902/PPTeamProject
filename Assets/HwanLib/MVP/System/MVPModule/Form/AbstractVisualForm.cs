@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
+﻿using HwanLib.MVP.System.BaseMVP.Form;
 
-namespace HwanLib.MVP.System.BaseMVP.Form
+namespace HwanLib.MVP.System.MVPModule.Form
 {
     public abstract class AbstractVisualForm : BaseForm, IUpdatable
     {
