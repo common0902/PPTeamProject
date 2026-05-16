@@ -14,6 +14,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private int maxDetectCount;
         [SerializeField] private float damage;
         [SerializeField] private float lifetime;
+        [SerializeField] private LayerMask enemyLayer;
         private Rigidbody _rigid;
 
         public override void Initialize(ModuleOwner moduleOwner)
@@ -21,17 +22,18 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             base.Initialize(moduleOwner);
             gameObject.SetActive(false);
         }
-
         public override void UseFunction()
         {
+            transform.
             gameObject.SetActive(true);
             if (GetGround(out var hit))
             {
-                ExecuteDamage(hit.point);
+                ExecuteDamage();
 
                 //바닥으로 이동하는 코드
                 transform.DOMoveY(hit.point.y + 1.5f, 0.5f).SetEase(Ease.InSine).OnComplete((() =>
                 {
+                    PlayParticle();
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
                         gameObject.SetActive(false);
@@ -41,13 +43,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
         }
 
-        private void ExecuteDamage(Vector3 hitPos)
+        private void ExecuteDamage()
         {
             //에너미에 대미지를 가하는 코드
             Collider[] hits = new Collider[maxDetectCount];
-            float height = transform.position.y - hitPos.y;
-            Vector3 realBoxSize = new Vector3(boxSize.x, height, boxSize.z);
-            Physics.OverlapBoxNonAlloc(transform.position, realBoxSize, hits);
+            Physics.OverlapBoxNonAlloc(transform.position + boxOffset, boxSize, hits, Quaternion.identity,enemyLayer);
             foreach (Collider c in hits)
             {
                 if(c == null) continue;
@@ -56,7 +56,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                     Vector3 dir = c.transform.position - transform.position;
                     damageable.TakeDamage
                         (damage, dir.normalized, transform.position);
-                    Debug.Log(damageable);
                 }
             }
         }
@@ -64,7 +63,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawCube(transform.position, boxSize / 2);
+            Gizmos.DrawCube(transform.position + boxOffset, boxSize / 2);
         }
     }
 }
