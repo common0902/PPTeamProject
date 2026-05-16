@@ -7,40 +7,27 @@ using UnityEngine;
 namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 {
     [RequireComponent(typeof(BoxCollider))]
-    public class Gas : MonoBehaviour
+    public class Gas : AbstractObject
     {
-        [SerializeField] private Vector3 detectSize;
-        [SerializeField] private EventChannelSO cameraEvent;
-        [SerializeField] private float lifeTime;
         private BoxCollider _collider;
         private ParticleSystem _particle;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             _collider = GetComponent<BoxCollider>() ;
             _particle = GetComponentInChildren<ParticleSystem>();
-            _collider.size = detectSize;
-            _particle.shape.scale.Scale(detectSize * 3);;
-            cameraEvent.AddListener<TopViewEvent>(topView =>
-            {
-                if(topView.IsTopView)
-                    Destroy(gameObject, lifeTime);
-            });
+            _particle.shape.scale.Scale(_collider.size * 3);;
         }
 
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.deepSkyBlue;
-            Gizmos.DrawCube(transform.position, detectSize);
+        protected override void OnTriggerEnterEnemy(AbstractEnemy enemy)
+        { 
+            // 적의 이동속도가 내려가고 시아가 차단된다.
         }
 
-        private void OnTriggerEnter(Collider other)
+        protected override void OnTriggerExitEnemy(AbstractEnemy enemy)
         {
-            if (other.TryGetComponent<AbstractEnemy>(out var enemy))
-            {
-                // enemy.
-            }
-                
+            
         }
     }
 }

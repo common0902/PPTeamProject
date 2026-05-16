@@ -4,7 +4,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 {
     public class GasSabotageFunction : AbstractSabotageFunctionModule
     {
-        [SerializeField] private GameObject gasObject;
+        [SerializeField] private AbstractObject gasObject;
         [SerializeField] private Transform spawnPos;
 
         public override void UseFunction()

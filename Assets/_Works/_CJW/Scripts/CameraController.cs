@@ -66,7 +66,7 @@ namespace _Works._CJW.Scripts
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             _camera.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), quadViewDuration).SetEase(transitionCurve)
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
