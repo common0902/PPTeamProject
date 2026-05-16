@@ -92,6 +92,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             if(IsUsed || IsLocked) return; 
     
             _visual.HandleOutLineEnable(false);
+            _visual.HandleActivation(false, true);
             _functionModule.UseFunction();
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
             IsUsed = true;

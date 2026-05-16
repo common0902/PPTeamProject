@@ -11,6 +11,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
     {
         [SerializeField] private EventChannelSO interactEvent;
         [SerializeField] private LayerMask playerLayer;
+        [SerializeField] private Color defaultColor; // 기본 아웃라인 컬러
+        [SerializeField] private Color interactColor; // 상호작용 
         [Header("안넣어도 문제는 없음 사보타지와 연결된거면 됨")]
         [SerializeField] private SabotageDataSo sabotageData; // 사보타지 데이터. 사보타지가 필요한 오브젝트는 이걸로 구별할 수 있음
         public bool IsPlayerInRange { get; private set; } = false; // 플레이어가 범위 내에 있는지
@@ -21,7 +23,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         {
             _outline = GetComponent<Outline>();
             Debug.Assert(_outline != null, "Outline not found.");
-            _outline.enabled = false;
+            _outline.OutlineColor = defaultColor;
         }
 
         private void OnTriggerEnter(Collider other)
@@ -63,7 +65,11 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         //플레이어와 가장 가까운 상호작용 오브젝트는 외곽선 표시
         public void SetFocused(bool focused)
         {
-            _outline.enabled = focused;
+            if (focused)
+                _outline.OutlineColor = interactColor;
+            else
+                _outline.OutlineColor = defaultColor;
+            Debug.Log(focused);
         }
 
         private void OnDrawGizmos()
