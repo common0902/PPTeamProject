@@ -21,13 +21,14 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         }
 
         protected override void OnTriggerEnterEnemy(AbstractEnemy enemy)
-        { 
-            // 적의 이동속도가 내려가고 시아가 차단된다.
+        {
+            enemy.ChangeWaterState(true);
         }
 
         protected override void OnTriggerExitEnemy(AbstractEnemy enemy)
         {
             
+            enemy.ChangeWaterState(false);
         }
     }
 }
