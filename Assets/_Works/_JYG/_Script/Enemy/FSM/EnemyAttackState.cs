@@ -47,7 +47,7 @@ namespace _Works._JYG._Script.Enemy.FSM
                 && (_targetCaster.TargetPlayer != null 
                 || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance))
             {
-                if (!_targetCaster.TargetPlayer.TryGetComponent<TestPPPP>(out TestPPPP player) 
+                if (!_targetCaster.TargetPlayer.TryGetComponent<PlayerController>(out PlayerController player) 
                     || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance)
                 {
                     _enemy.ChangeState((int)EnemyState.CHASE);

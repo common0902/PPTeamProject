@@ -41,7 +41,7 @@ namespace _Works._JYG._Script.Enemy.FSM
 
             if(_targetCaster.TryGetTarget(out GameObject target))//Target Caster에 감지되었다.
             {
-                if(target.TryGetComponent<TestPPPP>(out TestPPPP test) 
+                if(target.TryGetComponent<PlayerController>(out PlayerController test) 
                    && Vector3.Distance(_enemy.transform.position, target.transform.position) <= _enemy.AttackDistance)
                 {
                     _enemy.ChangeState((int)EnemyState.ATTACK);
