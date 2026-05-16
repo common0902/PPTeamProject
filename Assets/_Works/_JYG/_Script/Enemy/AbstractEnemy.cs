@@ -92,6 +92,7 @@ namespace _Works._JYG._Script.Enemy
 
         public void ChangeWaterState(bool isOnWater)
         {
+            isWater = isOnWater;
             if (isOnWater)
             {
                 AiSystem.Navmesh.speed = WaterSpeed;
