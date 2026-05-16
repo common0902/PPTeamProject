@@ -18,6 +18,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public event Action OnWeaponSwapUp;
     public event Action OnWeaponSwapDown;
+    public event Action<int> OnWeaponSwapIndex;
 
     private Controls _controls;
     private bool _viewMap = false;
@@ -87,21 +88,21 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
         {
             Vector2 scroll = context.ReadValue<Vector2>();
             if (scroll.y > 0)
-                OnWeaponSwapUp?.Invoke();
+                OnWeaponSwapIndex?.Invoke(0);
             else if (scroll.y < 0)
-                OnWeaponSwapDown?.Invoke();
+                OnWeaponSwapIndex?.Invoke(1);
         }
     }
 
     public void OnWeaponSwap1(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnWeaponSwapDown?.Invoke();
+            OnWeaponSwapIndex?.Invoke(0);
     }
 
     public void OnWeaponSwap2(InputAction.CallbackContext context)
     {
         if (context.performed)
-            OnWeaponSwapUp?.Invoke();
+            OnWeaponSwapIndex?.Invoke(1);
     }
 }

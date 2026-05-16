@@ -17,6 +17,7 @@ public class PlayerController : Agent
     public CinemachineCamera CinemachineCamera => _cinemachineCamera;
     public PlayerMovement Movement { get; private set; }
     public Vector2 MoveInput { get; private set; }
+    public WeaponModule WeaponModule { get; private set; }
     public bool IsRunning { get; private set; }
     public bool IsRunCooldown { get; private set; }
     public Transform CameraTransform { get; private set; }
@@ -28,6 +29,7 @@ public class PlayerController : Agent
     {
         base.Initialize();
         Movement = GetModule<PlayerMovement>();
+        WeaponModule = GetModule<WeaponModule>();
         CameraTransform = _cinemachineCamera.transform;
     }
 
@@ -45,6 +47,8 @@ public class PlayerController : Agent
 
         //PlayerInput.OnWeaponSwapUp += OnWeaponSwapUp;
         //PlayerInput.OnWeaponSwapDown += OnWeaponSwapDown;
+        PlayerInput.OnWeaponSwapIndex += OnWeaponSwapIndex;
+
 
 
         var stateMachine = GetComponent<PlayerStateMachine>();
@@ -53,10 +57,12 @@ public class PlayerController : Agent
     }
 
     
+
     protected override void Update()
     {
         UpdateRotation();
         UpdateRunCooldown();
+        IsAttackPressed = false;
     }   
 
     
@@ -90,6 +96,7 @@ public class PlayerController : Agent
 
         //PlayerInput.OnWeaponSwapUp -= OnWeaponSwapUp;
         //PlayerInput.OnWeaponSwapDown -= OnWeaponSwapDown;
+        PlayerInput.OnWeaponSwapIndex -= OnWeaponSwapIndex;
     }
 
     private void OnMovementChange(Vector2 input)
@@ -120,9 +127,10 @@ public class PlayerController : Agent
         IsViewMap = false;
     }
 
-    //private void OnWeaponSwapUp() => GetModule<WeaponModule>()?.SwapNext();
+    private void OnWeaponSwapUp() => WeaponModule?.SwapNext();
+    private void OnWeaponSwapDown() => WeaponModule?.SwapPrev();
 
-    //private void OnWeaponSwapDown() => GetModule<WeaponModule>()?.SwapPrev();
+    private void OnWeaponSwapIndex(int index) => WeaponModule?.SwapWeaponIndex(index);
 
     protected override void HandleHealthChaged(float prevHealth, float currentHealth, float max)
     {

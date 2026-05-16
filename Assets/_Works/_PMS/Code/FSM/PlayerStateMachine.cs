@@ -1,6 +1,7 @@
 ﻿using System.Xml;
 using UnityEngine;
 
+[DefaultExecutionOrder(-100)]
 public class PlayerStateMachine : MonoStateMachine<PlayerController>
 {
     // Player의 레이어별 상태 추가
@@ -35,13 +36,11 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
 
         // 레이어 1 - 행동
         MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
-
-        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && Owner.IsAttackPressed, layer: 1);
-
+        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && Owner.IsAttackPressed && Owner.WeaponModule.CanAttack, layer: 1);
         MakeAnyTransition<PlayerViewMapState>(state => !Owner.IsDead && Owner.IsViewMap, layer: 1);
 
-        MakeAnyTransition<PlayerNoneState>(state => !Owner.IsDead &&  !Owner.IsAttackPressed && !Owner.IsViewMap, layer: 1);
-            
+        MakeTransition<PlayerAttackState, PlayerNoneState>(state => true, layer: 1);
+
     }
 }
 
