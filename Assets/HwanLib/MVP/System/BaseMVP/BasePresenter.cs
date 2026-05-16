@@ -1,17 +1,16 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-using HwanLib.MVP.Forms;
-using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.BaseMVP
 {
     public abstract class BasePresenter : MonoBehaviour
     {
-        protected virtual BaseView View { get; private set; }
-        protected virtual IModel Model { get; private set; }
+        protected BaseView View { get; private set; }
+        protected IModel Model { get; private set; }
 
         private Dictionary<int, Action<UIParam>> _moduleInteractMethodDict;
         private Dictionary<int, Func<UIParam>> _moduleUpdateMethodDict;

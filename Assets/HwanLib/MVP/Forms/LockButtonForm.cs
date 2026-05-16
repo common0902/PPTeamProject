@@ -1,11 +1,12 @@
 using System;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP.Form;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
-    public class TextButtonForm : BaseForm
+    public class LockButtonForm : BaseForm
     {
         public string Text => _textForm.Text;
         

@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: FadeUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 3563154720586578394, guid: 5635e7e5dc3ffdd46b6405fe90764cc7, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_Background
+      formTypeName: BackgroundForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 3
+      gameObjectName: F_StageText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateStageText
+      isInteractable: 0
+      isUpdatable: 1
+  modelTypeName: FadeUIModel
+  viewTypeName: FadeUIView
+  selectedChildName: F_StageText

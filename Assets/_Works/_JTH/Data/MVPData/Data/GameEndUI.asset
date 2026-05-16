@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
+  m_Name: GameEndUI
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
+  parentPrefab: {fileID: 5777851740471270570, guid: a6c44dc647f9b8e4ba43a22875450be1, type: 3}
+  formDataList:
+    list:
+    - childIndex: 2
+      gameObjectName: F_Background
+      formTypeName: BackgroundForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 4
+      gameObjectName: F_TitleText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateTitleText
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 5
+      gameObjectName: F_DayText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateDayText
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 6
+      gameObjectName: F_GameOverUI
+      formTypeName: AccessForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 7
+      gameObjectName: F_ContinueBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: ContinueBtnHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 10
+      gameObjectName: F_QuitBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: QuitBtnHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 13
+      gameObjectName: F_DescText
+      formTypeName: TextForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: UpdateDescText
+      isInteractable: 0
+      isUpdatable: 1
+    - childIndex: 14
+      gameObjectName: F_ClearUI
+      formTypeName: AccessForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 15
+      gameObjectName: F_NextBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: NextBtnHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+  modelTypeName: GameEndUIModel
+  viewTypeName: GameEndUIView
+  selectedChildName: F_NextBtn

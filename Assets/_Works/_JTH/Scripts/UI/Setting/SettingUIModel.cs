@@ -1,6 +1,6 @@
 ﻿using _Script.ScriptableObject.Event;
 using HwanLib.MVP.System;
-using HwanLib.MVP.System.SaveMVP;
+using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -17,19 +17,11 @@ namespace _Works._JTH.Scripts.UI.Setting
             public bool IsFullScreen = true;
         }
         
-        private EventChannelSO _saveChannel;
-        
-        private AudioMixer _audioMixer;
+        public AudioMixer AudioMixer { get; set; }
         private SettingInfo _settingInfo;
 
-        public void SetAudioMixer(AudioMixer audioMixer)
+        public void SetDefaultValue()
         {
-            _audioMixer = audioMixer;
-        }
-
-        public void SetDefaultValue(EventChannelSO saveChannel)
-        {
-            _saveChannel = saveChannel;
             _settingInfo = new SettingInfo();
         }
 
@@ -42,9 +34,9 @@ namespace _Works._JTH.Scripts.UI.Setting
         {
             _settingInfo = JsonUtility.FromJson<SettingInfo>(data);
             
-            _audioMixer.SetFloat("Master", _settingInfo.MasterVolume);
-            _audioMixer.SetFloat("BGM", _settingInfo.BgmVolume);
-            _audioMixer.SetFloat("SFX", _settingInfo.SfxVolume);
+            AudioMixer.SetFloat("Master", _settingInfo.MasterVolume);
+            AudioMixer.SetFloat("BGM", _settingInfo.BgmVolume);
+            AudioMixer.SetFloat("SFX", _settingInfo.SfxVolume);
             
             if (_settingInfo.IsFullScreen)
                 Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
@@ -56,21 +48,21 @@ namespace _Works._JTH.Scripts.UI.Setting
         {
             float volume = ((UIFloatParam)data).Value;
             _settingInfo.MasterVolume = volume;
-            _audioMixer.SetFloat("Master", Mathf.Log10(_settingInfo.MasterVolume) * 20f);
+            AudioMixer.SetFloat("Master", Mathf.Log10(_settingInfo.MasterVolume) * 20f);
         }
         
         private void BGMVolumeChangeHandler(UIParam data)
         {
             float volume = ((UIFloatParam)data).Value;
             _settingInfo.BgmVolume = volume;
-            _audioMixer.SetFloat("BGM", Mathf.Log10(_settingInfo.BgmVolume) * 20f);
+            AudioMixer.SetFloat("BGM", Mathf.Log10(_settingInfo.BgmVolume) * 20f);
         }
         
         private void SFXVolumeChangeHandler(UIParam data)
         {
             float volume = ((UIFloatParam)data).Value;
             _settingInfo.SfxVolume = volume;
-            _audioMixer.SetFloat("SFX", Mathf.Log10(_settingInfo.SfxVolume) * 20f);
+            AudioMixer.SetFloat("SFX", Mathf.Log10(_settingInfo.SfxVolume) * 20f);
         }
 
         private void FullScreenToggleChangeHandler(UIParam data)
@@ -83,18 +75,13 @@ namespace _Works._JTH.Scripts.UI.Setting
             else
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         }
-
-        private void CloseBtnClickHandler(UIParam clickData)
-        {
-            _saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
-        }
-
-        private UIParam UpdateMasterVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.MasterVolume);
         
-        private UIParam UpdateBGMVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.BgmVolume);
+        private UIParam UpdateMasterVolume() => UIParams.UIFloatParam.Init(_settingInfo.MasterVolume);
         
-        private UIParam UpdateSFXVolume() => UIParamContainer.UIFloatParam.Init(_settingInfo.SfxVolume);
+        private UIParam UpdateBGMVolume() => UIParams.UIFloatParam.Init(_settingInfo.BgmVolume);
         
-        private UIParam UpdateIsFullScreen() => UIParamContainer.UIBoolParam.Init(_settingInfo.IsFullScreen);
+        private UIParam UpdateSFXVolume() => UIParams.UIFloatParam.Init(_settingInfo.SfxVolume);
+        
+        private UIParam UpdateIsFullScreen() => UIParams.UIBoolParam.Init(_settingInfo.IsFullScreen);
     }
 }

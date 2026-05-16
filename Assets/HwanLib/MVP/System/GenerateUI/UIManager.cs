@@ -77,7 +77,6 @@ namespace HwanLib.MVP.System.GenerateUI
             Type presenterType = presenter.GetType();
             MultiableUIs multiableUIs = _multiableUIDict[presenterType];
             
-            //Open 가능, 열어야 함.
             switch (multiableUIs.State)
             {
                 case MultiableUIState.None:
@@ -86,25 +85,26 @@ namespace HwanLib.MVP.System.GenerateUI
                 case MultiableUIState.Opened:
                     if (presenter == multiableUIs.EndPresenter)
                         multiableUIs.State = MultiableUIState.None;
-                    
                     return false;
             }
 
-            if (presenter.CanOpen == false)
-                return false;
-            
-            if (presenter != multiableUIs.EndPresenter)
+            //열어야 함.
+            //열 수 있음
+            if (presenter.CanOpen)
             {
                 presenter.OpenUI();
                 multiableUIs.State = MultiableUIState.Opened;
             }
-            //Open 불가능, 열어야함, 마지막
-            else
+            //열 수 없음, 마지막,
+            else if (presenter == multiableUIs.EndPresenter)
             {
                 AddMultiableUI(mvpDataList.GetDataFromMultiable(presenterType));
                 multiableUIs.EndPresenter.OpenUI();
                 multiableUIs.State = MultiableUIState.None;
             }
+            //열 수 없음
+            else
+                return false;
 
             return true;
         }

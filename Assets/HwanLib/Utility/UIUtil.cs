@@ -18,5 +18,19 @@ namespace HwanLib.Utility
 
             group.alpha = alpha;
         }
+
+        public static void SetPivotWithoutScreenPosChange(this RectTransform rectTrm, Vector2 targetPivot)
+        {
+            if (rectTrm.pivot == targetPivot)
+                return;
+            
+            Vector2 deltaPivot = targetPivot - rectTrm.pivot;
+            Vector2 sizeDelta = rectTrm.sizeDelta;
+            
+            rectTrm.pivot = targetPivot;
+            
+            Vector2 deltaPosition = new Vector2(deltaPivot.x * sizeDelta.x, deltaPivot.y * sizeDelta.y);
+            rectTrm.anchoredPosition += deltaPosition;
+        }
     }
 }

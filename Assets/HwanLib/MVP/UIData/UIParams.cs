@@ -1,6 +1,6 @@
 ﻿namespace HwanLib.MVP.UIData
 {
-    public static class UIParamContainer
+    public static class UIParams
     {
         public static readonly UIClickParam UIClickParam = new UIClickParam();
         public static readonly UIFloatParam UIFloatParam = new UIFloatParam();

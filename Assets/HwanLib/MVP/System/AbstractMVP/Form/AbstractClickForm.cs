@@ -2,7 +2,7 @@
 using HwanLib.MVP.UIData;
 using UnityEngine.EventSystems;
 
-namespace HwanLib.MVP.System.MVPModule.Form
+namespace HwanLib.MVP.System.AbstractMVP.Form
 {
     public abstract class AbstractClickForm : BaseForm, IInteractable, IPointerClickHandler
     {
@@ -10,7 +10,7 @@ namespace HwanLib.MVP.System.MVPModule.Form
         
         public virtual void OnPointerClick(PointerEventData eventData)
         {
-            OnFormInteracted?.Invoke(ChildIndex, UIParamContainer.UIClickParam);
+            OnFormInteracted?.Invoke(ChildIndex, UIParams.UIClickParam);
         }
     }
 }

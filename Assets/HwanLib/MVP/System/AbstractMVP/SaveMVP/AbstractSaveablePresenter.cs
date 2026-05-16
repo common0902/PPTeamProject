@@ -6,7 +6,7 @@ using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 
-namespace HwanLib.MVP.System.SaveMVP
+namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
 {
     public abstract class AbstractSaveablePresenter : BasePresenter, IRestorable, IStorable
     {
@@ -14,6 +14,7 @@ namespace HwanLib.MVP.System.SaveMVP
         [SerializeField] protected EventChannelSO saveChannel;
         
         protected new ISaveableModel Model;
+        private EnableEventComponent _enableEventCompo;
 
         public override void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
@@ -26,9 +27,26 @@ namespace HwanLib.MVP.System.SaveMVP
             base.InitializePresenter(formData, viewType, modelType);
             
             Model = (ISaveableModel)base.Model;
-            Model.SetDefaultValue(saveChannel);
+            Model.SetDefaultValue();
+            
+            _enableEventCompo = View.RootCanvas.gameObject.AddComponent<EnableEventComponent>();
+            _enableEventCompo.OnEnabled += EnableHandler;
         }
 
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            _enableEventCompo.OnEnabled -= EnableHandler;
+        }
+
+        private void EnableHandler(bool isEnabled)
+        {
+            if (isEnabled)
+                saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
+            else
+                saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+        }
+        
         public string StoreData()
         {
             return Model.StoreData();

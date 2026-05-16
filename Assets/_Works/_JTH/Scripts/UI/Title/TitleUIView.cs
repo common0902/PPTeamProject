@@ -15,11 +15,10 @@ namespace _Works._JTH.Scripts.UI.Title
             Select,
         }
 
-        private TitleState _currentState;
         private AccessForm _titleText;
         private AccessForm _mainButtons;
         private AccessForm _selectButtons;
-        private TextButtonForm _continueTxtBtn;
+        private LockButtonForm _continueTxtBtn;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
@@ -29,7 +28,7 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleText = GetForm<AccessForm>((int)TitleUIEnum.TitleText);
             _mainButtons = GetForm<AccessForm>((int)TitleUIEnum.MainButtons);
             _selectButtons = GetForm<AccessForm>((int)TitleUIEnum.SelectButtons);
-            _continueTxtBtn = GetForm<TextButtonForm>((int)TitleUIEnum.ContinueTxtBtn);
+            _continueTxtBtn = GetForm<LockButtonForm>((int)TitleUIEnum.ContinueTxtBtn);
             
             _continueTxtBtn.SetTextAndButtonForm(GetForm<TextForm>((int)TitleUIEnum.ContinueTxt),
                 GetForm<FadeButtonForm>((int)TitleUIEnum.ContinueBtn));
@@ -50,7 +49,7 @@ namespace _Works._JTH.Scripts.UI.Title
         {
             base.UpdateView();
 
-            if (_continueTxtBtn.Text.Contains("Day-1"))
+            if (_continueTxtBtn.Text.Contains("Day0"))
             {
                 _continueTxtBtn.SetInteractive(false);
             }
@@ -69,12 +68,10 @@ namespace _Works._JTH.Scripts.UI.Title
 
         private void UpdateState(TitleState state)
         {
-            _currentState = state;
-
             _titleText.gameObject.SetActive(false);
             _mainButtons.gameObject.SetActive(false);
             _selectButtons.gameObject.SetActive(false);
-            switch (_currentState)
+            switch (state)
             {
                 case TitleState.Default:
                     _titleText.gameObject.SetActive(true);
