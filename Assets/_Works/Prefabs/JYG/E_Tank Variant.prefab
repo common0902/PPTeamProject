@@ -316,7 +316,7 @@ MonoBehaviour:
   enemyCautionDelay: 3
   <AttackDistance>k__BackingField: 2
   <PatrolSpeed>k__BackingField: 1.5
-  <OnWaterSpeed>k__BackingField: 0.5
+  <WaterSpeed>k__BackingField: 0.5
   <ChaseSpeed>k__BackingField: 2.5
   <RotateSpeed>k__BackingField: 1
   callingDuration: 5
@@ -325,6 +325,7 @@ MonoBehaviour:
   <ForceXParam>k__BackingField: {fileID: 11400000, guid: 9b677280e9dd5504bb9dc740700cc4fd, type: 2}
   <ForceYParam>k__BackingField: {fileID: 11400000, guid: 305fc9c946551d84d8777723461bac50, type: 2}
   <IsRunning>k__BackingField: 1
+  isWater: 0
   shieldAngle: 120
   <ShieldBlockSO>k__BackingField: {fileID: 11400000, guid: d399994b34069994db50324f0fb9a0ae, type: 2}
 --- !u!1 &6489768754262592516 stripped
