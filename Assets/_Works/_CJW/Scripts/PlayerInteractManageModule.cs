@@ -24,6 +24,12 @@ namespace _Works._CJW.Scripts
             interactEvent.AddListener<ObjectRegisterEvent>(HandleRegister);
         }
 
+        public void TestInitialize()
+        {
+            interactEvent.AddListener<InteractKeyEvent>(HandleInteractEvent);
+            interactEvent.AddListener<ObjectRegisterEvent>(HandleRegister);
+        }
+
         // 상호작용 오브젝트 범위 내에 들었을 때 실행되는 핸들러
         // 실행시 주변 상호작용 오브젝트가 리스트에 등록되고 가까운 오브젝트를 찾음
         private void HandleRegister(ObjectRegisterEvent obj)

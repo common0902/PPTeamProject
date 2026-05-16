@@ -1,66 +1,46 @@
-﻿using System;
+﻿using DG.Tweening;
 using HwanLib.MVP.System.BaseMVP.Form;
+using HwanLib.MVP.System.MVPModule.Form;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace HwanLib.MVP.Forms
 {
+    [RequireComponent(typeof(Image))]
     public class BackgroundForm : AbstractClickForm
     {
-        private class TempComponent : MonoBehaviour
-        {
-            public Action OnActiveTrue;
-            public Action OnActiveFalse;
-
-            private void OnEnable()
-                => OnActiveTrue?.Invoke();
-
-            private void OnDisable()
-                => OnActiveFalse?.Invoke();
-        }
-        
-        private readonly Color _backgroundColor = new Color(10.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 0.6f);
+        private readonly Color _fadeInColor = new Color(10.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 0.6f);
+        private readonly Color _fadeOutColor = new Color(10.0f / 255.0f, 10.0f / 255.0f, 10.0f / 255.0f, 0);
         
         private Image _backgroundImage;
-        private TempComponent _tempCompo;
+        private float _fadeInDuration;
+        private float _fadeOutDuration;
         
         private void Awake()
         {
-            GenerateTempGameObject();
             GenerateBackground();
+            _fadeInDuration = 0;
+            _fadeOutDuration = 0;
         }
 
-        private void GenerateTempGameObject()
+        public void SetDuration(float duration)
+        { 
+            _fadeInDuration = duration;
+            _fadeOutDuration = duration;
+        } 
+
+        public void SetDuration(float fadeInDuration, float fadeOutDuration)
         {
-            GameObject tempGameObject = new GameObject();
-            tempGameObject.name = "TempGameObject"; 
-            
-            tempGameObject.transform.SetParent(transform.parent, false);
-            tempGameObject.transform.SetAsFirstSibling();
-            _tempCompo = tempGameObject.AddComponent<TempComponent>();
-            
-            _tempCompo.OnActiveTrue += ActiveTrueHandler;
-            _tempCompo.OnActiveFalse += ActiveFalseHandler;
+            _fadeInDuration = fadeInDuration;
+            _fadeOutDuration = fadeOutDuration;
         }
-
-        private void OnDestroy()
-        {
-            _tempCompo.OnActiveTrue -= ActiveTrueHandler;
-            _tempCompo.OnActiveFalse -= ActiveFalseHandler;
-        }
-
-        private void ActiveTrueHandler()
-            => SetBackgroundActive(true);
-
-        private void ActiveFalseHandler()
-            => SetBackgroundActive(false);
-
+        
         private void GenerateBackground()
         {
             Canvas rootCanvas = GetComponentInParent<Canvas>();
             
-            var image = gameObject.AddComponent<Image>();
-            image.color = _backgroundColor;
+            var image = gameObject.GetComponent<Image>();
+            image.color = _fadeOutColor;
 
             gameObject.transform.localScale = Vector3.one;
             gameObject.GetComponent<RectTransform>().sizeDelta = rootCanvas.GetComponent<RectTransform>().sizeDelta;
@@ -70,17 +50,19 @@ namespace HwanLib.MVP.Forms
             _backgroundImage = image;
         }
 
-        private void SetBackgroundActive(bool active)
+        public void DoFade(bool fadeIn)
         {
-            if (active == true)
+            _backgroundImage.DOKill();
+            
+            if (fadeIn == true)
             {
-                _backgroundImage.canvasRenderer.SetAlpha(0.0f);
-                _backgroundImage.CrossFadeAlpha(1.0f, 0.2f, false);
+                _backgroundImage.color = _fadeOutColor;
+                _backgroundImage.DOColor(_fadeInColor, _fadeInDuration).SetUpdate(true);
             }
             else
             {
-                _backgroundImage.canvasRenderer.SetAlpha(1.0f);
-                _backgroundImage.CrossFadeAlpha(0.0f,0.2f, false);
+                _backgroundImage.color = _fadeInColor;
+                _backgroundImage.DOColor(_fadeOutColor, _fadeInDuration).SetUpdate(true);
             }
         }
     }

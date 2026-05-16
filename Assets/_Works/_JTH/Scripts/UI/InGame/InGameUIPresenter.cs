@@ -7,9 +7,7 @@ using _Works._PMS.Code.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 namespace _Works._JTH.Scripts.UI.InGame
 {
@@ -36,9 +34,11 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameModel = (InGameUIModel)Model;
             
             _inGameModel.SetEventChannel(openUIChannel);
+            //_inGameModel.InitializeData(new InGameUIData
+            //    ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
             _inGameModel.InitializeData(new InGameUIData
-                ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
-            
+                (1, 1, 1, true));
+
             AddListener();
             
             int currentIndex = SceneManager.GetActiveScene().buildIndex;

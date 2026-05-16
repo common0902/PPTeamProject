@@ -37,10 +37,15 @@ namespace _Works._JTH.Scripts.UI.Title
             
             AddFormInteractionListener(PlayBtnClickHandler, (int)TitleUIEnum.PlayBtn);
             AddFormInteractionListener(BackgroundClickHandler, (int)TitleUIEnum.SelectBackground);
+        }
+
+        public override void OpenView()
+        {
+            base.OpenView();
             
             UpdateState(TitleState.Default);
         }
-        
+
         public override void UpdateView()
         {
             base.UpdateView();

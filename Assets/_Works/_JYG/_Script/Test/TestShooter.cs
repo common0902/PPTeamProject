@@ -9,17 +9,17 @@ namespace _Works._JYG._Script.Test
     {
         [field: SerializeField] public GameObject TargetGameObject { get; private set; }
         [field: SerializeField] public IDamageable Target { get; private set; }
-
-        private void Start()
-        {
-            Target = TargetGameObject.GetComponent<IDamageable>();
-            if(Target == null) Debug.Log("Target Is NULL!!!!!!");
-        }
-
+        
         private void Update()
         {
             if (Keyboard.current.hKey.wasPressedThisFrame)
             {
+                Target = TargetGameObject.GetComponent<IDamageable>();
+                if (Target == null)
+                {
+                    Debug.Log("Target Is NULL!!!!!!");
+                    return;
+                }
                 Target.TakeDamage(1f, transform.forward, transform.position);
             }
         }

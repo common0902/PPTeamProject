@@ -66,7 +66,7 @@ namespace _Works._CJW.Scripts
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             _camera.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), quadViewDuration).SetEase(transitionCurve)
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
@@ -90,6 +90,7 @@ namespace _Works._CJW.Scripts
                 yield return null;
             }
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
+            Debug.Log(CameraEvent.TopViewEvent.IsTopView);
         }
     
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴

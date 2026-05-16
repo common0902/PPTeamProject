@@ -3,67 +3,37 @@ using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.System.MVPModule;
 using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
-    public class SettingUIView : BaseView
+    public class SettingUIView : AbstractPopupView
     {
         private DoTweenWindowForm _windowForm;
+        private BackgroundForm _backgroundForm;
         private bool _isOpen;
         private CanvasGroup _canvasGroup;
+
+        protected override int WindowFormIndex => (int)SettingUIEnum.PopupWindow;
+        protected override int BackgroundFormIndex => (int)SettingUIEnum.Background;
+        protected override bool UseBackgroundForm => true;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            _windowForm = GetForm<DoTweenWindowForm>((int)SettingUIEnum.PopupWindow);
-            _canvasGroup = RootCanvas.GetComponent<CanvasGroup>();
-            
-            AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
-            AddFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
-
-            _windowForm.OnAnimationEnd += AnimationEndHandler;
-
-            _isOpen = false;
+            AddFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
+            AddFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
         }
 
         public override void OnDestroyView()
         {
             base.OnDestroyView();
             
-            RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.CloseBtn);
-            RemoveFormInteractionListener(StartCloseAnimation, (int)SettingUIEnum.Background);
-            _windowForm.OnAnimationEnd -= AnimationEndHandler;
-        }
-
-        public override void OpenView()
-        {
-            base.OpenView();
-            
-            _windowForm.PlayOpenAnimation();
-            
-            _canvasGroup.interactable = true;
-            _canvasGroup.blocksRaycasts = true;
-        }
-
-        private void StartCloseAnimation()
-        {
-            _windowForm.PlayCloseAnimation();
-            
-            _canvasGroup.interactable = false;
-            _canvasGroup.blocksRaycasts = false;
-        }
-        
-        private void AnimationEndHandler()
-        {
-            _isOpen = !_isOpen;
-
-            if (_isOpen == false)
-            {
-                RootCanvas.gameObject.SetActive(false);
-            }
+            RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
+            RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
         }
     }
 }

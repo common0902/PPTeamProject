@@ -37,7 +37,7 @@ namespace _Works._JYG._Script.Enemy
         [field: SerializeField] public float AttackDistance { get; private set; } = 15f;
 
         [field: SerializeField] public float PatrolSpeed { get; private set; } = 1.5f;    //Patrol 상태일 때 사용되는 걷는 속도
-        [field: SerializeField] public float OnWaterSpeed { get; private set; } = 0.5f;    //Patrol 상태일 때 사용되는 걷는 속도
+        [field: SerializeField] public float WaterSpeed { get; private set; } = 0.5f;    //Patrol 상태일 때 사용되는 걷는 속도
         [field: SerializeField] public float ChaseSpeed { get; private set; } = 2.5f;     //Chase 상태일 때 사용되는 뛰는 속도
         [field: SerializeField] public float RotateSpeed { get; private set; } = 5f;     //Chase 상태일 때 사용되는 뛰는 속도
         public float GetEnemyCaution => Mathf.Clamp01(enemyCurrentCaution / enemyCautionDelay); //0과 1로 표현하는 Enemy 경계수치
@@ -58,6 +58,8 @@ namespace _Works._JYG._Script.Enemy
         public IAISystem AiSystem { get; private set; }
 
         [field: SerializeField] public bool IsRunning { get; private set; } = true;
+
+        public bool isWater = false;
 
         protected override void Awake()
         {
@@ -86,6 +88,23 @@ namespace _Works._JYG._Script.Enemy
             {
                 AiSystem.Navmesh.isStopped = obj.IsTopView;
             }
+        }
+
+        public void ChangeWaterState(bool isOnWater)
+        {
+            isWater = isOnWater;
+            if (isOnWater)
+            {
+                AiSystem.Navmesh.speed = WaterSpeed;
+                return;
+            }
+
+            AiSystem.Navmesh.speed = GetCurrentState switch
+            {
+                EnemyPatrolState => PatrolSpeed,
+                EnemyChaseState => ChaseSpeed,
+                _ => 0
+            };
         }
 
         protected override void Initialize()

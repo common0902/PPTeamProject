@@ -9,9 +9,16 @@ using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
-    public class PopupUIPresenter : BasePresenter
+    public class PopupUIPresenter : BasePresenter, IMultiable
     {
         [SerializeField] private EventChannelSO openUIEvent;
+        
+        public event Func<IMultiable, bool> TryOpen;
+
+        public bool CanOpen => _popupView.CanUse;
+        
+        public void OpenUI()
+            => _popupView.OpenView();
         
         private PopupUIView _popupView;
         private PopupUIModel _popupModel;
@@ -34,10 +41,12 @@ namespace _Works._JTH.Scripts.UI.Popup
         
         private void ShowPopup(OpenPopupEvent eventData)
         {
+            if (TryOpen == null || !TryOpen.Invoke(this))
+                return;
+            
             _popupModel.SetMessage(eventData.Message);
             _popupModel.SetActions(eventData.YesAction, eventData.NoAction);
-            
-            _popupView.OpenView();
+            _popupView.UpdateView();
         }
 
         #if UNITY_EDITOR
