@@ -90,6 +90,7 @@ namespace _Works._CJW.Scripts
                 yield return null;
             }
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
+            Debug.Log(CameraEvent.TopViewEvent.IsTopView);
         }
     
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴

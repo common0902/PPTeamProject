@@ -21,7 +21,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void Initialize(ModuleOwner moduleOwner)
         {
-            Debug.Log("Init");
             _outline = visualObject.GetComponent<Outline>();
             _owner = moduleOwner;
             _outline.OutlineColor = defaultOutLineColor;
@@ -44,7 +43,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             visualObject.SetActive(visual);
             lockedObject.SetActive(lockVisual);
-            Debug.Log(visualObject.activeSelf);
         }
 
         public void HandleOutLineEnable(bool enable)
