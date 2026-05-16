@@ -31,7 +31,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleFocused(FocusedSabotageEvent obj)
         {
-            Debug.Log($"{obj.Sabotage.gameObject} != {_owner.gameObject} == {obj.Sabotage.gameObject != _owner.gameObject}");
             if(obj.Sabotage.gameObject != _owner.gameObject)
                 return;
             
