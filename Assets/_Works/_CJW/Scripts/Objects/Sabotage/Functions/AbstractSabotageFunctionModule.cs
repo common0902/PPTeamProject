@@ -6,7 +6,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
     public abstract class AbstractSabotageFunctionModule : MonoBehaviour, IModule, ISabotageFunctionModule
     {
         [SerializeField] private LayerMask groundLayer;
-        
+        [SerializeField] private ParticleSystem[] vfXes;
         private ModuleOwner _owner;
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
@@ -14,6 +14,14 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         }
 
         public abstract void UseFunction();
+
+        protected void PlayParticle()
+        {
+            foreach (ParticleSystem particle in vfXes)
+            {
+                particle.Play();
+            }
+        }
         
         protected bool GetGround(out RaycastHit hit)
         {

@@ -29,7 +29,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 ExecuteDamage();
 
                 //바닥으로 이동하는 코드
-                transform.DOMoveY(hit.point.y + 1.5f, 0.5f).OnComplete((() =>
+                transform.DOMoveY(hit.point.y + 1.5f, 0.5f).SetEase(Ease.InSine).OnComplete((() =>
                 {
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
@@ -55,13 +55,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                         (damage, dir.normalized, transform.position);
                 }
             }
-        }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.chartreuse;
-            Gizmos.DrawLine(transform.position, new Vector3(transform.position.x, -10, transform.position.z));
-            Gizmos.DrawCube(transform.position + boxOffset, boxSize) ;
         }
     }
 }
