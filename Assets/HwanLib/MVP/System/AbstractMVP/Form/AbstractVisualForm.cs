@@ -1,6 +1,7 @@
 ﻿using HwanLib.MVP.System.BaseMVP.Form;
+using HwanLib.MVP.UIData;
 
-namespace HwanLib.MVP.System.MVPModule.Form
+namespace HwanLib.MVP.System.AbstractMVP.Form
 {
     public abstract class AbstractVisualForm : BaseForm, IUpdatable
     {

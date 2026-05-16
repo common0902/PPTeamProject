@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using HwanLib.MVP.System.AddFormComponent;
 using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.BaseMVP
 {
     public abstract class BaseView
     {
-        protected Canvas RootCanvas { get; private set; }
+        public Canvas RootCanvas { get; private set; }
         private Action<int> _viewEvent;
 
         private Dictionary<int, BaseForm> _formDict;
@@ -36,11 +37,10 @@ namespace HwanLib.MVP.System.BaseMVP
                     interactable.OnFormInteracted += OnFormInteract;
                     interactable.OnFormInteracted += formInteractedHandler;
                 }
-
                 if (form is IUpdatable updatable)
-                {
                     updatable.OnFormUpdate += updateFormHandler;
-                }
+                if (form is IInitializable initializable)
+                    initializable.Initialize();
                 
                 _formDict.Add(formData.childIndex, form);
             }

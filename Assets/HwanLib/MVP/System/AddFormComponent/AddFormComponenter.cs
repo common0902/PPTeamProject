@@ -25,8 +25,8 @@ namespace HwanLib.MVP.System.AddFormComponent
                     return gameObject.AddComponent<SliderForm>();
                 case "SwapForm":
                     return gameObject.AddComponent<SwapForm>();
-                case "TextButtonForm":
-                    return gameObject.AddComponent<TextButtonForm>();
+                case "LockButtonForm":
+                    return gameObject.AddComponent<LockButtonForm>();
                 case "TextForm":
                     return gameObject.AddComponent<TextForm>();
                 case "ToggleForm":

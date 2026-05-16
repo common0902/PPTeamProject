@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
+using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
-using HwanLib.MVP.System.SaveMVP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -24,20 +24,12 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleView = (TitleUIView)View;
             _titleModel = (TitleUIModel)Model;
 
-            _titleModel.InitTitleModel(stageStartIndex);
-            _titleModel.SetOnPopupCloseEvent(_titleView.CloseView);
-            _titleModel.SetPopupEventChannel(openUIChannel);
+            _titleModel.StageStartIndex = stageStartIndex;
+            _titleModel.PopupCloseEvent = _titleView.CloseView;
+            _titleModel.OpenUIChannel = openUIChannel;
 
             if (SceneManager.GetActiveScene().buildIndex == titleIndex)
                 _titleView.OpenView();
         }
-        
-        #if UNITY_EDITOR
-        public void Save()
-        {
-            RestoreData("2");
-            saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
-        }
-        #endif
     }
 }
