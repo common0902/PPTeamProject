@@ -37,7 +37,6 @@ namespace _Works._JYG._Script.Enemy.FSM
             {
                 _navMesh.SetEnemyRoute();
                 _enemy.ChangeState((int)EnemyState.IDLE);
-                Debug.Log("Patrol TO IDLE");
             }
         }
 
