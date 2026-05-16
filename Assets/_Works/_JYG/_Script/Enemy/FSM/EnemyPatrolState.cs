@@ -21,7 +21,8 @@ namespace _Works._JYG._Script.Enemy.FSM
         {
             base.Enter();
             _navMesh.Navmesh.isStopped = false;
-            _navMesh.Navmesh.speed = _enemy.PatrolSpeed;
+            
+            _navMesh.Navmesh.speed = _enemy.isWater ? _enemy.WaterSpeed : _enemy.PatrolSpeed;
         }
 
         public override void Update()
