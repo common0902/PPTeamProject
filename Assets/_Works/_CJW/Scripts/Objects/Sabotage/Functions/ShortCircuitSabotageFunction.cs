@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using _Works._JYG._Script.Enemy;
+using Agents.FSM;
 using DG.Tweening;
 using UnityEngine;
 
@@ -15,11 +16,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             foreach (AbstractEnemy enemy in targetEnemies)
             {
                 enemy.AiSystem.RouteRePath(transform.position);
-                DOVirtual.DelayedCall(duration, () =>
-                {
-                   
-                    //asd
-                });
+                enemy.ChangeState((int)EnemyState.PATROL);
             }
         }
     }
