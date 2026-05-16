@@ -27,7 +27,7 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Enter()
         {
             _navmesh.Navmesh.isStopped = false;
-            _navmesh.Navmesh.speed = _enemy.ChaseSpeed;
+            _navmesh.Navmesh.speed = _enemy.isWater ? _enemy.WaterSpeed : _enemy.ChaseSpeed;
             
             if(!_enemy.SirenEffect)
                 _enemy.CallingPartner();    // n초 이내에 사살하지 못하면 모든 Enemy가 플레이어를 쫓는다.
