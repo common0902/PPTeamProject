@@ -1694,10 +1694,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2087547936}
     m_Modifications:
+    - target: {fileID: 3158486864454310713, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 366297da2f8d1004ea8e20b2925189aa, type: 2}
     - target: {fileID: 3479246224266229466, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
       propertyPath: m_Name
       value: StorageRoom (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 3876496145936674878, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 366297da2f8d1004ea8e20b2925189aa, type: 2}
     - target: {fileID: 7143328911238743494, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1746,6 +1754,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7767021343682875459, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 366297da2f8d1004ea8e20b2925189aa, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7288,6 +7300,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: StorageRoom (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 3876496145936674878, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 366297da2f8d1004ea8e20b2925189aa, type: 2}
     - target: {fileID: 7143328911238743494, guid: dae4a38ce5e96c6419d417f5c12fa50c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8455,6 +8471,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4302621366001209653, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: m_UseCustomVertexStreams
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001209653, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 72d1b755715feba44ab2987825a808b7, type: 2}
+    - target: {fileID: 4302621366001209653, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: m_VertexStreams.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001209653, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: 'm_VertexStreams.Array.data[1]'
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001209653, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: 'm_VertexStreams.Array.data[2]'
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: CustomDataModule.mode0
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: CustomDataModule.enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: CustomDataModule.color0.maxColor.b
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: CustomDataModule.color0.maxColor.g
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 4302621366001313941, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: CustomDataModule.color0.maxColor.r
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
       value: E_Sniper
