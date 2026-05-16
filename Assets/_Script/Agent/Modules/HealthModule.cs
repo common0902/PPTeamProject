@@ -44,8 +44,8 @@ namespace _Script.Agent.Modules
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
             {
+                _moduleAgent.GetComponent<Collider>().enabled = false;
                 OnDeath?.Invoke();
-                Debug.Log("Enemy Death!");
             }
         }
 
