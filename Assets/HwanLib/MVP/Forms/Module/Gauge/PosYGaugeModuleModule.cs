@@ -1,17 +1,19 @@
 ﻿using DG.Tweening;
+using HwanLib.Utility;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
-    internal class PosYGauge : AbstractGauge
+    internal class PosYGaugeModuleModule : AbstractGaugeModule
     {
         private RectTransform _targetTransform;
 
         protected override void Init(GameObject gameObject)
         {
             _targetTransform = gameObject.GetComponent<RectTransform>();
-            _targetTransform.pivot = new Vector2(0.5f, 0);
+            Vector3 prevPos = _targetTransform.localPosition;
+            _targetTransform.SetPivotWithoutScreenPosChange(new Vector2(0.5f, 0));
+            _targetTransform.localPosition = prevPos;
         }
 
         public override void SetGauge(float ratio, float duration = 0, Ease ease = Ease.Linear)

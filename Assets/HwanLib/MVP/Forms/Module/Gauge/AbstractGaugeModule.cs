@@ -1,10 +1,9 @@
 ﻿using DG.Tweening;
 using UnityEngine;
-using NotImplementedException = System.NotImplementedException;
 
 namespace HwanLib.MVP.Forms.Module.Gauge
 {
-    internal abstract class AbstractGauge
+    internal abstract class AbstractGaugeModule
     {
         public void InitGauge(GameObject gameObject)
         {
