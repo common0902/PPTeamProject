@@ -1,8 +1,10 @@
 using System;
 using System.Xml.Schema;
 using _Script.Agent.Modules;
+using _Script.ScriptableObject.Event;
 using _Works._JYG._Script.Enemy.CombatSystem;
 using DG.Tweening;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
@@ -24,6 +26,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         }
         public override void UseFunction()
         {
+            base.UseFunction();
             transform.
             gameObject.SetActive(true);
             if (GetGround(out var hit))
@@ -31,7 +34,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 ExecuteDamage();
 
                 //바닥으로 이동하는 코드
-                transform.DOMoveY(hit.point.y + 1.5f, 0.5f).SetEase(Ease.InSine).OnComplete((() =>
+                transform.DOMoveY(hit.point.y + 1.5f, 0.25f).SetEase(Ease.InSine).OnComplete((() =>
                 {
                     PlayParticle();
                     DOVirtual.DelayedCall(lifetime, () =>

@@ -12,6 +12,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private float duration;
         public override void UseFunction()
         {
+            base.UseFunction();
             PlayParticle();
             foreach (AbstractEnemy enemy in targetEnemies)
             {
