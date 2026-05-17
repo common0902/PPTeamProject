@@ -7,7 +7,8 @@ namespace _Works._JTH.Scripts.UI.Event
     {
         public static readonly OpenPopupEvent OpenPopupEvent = new OpenPopupEvent();
         public static readonly OpenSettingEvent OpenSettingEvent = new OpenSettingEvent();
-        public static readonly OpenTooltipEvent OpenTooltipEvent = new OpenTooltipEvent();
+        public static readonly OpenGameEndEvent OpenGameEndEvent = new OpenGameEndEvent();
+        public static readonly OpenFadeUIEvent OpenFadeUIEvent = new OpenFadeUIEvent();
     }
 
     public class OpenPopupEvent : GameEvent
@@ -31,15 +32,28 @@ namespace _Works._JTH.Scripts.UI.Event
         
     }
     
-    public class OpenTooltipEvent : GameEvent
+    public class OpenGameEndEvent : GameEvent
     {
-        public string TitleText;
-        public string DescText;
+        public bool IsGameOver;
 
-        public OpenTooltipEvent Init(string titleText, string descText)
+        public OpenGameEndEvent Init(bool isGameOver)
         {
-            TitleText = titleText;
-            DescText = descText;
+            IsGameOver = isGameOver;
+            return this;
+        }
+    }
+
+    public class OpenFadeUIEvent : GameEvent
+    {
+        public int SceneIndex;
+        public bool DrawNextDayText;
+        public bool DrawCurDayText;
+
+        public OpenFadeUIEvent Init(int sceneIndex, bool drawCurDayText, bool drawNextDayText)
+        {
+            SceneIndex = sceneIndex;
+            DrawCurDayText = drawCurDayText;
+            DrawNextDayText = drawNextDayText;
             
             return this;
         }

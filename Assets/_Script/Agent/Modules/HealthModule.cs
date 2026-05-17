@@ -44,8 +44,11 @@ namespace _Script.Agent.Modules
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
             {
-                _moduleAgent.GetComponent<Collider>().enabled = false;
+                Collider targetCollider = _moduleAgent.GetComponent<Collider>();
+                targetCollider.isTrigger = true;
+                //targetCollider.enabled = false;
                 OnDeath?.Invoke();
+                Destroy(_moduleAgent.gameObject, 5f);
             }
         }
 

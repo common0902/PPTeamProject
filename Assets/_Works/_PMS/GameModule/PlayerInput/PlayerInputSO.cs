@@ -9,10 +9,16 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action<Vector2> OnMovementChange;
     public event Action OnAttackKeyPressed;
     public event Action OnJumpKeyPressed;
+
     public event Action OnRunStarted;
     public event Action OnRunCanceled;
+
     public event Action OnViewMapStarted;
     public event Action OnViewMapCanceled;
+
+    public event Action OnWeaponSwapUp;
+    public event Action OnWeaponSwapDown;
+    public event Action<int> OnWeaponSwapIndex;
 
     private Controls _controls;
     private bool _viewMap = false;
@@ -76,8 +82,27 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
         }
     }
 
-    public void OnWeaponSwap(InputAction.CallbackContext context)
+    public void OnWeaponSwapScroll(InputAction.CallbackContext context)
     {
-       
+        if (context.performed)
+        {
+            Vector2 scroll = context.ReadValue<Vector2>();
+            if (scroll.y > 0)
+                OnWeaponSwapIndex?.Invoke(0);
+            else if (scroll.y < 0)
+                OnWeaponSwapIndex?.Invoke(1);
+        }
+    }
+
+    public void OnWeaponSwap1(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnWeaponSwapIndex?.Invoke(0);
+    }
+
+    public void OnWeaponSwap2(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnWeaponSwapIndex?.Invoke(1);
     }
 }

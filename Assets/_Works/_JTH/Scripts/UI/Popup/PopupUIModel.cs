@@ -31,7 +31,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 
         private UIParam ChangePopupMessageHandler()
         {
-            return UIParamContainer.UIStringParam.Init(_message);
+            return UIParams.UIStringParam.Init(_message);
         }
     }
 }

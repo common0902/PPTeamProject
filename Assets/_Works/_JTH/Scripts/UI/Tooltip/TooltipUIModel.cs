@@ -16,9 +16,9 @@ namespace _Works._JTH.Scripts.UI.Tooltip
         }
         
         private UIParam UpdateTitleText()
-            => UIParamContainer.UIStringParam.Init(_titleText);
+            => UIParams.UIStringParam.Init(_titleText);
         
         private UIParam UpdateDescText()
-            => UIParamContainer.UIStringParam.Init(_descText);
+            => UIParams.UIStringParam.Init(_descText);
     }
 }

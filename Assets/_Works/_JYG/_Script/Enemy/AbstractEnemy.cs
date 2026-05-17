@@ -180,6 +180,7 @@ namespace _Works._JYG._Script.Enemy
         
         private void HandleEnemyChange(EnemyChangeState evt)
         {
+            if (IsDead) return;
             ChangeState((int)evt.NextState);
             enemyCurrentCaution = evt.NextState switch
             {
@@ -198,7 +199,7 @@ namespace _Works._JYG._Script.Enemy
         
         public void CallingPartner()
         {
-            if (SirenEffect) return;
+            if (SirenEffect || IsDead) return;
             
             StartCoroutine(StartCalling(callingDuration));
         }

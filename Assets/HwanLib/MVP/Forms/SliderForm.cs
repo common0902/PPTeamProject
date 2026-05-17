@@ -1,18 +1,19 @@
 ﻿using HwanLib.MVP.System;
+using HwanLib.MVP.System.AbstractMVP.Form;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.BaseMVP.Form;
-using HwanLib.MVP.System.MVPModule.Form;
 using HwanLib.MVP.UIData;
 using UnityEngine.UI;
 
 namespace HwanLib.MVP.Forms
 {
-    public class SliderForm : AbstractVisualForm, IInteractable
+    public class SliderForm : AbstractVisualForm, IInteractable, IInitializable
     {
         public event FormInteracted OnFormInteracted;
 
         private Slider _slider;
 
-        public void Awake()
+        public void Initialize()
         {
             _slider = GetComponent<Slider>();
             _slider.onValueChanged.AddListener(SliderValueChangeHandler);
@@ -20,7 +21,7 @@ namespace HwanLib.MVP.Forms
 
         private void SliderValueChangeHandler(float value)
         {
-            OnFormInteracted?.Invoke(ChildIndex, UIParamContainer.UIFloatParam.Init(value));
+            OnFormInteracted?.Invoke(ChildIndex, UIParams.UIFloatParam.Init(value));
         }
 
         protected override void UpdateVisual(UIParam data)

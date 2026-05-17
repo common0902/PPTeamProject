@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
 using HwanLib.MVP.System;
+using HwanLib.MVP.System.AbstractMVP.Form;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.BaseMVP.Form;
-using HwanLib.MVP.System.MVPModule.Form;
 using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace HwanLib.MVP.Forms
 {
-    public class SwapForm : AbstractVisualForm
+    public class SwapForm : AbstractVisualForm, IInitializable
     {
         [SerializeField] private float swapDuration = 0.3f;
 
@@ -18,7 +19,7 @@ namespace HwanLib.MVP.Forms
         private Sequence _sequence;
         private float _startSwapTime;
 
-        private void Awake()
+        public void Initialize()
         {
             _childDict = new Dictionary<int, int>();
             _currentChildren = new RectTransform[transform.childCount];

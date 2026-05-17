@@ -1,4 +1,5 @@
-using HwanLib.MVP.System.MVPModule.Form;
+using HwanLib.MVP.System.AbstractMVP.Form;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(CanvasGroup))]
-    public class FadeButtonForm : AbstractClickForm, IPointerDownHandler, IPointerUpHandler
+    public class FadeButtonForm : AbstractClickForm, IInitializable, IPointerDownHandler, IPointerUpHandler
         , IPointerEnterHandler, IPointerExitHandler
     {
         [SerializeField] protected float fadeTime = 0.2f;
@@ -14,9 +15,10 @@ namespace HwanLib.MVP.Forms
         [SerializeField] protected float onClickAlpha = 0.4f;
 
         private CanvasGroup _canvasGroup;
+        
         public bool Interactive { get; private set; }
 
-        public void Awake()
+        public void Initialize()
         {
             _canvasGroup = GetComponent<CanvasGroup>();
         
@@ -26,7 +28,6 @@ namespace HwanLib.MVP.Forms
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (_canvasGroup.interactable == false) return;
-            
             StopAllCoroutines();
             StartCoroutine(UIUtil.Fade(_canvasGroup, onHoverAlpha, fadeTime));
         }

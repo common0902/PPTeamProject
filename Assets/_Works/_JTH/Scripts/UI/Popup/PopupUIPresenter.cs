@@ -48,22 +48,5 @@ namespace _Works._JTH.Scripts.UI.Popup
             _popupModel.SetActions(eventData.YesAction, eventData.NoAction);
             _popupView.UpdateView();
         }
-
-        #if UNITY_EDITOR
-        private void Update()
-        {
-            if (!Keyboard.current.ctrlKey.isPressed)
-                return;
-            
-            if (Keyboard.current.pKey.wasPressedThisFrame)
-                TestPopup();
-        }
-
-        public void TestPopup()
-        {
-            ShowPopup(OpenUIEvents.OpenPopupEvent
-                .Init("안녕하세요?", () => Debug.Log("Yes"), () => Debug.Log("No")));
-        }
-        #endif
     }
 }

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
+using _Works._JTH.Scripts.SO;
+using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
-using HwanLib.MVP.System.SaveMVP;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,8 +12,7 @@ namespace _Works._JTH.Scripts.UI.Title
     public class TitleUIPresenter : AbstractSaveablePresenter
     {
         [SerializeField] private EventChannelSO openUIChannel;
-        [SerializeField] private int stageStartIndex = 1;
-        [SerializeField] private int titleIndex;
+        [SerializeField] private StageInfoSO stageInfoSO;
 
         private TitleUIView _titleView;
         private TitleUIModel _titleModel;
@@ -24,20 +24,27 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleView = (TitleUIView)View;
             _titleModel = (TitleUIModel)Model;
 
-            _titleModel.InitTitleModel(stageStartIndex);
-            _titleModel.SetOnPopupCloseEvent(_titleView.CloseView);
-            _titleModel.SetPopupEventChannel(openUIChannel);
+            _titleModel.StageStartIndex = stageInfoSO.stageStart;
+            _titleModel.OpenUIChannel = openUIChannel;
+            _titleModel.SaveChannel = saveChannel;
+            _titleModel.SaveId = SaveId.Id;
 
-            if (SceneManager.GetActiveScene().buildIndex == titleIndex)
-                _titleView.OpenView();
+            SceneManager.sceneLoaded += SceneLoadedHandler;
         }
-        
-        #if UNITY_EDITOR
-        public void Save()
+
+        protected override void OnDestroy()
         {
-            RestoreData("2");
-            saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+            base.OnDestroy();
+            
+            SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
-        #endif
+
+        private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
+        {
+            if (scene.buildIndex == stageInfoSO.title)
+                _titleView.OpenView();
+            else
+                _titleView.CloseView();
+        }
     }
 }
