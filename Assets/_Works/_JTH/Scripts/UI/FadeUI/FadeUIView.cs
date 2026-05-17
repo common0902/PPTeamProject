@@ -50,15 +50,15 @@ namespace _Works._JTH.Scripts.UI.FadeUI
         {
             base.OpenView();
             
-            BackgroundForm.DoFade(FadeDuration, Color.black);
-            if (!_stageTextForm.Text.Contains("0") && !DrawCurDayText)
+            BackgroundForm.DoFade(true, FadeDuration, 1);
+            if (DrawCurDayText && !_stageTextForm.Text.Contains("0"))
                 _stageTextForm.DrawerModule.Draw(true, DrawDuration / 2, true);
         }
 
         public void StartClose()
         {
-            BackgroundForm.DoFade(false, FadeDuration);
-            if (!DrawNextDayText)
+            BackgroundForm.DoFade(false, FadeDuration, 1);
+            if (DrawNextDayText)
             {
                 _stageTextForm.DrawerModule.Draw(true, DrawDuration / 2, true);
                 _stageTextForm.TextModule.UpdateText(NextStage);

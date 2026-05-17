@@ -43,11 +43,9 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
         {
             if (isEnabled)
                 saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
-            else
-                saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
         
-        public string StoreData()
+        public virtual string StoreData()
         {
             return Model.StoreData();
         }

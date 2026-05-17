@@ -28,7 +28,6 @@ namespace HwanLib.MVP.Forms
         public void OnPointerEnter(PointerEventData eventData)
         {
             if (_canvasGroup.interactable == false) return;
-            
             StopAllCoroutines();
             StartCoroutine(UIUtil.Fade(_canvasGroup, onHoverAlpha, fadeTime));
         }

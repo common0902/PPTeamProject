@@ -50,8 +50,8 @@ namespace HwanLib.MVP.System.BaseMVP
 
         public virtual void OpenView()
         {
-            UpdateView();
             RootCanvas.gameObject.SetActive(true);
+            UpdateView();
         }
 
         public virtual void CloseView()

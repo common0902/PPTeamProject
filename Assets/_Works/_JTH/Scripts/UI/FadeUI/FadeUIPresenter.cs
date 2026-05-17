@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
+using _Works._JTH.Scripts.SO;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
@@ -13,7 +14,7 @@ namespace _Works._JTH.Scripts.UI.FadeUI
     public class FadeUIPresenter : BasePresenter
     {
         [SerializeField] private EventChannelSO openUIChannel;
-        [SerializeField] private int stageStartIndex;
+        [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private float fadeDuration = 2;
         [SerializeField] private float drawDuration = 2;
         [SerializeField] private float waitForCloseDuration = 0.25f;
@@ -48,9 +49,9 @@ namespace _Works._JTH.Scripts.UI.FadeUI
 
         private void OpenUI(OpenFadeUIEvent data)
         {
-            _nextStageIndex = data.SceneIndex + 1;
-            _fadeView.NextStage = (data.SceneIndex - stageStartIndex + 2).ToString();
-            _fadeModel.CurrentStage = data.SceneIndex - stageStartIndex + 1;
+            _nextStageIndex = data.SceneIndex;
+            _fadeView.NextStage = (_nextStageIndex - stageInfoSO.stageStart + 1).ToString();
+            _fadeModel.CurrentStage = SceneManager.GetActiveScene().buildIndex - stageInfoSO.stageStart + 1;
 
             _fadeView.DrawNextDayText = data.DrawNextDayText;
             _fadeView.DrawCurDayText = data.DrawCurDayText;

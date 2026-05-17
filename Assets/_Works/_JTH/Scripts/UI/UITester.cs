@@ -1,11 +1,13 @@
-﻿using _Script.ScriptableObject.Event;
+﻿using System;
+using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
+using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI
 {
-    public class UITester : MonoBehaviour
+    public class UITester : LightSingleton<UITester>
     {
         [SerializeField] private EventChannelSO openUIChannel;
 
@@ -16,7 +18,7 @@ namespace _Works._JTH.Scripts.UI
             else if (Keyboard.current.wKey.wasPressedThisFrame)
                 openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(false));
             else if (Keyboard.current.eKey.wasPressedThisFrame)
-                openUIChannel.RaiseEvent(OpenUIEvents.OpenPopupEvent.Init("안녕하세용", () => Debug.Log("안녕하세요?"), () => Debug.Log("안 안녕하세요?")));
+                openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(true));
             else if (Keyboard.current.rKey.wasPressedThisFrame)
                 openUIChannel.RaiseEvent((OpenUIEvents.OpenSettingEvent));
         }

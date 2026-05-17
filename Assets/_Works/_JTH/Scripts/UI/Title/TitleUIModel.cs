@@ -1,11 +1,10 @@
 ﻿using System;
+using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
-using HwanLib.MVP.System;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.UIData;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Title
 {
@@ -14,9 +13,10 @@ namespace _Works._JTH.Scripts.UI.Title
         private string _savedStage;
         private const string NotSavedStage = "0";
 
+        public int SaveId { get; set; }
         public EventChannelSO OpenUIChannel { get; set; }
+        public EventChannelSO SaveChannel { get; set; }
         public int StageStartIndex { get; set; }
-        public Action PopupCloseEvent {get; set;}
 
         public void SetDefaultValue()
         {
@@ -32,7 +32,7 @@ namespace _Works._JTH.Scripts.UI.Title
         {
             _savedStage = data;
         }
-
+        
         private void NewGameBtnClickHandler(UIParam clickData)
         {
             OpenUIChannel.RaiseEvent(
@@ -46,13 +46,12 @@ namespace _Works._JTH.Scripts.UI.Title
                 OpenUIEvents.OpenPopupEvent.Init("튜토리얼을 진행하시겠습니까?"
                     , () =>
                     {
-                        PopupCloseEvent?.Invoke();
-                        _savedStage = NotSavedStage;
+                        SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent.Init(SaveId, NotSavedStage));
                         OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
                             .Init(StageStartIndex - 1, false, false));
                     }, () =>
                     {
-                        PopupCloseEvent?.Invoke();
+                        SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent.Init(SaveId, "1"));
                         OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
                             .Init(StageStartIndex, false, true));
                     }));

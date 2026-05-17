@@ -49,11 +49,11 @@ namespace _Works._JTH.Scripts.UI.Event
         public bool DrawNextDayText;
         public bool DrawCurDayText;
 
-        public OpenFadeUIEvent Init(int sceneIndex, bool  drawNextDayText, bool drawCurDayText)
+        public OpenFadeUIEvent Init(int sceneIndex, bool drawCurDayText, bool drawNextDayText)
         {
             SceneIndex = sceneIndex;
-            DrawNextDayText = drawNextDayText;
             DrawCurDayText = drawCurDayText;
+            DrawNextDayText = drawNextDayText;
             
             return this;
         }

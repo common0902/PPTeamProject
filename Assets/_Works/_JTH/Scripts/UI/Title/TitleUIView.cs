@@ -49,7 +49,7 @@ namespace _Works._JTH.Scripts.UI.Title
         {
             base.UpdateView();
 
-            if (_continueTxtBtn.Text.Contains("Day0"))
+            if (_continueTxtBtn.Text.Contains("0"))
             {
                 _continueTxtBtn.SetInteractive(false);
             }

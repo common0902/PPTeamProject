@@ -5,7 +5,7 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
 {
     public class EnableEventComponent : MonoBehaviour
     {
-        public event Action<bool> OnEnabled;
+        public Action<bool> OnEnabled;
 
         private void OnEnable()
         {

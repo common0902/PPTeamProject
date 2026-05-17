@@ -85,8 +85,7 @@ MonoBehaviour:
   <SaveId>k__BackingField: {fileID: 11400000, guid: 3bc110ad6133dea4a892d3a020cfb16a, type: 2}
   saveChannel: {fileID: 11400000, guid: 55abadb8b90f1164693e5e42084167a6, type: 2}
   openUIChannel: {fileID: 11400000, guid: fe5b3ecdbfa43714390f2943249b64ac, type: 2}
-  stageStartIndex: 2
-  titleIndex: 0
+  stageInfoSO: {fileID: 11400000, guid: 0c28761e87464e34d82a138048b4bea1, type: 2}
 --- !u!1 &3353493538723911319
 GameObject:
   m_ObjectHideFlags: 0
@@ -805,8 +804,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 802039673736485435}
     m_Modifications:
     - target: {fileID: 1085475099747671429, guid: f69c6b1c5daf89648847601987b8b411, type: 3}
+      propertyPath: m_text
+      value: CONTINUE (DAY {0})
+      objectReference: {fileID: 0}
+    - target: {fileID: 1085475099747671429, guid: f69c6b1c5daf89648847601987b8b411, type: 3}
       propertyPath: m_fontSize
-      value: 72.75
+      value: 70.55
       objectReference: {fileID: 0}
     - target: {fileID: 2977736450741143863, guid: f69c6b1c5daf89648847601987b8b411, type: 3}
       propertyPath: m_Name

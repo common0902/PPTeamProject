@@ -1,4 +1,5 @@
 ﻿using System;
+using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
@@ -8,51 +9,64 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 {
     public class GameEndUIModel : ISaveableModel
     {
-        private string _savedStage;
+        private int _savedStage;
         private const string GameOverTitle = "GAME OVER";
         private const string GameClearTitle = "CLEAR";
-         
-        public bool IsGameOver { get; set; }
+        private bool _isGameOver;
+
+        public void SetGame(bool isGameOver, int saveDataId)
+        {
+            _isGameOver = isGameOver;
+            if (isGameOver == false)
+                SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent.Init(saveDataId, (_savedStage + 1).ToString()));
+        }
+        
         public int StageStartIndex { get; set; }
         public Action CloseViewAction { get; set; }
         public EventChannelSO OpenUIChannel { get; set; }
-        
-        private int NextStage => int.Parse(_savedStage) + 1;
+        public EventChannelSO SaveChannel { get; set; }
+
         
         public void SetDefaultValue()
         {
-            _savedStage = "0";
+            _savedStage = 0;
+            _isGameOver = true;
         }
 
         public string StoreData()
         {
-            return NextStage.ToString();
+            return _savedStage.ToString();
         }
 
         public void RestoreData(string data)
-            => _savedStage = data;
-        
-        private UIParam UpdateTitleText() => UIParams.UIStringParam.Init(IsGameOver ? GameOverTitle : GameClearTitle);
+        {
+            _savedStage = int.Parse(data);
+        }
 
-        private UIParam UpdateDayText() => UIParams.UIStringParam.Init(_savedStage);
+        private UIParam UpdateTitleText() => UIParams.UIStringParam.Init(_isGameOver ? GameOverTitle : GameClearTitle);
+
+        private UIParam UpdateDayText() => UIParams.UIStringParam.Init((_isGameOver ? _savedStage : _savedStage - 1).ToString());
         
-        private UIParam UpdateDescText() => UIParams.UIStringParam.Init(_savedStage);
+        private UIParam UpdateDescText() => UIParams.UIStringParam.Init((_isGameOver ? _savedStage : _savedStage - 1).ToString());
 
         private void ContinueBtnHandler(UIParam clickData)
-            => OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
-                .Init(StageStartIndex + NextStage - 2, false, true));
-        
+        {
+            CloseViewAction?.Invoke();
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
+                .Init(StageStartIndex + _savedStage - 1, false, _savedStage != 0));
+        }
+
         private void NextBtnHandler(UIParam clickData)
         {
             CloseViewAction?.Invoke();
             OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
-                .Init(StageStartIndex + NextStage - 1, true, true));
+                .Init(StageStartIndex + _savedStage - 1, false, true));
         }
 
         private void QuitBtnHandler(UIParam clickData)
         {
             CloseViewAction?.Invoke();
-            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(0, true, false));
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(0, false, false));
         }
     }
 }

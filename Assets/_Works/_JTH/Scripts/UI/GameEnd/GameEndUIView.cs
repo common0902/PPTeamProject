@@ -18,9 +18,11 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         private AccessForm _clearUI;
         private AccessForm _gameOverUI;
         private BackgroundForm _background;
+        private TextForm _dayTextForm;
+        private TextForm _descTextForm;
         
         public float FadeDuration { get; set; }
-        public Color FadeColor { get; set; }
+        public float FadeAlpha { get; set; }
         
         public void SetGameState(bool isGameOver) => UpdateState(isGameOver ? UIState.GameOver : UIState.GameClear);
 
@@ -32,20 +34,46 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _clearUI = GetForm<AccessForm>((int)GameEndUIEnum.ClearUI);
             _gameOverUI = GetForm<AccessForm>((int)GameEndUIEnum.GameOverUI);
             _background = GetForm<BackgroundForm>((int)GameEndUIEnum.Background);
+            _dayTextForm = GetForm<TextForm>((int)GameEndUIEnum.DayText);
+            _descTextForm = GetForm<TextForm>((int)GameEndUIEnum.DescText);
+
+            _background.OnFadeEnd += FadeEndHandler;
+        }
+
+        public override void OnDestroyView()
+        {
+            base.OnDestroyView();
+            
+            _background.OnFadeEnd -= FadeEndHandler;
+        }
+
+        private void FadeEndHandler(bool fadeIn)
+        {
+            if (fadeIn == false)
+                CloseView();
         }
 
         public override void OpenView()
         {
             base.OpenView();
+
+            if (_dayTextForm.Text.Contains("0"))
+            {
+                _dayTextForm.gameObject.SetActive(false);
+                _descTextForm.gameObject.SetActive(false);
+            }
+            else
+            {
+                _dayTextForm.gameObject.SetActive(true);
+                _descTextForm.gameObject.SetActive(true);
+            }
             
-            _background.DoFade(FadeDuration, FadeColor);
+            _background.DoFade(true, FadeDuration, FadeAlpha);
         }
 
-        public override void CloseView()
+        public void StartClose()
         {
-            base.CloseView();
-            
-            _background.DoFade(false, 0);
+            _background.DoFade(false, FadeDuration / 2, FadeAlpha);
         }
 
         private void UpdateState(UIState state)

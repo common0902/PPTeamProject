@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.Utility;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace HwanLib.MVP.System.GenerateUI
 {
@@ -18,15 +20,18 @@ namespace HwanLib.MVP.System.GenerateUI
         public IMultiable EndPresenter { get; set; }
     }
     
-    public class UIManager : MonoBehaviour
+    public class UIManager : LightSingleton<UIManager>
     {
         [SerializeField] private MVPDataListSO mvpDataList;
+        [SerializeField] private EventSystem eventSystemPrefab;
 
         private Dictionary<Type, MultiableUIs> _multiableUIDict;
 
-        private void Awake()
+        protected override void Initialize()
         {
-            DontDestroyOnLoad(gameObject);
+            base.Initialize();
+            
+            Instantiate(eventSystemPrefab, transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
             GenerateAllUI();
