@@ -1,6 +1,6 @@
 ﻿using HwanLib.MVP.Forms.Module.Gauge;
 using HwanLib.MVP.System;
-using HwanLib.MVP.System.MVPModule.Form;
+using HwanLib.MVP.System.AbstractMVP.Form;
 using HwanLib.MVP.UIData;
 
 namespace HwanLib.MVP.Forms
@@ -8,7 +8,7 @@ namespace HwanLib.MVP.Forms
     public class CooldownForm : AbstractVisualForm
     {
         private GaugeType _gaugeType;
-        private AbstractGauge _cooldown;
+        private AbstractGaugeModule _cooldown;
 
         public void InitCooldownForm(GaugeType gaugeType)
         {
@@ -17,7 +17,7 @@ namespace HwanLib.MVP.Forms
             switch (_gaugeType)
             {
                 case GaugeType.PosY:
-                    _cooldown = new PosYGauge();
+                    _cooldown = new PosYGaugeModuleModule();
                     break;
             }
             

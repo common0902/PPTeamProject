@@ -28,6 +28,7 @@ namespace _Works._CJW.Scripts
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
         private CinemachineCamera _camera;
+        [SerializeField] private float rotateStartPercent = 0.4f;
 
         private void Awake()
         {
@@ -70,29 +71,47 @@ namespace _Works._CJW.Scripts
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
-        private IEnumerator TransCameraToQuadViewCoroutine() // 카메라를 쿼드뷰로 변환하는 코루틴
+        private IEnumerator TransCameraToQuadViewCoroutine()
         {
             topViewCam.Priority.Value = 1;
             firstViewCam.Priority.Value = 0;
-            
+
             float t = 0;
-            float startVal = _thirdPersonFollow.VerticalArmLength; 
-            Quaternion endRotation = Quaternion.Euler(0,0,0);
-        
+
+            float startVal = _thirdPersonFollow.VerticalArmLength;
+
+
             while (t < durationTime)
             {
                 t += Time.deltaTime;
-                float percent = t / durationTime;
-                float curveValue = transitionCurve.Evaluate(percent);
-                _thirdPersonFollow.VerticalArmLength = Mathf.SmoothStep(startVal, resultHeight, percent * curveValue);
-                if(percent > 0.35f)
-                    _tempTrs.rotation = Quaternion.Slerp(_tempTrs.rotation, endRotation, percent * curveValue);
+
+                float percent = Mathf.Clamp01(t / durationTime);
+
+                // 40% 이전까지는 그대로
+                if (percent < rotateStartPercent)
+                {
+                    _thirdPersonFollow.VerticalArmLength = startVal;
+                }
+                else
+                {
+                    // 0.4 ~ 1 구간을 다시 0 ~ 1로 변환
+                    float movePercent =
+                        Mathf.InverseLerp(rotateStartPercent, 1f, percent);
+
+                    float curveValue =
+                        transitionCurve.Evaluate(movePercent);
+
+                    _thirdPersonFollow.VerticalArmLength =
+                        Mathf.Lerp(startVal, resultHeight, curveValue);
+                }
+
                 yield return null;
             }
+
+            _thirdPersonFollow.VerticalArmLength = resultHeight;
+
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
-            Debug.Log(CameraEvent.TopViewEvent.IsTopView);
         }
-    
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
             cameraEvent?.RaiseEvent(CameraEvent.TopViewEvent.Init(false));

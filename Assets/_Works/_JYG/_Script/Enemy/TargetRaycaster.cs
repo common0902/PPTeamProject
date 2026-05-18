@@ -12,6 +12,7 @@ namespace _Works._JYG._Script.Enemy
         private GameObject _player;
         [field: SerializeField] public float Range { get; private set; } = 80f;
         public GameObject TargetPlayer{ get; private set; }
+        private Vector3 TargetPlayerMiddlePos => GameManager.Instance.GetPlayerMiddlePos();
         [SerializeField] private LayerMask targetMask;
         public void Initialize(ModuleOwner moduleOwner)
         {
@@ -26,7 +27,7 @@ namespace _Works._JYG._Script.Enemy
 
         private void GetTarget(Transform target)
         {
-            Ray ray = new Ray(transform.position, target.transform.position - transform.position); // 내 위치에서 플레이어 위치 방향으로 레이캐스트 발사.
+            Ray ray = new Ray(transform.position, TargetPlayerMiddlePos - transform.position); // 내 위치에서 플레이어 위치 방향으로 레이캐스트 발사.
             Debug.DrawRay(ray.origin, ray.direction * Range, Color.cyan);                            // 
             if (Physics.Raycast(ray, out RaycastHit hit, Range, targetMask))                                // 레이캐스트로 Target찾기.
             {

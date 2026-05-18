@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.Sabotage;
+using _Works._JTH.Scripts.SO;
 using _Works._PMS.Code.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
@@ -17,8 +18,7 @@ namespace _Works._JTH.Scripts.UI.InGame
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private EventChannelSO cameraChannel;
         [SerializeField] private EventChannelSO playerChannel;
-        [SerializeField] private int stageStartIndex;
-        [SerializeField] private int stageEndIndex;
+        [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private PlayerStatSO playerStat;
         
         private InGameUIModel _inGameModel;
@@ -34,18 +34,24 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameModel = (InGameUIModel)Model;
             
             _inGameModel.SetEventChannel(openUIChannel);
-            //_inGameModel.InitializeData(new InGameUIData
-            //    ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
+            _inGameModel.InitializeData(new InGameUIData
+                ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
             _inGameModel.InitializeData(new InGameUIData
                 (1, 1, 1, true));
 
             AddListener();
             
-            int currentIndex = SceneManager.GetActiveScene().buildIndex;
-            if (currentIndex >= stageStartIndex && currentIndex <= stageEndIndex )
-                _inGameView.OpenView();
+            SceneManager.sceneLoaded += SceneLoadedHandler;
         }
 
+        private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
+        {
+            if (scene.buildIndex >= stageInfoSO.stageStart && scene.buildIndex <= stageInfoSO.stageEnd)
+                _inGameView.OpenView();
+            else
+                _inGameView.CloseView();
+        }
+        
         private void AddListener()
         {
             cameraChannel.AddListener<TopViewEvent>(UseTopViewSkillHandler);
@@ -76,8 +82,10 @@ namespace _Works._JTH.Scripts.UI.InGame
 
         protected override void OnDestroy()
         {
-            RemoveListener();
             base.OnDestroy();
+            
+            RemoveListener();
+            SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
 
         private void UseTopViewSkillHandler(TopViewEvent data)

@@ -6,21 +6,24 @@ using UnityEngine;
 
 namespace HwanLib.MVP.Forms
 {
-    public class DoTweenWindowForm : BaseForm
+    public class DoTweenWindowForm : BaseForm, IInitializable
     {
-        [field: SerializeField] public float OpenDuration { get; private set; } = 0.25f;
-        [field: SerializeField] public float CloseDuration { get; private set; } = 0.225f;
+        [SerializeField] private float openDuration = 0.25f;
+        [SerializeField] private float closeDuration = 0.225f;
         
         public event Action OnAnimationEnd;
 
         private Sequence _sequence;
 
-        private void Awake()
+        public void Initialize()
         {
             _sequence = DOTween.Sequence();
         }
 
-        public void PlayOpenAnimation()
+        public void PlayAnimation(bool isOpen)
+            => PlayAnimation(isOpen, isOpen ? openDuration : closeDuration);
+
+        public void PlayAnimation(bool isOpen, float duration)
         {
             if (_sequence.IsActive() == true)
             {
@@ -28,40 +31,19 @@ namespace HwanLib.MVP.Forms
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
-            transform.localScale = Vector3.zero;
+            
+            transform.localScale = isOpen ? Vector3.zero : transform.localScale;
+            float curDuration = isOpen ? Mathf.Clamp01(1 - transform.localScale.x) * duration
+                : transform.localScale.x * closeDuration;
+            Vector3 targetScale = isOpen ? Vector3.one : Vector3.zero;
+            Ease ease = isOpen ? Ease.InCirc : Ease.InBack;
 
             _sequence = DOTween.Sequence();
-            float curDuration = Mathf.Clamp01(1 - transform.localScale.x) * OpenDuration;
-            _sequence.Append(transform.DOScale(Vector3.one, curDuration).SetEase(Ease.InCirc))
+            _sequence.Append(transform.DOScale(targetScale, curDuration).SetEase(ease))
                 .SetUpdate(true)
-                .OnComplete(() =>
-                {
-                    transform.localScale = Vector3.one;
-                    OnAnimationEnd?.Invoke();
-                });
+                .OnComplete(() => OnAnimationEnd?.Invoke());
         }
         
-        public void PlayCloseAnimation()
-        {
-            if (_sequence.IsActive() == true)
-            {
-                _sequence.Complete();
-                _sequence.Kill();
-                OnAnimationEnd?.Invoke();
-            }
-            transform.localScale = Vector3.one;
-
-            _sequence = DOTween.Sequence();
-            float curDuration = transform.localScale.x * CloseDuration;
-            _sequence.Append(transform.DOScale(Vector3.zero, curDuration).SetEase(Ease.InBack))
-                .SetUpdate(true)
-                .OnComplete(() =>
-                {
-                    transform.localScale = Vector3.zero;
-                    OnAnimationEnd?.Invoke();
-                });
-        }
-
         private void OnDestroy()
         {
             if (_sequence.IsActive() == true)

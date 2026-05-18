@@ -1,7 +1,7 @@
-﻿using System;
-using HwanLib.MVP.System;
-using HwanLib.MVP.System.BaseMVP.Form;
-using HwanLib.MVP.System.MVPModule.Form;
+﻿using HwanLib.MVP.Forms.Module;
+using HwanLib.MVP.Forms.Module.DrawerModule;
+using HwanLib.MVP.System.AbstractMVP.Form;
+using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;
 using TMPro;
 using UnityEngine;
@@ -9,28 +9,29 @@ using UnityEngine;
 namespace HwanLib.MVP.Forms
 {
     [RequireComponent(typeof(TextMeshProUGUI))]
-    public class TextForm : AbstractVisualForm
+    public class TextForm : AbstractVisualForm, IInitializable
     {
         public string Text
         {
-            get => _textMeshProUGUI.text;
-            set => _textMeshProUGUI.text = value;
+            get => TextModule.Text;
+            set => TextModule.Text = value;
         }
 
-        private TextMeshProUGUI _textMeshProUGUI;
-        private string _originalText;
-
-        public void Awake()
+        public DrawerModule DrawerModule { get; private set; }
+        public TextModule TextModule { get; private set; }
+        
+        public void Initialize()
         {
-            _textMeshProUGUI = GetComponent<TextMeshProUGUI>();
-            _originalText = _textMeshProUGUI.text;
+            TextModule = new TextModule(GetComponent<TextMeshProUGUI>());
         }
-
+        
+        public void InitializeDrawer(DrawDirection drawDirection)
+            => DrawerModule = new DrawerModule(GetComponent<RectTransform>(), drawDirection);
+        
         protected override void UpdateVisual(UIParam data)
         {
             string text = ((UIStringParam)data)?.Value;
-            if (!String.IsNullOrEmpty(text))
-                Text = String.Format(_originalText, text);
+            TextModule.UpdateText(text);
         }
     }
 }

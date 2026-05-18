@@ -30,13 +30,14 @@ namespace _Script.SaveSystem
         {
             DataSaveEventChannel.AddListener<StoreDataEvent>(HandleStorePrefEvent);
             DataSaveEventChannel.AddListener<RestoreDataEvent>(HandleRestorePrefEvent);
+            DataSaveEventChannel.AddListener<SyncDataEvent>(HandleSyncDataEvent);
         }
-
 
         private void OnDestroy()
         {
             DataSaveEventChannel.RemoveListener<StoreDataEvent>(HandleStorePrefEvent);
             DataSaveEventChannel.RemoveListener<RestoreDataEvent>(HandleRestorePrefEvent);
+            DataSaveEventChannel.RemoveListener<SyncDataEvent>(HandleSyncDataEvent);
         }
 
         private void HandleStorePrefEvent(StoreDataEvent @event)
@@ -59,6 +60,17 @@ namespace _Script.SaveSystem
             List<SaveData> toSaveData = new List<SaveData>();
             foreach (IStorable saveable in saveableObjects)
             {
+                if (toSaveData.Any(saveData =>
+                    {
+                        if (saveData.Id == saveable.SaveId.Id)
+                        {
+                            Debug.Assert(saveData.Data == saveable.StoreData()
+                                , $"공유 SaveData가 동기화되어 있지 않습니다. {saveable}");
+                            return true;
+                        }
+                        return false;
+                    }))
+                    continue;
                 toSaveData.Add(new SaveData { Id = saveable.SaveId.Id, Data = saveable.StoreData() });
             }
 
@@ -76,23 +88,37 @@ namespace _Script.SaveSystem
             //json값이 비지 않았다면 (저장된 값이 이미 있다면) json값을 들고오고, 저장한다. 비어있다면 새로 판다.
 
             _unUsedData.Clear();
-
             if (parsedData.Collection != null)
             {
                 foreach (SaveData saveData in parsedData.Collection)
                 {
-                    IRestorable saveable = saveables.FirstOrDefault(s => s.SaveId.Id == saveData.Id);
-                    if (saveable != null)
+                    IEnumerable<IRestorable> restorables = saveables.Where(s => s.SaveId.Id == saveData.Id);
+                    foreach (IRestorable restorable in restorables)
                     {
-                        saveable.RestoreData(saveData.Data);
+                        restorable.RestoreData(saveData.Data);
                     }
-                    else
+                    if (restorables.Count() == 0)
                     {
                         _unUsedData.Add(saveData);
                     }
                 }
             }
             Debug.Log("Restore : " + parsedData);
+        }
+
+        private void HandleSyncDataEvent(SyncDataEvent data)
+        {
+            IEnumerable<IRestorable> saveables = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None).OfType<IRestorable>();
+
+            foreach (IRestorable restorable in saveables)
+            {
+                if (restorable.SaveId.Id == data.SaveId)
+                {
+                    restorable.RestoreData(data.SaveData);
+                }
+            }
+            
+            DataSaveEventChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
         
         [ContextMenu("Clear Pref Data")]

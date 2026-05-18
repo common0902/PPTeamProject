@@ -1,19 +1,28 @@
 using _Script.Agent.Modules;
+using _Script.ScriptableObject.Event;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 {
     public abstract class AbstractSabotageFunctionModule : MonoBehaviour, IModule, ISabotageFunctionModule
     {
+        [SerializeField] protected EventChannelSO soundEventChannel;
+        [SerializeField] protected SoundClipSO startSoundClip;
+        
         [SerializeField] private LayerMask groundLayer;
-        [SerializeField] private ParticleSystem[] vfXes;
+        [SerializeField] protected ParticleSystem[] vfXes;
+        [SerializeField] protected int channelNumber;
         private ModuleOwner _owner;
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
             _owner = moduleOwner;
         }
 
-        public abstract void UseFunction();
+        public virtual void UseFunction()
+        {
+            soundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, startSoundClip, channelNumber));
+        }
 
         protected void PlayParticle()
         {

@@ -25,6 +25,13 @@ namespace _Works._JYG._Script
         {
             PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.EnemyChangeState.Init(EnemyState.CHASE));
         }
+
+        public Vector3 GetPlayerMiddlePos()
+        {
+            Vector3 middle = Player.transform.position;
+            middle.y += 1f;
+            return middle;
+        }
         
     }
 }
