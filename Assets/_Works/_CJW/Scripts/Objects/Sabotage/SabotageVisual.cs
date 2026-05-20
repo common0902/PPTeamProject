@@ -14,9 +14,12 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private Color interactedOutLineColor;
         [SerializeField] private GameObject visualObject;
         [SerializeField] private GameObject lockedObject;
+
+        public Action<bool> OnPointerEvent;
         
         private Outline _outline;
         private ModuleOwner _owner;
+        private bool _isTopView = false;
         
 
         public void Initialize(ModuleOwner moduleOwner)
@@ -41,6 +44,10 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void HandleActivation(bool visual, bool lockVisual)
         {
+            if (visual)
+            {
+                HandleOutLineColor(true);
+            }
             visualObject.SetActive(visual);
             lockedObject.SetActive(lockVisual);
         }

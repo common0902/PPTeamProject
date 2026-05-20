@@ -207,12 +207,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a827ef15d53c4723a0bd63dd1418020d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.SprinklerSabotageFunction
+  soundEventChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  startSoundClip: {fileID: 11400000, guid: 6beb2d7de3e988948a49c4a87cf0e801, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   vfXes:
   - {fileID: 8235697044690430894}
-  puddleObject: {fileID: 0}
+  channelNumber: 5
+  puddleObject: {fileID: 2270543831930725328}
+  duration: 5
 --- !u!1 &4682044320749760534
 GameObject:
   m_ObjectHideFlags: 0
