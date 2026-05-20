@@ -4,17 +4,17 @@ using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
     public class SettingUIPresenter : AbstractSaveablePresenter
     {
-        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIEvent;
         [SerializeField] private AudioMixer audioMixer;
+        [SerializeField] private FormSoundModule<SettingUIEnum> soundModule;
         
         private SettingUIView _settingView;
         private SettingUIModel _settingModel;
@@ -40,6 +40,12 @@ namespace _Works._JTH.Scripts.UI.Setting
         private void ShowSetting(OpenSettingEvent eventData)
         {
             _settingView.OpenView();
+        }
+        
+        protected override void InteractedHandler(int childIndex, UIParam value)
+        {
+            base.InteractedHandler(childIndex, value);
+            soundModule.PlaySound(childIndex);
         }
     }
 }

@@ -157,6 +157,15 @@ MonoBehaviour:
   saveChannel: {fileID: 11400000, guid: 55abadb8b90f1164693e5e42084167a6, type: 2}
   openUIEvent: {fileID: 11400000, guid: fe5b3ecdbfa43714390f2943249b64ac, type: 2}
   audioMixer: {fileID: 24100000, guid: 9ce6ed8d51e78d54aae01359d6944913, type: 2}
+  soundModule:
+    soundForms:
+    - TargetForm: 5
+      ClipSO: {fileID: 11400000, guid: 292703abe2403ca4eb2218669d26c6d1, type: 2}
+    - TargetForm: 32
+      ClipSO: {fileID: 11400000, guid: cd81970c29ec7f943840829ec3b3f6ae, type: 2}
+    - TargetForm: 2
+      ClipSO: {fileID: 11400000, guid: 292703abe2403ca4eb2218669d26c6d1, type: 2}
+    soundChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
 --- !u!1 &4840220680523619209
 GameObject:
   m_ObjectHideFlags: 0

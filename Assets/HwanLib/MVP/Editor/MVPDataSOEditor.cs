@@ -94,6 +94,7 @@ namespace HwanLib.MVP.Editor
             BasePresenter presenter = evt.newValue as BasePresenter;
             if (presenter == null)
             {
+                Debug.LogError("BasePresenter 형식을 상속 받아야 합니다.");
                 _targetData.parentPrefab = null;
                 CheckTypeNameContainerActive();
                 return;
@@ -110,6 +111,7 @@ namespace HwanLib.MVP.Editor
 
             if (evt.newValue != evt.previousValue)
             {
+                Debug.LogWarning("프리팹 바뀜");
                 _targetData.ResetFormData();
                 _targetData.modelTypeName = null;
                 _targetData.modelTypeName = null;
