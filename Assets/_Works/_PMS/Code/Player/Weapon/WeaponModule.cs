@@ -1,15 +1,15 @@
 ﻿using _Script.Agent.Modules;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class WeaponModule : MonoBehaviour, IModule
 {
     [SerializeField] private float damage = 10f;
     [SerializeField] private float swapAttackDelay = 0.5f;
+    [SerializeField] private MeleeWeapon meleeWeapon;
+    [SerializeField] private RangedWeapon rangedWeapon;
 
     private List<IWeapon> _weapons = new();
-
     private int _currentIndex = 0;
     private float _swapDelayTimer = 0f;
     private ModuleOwner _owner;
@@ -21,14 +21,14 @@ public class WeaponModule : MonoBehaviour, IModule
     {
         _owner = owner;
 
-        // 비활성화된 게임 오브젝트도 포함해서 찾기
-        var found = owner.GetComponentsInChildren<IWeapon>(true);
-        foreach (var weapon in found)
-            _weapons.Add(weapon);
+        if (meleeWeapon != null)
+        {
+            _weapons.Add(meleeWeapon);
+            meleeWeapon.WeaponObject.SetActive(true);
+        }
 
-        // 처음엔 칼만 활성화
-        for (int i = 0; i < _weapons.Count; i++)
-            _weapons[i].WeaponObject.SetActive(i == 0);
+        if (rangedWeapon != null)
+            rangedWeapon.WeaponObject.SetActive(false);
     }
 
     private void Update()
@@ -40,10 +40,8 @@ public class WeaponModule : MonoBehaviour, IModule
     public void Attack()
     {
         if (!CanAttack) return;
-        Debug.Log(11111111111111);
         CurrentWeapon.Attack(damage);
 
-        // 탄알 0이면 총 제거
         if (CurrentWeapon is RangedWeapon ranged && ranged.Bullets == 0)
             RemoveCurrentWeapon();
     }
@@ -76,28 +74,31 @@ public class WeaponModule : MonoBehaviour, IModule
         _swapDelayTimer = swapAttackDelay;
     }
 
+    [ContextMenu("AddGun")]
     public void AddGun()
     {
-        var ranged = _weapons.OfType<RangedWeapon>().FirstOrDefault();
-        if (ranged != null)
+        if (rangedWeapon == null) return;
+
+        if (_weapons.Contains(rangedWeapon))
         {
-            ranged.Reroad(); // 이미 있으면 탄알만 충전
+            rangedWeapon.Reroad();
             return;
         }
 
-        // 비활성화된 Gun 찾아서 추가
-        var gun = _owner.GetComponentsInChildren<RangedWeapon>(true).FirstOrDefault();
-        if (gun != null)
-        {
-            _weapons.Add(gun);
-            gun.WeaponObject.SetActive(false); // 스왑 전까지 비활성화 유지
-        }
+        _weapons.Add(rangedWeapon);
+        rangedWeapon.WeaponObject.SetActive(false);
+        SwapWeaponIndex(1);
     }
 
     private void RemoveCurrentWeapon()
     {
         CurrentWeapon.WeaponObject.SetActive(false);
         _weapons.RemoveAt(_currentIndex);
-        _currentIndex = Mathf.Clamp(_currentIndex, 0, _weapons.Count - 1);
+
+        if (_weapons.Count == 0) return;
+
+        
+        _currentIndex = 0;
+        CurrentWeapon.WeaponObject.SetActive(true);
     }
 }

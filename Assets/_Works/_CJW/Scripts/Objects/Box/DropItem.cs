@@ -33,15 +33,5 @@ namespace _Works._CJW.Scripts.Objects.Box
 
             StartCoroutine(BouncingCoroutine());
         }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if(other.gameObject.CompareTag("Player"))
-            {
-                // 플레이어가 아이템을 획득하는 로직을 여기에 추가
-                Debug.Log("Player picked up the item!");
-                Destroy(gameObject);
-            }
-        }
     }
 }

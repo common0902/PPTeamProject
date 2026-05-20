@@ -17,18 +17,17 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private float damage;
         [SerializeField] private float lifetime;
         [SerializeField] private LayerMask enemyLayer;
+        private SabotageVisual _visual;
         private Rigidbody _rigid;
 
         public override void Initialize(ModuleOwner moduleOwner)
         {
             base.Initialize(moduleOwner);
-            gameObject.SetActive(false);
         }
         public override void UseFunction()
         {
             base.UseFunction();
-            transform.
-            gameObject.SetActive(true);
+            _owner.ActiveVisual(false, false);
             if (GetGround(out var hit))
             {
                 ExecuteDamage();
@@ -40,6 +39,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
                         gameObject.SetActive(false);
+                        _owner.ActiveVisual(false, false);
                     });
                 }));
             }
@@ -66,7 +66,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawCube(transform.position + boxOffset, boxSize / 2);
+            Gizmos.DrawCube(transform.position + boxOffset, boxSize);
         }
     }
 }

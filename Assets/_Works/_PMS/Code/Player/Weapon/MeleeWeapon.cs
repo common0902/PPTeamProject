@@ -12,7 +12,7 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
 
     public void Attack(float damage)
     {
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + Vector3.up;
         Vector3 direction = transform.forward;
 
         if (Physics.SphereCast(origin, attackRadius, direction, out RaycastHit hit, attackRange, targetLayer))
@@ -20,5 +20,14 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
             if (hit.collider.TryGetComponent(out IDamageable damageable))
                 damageable.TakeDamage(damage, direction, origin);
         }
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up, attackRadius);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position + Vector3.up + transform.forward * attackRange, attackRadius);
+
     }
 }
