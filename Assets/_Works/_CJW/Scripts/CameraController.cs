@@ -40,6 +40,9 @@ namespace _Works._CJW.Scripts
             _rootTrs = _camera.Follow;
             // _playerTrs = _rootTrs;
             _tempTrs = new GameObject("CamTempTransform").transform;
+            
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
         [ContextMenu("Quad")]
         private void Test()
@@ -71,8 +74,11 @@ namespace _Works._CJW.Scripts
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
-        private IEnumerator TransCameraToQuadViewCoroutine()
+        private IEnumerator TransCameraToQuadViewCoroutine() //탑뷰로 올라가기 시작
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+            
             topViewCam.Priority.Value = 1;
             firstViewCam.Priority.Value = 0;
 
@@ -114,6 +120,9 @@ namespace _Works._CJW.Scripts
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+            
             cameraEvent?.RaiseEvent(CameraEvent.TopViewEvent.Init(false));
             float t = 0;
             float startVal = _thirdPersonFollow.VerticalArmLength;
