@@ -22,6 +22,11 @@ namespace _Script.Agent.Modules
             transform.eulerAngles = newAngle;
         }
 
+        public void SetVisible()
+        {
+
+        }
+
         public void PlayAnimationWithSO(AnimationHashSO animationHash, float fadeDuration) =>
             PlayCrossFade(animationHash.AnimationHash, 0, fadeDuration);
 
