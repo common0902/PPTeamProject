@@ -11,6 +11,7 @@ namespace _Works._JTH.Scripts.UI.Title
 {
     public class TitleUIPresenter : AbstractSaveablePresenter
     {
+        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
 
@@ -24,7 +25,7 @@ namespace _Works._JTH.Scripts.UI.Title
             _titleView = (TitleUIView)View;
             _titleModel = (TitleUIModel)Model;
 
-            _titleModel.StageStartIndex = stageInfoSO.stageStart;
+            _titleModel.StageStartIndex = stageInfoSO.stageStartIdx;
             _titleModel.OpenUIChannel = openUIChannel;
             _titleModel.SaveChannel = saveChannel;
             _titleModel.SaveId = SaveId.Id;
@@ -41,7 +42,7 @@ namespace _Works._JTH.Scripts.UI.Title
 
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
         {
-            if (scene.buildIndex == stageInfoSO.title)
+            if (scene.buildIndex == stageInfoSO.titleIdx)
                 _titleView.OpenView();
             else
                 _titleView.CloseView();
