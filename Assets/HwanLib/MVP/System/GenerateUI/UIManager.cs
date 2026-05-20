@@ -4,6 +4,7 @@ using HwanLib.MVP.System.BaseMVP;
 using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Rendering.Universal;
 
 namespace HwanLib.MVP.System.GenerateUI
 {
@@ -24,17 +25,24 @@ namespace HwanLib.MVP.System.GenerateUI
     {
         [SerializeField] private MVPDataListSO mvpDataList;
         [SerializeField] private EventSystem eventSystemPrefab;
+        [SerializeField] private WorldUICamera worldUICamera;
+        [SerializeField] private LayerMask uiLayer;
 
         private Dictionary<Type, MultiableUIs> _multiableUIDict;
+        private List<BasePresenter> _presenterList;
 
         protected override void Initialize()
         {
             base.Initialize();
             
             Instantiate(eventSystemPrefab, transform);
+            Instantiate(worldUICamera, transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
+            _presenterList = new List<BasePresenter>();
+            
             GenerateAllUI();
+            SetOverlyCamera();
         }
 
         private void GenerateAllUI()
@@ -46,6 +54,8 @@ namespace HwanLib.MVP.System.GenerateUI
                     , $"singleUIData에 multiable UI가 존재합니다. {presenter.gameObject.name}");
                 presenter.InitializePresenter(singleUI.GetFormDataList(), 
                     singleUI.GetViewType(), singleUI.GetModelType());
+                
+                _presenterList.Add(presenter);
             }
 
             foreach (MultiableUIData multiableData in mvpDataList.multiableUIData)
@@ -75,6 +85,8 @@ namespace HwanLib.MVP.System.GenerateUI
                     
             multiableUI.TryOpen += OpenMultiableUI;
             multiableData.EndPresenter = multiableUI;
+            
+            _presenterList.Add(presenter);
         }
         
         private bool OpenMultiableUI(IMultiable presenter)
@@ -112,6 +124,22 @@ namespace HwanLib.MVP.System.GenerateUI
                 return false;
 
             return true;
+        }
+
+        private void SetOverlyCamera()
+        {
+            var cameraData = Camera.main.GetComponent<UniversalAdditionalCameraData>();
+            
+            foreach (BasePresenter presenter in _presenterList)
+            {
+                if (presenter.IsWorldPosition)
+                {
+                    Camera overlayCam = cameraData.cameraStack
+                        .Find(cam => cam.cullingMask == uiLayer);
+                    
+                    presenter.transform.GetChild(0).GetComponent<Canvas>().worldCamera = overlayCam;
+                }
+            }
         }
     }
 }

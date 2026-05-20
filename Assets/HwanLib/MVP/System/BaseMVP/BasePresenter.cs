@@ -14,6 +14,8 @@ namespace HwanLib.MVP.System.BaseMVP
 
         protected Dictionary<int, Action<UIParam>> ModuleInteractMethodDict;
         private Dictionary<int, Func<UIParam>> _moduleUpdateMethodDict;
+
+        public virtual bool IsWorldPosition => false;
         
         public virtual void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
