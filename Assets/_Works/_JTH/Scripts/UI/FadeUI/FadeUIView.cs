@@ -26,6 +26,9 @@ namespace _Works._JTH.Scripts.UI.FadeUI
             
             _stageTextForm = GetForm<TextForm>((int)FadeUIEnum.StageText);
             BackgroundForm = GetForm<BackgroundForm>((int)FadeUIEnum.Background);
+
+            BackgroundForm.CompleteOnStart = false;
+            BackgroundForm.ResetOnStart = true;
             
             _stageTextForm.InitializeDrawer(DrawDirection.Up);
             _stageTextForm.DrawerModule.Draw(false, 0, true);
@@ -58,7 +61,7 @@ namespace _Works._JTH.Scripts.UI.FadeUI
         public void StartClose()
         {
             BackgroundForm.DoFade(false, FadeDuration, 1);
-            if (DrawNextDayText)
+            if (DrawCurDayText && !_stageTextForm.Text.Contains("0"))
             {
                 _stageTextForm.DrawerModule.Draw(true, DrawDuration / 2, true);
                 _stageTextForm.TextModule.UpdateText(NextStage);

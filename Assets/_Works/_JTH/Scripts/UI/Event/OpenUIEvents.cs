@@ -49,6 +49,13 @@ namespace _Works._JTH.Scripts.UI.Event
         public bool DrawNextDayText;
         public bool DrawCurDayText;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sceneIndex">이동할 씬의 인덱스</param>
+        /// <param name="drawCurDayText">현재 스테이지 UI를 표시(내릴지)</param>
+        /// <param name="drawNextDayText">이동할 스테이지 UI를 표시(내릴지)</param>
+        /// <returns></returns>
         public OpenFadeUIEvent Init(int sceneIndex, bool drawCurDayText, bool drawNextDayText)
         {
             SceneIndex = sceneIndex;

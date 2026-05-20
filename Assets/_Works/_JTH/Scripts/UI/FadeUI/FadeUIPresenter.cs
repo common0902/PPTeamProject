@@ -50,11 +50,12 @@ namespace _Works._JTH.Scripts.UI.FadeUI
         private void OpenUI(OpenFadeUIEvent data)
         {
             _nextStageIndex = data.SceneIndex;
-            _fadeView.NextStage = (_nextStageIndex - stageInfoSO.stageStart + 1).ToString();
-            _fadeModel.CurrentStage = SceneManager.GetActiveScene().buildIndex - stageInfoSO.stageStart + 1;
-
+            _fadeView.NextStage = _nextStageIndex.ToString();
             _fadeView.DrawNextDayText = data.DrawNextDayText;
             _fadeView.DrawCurDayText = data.DrawCurDayText;
+
+            _fadeModel.CurrentStage = SceneManager.GetActiveScene().buildIndex - stageInfoSO.stageStartIdx + 1;
+            StopAllCoroutines();
             _fadeView.OpenView();
         }
 

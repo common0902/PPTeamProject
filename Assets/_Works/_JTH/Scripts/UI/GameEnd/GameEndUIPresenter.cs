@@ -11,6 +11,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 {
     public class GameEndUIPresenter : AbstractSaveablePresenter
     {
+        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private float fadeDuration = 2;
         [SerializeField] private float fadeInAlpha;
@@ -26,7 +27,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _gameEndModel = (GameEndUIModel)Model;
             _gameEndView = (GameEndUIView)View;
             
-            _gameEndModel.StageStartIndex = stageInfoSO.stageStart;
+            _gameEndModel.StageStartIndex = stageInfoSO.stageStartIdx;
             _gameEndModel.CloseViewAction = _gameEndView.StartClose;
             _gameEndModel.OpenUIChannel = openUIChannel;
             _gameEndModel.SaveChannel = saveChannel;

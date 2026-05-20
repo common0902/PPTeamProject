@@ -11,6 +11,7 @@ namespace _Works._JTH.Scripts.UI.Popup
 {
     public class PopupUIPresenter : BasePresenter, IMultiable
     {
+        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIEvent;
         
         public event Func<IMultiable, bool> TryOpen;
