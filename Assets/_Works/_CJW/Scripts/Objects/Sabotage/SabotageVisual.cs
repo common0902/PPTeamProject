@@ -37,9 +37,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
                 return;
             
             if (obj.IsFocused)
-                HandleOutLineColor(true);
-            else
                 HandleOutLineColor(false);
+            else
+                HandleOutLineColor(true);
         }
 
         public void HandleActivation(bool visual, bool lockVisual)
