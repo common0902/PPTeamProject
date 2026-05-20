@@ -46,7 +46,7 @@ namespace _Works._JTH.Scripts.UI.InGame
 
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
         {
-            if (scene.buildIndex >= stageInfoSO.stageStart && scene.buildIndex <= stageInfoSO.stageEnd)
+            if (scene.buildIndex >= stageInfoSO.stageStartIdx && scene.buildIndex <= stageInfoSO.stageEndIdx)
                 _inGameView.OpenView();
             else
                 _inGameView.CloseView();
