@@ -5,6 +5,7 @@ using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
+using WorldUICamera = HwanLib.MVP.System.GenerateUI.WorldUICamera;
 
 namespace HwanLib.MVP.System.GenerateUI
 {
