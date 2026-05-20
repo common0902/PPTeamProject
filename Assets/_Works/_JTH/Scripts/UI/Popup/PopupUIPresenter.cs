@@ -4,15 +4,15 @@ using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
     public class PopupUIPresenter : BasePresenter, IMultiable
     {
-        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIEvent;
+        [SerializeField] private FormSoundModule<PopupUIEnum> soundModule;
         
         public event Func<IMultiable, bool> TryOpen;
 
@@ -48,6 +48,12 @@ namespace _Works._JTH.Scripts.UI.Popup
             _popupModel.SetMessage(eventData.Message);
             _popupModel.SetActions(eventData.YesAction, eventData.NoAction);
             _popupView.UpdateView();
+        }
+        
+        protected override void InteractedHandler(int childIndex, UIParam value)
+        {
+            base.InteractedHandler(childIndex, value);
+            soundModule.PlaySound(childIndex);
         }
     }
 }

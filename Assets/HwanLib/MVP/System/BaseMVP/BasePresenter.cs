@@ -12,14 +12,16 @@ namespace HwanLib.MVP.System.BaseMVP
         protected BaseView View { get; private set; }
         protected IModel Model { get; private set; }
 
-        private Dictionary<int, Action<UIParam>> _moduleInteractMethodDict;
+        protected Dictionary<int, Action<UIParam>> ModuleInteractMethodDict;
         private Dictionary<int, Func<UIParam>> _moduleUpdateMethodDict;
+
+        public virtual bool IsWorldPosition => false;
         
         public virtual void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
             Dictionary<int, string> formInteractMethodDict = new Dictionary<int, string>();
             Dictionary<int, string> formUpdateMethodDict = new Dictionary<int, string>();
-            _moduleInteractMethodDict = new Dictionary<int, Action<UIParam>>();
+            ModuleInteractMethodDict = new Dictionary<int, Action<UIParam>>();
             _moduleUpdateMethodDict = new Dictionary<int, Func<UIParam>>();
             
             foreach (FormData form in formData)
@@ -51,7 +53,7 @@ namespace HwanLib.MVP.System.BaseMVP
                         && method.GetParameters().Length == 1
                         && method.GetParameters()[0].ParameterType == typeof(UIParam))
                     {
-                        _moduleInteractMethodDict.Add(targetMethodData.Key
+                        ModuleInteractMethodDict.Add(targetMethodData.Key
                             , method.CreateDelegate(typeof(Action<UIParam>), Model) as Action<UIParam>);
                         break;
                     }
@@ -84,9 +86,9 @@ namespace HwanLib.MVP.System.BaseMVP
             View.OnDestroyView();
         }
 
-        private void InteractedHandler(int childIndex, UIParam value)
+        protected virtual void InteractedHandler(int childIndex, UIParam value)
         {
-            if (_moduleInteractMethodDict.TryGetValue(childIndex, out Action<UIParam> interactMethod))
+            if (ModuleInteractMethodDict.TryGetValue(childIndex, out Action<UIParam> interactMethod))
             {
                 interactMethod?.Invoke(value);
             }
