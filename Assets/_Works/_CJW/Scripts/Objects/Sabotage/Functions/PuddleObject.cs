@@ -11,12 +11,12 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
     {
         protected override void OnTriggerEnterEnemy(AbstractEnemy enemy)
         {
-            
+            enemy.isWater = true;
         }
 
         protected override void OnTriggerExitEnemy(AbstractEnemy enemy)
         {
-            
+            enemy.isWater = false;
         }
         
 
