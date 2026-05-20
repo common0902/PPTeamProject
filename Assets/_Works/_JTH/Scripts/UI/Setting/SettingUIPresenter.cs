@@ -12,6 +12,7 @@ namespace _Works._JTH.Scripts.UI.Setting
 {
     public class SettingUIPresenter : AbstractSaveablePresenter
     {
+        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIEvent;
         [SerializeField] private AudioMixer audioMixer;
         

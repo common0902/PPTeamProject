@@ -18,7 +18,11 @@ namespace HwanLib.MVP.Forms
         [Header("Default Duration")]
         [SerializeField] private float fadeInDuration = 0.3f;
         [SerializeField] private float fadeOutDuration = 0.3f;
-
+        
+        [Header("Settings")]
+        [field: SerializeField] public bool ResetOnStart { get; set; } = false;
+        [field: SerializeField] public bool CompleteOnStart { get; set; } = false;
+        
         public event Action<bool> OnFadeEnd;
         
         private Image _backgroundImage;
@@ -53,12 +57,13 @@ namespace HwanLib.MVP.Forms
             _backgroundImage = image;
         }
         
-        public void DoFade(bool isFadeIn, float duration, float targetAlpha)
+        public void DoFade(bool isFadeIn, float duration, float originAlpha)
         {
-            _backgroundImage.DOComplete();
-            _backgroundImage.DOKill();
+            if (CompleteOnStart) _canvasGroup.DOComplete();
+            _canvasGroup.DOKill();
+            if (ResetOnStart) _canvasGroup.alpha = isFadeIn ? 0 : 1;
             
-            _backgroundImage.color = new Color(0, 0, 0, targetAlpha);
+            _backgroundImage.color = new Color(0, 0, 0, originAlpha);
             _canvasGroup.DOFade(isFadeIn ? 1 : 0, duration).SetUpdate(true).SetEase(Ease.Linear)
                 .OnComplete(() => OnFadeEnd?.Invoke(isFadeIn));
         }
