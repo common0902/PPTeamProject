@@ -37,6 +37,8 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _dayTextForm = GetForm<TextForm>((int)GameEndUIEnum.DayText);
             _descTextForm = GetForm<TextForm>((int)GameEndUIEnum.DescText);
 
+            _background.CompleteOnStart = false;
+            _background.ResetOnStart = true;
             _background.OnFadeEnd += FadeEndHandler;
         }
 
