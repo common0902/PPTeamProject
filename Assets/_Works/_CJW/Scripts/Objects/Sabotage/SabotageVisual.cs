@@ -14,6 +14,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private Color interactedOutLineColor;
         [SerializeField] private GameObject visualObject;
         [SerializeField] private GameObject lockedObject;
+
+        public Action<bool> OnPointerEvent;
         
         private Outline _outline;
         private ModuleOwner _owner;

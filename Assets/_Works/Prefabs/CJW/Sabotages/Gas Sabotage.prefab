@@ -353,7 +353,7 @@ Transform:
   m_GameObject: {fileID: 3289058397842607533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.01051, z: 0.0406}
+  m_LocalPosition: {x: 0, y: 0, z: 5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -426,9 +426,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4edd2e6446b945538d385c2685eb5a3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.Functions.GasSabotageFunction
+  soundEventChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  startSoundClip: {fileID: 11400000, guid: b14b70ea8262e3d41a80c56711fb5d04, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   vfXes: []
+  channelNumber: 4
   gasObject: {fileID: 1364807667489891953, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
   spawnPos: {fileID: 368398463371007459}
+  duration: 10

@@ -154,8 +154,8 @@ Transform:
   m_GameObject: {fileID: 7296050046287856163}
   serializedVersion: 2
   m_LocalRotation: {x: 0.00000023841855, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.5, y: -3.5000002, z: 0.49999958}
-  m_LocalScale: {x: 100, y: 100.000046, z: 100.000046}
+  m_LocalPosition: {x: -0.5, y: -3.5, z: 1.21}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 84492146920845805}
@@ -181,7 +181,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 3
   m_Size: {x: 0.02, y: 0.020000005, z: 0.007501476}
-  m_Center: {x: 0, y: -9.313226e-10, z: -0.0062292167}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &890301539378715754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -194,12 +194,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc14d0582f2b42efb4314d3c796983d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.Functions.ShortCircuitSabotageFunction
+  soundEventChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  startSoundClip: {fileID: 11400000, guid: 5c5239fc2eb65794cb255bee95cc645e, type: 2}
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   vfXes:
   - {fileID: 1777842173298393190}
-  targetEnemies: []
+  channelNumber: 0
+  targetEnemies:
+  - {fileID: 0}
   duration: 0
 --- !u!1 &7651026681882877732
 GameObject:
