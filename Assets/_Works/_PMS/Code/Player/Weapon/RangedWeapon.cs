@@ -17,8 +17,10 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     {
         if (!CanAttack) return;
 
-        Vector3 origin = transform.position;
+        Vector3 origin = transform.position + Vector3.up;
         Vector3 direction = transform.forward;
+
+        Debug.Log(10001);
 
         _bullets--;
 
@@ -30,5 +32,11 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     }
 
     public void Reroad() => _bullets = 5;
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawRay(transform.position + Vector3.up, transform.forward * range);
+    }
 
 }

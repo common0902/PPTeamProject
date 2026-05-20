@@ -77,6 +77,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if (evt.IsTopView && !IsLocked)
             {
+                _visual.HandleOutLineEnable(true);
                 _visual.HandleActivation(true, false);
                 return;
             }
@@ -91,6 +92,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             }
         }
 
+        public void ActiveVisual(bool unlockVisual, bool lockVisual)
+            => _visual.HandleActivation(unlockVisual, lockVisual); 
         public void OnPointerClick(PointerEventData eventData)
         {
             if(IsUsed || IsLocked) return; 
@@ -105,7 +108,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         public void OnPointerEnter(PointerEventData eventData)
         {
             if(IsUsed) return;
-            Debug.Log("Enter");
             
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, true));
             ShouldMark = false;

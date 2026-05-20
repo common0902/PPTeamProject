@@ -13,10 +13,10 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] protected ParticleSystem[] vfXes;
         [SerializeField] protected int channelNumber;
-        private ModuleOwner _owner;
+        protected Sabotage _owner;
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
-            _owner = moduleOwner;
+            _owner = moduleOwner as Sabotage;
         }
 
         public virtual void UseFunction()
