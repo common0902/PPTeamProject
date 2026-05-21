@@ -5,6 +5,7 @@ using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
+using _Works._CJW.Scripts.Objects.Sabotage.Functions;
 using UnityEngine;
 
 namespace _Works._CJW.Scripts
@@ -13,8 +14,8 @@ namespace _Works._CJW.Scripts
     {
         [SerializeField] private EventChannelSO interactEvent;
         
-        private List<IInteractableObject> _interactableObjects = new();
-        private IInteractableObject _currentObject;
+        private List<AbstractInteractableObject> _interactableObjects = new();
+        private AbstractInteractableObject _currentObject;
         private Player _owner;
         public void Initialize(ModuleOwner moduleOwner)
         {
@@ -66,7 +67,14 @@ namespace _Works._CJW.Scripts
             //가장 가까운 오브젝트와 상호작용 가능하게 하고, 시각적으로 표현함
             var nearObject = _interactableObjects.OrderBy
             (interactObject => Vector3.Distance(transform.position
-                , ((MonoBehaviour)interactObject).transform.position)).FirstOrDefault();
+                , interactObject.transform.position)).FirstOrDefault();
+
+            if (_currentObject != nearObject && nearObject != null)
+            {
+                interactEvent.RaiseEvent(InteractEvents.ClosestObjectEvent
+                    .Init(nearObject.DataSo, nearObject.transform.position));
+            }
+            
             _currentObject = nearObject;
             _currentObject?.SetFocused(true);
             

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6106921990152443153}
   - component: {fileID: 7443911186355670952}
   - component: {fileID: 537354962449197791}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Short Circuit Sabotage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,8 +74,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 0.25, z: 1.5}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.5, y: 1.5, z: 1.5}
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &929938810452144330
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +87,6 @@ GameObject:
   - component: {fileID: 557138019757771826}
   - component: {fileID: 873937057234270065}
   - component: {fileID: 5893258285580467832}
-  - component: {fileID: 6036068638043249988}
   - component: {fileID: 4312300353101066799}
   m_Layer: 6
   m_Name: Electric_Box_01 (1)
@@ -168,28 +167,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6036068638043249988
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 929938810452144330}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 183ba50f754853448ac7cdd8ed8d0597, type: 3}
 --- !u!114 &4312300353101066799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -234,7 +211,7 @@ Transform:
   m_GameObject: {fileID: 5828862571457308187}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -255,8 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.SabotageVisual
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
-  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 0}
-  interactedOutLineColor: {r: 0, g: 0.035513878, b: 1, a: 1}
+  defaultOutLineColor: {r: 0, g: 0, b: 0, a: 1}
+  interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
   visualObject: {fileID: 7131430902156394130}
   lockedObject: {fileID: 929938810452144330}
 --- !u!1 &7131430902156394130
@@ -270,7 +247,6 @@ GameObject:
   - component: {fileID: 6040522164857853285}
   - component: {fileID: 8928197333560661803}
   - component: {fileID: 2713462916166861576}
-  - component: {fileID: 924645872192102011}
   - component: {fileID: 8612964134298989252}
   m_Layer: 6
   m_Name: Electric_Box_01
@@ -351,28 +327,6 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &924645872192102011
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7131430902156394130}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 183ba50f754853448ac7cdd8ed8d0597, type: 3}
 --- !u!114 &8612964134298989252
 MonoBehaviour:
   m_ObjectHideFlags: 0
