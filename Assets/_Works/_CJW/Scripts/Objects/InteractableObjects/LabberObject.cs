@@ -22,6 +22,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
                 transform.rotation = 
                     Quaternion.Lerp(transform.rotation, Quaternion.Euler(endRotation, 0, 0), t);
             }
+
+            yield return null;
         }
     }
 }
