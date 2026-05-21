@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Script.Agent.Modules;
@@ -51,6 +52,11 @@ namespace _Works._CJW.Scripts
                     Debug.Log($"Unregistered object");
                 }
             }
+            UpdateFocused();
+        }
+
+        private void LateUpdate()
+        {
             UpdateFocused();
         }
 
