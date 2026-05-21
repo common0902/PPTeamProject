@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Multiable;
 using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
-using WorldUICamera = HwanLib.MVP.System.GenerateUI.WorldUICamera;
 
 namespace HwanLib.MVP.System.GenerateUI
 {
@@ -19,7 +19,7 @@ namespace HwanLib.MVP.System.GenerateUI
     public class MultiableUIs
     {
         public MultiableUIState State { get; set; }
-        public IMultiable EndPresenter { get; set; }
+        public IMultiablePresenter EndPresenter { get; set; }
     }
     
     public class UIManager : LightSingleton<UIManager>
@@ -37,7 +37,7 @@ namespace HwanLib.MVP.System.GenerateUI
             base.Initialize();
             
             Instantiate(eventSystemPrefab, transform);
-            Instantiate(worldUICamera, transform);
+            Instantiate(worldUICamera, Camera.main.transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
             _presenterList = new List<BasePresenter>();
@@ -51,7 +51,7 @@ namespace HwanLib.MVP.System.GenerateUI
             foreach (MVPDataSO singleUI in mvpDataList.singleUIData)
             {
                 BasePresenter presenter = Instantiate(singleUI.parentPrefab, transform);
-                Debug.Assert(presenter is not IMultiable
+                Debug.Assert(presenter is not IMultiablePresenter
                     , $"singleUIData에 multiable UI가 존재합니다. {presenter.gameObject.name}");
                 presenter.InitializePresenter(singleUI.GetFormDataList(), 
                     singleUI.GetViewType(), singleUI.GetModelType());
@@ -63,7 +63,7 @@ namespace HwanLib.MVP.System.GenerateUI
             {
                 MVPDataSO dataSO = multiableData.MvpDataSO;
                 
-                MultiableUIs multiableUIs = new MultiableUIs() { State = MultiableUIState.None };
+                MultiableUIs multiableUIs = new MultiableUIs { State = MultiableUIState.None };
                 _multiableUIDict.Add(dataSO.parentPrefab.GetType(), multiableUIs);
                 
                 for (int i = 0; i < multiableData.Count; ++i)
@@ -80,17 +80,17 @@ namespace HwanLib.MVP.System.GenerateUI
             
             presenter.InitializePresenter(dataSO.GetFormDataList(), dataSO.GetViewType(), dataSO.GetModelType());
                     
-            IMultiable multiableUI = presenter as IMultiable;
-            Debug.Assert(multiableUI != null,
+            IMultiablePresenter multiablePresenterUI = presenter as IMultiablePresenter;
+            Debug.Assert(multiablePresenterUI != null,
                 $"multiable UI Data는 IMultiable을 상속해야 합니다. gameObject: {presenter.gameObject.name}");
                     
-            multiableUI.TryOpen += OpenMultiableUI;
-            multiableData.EndPresenter = multiableUI;
+            multiablePresenterUI.TryOpen += OpenMultiableUI;
+            multiableData.EndPresenter = multiablePresenterUI;
             
             _presenterList.Add(presenter);
         }
         
-        private bool OpenMultiableUI(IMultiable presenter)
+        private bool OpenMultiableUI(IMultiablePresenter presenter)
         {
             Type presenterType = presenter.GetType();
             MultiableUIs multiableUIs = _multiableUIDict[presenterType];
@@ -108,7 +108,7 @@ namespace HwanLib.MVP.System.GenerateUI
 
             //열어야 함.
             //열 수 있음
-            if (presenter.CanOpen)
+            if (presenter.MultiableView.CanOpen)
             {
                 presenter.OpenUI();
                 multiableUIs.State = MultiableUIState.Opened;
