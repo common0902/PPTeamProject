@@ -32,8 +32,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
 
         private IEnumerator BulletLifeTime()
         {
-            yield return new WaitForSeconds(2f);
-            Debug.Log($"맵이 유효하지 않거나 뚫려있어 LifeTime에 의해 EnemyBullet({gameObject.name})이 제거되었습니다.");
+            yield return new WaitForSeconds(1.5f);
             _poolManager.Push(this);
         }
         private void OnCollisionEnter(Collision collision)

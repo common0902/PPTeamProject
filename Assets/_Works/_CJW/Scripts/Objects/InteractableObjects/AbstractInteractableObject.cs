@@ -9,6 +9,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
     [RequireComponent(typeof(SphereCollider))]
     public abstract class AbstractInteractableObject : MonoBehaviour, IInteractableObject
     {
+        [field: SerializeField] public InteractableObjectDataSo DataSo { get; private set; }
         [SerializeField] private EventChannelSO interactEvent;
         [SerializeField] private LayerMask playerLayer;
         [SerializeField] private Color defaultColor; // 기본 아웃라인 컬러
