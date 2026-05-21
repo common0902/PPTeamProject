@@ -60,7 +60,7 @@ namespace _Works._CJW.Scripts
         }
 
         //탑뷰로 전환
-        private void TransToTopView()
+        public void TransToTopView()
         {
             if (!_isTransitioning)
             {
@@ -70,7 +70,7 @@ namespace _Works._CJW.Scripts
         }
         
         //1인칭으로 전환
-        private void TransToFirstView()
+        public void TransToFirstView()
         {
             if (!_isTransitioning)
             {
