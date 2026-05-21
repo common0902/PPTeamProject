@@ -137,6 +137,7 @@ MonoBehaviour:
   targetEventName: FireSabotageEvent
   markOffset: {x: 0, y: 0, z: 0}
   markBoxSize: {x: 2, y: 2}
+  sabotages: []
   <IsLocked>k__BackingField: 0
 --- !u!65 &4654009024373916963
 BoxCollider:
@@ -267,7 +268,7 @@ Transform:
   m_GameObject: {fileID: 3289058397842607533}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: -4.76}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -438,7 +439,8 @@ MonoBehaviour:
   vfXes: []
   channelNumber: 4
   gasObject: {fileID: 1364807667489891953, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-  spawnPos: {fileID: 368398463371007459}
+  spawnPos:
+  - {fileID: 2882403692331465936}
   duration: 10
 --- !u!1 &5588337309571698864
 GameObject:
