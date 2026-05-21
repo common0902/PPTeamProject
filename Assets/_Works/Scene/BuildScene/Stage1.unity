@@ -9244,6 +9244,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8404892478687946262, guid: e7325be54ff59484aa7c80f6886e5809, type: 3}
   m_PrefabInstance: {fileID: 1990697426}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1999937676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1999937677}
+  - component: {fileID: 1999937678}
+  m_Layer: 3
+  m_Name: InteractManageModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1999937677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999937676}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2061640600}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1999937678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1999937676}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57992cbdbf984b41b2c5129aa0976acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.PlayerInteractManageModule
+  interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
 --- !u!1 &2008968781
 GameObject:
   m_ObjectHideFlags: 0
@@ -9940,6 +9985,7 @@ Transform:
   - {fileID: 2012413663}
   - {fileID: 1988120198}
   - {fileID: 487927857}
+  - {fileID: 1999937677}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2064089494 stripped
