@@ -1,5 +1,4 @@
-﻿using System;
-using _Script.ScriptableObject.Event;
+﻿using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.Utility;
@@ -23,9 +22,12 @@ namespace _Works._JTH.Scripts.UI
                 openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(true));
             else if (Keyboard.current.rKey.wasPressedThisFrame)
                 openUIChannel.RaiseEvent((OpenUIEvents.OpenSettingEvent));
-            // else if (Keyboard.current.tKey.wasPressedThisFrame)
-            //     openUIChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
-            //         .Init(true));
+            else if (Keyboard.current.tKey.wasPressedThisFrame)
+                interactChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
+                    .Init(true, null));
+            else if (Keyboard.current.yKey.wasPressedThisFrame)
+                interactChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
+                    .Init(false, null));
         }
     }
 }

@@ -19,9 +19,6 @@ namespace _Works._JTH.Scripts.UI.Popup
 
         public IMultiableView MultiableView => View as IMultiableView;
 
-        public void OpenUI()
-            => _popupView.OpenView();
-        
         private PopupUIView _popupView;
         private PopupUIModel _popupModel;
 
@@ -49,6 +46,11 @@ namespace _Works._JTH.Scripts.UI.Popup
             _popupModel.SetMessage(eventData.Message);
             _popupModel.SetActions(eventData.YesAction, eventData.NoAction);
             _popupView.UpdateView();
+        }
+
+        public void OpenUI()
+        {
+            _popupView.OpenView();
         }
         
         protected override void InteractedHandler(int childIndex, UIParam value)

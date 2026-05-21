@@ -6,7 +6,6 @@ using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Rendering.Universal;
-using WorldUICamera = HwanLib.MVP.System.GenerateUI.WorldUICamera;
 
 namespace HwanLib.MVP.System.GenerateUI
 {
@@ -38,7 +37,7 @@ namespace HwanLib.MVP.System.GenerateUI
             base.Initialize();
             
             Instantiate(eventSystemPrefab, transform);
-            Instantiate(worldUICamera, transform);
+            Instantiate(worldUICamera, Camera.main.transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
             _presenterList = new List<BasePresenter>();
@@ -64,7 +63,7 @@ namespace HwanLib.MVP.System.GenerateUI
             {
                 MVPDataSO dataSO = multiableData.MvpDataSO;
                 
-                MultiableUIs multiableUIs = new MultiableUIs() { State = MultiableUIState.None };
+                MultiableUIs multiableUIs = new MultiableUIs { State = MultiableUIState.None };
                 _multiableUIDict.Add(dataSO.parentPrefab.GetType(), multiableUIs);
                 
                 for (int i = 0; i < multiableData.Count; ++i)

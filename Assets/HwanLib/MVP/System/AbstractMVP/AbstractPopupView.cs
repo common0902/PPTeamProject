@@ -18,7 +18,7 @@ namespace HwanLib.MVP.System.AbstractMVP
         private BackgroundForm _backgroundForm;
         
         private CanvasGroup _canvasGroup;
-        private bool _isOpen;
+        public bool IsOpen { get; protected set; }
 
         protected abstract int WindowFormIndex { get; }
         protected abstract int BackgroundFormIndex { get; }
@@ -35,7 +35,7 @@ namespace HwanLib.MVP.System.AbstractMVP
             
             WindowForm.OnAnimationEnd += AnimationEndHandler;
 
-            _isOpen = false;
+            IsOpen = false;
         }
 
         public override void OnDestroyView()
@@ -47,12 +47,12 @@ namespace HwanLib.MVP.System.AbstractMVP
 
         public override void OpenView()
         {
-            if (_isOpen == true)
+            if (IsOpen == true)
                 return;
 
             base.OpenView();
             
-            _isOpen = true;
+            IsOpen = true;
             WindowForm.PlayAnimation(true, OpenDuration);
             _backgroundForm?.DoFade(true, OpenDuration);
             
@@ -62,10 +62,10 @@ namespace HwanLib.MVP.System.AbstractMVP
         
         public override void CloseView()
         {
-            if (_isOpen == false)
+            if (IsOpen == false)
                 return;
             
-            _isOpen = false;
+            IsOpen = false;
             WindowForm.PlayAnimation(false, CloseDuration);
             _backgroundForm?.DoFade(false, CloseDuration);
             
@@ -75,7 +75,7 @@ namespace HwanLib.MVP.System.AbstractMVP
 
         protected void AnimationEndHandler()
         {
-            if (_isOpen == false)
+            if (IsOpen == false)
                 RootCanvas.gameObject.SetActive(false);
         }
     }
