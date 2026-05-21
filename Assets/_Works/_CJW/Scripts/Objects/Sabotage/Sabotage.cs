@@ -125,13 +125,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, false));;
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(transform.position + markOffset, new Vector3(markBoxSize.x, 0, markBoxSize.y));
-        }
-
+        
         private void OnDestroy()
         {
             cameraEvent.RemoveListener<TopViewEvent>(HandleOpen);

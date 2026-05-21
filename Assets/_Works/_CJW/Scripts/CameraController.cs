@@ -92,8 +92,9 @@ namespace _Works._CJW.Scripts
                 t += Time.deltaTime;
 
                 float percent = Mathf.Clamp01(t / durationTime);
-
-                // 40% 이전까지는 그대로
+                cameraEvent.RaiseEvent(CameraEvent.CameraElapseEvent.Init(percent));
+            
+                // 0.4 이전까지는 그대로
                 if (percent < rotateStartPercent)
                 {
                     _thirdPersonFollow.VerticalArmLength = startVal;
