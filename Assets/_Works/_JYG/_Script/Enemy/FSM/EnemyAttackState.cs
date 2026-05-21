@@ -51,7 +51,6 @@ namespace _Works._JYG._Script.Enemy.FSM
                     || Vector3.Distance(_enemy.transform.position, _player.transform.position) > _enemy.AttackDistance)
                 {
                     _enemy.ChangeState((int)EnemyState.CHASE);
-                    Debug.Log("Change State To Chase");
                 }
             }
         }

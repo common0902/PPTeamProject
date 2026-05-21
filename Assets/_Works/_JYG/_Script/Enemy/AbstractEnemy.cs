@@ -127,6 +127,7 @@ namespace _Works._JYG._Script.Enemy
         {
             if (currentHealth <= 0)
             {
+                GameManager.Instance.EnemyDead();
                 ChangeState((int)EnemyState.Dead);
             }
         }
@@ -181,18 +182,20 @@ namespace _Works._JYG._Script.Enemy
         private void HandleEnemyChange(EnemyChangeState evt)
         {
             if (IsDead) return;
+            
+            if (evt.NextState == EnemyState.CHASE  && _stateMachine.CurrentState is not EnemyAttackState)
+                SirenEffect = true;
+            else if (evt.NextState == EnemyState.PATROL)
+                SirenEffect = false;
+            
             ChangeState((int)evt.NextState);
+            
             enemyCurrentCaution = evt.NextState switch
             {
                 EnemyState.CHASE => enemyCautionDelay,  //Chase상태라면, 사이렌이 울린거니까 에너미 경계치 최대로 상승
                 EnemyState.PATROL => 0,                 //Patrol상태라면, 진정된거니 0으로 초기화.
                 _ => enemyCurrentCaution                //나머지는 변함 없음.
             };
-
-            if (evt.NextState == EnemyState.CHASE && !(_stateMachine.CurrentState is EnemyAttackState))
-                SirenEffect = true;
-            else if (evt.NextState == EnemyState.PATROL)
-                SirenEffect = false;
         }
         
         public void SetSirenEffect(bool isEffected) => SirenEffect = isEffected;
@@ -206,7 +209,10 @@ namespace _Works._JYG._Script.Enemy
 
         private IEnumerator StartCalling(float t)
         {
-            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, PlayerFoundSound));
+            if (!SirenEffect)
+            {
+                SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, PlayerFoundSound));
+            }
             
             yield return new WaitForSeconds(t);
             if (!IsDead && !SirenEffect)
