@@ -4,6 +4,7 @@ using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.SO;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,9 +12,9 @@ namespace _Works._JTH.Scripts.UI.Title
 {
     public class TitleUIPresenter : AbstractSaveablePresenter
     {
-        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
+        [SerializeField] private FormSoundModule<TitleUIEnum> soundModule;
 
         private TitleUIView _titleView;
         private TitleUIModel _titleModel;
@@ -46,6 +47,12 @@ namespace _Works._JTH.Scripts.UI.Title
                 _titleView.OpenView();
             else
                 _titleView.CloseView();
+        }
+
+        protected override void InteractedHandler(int childIndex, UIParam value)
+        {
+            base.InteractedHandler(childIndex, value);
+            soundModule.PlaySound(childIndex);
         }
     }
 }

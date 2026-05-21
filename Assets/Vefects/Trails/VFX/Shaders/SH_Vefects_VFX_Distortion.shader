@@ -1,4 +1,4 @@
-// Made with Amplify Shader Editor
+﻿// Made with Amplify Shader Editor
 // Available at the Unity Asset Store - http://u3d.as/y3X 
 Shader "Vefects/SH_Vefects_VFX_Distortion"
 {

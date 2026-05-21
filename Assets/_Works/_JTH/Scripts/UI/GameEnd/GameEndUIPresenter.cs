@@ -5,17 +5,18 @@ using _Works._JTH.Scripts.SO;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.GameEnd
 {
     public class GameEndUIPresenter : AbstractSaveablePresenter
     {
-        [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private float fadeDuration = 2;
         [SerializeField] private float fadeInAlpha;
         [SerializeField] private EventChannelSO openUIChannel;
+        [SerializeField] private FormSoundModule<GameEndUIEnum> soundModule;
         
         private GameEndUIModel _gameEndModel;
         private GameEndUIView _gameEndView;
@@ -51,6 +52,12 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _gameEndView.SetGameState(data.IsGameOver);
             
             _gameEndView.OpenView();
+        }
+        
+        protected override void InteractedHandler(int childIndex, UIParam value)
+        {
+            base.InteractedHandler(childIndex, value);
+            soundModule.PlaySound(childIndex);
         }
     }
 }

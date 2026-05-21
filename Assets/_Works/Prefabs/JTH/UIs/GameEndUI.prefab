@@ -675,6 +675,15 @@ MonoBehaviour:
   fadeDuration: 1
   fadeInAlpha: 0.75
   openUIChannel: {fileID: 11400000, guid: fe5b3ecdbfa43714390f2943249b64ac, type: 2}
+  soundModule:
+    soundForms:
+    - TargetForm: 7
+      ClipSO: {fileID: 11400000, guid: d177ced02920ad641b7b17d0af642cab, type: 2}
+    - TargetForm: 10
+      ClipSO: {fileID: 11400000, guid: d177ced02920ad641b7b17d0af642cab, type: 2}
+    - TargetForm: 15
+      ClipSO: {fileID: 11400000, guid: d177ced02920ad641b7b17d0af642cab, type: 2}
+    soundChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
 --- !u!1 &8209584866278258539
 GameObject:
   m_ObjectHideFlags: 0

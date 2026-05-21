@@ -16,8 +16,8 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action OnViewMapStarted;
     public event Action OnViewMapCanceled;
 
-    public event Action OnWeaponSwapUp;
-    public event Action OnWeaponSwapDown;
+    //public event Action OnWeaponSwapUp;
+    //public event Action OnWeaponSwapDown;
     public event Action<int> OnWeaponSwapIndex;
 
     private Controls _controls;

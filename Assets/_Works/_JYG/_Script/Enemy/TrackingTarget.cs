@@ -19,18 +19,22 @@ namespace _Works._JYG._Script.Enemy
             if(findingSource == null)
                 findingSource = GetComponent<AudioSource>();
             
-            findingSource.pitch = Random.Range(0.5f, 1.5f);
+            findingSource.pitch = Random.Range(0.5f, 1f);
         }
 
         private void Update()
         {
+            if (_enemy.IsDead)
+            {
+                StopAllCoroutines();
+                findingSource.Stop();
+            }
             if (Mathf.Approximately(_enemy.GetEnemyCaution, 1) && !isFind)
             {
                 isFind = true;
                 StartCoroutine(SetActiveFalse());
                 return;
             }
-            
             if (_enemy.GetEnemyCaution > 0.1f)
             {
                 findingSource.volume = _enemy.GetEnemyCaution;
@@ -47,6 +51,7 @@ namespace _Works._JYG._Script.Enemy
             float percent = 0;
             while (percent < 1)
             {
+                if (_enemy.IsDead) yield break;
                 percent = (time) / 1;
                 
                 findingSource.volume = (1 - percent);

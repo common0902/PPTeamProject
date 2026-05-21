@@ -36,7 +36,9 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
 
         // 레이어 1 - 행동
         MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
-        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && Owner.IsAttackPressed && Owner.WeaponModule.CanAttack, layer: 1);
+
+        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && !Owner.IsViewMap && Owner.IsAttackPressed && Owner.WeaponModule.CanAttack, layer: 1);
+
         MakeAnyTransition<PlayerViewMapState>(state => !Owner.IsDead && Owner.IsViewMap, layer: 1);
 
         MakeTransition<PlayerAttackState, PlayerNoneState>(state => true, layer: 1);
