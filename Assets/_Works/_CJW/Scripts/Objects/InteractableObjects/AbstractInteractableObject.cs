@@ -19,6 +19,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         public bool IsPlayerInRange { get; private set; } = false; // 플레이어가 범위 내에 있는지
         private bool _isRegistered = false; // 오브젝트가 리스트에 등록되었는지
         private Outline _outline;
+        public bool _isUsed { get; private set; }
 
         private void Awake()
         {
@@ -57,6 +58,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         [ContextMenu("Interact")]
         public virtual void HandleInteract()
         {
+            if (_isUsed) return;
+            _isUsed = true;
             interactEvent.RaiseEvent(InteractEvents.InteractEvent); // 상호작용 이벤트 발생하도록
             if(sabotageData != null)
                 interactEvent.RaiseEvent(new UnlockEvent().Init(sabotageData)); // 상호작용하면 본인의 사보타지 데이터를 보내고 해금 이벤트 발생하도록

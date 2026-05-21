@@ -25,6 +25,7 @@ namespace _Works._CJW.Scripts
         [SerializeField] private float quadViewOffset;
         [SerializeField] private float quadViewDuration;
 
+        private bool _isTransitioning = false;
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
@@ -43,17 +44,39 @@ namespace _Works._CJW.Scripts
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        
-        //탑뷰로 전환
-        private void TransToTopView()
+
+        private void Awake()
         {
-            TransCameraToQuadView();
+            _thirdPersonFollow = topViewCam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
+        
+            Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
+            
+            _rootTrs = topViewCam.Follow;
+            // _playerTrs = _rootTrs;
+            _tempTrs = new GameObject("CamTempTransform").transform;
+            
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        //탑뷰로 전환
+        public void TransToTopView()
+        {
+            if (!_isTransitioning)
+            {
+                _isTransitioning = true;
+                TransCameraToQuadView();
+            }
         }
         
         //1인칭으로 전환
-        private void TransToFirstView()
+        public void TransToFirstView()
         {
-            StartCoroutine(TransCameraToFirstViewCoroutine());
+            if (!_isTransitioning)
+            {
+                _isTransitioning = true;
+                StartCoroutine(TransCameraToFirstViewCoroutine());
+            }
         }
 
         private void Update()
@@ -119,6 +142,7 @@ namespace _Works._CJW.Scripts
             _thirdPersonFollow.VerticalArmLength = resultHeight;
 
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
+            _isTransitioning = false;
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
@@ -143,6 +167,7 @@ namespace _Works._CJW.Scripts
             topViewCam.Follow = _rootTrs;
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
+            _isTransitioning = false;
         }
     }
 }

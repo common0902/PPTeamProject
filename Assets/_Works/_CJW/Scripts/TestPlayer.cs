@@ -12,8 +12,7 @@ namespace _Works._CJW
         private void Awake()
         {
             var compos = GetComponentsInChildren<MonoBehaviour>().First(compo => compo is PlayerInteractManageModule);
-            var compo = compos as PlayerInteractManageModule;
-            compo.TestInitialize();
+            var compo = compos as CameraController;
         }
     }
 }
