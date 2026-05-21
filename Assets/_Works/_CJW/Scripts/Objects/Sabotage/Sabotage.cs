@@ -37,8 +37,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
                 
         public bool ShouldMark { get; private set; } = true; // 마킹해야하는지
         public bool IsUsed { get; private set; } = false;
-        
-        
+
+        private bool _isTopView;
         private AbstractSabotageEvent _targetEvent;
         private SabotageVisual _visual;
         private ISabotageFunctionModule _functionModule;
@@ -57,6 +57,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             _targetEvent = typeof(SabotageEvents).GetField(targetEventName,
                 BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as AbstractSabotageEvent;
             cameraEvent.RaiseEvent(new RegisterSabotageEvent().Init(this, true));
+            _visual.HandleActivation(true, false);
+            _visual.HandleOutLineEnable(false);
         }
 
         private void HandleUnlock(UnlockEvent evt)
@@ -75,20 +77,24 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private void HandleOpen(TopViewEvent evt)
         {
-            if (evt.IsTopView && !IsLocked)
+            _isTopView = evt.IsTopView;
+            
+            if (_isTopView && !IsLocked)
             {
                 _visual.HandleOutLineEnable(true);
                 _visual.HandleActivation(true, false);
                 return;
             }
-            if ((evt.IsTopView && IsLocked) || IsUsed)
+            if ((_isTopView && IsLocked) || IsUsed)
             {
                 Debug.Log("사용할 수 없음");
+                _visual.HandleOutLineEnable(false);
                 _visual.HandleActivation(false, true);
             }
             else
             {
                 _visual.HandleActivation(false, false);
+                _visual.HandleOutLineEnable(false);
             }
         }
 
@@ -107,7 +113,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(IsUsed) return;
+            if(IsUsed || !_isTopView) return;
             
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, true));
             ShouldMark = false;
@@ -115,15 +121,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (!_isTopView) return;
+            
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, false));;
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            Gizmos.color = Color.magenta;
-            Gizmos.DrawCube(transform.position + markOffset, new Vector3(markBoxSize.x, 0, markBoxSize.y));
-        }
-
+        
         private void OnDestroy()
         {
             cameraEvent.RemoveListener<TopViewEvent>(HandleOpen);
