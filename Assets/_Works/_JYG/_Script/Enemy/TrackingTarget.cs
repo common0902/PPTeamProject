@@ -28,6 +28,7 @@ namespace _Works._JYG._Script.Enemy
             {
                 StopAllCoroutines();
                 findingSource.Stop();
+                return;
             }
             if (Mathf.Approximately(_enemy.GetEnemyCaution, 1) && !isFind)
             {
@@ -35,14 +36,7 @@ namespace _Works._JYG._Script.Enemy
                 StartCoroutine(SetActiveFalse());
                 return;
             }
-            if (_enemy.GetEnemyCaution > 0.1f)
-            {
-                findingSource.volume = _enemy.GetEnemyCaution;
-            }
-            else
-            {
-                findingSource.volume = 0f;
-            }
+            findingSource.volume = _enemy.GetEnemyCaution > 0.1f ? _enemy.GetEnemyCaution : 0f;
         }
 
         private IEnumerator SetActiveFalse()
