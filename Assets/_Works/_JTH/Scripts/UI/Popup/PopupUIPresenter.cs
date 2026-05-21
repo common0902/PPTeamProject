@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Multiable;
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.MVP.UIData;
 using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.Popup
 {
-    public class PopupUIPresenter : BasePresenter, IMultiable
+    public class PopupUIPresenter : BasePresenter, IMultiablePresenter
     {
         [SerializeField] private EventChannelSO openUIEvent;
         [SerializeField] private FormSoundModule<PopupUIEnum> soundModule;
         
-        public event Func<IMultiable, bool> TryOpen;
+        public event Func<IMultiablePresenter, bool> TryOpen;
 
-        public bool CanOpen => _popupView.CanUse;
-        
+        public IMultiableView MultiableView => View as IMultiableView;
+
         public void OpenUI()
             => _popupView.OpenView();
         
@@ -28,7 +29,7 @@ namespace _Works._JTH.Scripts.UI.Popup
         {
             base.InitializePresenter(formData, viewType, modelType);
                         
-            _popupView = View as PopupUIView;
+            _popupView = MultiableView as PopupUIView;
             _popupModel = Model as PopupUIModel;
             
             openUIEvent?.AddListener<OpenPopupEvent>(ShowPopup);

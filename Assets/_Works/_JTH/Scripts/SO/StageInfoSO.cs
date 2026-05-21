@@ -8,6 +8,6 @@ namespace _Works._JTH.Scripts.SO
         public int titleIdx = 0;
         public int tutorialIdx = 1;
         public int stageStartIdx = 2;
-        public int stageEndIdx = 5;
+        public int stageCount = 3;
     }
 }

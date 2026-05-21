@@ -1,5 +1,6 @@
 ﻿using System;
 using _Script.ScriptableObject.Event;
+using _Works._CJW.Scripts.Events;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.Utility;
 using UnityEngine;
@@ -10,6 +11,7 @@ namespace _Works._JTH.Scripts.UI
     public class UITester : LightSingleton<UITester>
     {
         [SerializeField] private EventChannelSO openUIChannel;
+        [SerializeField] private EventChannelSO interactChannel;
 
         private void Update()
         {
@@ -21,6 +23,9 @@ namespace _Works._JTH.Scripts.UI
                 openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(true));
             else if (Keyboard.current.rKey.wasPressedThisFrame)
                 openUIChannel.RaiseEvent((OpenUIEvents.OpenSettingEvent));
+            // else if (Keyboard.current.tKey.wasPressedThisFrame)
+            //     openUIChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
+            //         .Init(true));
         }
     }
 }

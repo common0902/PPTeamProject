@@ -48,7 +48,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 
         private void OpenUI(OpenGameEndEvent data)
         {
-            _gameEndModel.SetGame(data.IsGameOver, SaveId.Id);
+            _gameEndModel.SetGame(data.IsGameOver, SaveId.Id, stageInfoSO.stageCount);
             _gameEndView.SetGameState(data.IsGameOver);
             
             _gameEndView.OpenView();

@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd4abb5091721304b98768b092ea2d7a, type: 3}
   m_Name: InteractiveBtnUI
   m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.MVPDataSO
-  parentPrefab: {fileID: 0}
+  parentPrefab: {fileID: 4941379920006742445, guid: d496eb0224a0ea1428b0343038bf9409, type: 3}
   formDataList:
-    list: []
-  modelTypeName: 
-  viewTypeName: 
-  selectedChildName: 
+    list:
+    - childIndex: 2
+      gameObjectName: F_Window
+      formTypeName: DoTweenWindowForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+  modelTypeName: InteractiveBtnUIModel
+  viewTypeName: InteractiveUIBtnView
+  selectedChildName: F_Window

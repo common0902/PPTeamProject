@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Multiable;
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.Utility;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.AbstractMVP
 {
-    public abstract class AbstractPopupView : BaseView
+    public abstract class AbstractPopupView : BaseView, IMultiableView
     {
-        public bool CanUse => !RootCanvas.gameObject.activeSelf;
+        public bool CanOpen => !RootCanvas.gameObject.activeSelf;
         public float OpenDuration { get; set; } = 0.25f;
         public float CloseDuration { get; set; } = 0.225f;
 
