@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using DG.Tweening;
@@ -9,7 +10,7 @@ using UnityEngine.InputSystem;
 
 namespace _Works._CJW.Scripts
 {
-    public class CameraController : MonoBehaviour
+    public class CameraController : MonoBehaviour, IModule
     {
         [Header("Event Channel")]
         [SerializeField] private EventChannelSO cameraEvent;
@@ -22,35 +23,35 @@ namespace _Works._CJW.Scripts
         [SerializeField] private CinemachineCamera firstViewCam;
         [Header("Quad View Setting")]
         [SerializeField] private float quadViewOffset;
-        [SerializeField]private float quadViewDuration;
+        [SerializeField] private float quadViewDuration;
 
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
-        private CinemachineCamera _camera;
         [SerializeField] private float rotateStartPercent = 0.4f;
 
-        private void Awake()
+        public void Initialize(ModuleOwner moduleOwner)
         {
-            _camera = GetComponent<CinemachineCamera>();
-            _thirdPersonFollow = _camera.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
+            _thirdPersonFollow = topViewCam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
         
             Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
             
-            _rootTrs = _camera.Follow;
+            _rootTrs = topViewCam.Follow;
             // _playerTrs = _rootTrs;
             _tempTrs = new GameObject("CamTempTransform").transform;
             
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
         }
-        [ContextMenu("Quad")]
-        private void Test()
+        
+        //탑뷰로 전환
+        private void TransToTopView()
         {
             TransCameraToQuadView();
         }
-        [ContextMenu("First")]
-        private void Test1()
+        
+        //1인칭으로 전환
+        private void TransToFirstView()
         {
             StartCoroutine(TransCameraToFirstViewCoroutine());
         }
@@ -59,17 +60,17 @@ namespace _Works._CJW.Scripts
         {
             if (Keyboard.current.rKey.wasPressedThisFrame)
             {
-                Test();
+                TransToTopView();
             }
             if(Keyboard.current.tKey.wasPressedThisFrame)
-                Test1();
+                TransToFirstView();
         }
 
         private void TransCameraToQuadView()
         {
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
-            _camera.Follow = _tempTrs;
+            topViewCam.Follow = _tempTrs;
             _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
                 .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
@@ -139,7 +140,7 @@ namespace _Works._CJW.Scripts
                 _thirdPersonFollow.VerticalArmLength = Mathf.SmoothStep(startVal, defaultHeight, percent * curveValue);
                 yield return null;
             }
-            _camera.Follow = _rootTrs;
+            topViewCam.Follow = _rootTrs;
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
         }
