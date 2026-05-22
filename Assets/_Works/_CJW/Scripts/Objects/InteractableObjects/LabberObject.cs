@@ -13,7 +13,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
 
         private void Awake()
         {
-            labberTrm.rotation = Quaternion.Euler(defaultRotation, 0, 0);
+            labberTrm.localRotation = Quaternion.Euler(defaultRotation, 0 , 0);
         }
 
         public override void HandleInteract()
@@ -29,7 +29,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             {
                 Debug.Log(t);
                 t += Time.deltaTime;
-                labberTrm.rotation = 
+                labberTrm.localRotation = 
                     Quaternion.Lerp(labberTrm.rotation, Quaternion.Euler(endRotation, 0, 0), t / duration);
                 yield return null;
             }

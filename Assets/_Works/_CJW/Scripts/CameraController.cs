@@ -26,6 +26,8 @@ namespace _Works._CJW.Scripts
         [SerializeField] private float quadViewDuration;
 
         private bool _isTransitioning = false;
+        private bool _isTopView;
+        
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
@@ -62,9 +64,10 @@ namespace _Works._CJW.Scripts
         //탑뷰로 전환
         public void TransToTopView()
         {
-            if (!_isTransitioning)
+            if (!_isTransitioning && !_isTopView)
             {
                 _isTransitioning = true;
+                _isTopView = true;
                 TransCameraToQuadView();
             }
         }
@@ -72,8 +75,9 @@ namespace _Works._CJW.Scripts
         //1인칭으로 전환
         public void TransToFirstView()
         {
-            if (!_isTransitioning)
+            if (!_isTransitioning && _isTopView)
             {
+                _isTopView = false;
                 _isTransitioning = true;
                 StartCoroutine(TransCameraToFirstViewCoroutine());
             }
