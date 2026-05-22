@@ -922,6 +922,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4654009024373916963, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_Size.y
       value: 2.006061
@@ -935,6 +939,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+--- !u!114 &915673354 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+  m_PrefabInstance: {fileID: 915673353}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1094395728
 GameObject:
   m_ObjectHideFlags: 0
@@ -6542,7 +6557,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.00000015637227
+      value: 0.00000014901161
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6550,19 +6565,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.8694215
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.49407104
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -6570,7 +6585,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -59.217
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -6580,6 +6595,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 915673354}
+    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: 'targetSabotages.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1834624612}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6896,11 +6923,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+--- !u!114 &1834624612 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+  m_PrefabInstance: {fileID: 1834624611}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1836710758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4532322350316919045, guid: c967cf1649b4ddb48b3cd998fdf3083c, type: 3}
