@@ -1,15 +1,16 @@
 ﻿using System.Collections.Generic;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Multiable;
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.Utility;
 using UnityEngine;
 
 namespace HwanLib.MVP.System.AbstractMVP
 {
-    public abstract class AbstractPopupView : BaseView
+    public abstract class AbstractPopupView : BaseView, IMultiableView
     {
-        public bool CanUse => !RootCanvas.gameObject.activeSelf;
+        public bool CanOpen => !RootCanvas.gameObject.activeSelf;
         public float OpenDuration { get; set; } = 0.25f;
         public float CloseDuration { get; set; } = 0.225f;
 
@@ -17,7 +18,7 @@ namespace HwanLib.MVP.System.AbstractMVP
         private BackgroundForm _backgroundForm;
         
         private CanvasGroup _canvasGroup;
-        private bool _isOpen;
+        public bool IsOpen { get; protected set; }
 
         protected abstract int WindowFormIndex { get; }
         protected abstract int BackgroundFormIndex { get; }
@@ -34,7 +35,7 @@ namespace HwanLib.MVP.System.AbstractMVP
             
             WindowForm.OnAnimationEnd += AnimationEndHandler;
 
-            _isOpen = false;
+            IsOpen = false;
         }
 
         public override void OnDestroyView()
@@ -46,12 +47,12 @@ namespace HwanLib.MVP.System.AbstractMVP
 
         public override void OpenView()
         {
-            if (_isOpen == true)
+            if (IsOpen == true)
                 return;
 
             base.OpenView();
             
-            _isOpen = true;
+            IsOpen = true;
             WindowForm.PlayAnimation(true, OpenDuration);
             _backgroundForm?.DoFade(true, OpenDuration);
             
@@ -61,10 +62,10 @@ namespace HwanLib.MVP.System.AbstractMVP
         
         public override void CloseView()
         {
-            if (_isOpen == false)
+            if (IsOpen == false)
                 return;
             
-            _isOpen = false;
+            IsOpen = false;
             WindowForm.PlayAnimation(false, CloseDuration);
             _backgroundForm?.DoFade(false, CloseDuration);
             
@@ -74,7 +75,7 @@ namespace HwanLib.MVP.System.AbstractMVP
 
         protected void AnimationEndHandler()
         {
-            if (_isOpen == false)
+            if (IsOpen == false)
                 RootCanvas.gameObject.SetActive(false);
         }
     }
