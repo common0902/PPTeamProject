@@ -7,6 +7,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
     {
         [SerializeField] private AbstractObject gasObject;
         [SerializeField] private Transform[] spawnPos;
+        [SerializeField] private Vector3 gasSize;
         [SerializeField] private float duration;
 
         public override void UseFunction()
@@ -16,7 +17,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 return;
             foreach (Transform trm in spawnPos)
             {
-                Instantiate(gasObject, trm.position, Quaternion.identity);
+                var gas = Instantiate(gasObject, trm.position, Quaternion.identity);
+                gas.InitSize(gasSize);
             }
         }
     }
