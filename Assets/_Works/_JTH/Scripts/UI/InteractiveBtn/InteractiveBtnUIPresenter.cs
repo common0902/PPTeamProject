@@ -49,6 +49,7 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
             if (data.IsRegistered == false && data.InteractableObject.transform == _targetObjectTrm)
             {
                 _interactiveBtnUIView.CloseView();
+                _targetObjectTrm = null;
                 return;
             }
 

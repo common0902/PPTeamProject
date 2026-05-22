@@ -58,6 +58,7 @@ namespace _Works._JYG._Script.Enemy
         public IAISystem AiSystem { get; private set; }
 
         [field: SerializeField] public bool IsRunning { get; private set; } = true;
+        public bool Calling { get; private set; } //이거 리팩토리할때 바꿔줘야함. 레전드 스파게티
 
         public bool isWater = false;
 
@@ -155,7 +156,6 @@ namespace _Works._JYG._Script.Enemy
             
             //진짜 레전드 스파게티 코딩이네.
             Vector3 dumpingDirection = (attackerPosition - transform.position);
-            Debug.Log("Dump D : " + dumpingDirection);
             
             if(Mathf.Abs(dumpingDirection.z) > Mathf.Abs(dumpingDirection.x))
                 dumpingDirection.x = 0;
@@ -205,6 +205,7 @@ namespace _Works._JYG._Script.Enemy
             if (SirenEffect || IsDead) return;
             
             StartCoroutine(StartCalling(callingDuration));
+            Calling = true;
         }
 
         private IEnumerator StartCalling(float t)

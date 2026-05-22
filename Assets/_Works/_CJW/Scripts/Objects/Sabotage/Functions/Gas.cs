@@ -17,7 +17,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         protected override void Awake()
         {
             base.Awake();
-            _collider = GetComponent<BoxCollider>() ;
+            _collider = GetComponent<BoxCollider>();
             _particle = GetComponentInChildren<ParticleSystem>();
             // _particle.shape.scale.Scale(_collider.size * 3);;
         }
@@ -25,6 +25,14 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         protected override void HandleTopViewEnd()
         {
             StartCoroutine(FadeOutGas());
+        }
+
+        public override void InitSize(Vector3 size)
+        {
+            base.InitSize(size);
+            _collider.size = size;
+            var shape = _particle.shape;
+            shape.scale = size;
         }
 
         private IEnumerator FadeOutGas()

@@ -43,7 +43,10 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c9b45e1f33094901a7eebe712f2fdb12, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.UIGenerator
+  m_EditorClassIdentifier: MVPSystem_Assembly::HwanLib.MVP.System.GenerateUI.UIManager
   mvpDataList: {fileID: 11400000, guid: 7ab49c43003ae8e4ca67128b9d7c06f3, type: 2}
   eventSystemPrefab: {fileID: 5138324106541661132, guid: bbd8421cbb441dd4eaa0bbae5388dda6, type: 3}
   worldUICamera: {fileID: 7887230078878132705, guid: 5a0d28b542a860e4bb6788627ce87267, type: 3}
+  uiLayer:
+    serializedVersion: 2
+    m_Bits: 32
