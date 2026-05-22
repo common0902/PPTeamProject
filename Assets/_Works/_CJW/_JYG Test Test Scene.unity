@@ -119,6 +119,28 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &51226158 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+  m_PrefabInstance: {fileID: 1967182796}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
+--- !u!114 &59721555 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3831990148443394398, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
+  m_PrefabInstance: {fileID: 1778522688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1001 &72355836
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -867,16 +889,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: gasSize.x
-      value: 5
+      propertyPath: spawnPos.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: gasSize.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: gasSize.z
-      value: 5
+      propertyPath: 'spawnPos.Array.data[0]'
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 852974830850950579, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_Name
@@ -921,18 +939,6 @@ PrefabInstance:
     - target: {fileID: 1588968667717711304, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: <IsLocked>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4654009024373916963, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: m_Size.y
-      value: 2.006061
-      objectReference: {fileID: 0}
-    - target: {fileID: 4654009024373916963, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: m_Center.y
-      value: -0.0030305386
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6595,6 +6601,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever_Prefab
       objectReference: {fileID: 0}
+    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.90808946
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.4007284
+      objectReference: {fileID: 0}
+    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.12161528
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
+      propertyPath: playerLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: targetSabotages.Array.size
       value: 2
@@ -6696,7 +6718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2671295266545856680, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.24
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2671295266545856680, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
       propertyPath: m_LocalPosition.y
@@ -6704,7 +6726,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2671295266545856680, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.22
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 2671295266545856680, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6734,6 +6756,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3831990148443394398, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
+      propertyPath: 'sabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 51226158}
     - target: {fileID: 7602655056140652033, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
       propertyPath: m_Name
       value: SprinklerSabotage
@@ -6927,6 +6953,10 @@ PrefabInstance:
       propertyPath: <IsLocked>k__BackingField
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: <SabotageData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 56b0b159ed8fbea4994accf8989f0c54, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7253,17 +7283,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: Falling Sabotage
       objectReference: {fileID: 0}
+    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: sabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: 'sabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 59721555}
+    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: <SabotageData>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: fe5b52eac444f0249b83ec4f557db412, type: 2}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: canPlaySound
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1176179076421998163, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: m_Name
+      value: DropObjectFuction
+      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.026798
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 5.83
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.4188097
+      value: 1.4
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalRotation.w

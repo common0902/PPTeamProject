@@ -47,15 +47,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
-  <SabotageData>k__BackingField: {fileID: 11400000, guid: 30248d7186831d74b99fbf122cbfe1f7, type: 2}
+  <SabotageData>k__BackingField: {fileID: 11400000, guid: fe5b52eac444f0249b83ec4f557db412, type: 2}
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
   targetEventName: FireSabotageEvent
   markOffset: {x: 0, y: 0, z: 0}
   markBoxSize: {x: 2, y: 2}
-  sabotages: []
-  <IsLocked>k__BackingField: 0
+  sabotages:
+  - {fileID: 0}
+  <IsLocked>k__BackingField: 1
 --- !u!65 &2293239939891266438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -90,7 +91,7 @@ GameObject:
   - component: {fileID: 2252674282672849492}
   - component: {fileID: 939764974225252019}
   m_Layer: 9
-  m_Name: DropObject
+  m_Name: DropObjectFuction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,12 +185,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.FallingSabotageFunction
   soundEventChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
   startSoundClip: {fileID: 11400000, guid: 0dc27529e12eba341896f41e74c8b2b1, type: 2}
+  canPlaySound: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   vfXes:
   - {fileID: 2144579652471234894}
-  channelNumber: 0
   boxSize: {x: 3.5, y: 2, z: 3.5}
   boxOffset: {x: 0, y: -3.98, z: 0}
   maxDetectCount: 5
