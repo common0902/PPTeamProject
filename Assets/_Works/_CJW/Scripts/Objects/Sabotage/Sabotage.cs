@@ -66,7 +66,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             IsLocked = false;
         }        
-        public void lockSabotage()
+        public void LockSabotage()
         {
             IsLocked = true;
         }

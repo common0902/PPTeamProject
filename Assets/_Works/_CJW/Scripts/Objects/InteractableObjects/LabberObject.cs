@@ -19,7 +19,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             {
                 foreach (Sabotage.Sabotage sabotage in targetSabotages)
                 {
-                    sabotage.lockSabotage();
+                    sabotage.LockSabotage();
                 }
             }
         }
