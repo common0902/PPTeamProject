@@ -888,14 +888,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: spawnPos.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-      propertyPath: 'spawnPos.Array.data[0]'
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 852974830850950579, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_Name
       value: Gas Sabotage
@@ -6601,26 +6593,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Lever_Prefab
       objectReference: {fileID: 0}
-    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.90808946
-      objectReference: {fileID: 0}
-    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.4007284
-      objectReference: {fileID: 0}
-    - target: {fileID: 4529453834126031564, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.12161528
-      objectReference: {fileID: 0}
-    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: playerLayer.m_Bits
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: targetSabotages.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
       propertyPath: 'targetSabotages.Array.data[0]'
       value: 
@@ -6949,14 +6921,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
-      propertyPath: <IsLocked>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
-      propertyPath: <SabotageData>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: 56b0b159ed8fbea4994accf8989f0c54, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7284,25 +7248,9 @@ PrefabInstance:
       value: Falling Sabotage
       objectReference: {fileID: 0}
     - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
-      propertyPath: sabotages.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: 'sabotages.Array.data[0]'
       value: 
       objectReference: {fileID: 59721555}
-    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
-      propertyPath: <SabotageData>k__BackingField
-      value: 
-      objectReference: {fileID: 11400000, guid: fe5b52eac444f0249b83ec4f557db412, type: 2}
-    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
-      propertyPath: canPlaySound
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1176179076421998163, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
-      propertyPath: m_Name
-      value: DropObjectFuction
-      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
