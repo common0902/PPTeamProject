@@ -1,8 +1,6 @@
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
 
-// using UnityEngine.Rendering.Universal;
-
 namespace HwanLib.MVP.System.GenerateUI
 {
     [DefaultExecutionOrder(0)]

@@ -92,22 +92,6 @@ namespace HwanLib.MVP.Editor
         private void HandleUIPrefab(ChangeEvent<UnityEngine.Object> evt)
         {
             BasePresenter presenter = evt.newValue as BasePresenter;
-            if (presenter == null)
-            {
-                Debug.LogError("BasePresenter 형식을 상속 받아야 합니다.");
-                _targetData.parentPrefab = null;
-                CheckTypeNameContainerActive();
-                return;
-            }
-            
-            if (!PrefabUtility.IsPartOfPrefabAsset(presenter.gameObject))
-            {
-                _targetData.parentPrefab = null;
-                _uiPrefabObjectField.SetValueWithoutNotify(null);
-                EditorUtility.DisplayDialog("Error", 
-                    "프리팹 오브젝트여야 합니다.", "OK");
-                return;
-            }
 
             if (evt.newValue != evt.previousValue)
             {

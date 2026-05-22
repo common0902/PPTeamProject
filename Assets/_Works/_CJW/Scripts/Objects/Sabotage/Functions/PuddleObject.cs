@@ -19,6 +19,5 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             enemy.isWater = false;
         }
         
-
     }
 }

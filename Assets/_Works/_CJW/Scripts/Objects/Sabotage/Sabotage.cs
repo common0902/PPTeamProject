@@ -20,8 +20,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         // [SerializeField] private SoundClipSO soundClipData;
         
         [Header("Sabotage Data")]
-        [field: SerializeField]
-        public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
+        [field: SerializeField] public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
 
         [Header("Event Channel")]
         [SerializeField] private EventChannelSO cameraEvent;
@@ -32,6 +31,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [Header("Mark Offset")]
         [SerializeField] public Vector3 markOffset; // 위치가 안맞을 수 있어서 오프셋 추가
         [SerializeField] public Vector2 markBoxSize; // 마크의 상단을 맞춰줄 박스
+
+        [Header("Together Sabotages")]
+        [SerializeField] private Sabotage[] sabotages;
         
         [field: SerializeField] public bool IsLocked { get; private set; } = false; // 사보타지가 잠금 해제되었는지 여부
                 
@@ -99,8 +101,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         }
 
         public void ActiveVisual(bool unlockVisual, bool lockVisual)
-            => _visual.HandleActivation(unlockVisual, lockVisual); 
-        public void OnPointerClick(PointerEventData eventData)
+            => _visual.HandleActivation(unlockVisual, lockVisual);
+
+        public void UseFunction()
         {
             if(IsUsed || IsLocked) return; 
     
@@ -109,6 +112,17 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             _functionModule.UseFunction();
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
             IsUsed = true;
+        }
+        
+        public void OnPointerClick(PointerEventData eventData)
+        {
+            if(IsUsed || IsLocked) return;
+
+            UseFunction();
+            foreach (var sabotage in sabotages)
+            {
+                sabotage.UseFunction();
+            }
             
         }
         public void OnPointerEnter(PointerEventData eventData)

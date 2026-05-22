@@ -4,6 +4,7 @@ using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.UIData;
+using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.GameEnd
 {
@@ -14,11 +15,12 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         private const string GameClearTitle = "CLEAR";
         private bool _isGameOver;
 
-        public void SetGame(bool isGameOver, int saveDataId)
+        public void SetGame(bool isGameOver, int saveDataId, int stageCount)
         {
             _isGameOver = isGameOver;
-            if (isGameOver == false)
-                SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent.Init(saveDataId, (_savedStage + 1).ToString()));
+            if (isGameOver == false && stageCount > _savedStage)
+                SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent
+                    .Init(saveDataId, Mathf.Max(_savedStage + 1, stageCount).ToString()));
         }
         
         public int StageStartIndex { get; set; }

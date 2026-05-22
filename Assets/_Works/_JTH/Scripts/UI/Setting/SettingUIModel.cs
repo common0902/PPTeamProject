@@ -33,7 +33,6 @@ namespace _Works._JTH.Scripts.UI.Setting
         public void RestoreData(string data)
         {
             _settingInfo = JsonUtility.FromJson<SettingInfo>(data);
-            
             AudioMixer.SetFloat("Master", _settingInfo.MasterVolume);
             AudioMixer.SetFloat("BGM", _settingInfo.BgmVolume);
             AudioMixer.SetFloat("SFX", _settingInfo.SfxVolume);

@@ -43,6 +43,8 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
         {
             if (isEnabled)
                 saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
+            else
+                saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
         
         public virtual string StoreData()
