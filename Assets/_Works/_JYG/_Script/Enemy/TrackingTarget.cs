@@ -33,10 +33,14 @@ namespace _Works._JYG._Script.Enemy
             if (Mathf.Approximately(_enemy.GetEnemyCaution, 1) && !isFind)
             {
                 isFind = true;
-                StartCoroutine(SetActiveFalse());
+                if(_enemy.Calling)
+                    StartCoroutine(SetActiveFalse());
                 return;
             }
-            findingSource.volume = _enemy.GetEnemyCaution > 0.1f ? _enemy.GetEnemyCaution : 0f;
+            if(!_enemy.SirenEffect)
+                findingSource.volume = _enemy.GetEnemyCaution > 0.1f ? _enemy.GetEnemyCaution : 0f;
+            else
+                findingSource.volume = 0f;
         }
 
         private IEnumerator SetActiveFalse()
