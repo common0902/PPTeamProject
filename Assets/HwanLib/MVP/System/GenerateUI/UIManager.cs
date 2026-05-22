@@ -27,8 +27,8 @@ namespace HwanLib.MVP.System.GenerateUI
         [SerializeField] private MVPDataListSO mvpDataList;
         [SerializeField] private EventSystem eventSystemPrefab;
         [SerializeField] private WorldUICamera worldUICamera;
-        [SerializeField] private LayerMask uiLayer;
-
+        [SerializeField] private LayerMask uiLayer = 1 << 5;
+ 
         private Dictionary<Type, MultiableUIs> _multiableUIDict;
         private List<BasePresenter> _presenterList;
 
