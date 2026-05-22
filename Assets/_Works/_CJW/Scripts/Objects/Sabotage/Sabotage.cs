@@ -49,7 +49,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             base.Awake();   
             cameraEvent.AddListener<TopViewEvent>(HandleOpen);
-            interactEvent.AddListener<UnlockEvent>(HandleUnlock);
             _visual = GetModule<SabotageVisual>();
             _functionModule = GetModule<ISabotageFunctionModule>();
         }
@@ -63,19 +62,14 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             _visual.HandleOutLineEnable(false);
         }
 
-        private void HandleUnlock(UnlockEvent evt)
+        public void UnlockSabotage()
         {
-            if(IsLocked == true
-               && evt.TargetSabotageData != null 
-               && evt.TargetSabotageData == SabotageData)
-            {
-                IsLocked = false;
-                interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
-                
-                Debug.Log($"{targetEventName} 사보타지 해금");
-            }
+            IsLocked = false;
+        }        
+        public void lockSabotage()
+        {
+            IsLocked = true;
         }
-
 
         private void HandleOpen(TopViewEvent evt)
         {
@@ -143,7 +137,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         private void OnDestroy()
         {
             cameraEvent.RemoveListener<TopViewEvent>(HandleOpen);
-            interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
             cameraEvent.RaiseEvent(new RegisterSabotageEvent().Init(this, false));
         }
     }
