@@ -34,6 +34,8 @@ namespace _Works._CJW.Scripts
 
         public event Action OnFirstViewComplete;
         private bool _hasTopView = false;
+
+        [SerializeField] private CinemachineInputAxisController _inputAxisController;
         #endregion
 
         private Transform _rootTrs;
@@ -100,6 +102,7 @@ namespace _Works._CJW.Scripts
     
         private IEnumerator TransCameraToQuadViewCoroutine() //탑뷰로 올라가기 시작
         {
+            _inputAxisController.enabled = false;
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
             
@@ -144,6 +147,8 @@ namespace _Works._CJW.Scripts
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
             _isTransitioning = false;
 
+
+
             _hasTopView = true;
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
@@ -170,7 +175,7 @@ namespace _Works._CJW.Scripts
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
             _isTransitioning = false;
-            
+            _inputAxisController.enabled = true;
 
             if (_hasTopView)
             {

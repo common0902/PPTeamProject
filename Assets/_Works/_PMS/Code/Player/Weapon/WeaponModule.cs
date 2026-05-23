@@ -1,5 +1,6 @@
 ﻿using _Script.Agent.Modules;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class WeaponModule : MonoBehaviour, IModule
@@ -12,15 +13,16 @@ public class WeaponModule : MonoBehaviour, IModule
     private List<IWeapon> _weapons = new();
     private int _currentIndex = 0;
     private float _swapDelayTimer = 0f;
-    private ModuleOwner _owner;
+
+    public float DEBUG_SwapTimer => _swapDelayTimer;
+    public IWeapon DEBUG_CurrentWeapon => CurrentWeapon;
+    public bool DEBUG_WeaponCanAttack => CurrentWeapon?.CanAttack ?? false;
 
     public IWeapon CurrentWeapon => _weapons.Count > 0 ? _weapons[_currentIndex] : null;
     public bool CanAttack => _swapDelayTimer <= 0f && CurrentWeapon != null && CurrentWeapon.CanAttack;
 
     public void Initialize(ModuleOwner owner)
     {
-        _owner = owner;
-
         if (meleeWeapon != null)
         {
             _weapons.Add(meleeWeapon);
@@ -28,7 +30,10 @@ public class WeaponModule : MonoBehaviour, IModule
         }
 
         if (rangedWeapon != null)
+        {
             rangedWeapon.WeaponObject.SetActive(false);
+            rangedWeapon.Initialize(this);
+        }
     }
 
     private void Update()
@@ -42,8 +47,7 @@ public class WeaponModule : MonoBehaviour, IModule
         if (!CanAttack) return;
         CurrentWeapon.Attack(damage);
 
-        if (CurrentWeapon is RangedWeapon ranged && ranged.Bullets == 0)
-            RemoveCurrentWeapon();
+        
     }
 
     public void SwapNext()
@@ -52,6 +56,7 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(false);
         _currentIndex = (_currentIndex + 1) % _weapons.Count;
         CurrentWeapon.WeaponObject.SetActive(true);
+        CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
     }
 
@@ -61,6 +66,7 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(false);
         _currentIndex = (_currentIndex - 1 + _weapons.Count) % _weapons.Count;
         CurrentWeapon.WeaponObject.SetActive(true);
+        CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
     }
 
@@ -71,10 +77,11 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(false);
         _currentIndex = index;
         CurrentWeapon.WeaponObject.SetActive(true);
+        CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
     }
 
-    [ContextMenu("AddGun")]
+    [ContextMenu("111")]
     public void AddGun()
     {
         if (rangedWeapon == null) return;
@@ -85,20 +92,23 @@ public class WeaponModule : MonoBehaviour, IModule
             return;
         }
 
+        CurrentWeapon.WeaponObject.SetActive(false);
         _weapons.Add(rangedWeapon);
-        rangedWeapon.WeaponObject.SetActive(false);
-        SwapWeaponIndex(1);
+        _currentIndex = _weapons.Count - 1;
+        CurrentWeapon.WeaponObject.SetActive(true);
+        CurrentWeapon.OnSwap();
+        _swapDelayTimer = swapAttackDelay;
     }
 
-    private void RemoveCurrentWeapon()
+    public void RemoveCurrentWeapon()
     {
         CurrentWeapon.WeaponObject.SetActive(false);
         _weapons.RemoveAt(_currentIndex);
 
         if (_weapons.Count == 0) return;
 
-        
         _currentIndex = 0;
         CurrentWeapon.WeaponObject.SetActive(true);
+        CurrentWeapon.OnSwap();
     }
 }

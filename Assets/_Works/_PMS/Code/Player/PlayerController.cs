@@ -150,7 +150,10 @@ public class PlayerController : Agent
         IsRunCooldown = true;
         _runCooldownTimer = runCooldown;
     }
-    private void OnAttackPressed() => IsAttackPressed = true;
+    private void OnAttackPressed()
+    {
+        IsAttackPressed = true;
+    }
 
     private void OnViewMapStarted()
     {
