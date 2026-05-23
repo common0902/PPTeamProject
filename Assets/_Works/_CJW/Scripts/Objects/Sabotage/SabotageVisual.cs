@@ -14,8 +14,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         [SerializeField] private Color interactedOutLineColor;
         [SerializeField] private GameObject visualObject;
         [SerializeField] private GameObject lockedObject;
-
-        public Action<bool> OnPointerEvent;
         
         private Outline _outline;
         private ModuleOwner _owner;
@@ -26,39 +24,41 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             _outline = visualObject.GetComponent<Outline>();
             _owner = moduleOwner;
-            _outline.OutlineColor = defaultOutLineColor;
+            HandleOutLineColor(false);
             HandleActivation(false, false);
             cameraEvent.AddListener<FocusedSabotageEvent>(HandleFocused);
         }
 
         private void HandleFocused(FocusedSabotageEvent obj)
         {
-            if(obj.Sabotage.gameObject != _owner.gameObject)
+            if (obj.Sabotage.gameObject != _owner.gameObject)
                 return;
             
-            if (obj.IsFocused)
-                HandleOutLineColor(false);
-            else
-                HandleOutLineColor(true);
+            HandleOutLineColor(obj.IsFocused);
         }
 
         public void HandleActivation(bool visual, bool lockVisual)
         {
             if (visual)
             {
-                HandleOutLineColor(true);
+                HandleOutLineColor(false);
             }
-            visualObject.SetActive(visual);
-            lockedObject.SetActive(lockVisual);
+            
+            if (visualObject != null)
+                visualObject.SetActive(visual);
+            if (lockedObject != null) 
+                lockedObject.SetActive(lockVisual);
         }
 
         public void HandleOutLineEnable(bool enable)
         {
+            if (_outline == null) return;
             _outline.enabled = enable;
         }
 
         private void HandleOutLineColor(bool isSelected)
         {
+            if (_outline == null) return;
             _outline.OutlineColor = isSelected ? interactedOutLineColor : defaultOutLineColor;
         }
 

@@ -129,7 +129,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (!_isTopView) return;
+            if (IsUsed || !_isTopView) return;
             
             cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, false));;
         }
