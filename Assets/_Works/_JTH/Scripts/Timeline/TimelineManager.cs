@@ -52,7 +52,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void StopGunner()
         {
-            gunnerAnimator.CrossFadeInFixedTime(_idle, 0.25f, 0, 0);
+            gunnerAnimator.CrossFadeInFixedTime(_idle, 0.3f, 0, 0);
         }
         
         public void Dance1Sniper()
@@ -67,7 +67,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void StopSniper()
         {
-            sniperAnimator.CrossFadeInFixedTime(_idle, 0.1f, 0, 0);
+            sniperAnimator.CrossFadeInFixedTime(_idle, 0.3f, 0, 0);
         }
     }
 }

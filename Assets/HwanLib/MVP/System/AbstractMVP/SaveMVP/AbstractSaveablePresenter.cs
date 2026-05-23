@@ -14,7 +14,6 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
         [SerializeField] protected EventChannelSO saveChannel;
         
         protected new ISaveableModel Model;
-        private EnableEventComponent _enableEventCompo;
 
         public override void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
@@ -28,25 +27,8 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
             
             Model = (ISaveableModel)base.Model;
             Model.SetDefaultValue();
-            
-            _enableEventCompo = View.RootCanvas.gameObject.AddComponent<EnableEventComponent>();
-            _enableEventCompo.OnEnabled += EnableHandler;
         }
 
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            _enableEventCompo.OnEnabled -= EnableHandler;
-        }
-
-        private void EnableHandler(bool isEnabled)
-        {
-            if (isEnabled)
-                saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
-            else
-                saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
-        }
-        
         public virtual string StoreData()
         {
             return Model.StoreData();
@@ -54,6 +36,7 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
 
         public void RestoreData(string data)
         {
+            Debug.Log(Model.GetType());
             Model.RestoreData(data);
             View.UpdateView();
         }

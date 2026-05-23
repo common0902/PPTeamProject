@@ -24,6 +24,7 @@ namespace HwanLib.MVP.System.GenerateUI
     
     public class UIManager : LightSingleton<UIManager>
     {
+        // [SerializeField] private Input
         [SerializeField] private MVPDataListSO mvpDataList;
         [SerializeField] private EventSystem eventSystemPrefab;
         [SerializeField] private WorldUICamera worldUICamera;

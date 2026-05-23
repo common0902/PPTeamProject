@@ -154,6 +154,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""OpenSetting"",
+                    ""type"": ""Button"",
+                    ""id"": ""8eea9739-dfb1-4b03-ab91-83f111f6250f"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -407,6 +416,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""WeaponSwap2"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""21d01991-11ca-42f4-8334-4ebdf4f053cf"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenSetting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1001,6 +1021,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_WeaponSwapScroll = m_Player.FindAction("WeaponSwapScroll", throwIfNotFound: true);
         m_Player_WeaponSwap1 = m_Player.FindAction("WeaponSwap1", throwIfNotFound: true);
         m_Player_WeaponSwap2 = m_Player.FindAction("WeaponSwap2", throwIfNotFound: true);
+        m_Player_OpenSetting = m_Player.FindAction("OpenSetting", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1101,6 +1122,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_WeaponSwapScroll;
     private readonly InputAction m_Player_WeaponSwap1;
     private readonly InputAction m_Player_WeaponSwap2;
+    private readonly InputAction m_Player_OpenSetting;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1140,6 +1162,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/WeaponSwap2".
         /// </summary>
         public InputAction @WeaponSwap2 => m_Wrapper.m_Player_WeaponSwap2;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/OpenSetting".
+        /// </summary>
+        public InputAction @OpenSetting => m_Wrapper.m_Player_OpenSetting;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1187,6 +1213,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WeaponSwap2.started += instance.OnWeaponSwap2;
             @WeaponSwap2.performed += instance.OnWeaponSwap2;
             @WeaponSwap2.canceled += instance.OnWeaponSwap2;
+            @OpenSetting.started += instance.OnOpenSetting;
+            @OpenSetting.performed += instance.OnOpenSetting;
+            @OpenSetting.canceled += instance.OnOpenSetting;
         }
 
         /// <summary>
@@ -1219,6 +1248,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @WeaponSwap2.started -= instance.OnWeaponSwap2;
             @WeaponSwap2.performed -= instance.OnWeaponSwap2;
             @WeaponSwap2.canceled -= instance.OnWeaponSwap2;
+            @OpenSetting.started -= instance.OnOpenSetting;
+            @OpenSetting.performed -= instance.OnOpenSetting;
+            @OpenSetting.canceled -= instance.OnOpenSetting;
         }
 
         /// <summary>
@@ -1568,6 +1600,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnWeaponSwap2(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "OpenSetting" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOpenSetting(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

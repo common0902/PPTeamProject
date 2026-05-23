@@ -33,6 +33,8 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameView = (InGameUIView)View;
             _inGameModel = (InGameUIModel)Model;
             
+            _sabotageList = new List<Sabotage>();
+            
             _inGameModel.SetEventChannel(openUIChannel);
             _inGameModel.InitializeData(new InGameUIData
                 ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
