@@ -27,6 +27,7 @@ namespace _Works._JYG._Script.Enemy
             if (!_enemy.IsRunning)
             {
                 findingSource.volume = 0f;
+                return;
             }
             if (_enemy.IsDead)
             {
