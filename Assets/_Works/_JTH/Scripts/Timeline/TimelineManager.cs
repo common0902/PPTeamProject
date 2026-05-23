@@ -11,7 +11,6 @@ namespace _Works._JTH.Scripts.Timeline
         private readonly int _idle = Animator.StringToHash("IDLE");
         private readonly int _dance1 = Animator.StringToHash("DANCE1");
         private readonly int _dance2 = Animator.StringToHash("DANCE2");
-        private readonly int _change = Animator.StringToHash("CHANGE");
         
         [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private SoundClipSO bgmClipSO;
@@ -46,12 +45,12 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void Dance2Gunner()
         {
-            gunnerAnimator.CrossFadeInFixedTime(_dance2, 0.1f, 0, 0);
+            gunnerAnimator.CrossFadeInFixedTime(_dance2, 0.25f, 0, 0);
         }
         
         public void StopGunner()
         {
-            gunnerAnimator.CrossFadeInFixedTime(_change, 0.1f, 0, 0);
+            gunnerAnimator.CrossFadeInFixedTime(_idle, 0.3f, 0, 0);
         }
         
         public void Dance1Sniper()
@@ -61,7 +60,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void Dance2Sniper()
         {
-            sniperAnimator.CrossFadeInFixedTime(_change, 0.1f, 0, 0);
+            sniperAnimator.CrossFadeInFixedTime(_dance2, 0.1f, 0, 0);
         }
         
         public void StopSniper()
