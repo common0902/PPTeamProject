@@ -16,10 +16,12 @@ namespace HwanLib.Utility
                 Initialize();
                 DontDestroyOnLoad(gameObject);
             }
+            
         }
 
         protected virtual void Initialize()
         {
+            
         }
     }
 }
