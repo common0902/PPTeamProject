@@ -16,6 +16,8 @@ namespace _Works._JTH.Scripts.UI.InGame
 
         private List<RectTransform> _redMarkList;
         
+        public int GetRedMarkCount => _redMarkList.Count;
+        
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
         {
