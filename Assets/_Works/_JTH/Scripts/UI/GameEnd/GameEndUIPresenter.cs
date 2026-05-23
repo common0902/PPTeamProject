@@ -32,6 +32,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _gameEndModel.CloseViewAction = _gameEndView.StartClose;
             _gameEndModel.OpenUIChannel = openUIChannel;
             _gameEndModel.SaveChannel = saveChannel;
+            _gameEndModel.StageInfoSO = stageInfoSO;
 
             _gameEndView.FadeDuration = fadeDuration;
             _gameEndView.FadeAlpha = fadeInAlpha;
@@ -48,8 +49,13 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 
         private void OpenUI(OpenGameEndEvent data)
         {
-            _gameEndModel.SetGame(data.IsGameOver, SaveId.Id, stageInfoSO.stageCount);
+            _gameEndModel.SetGame(data.IsGameOver, SaveId.Id);
             _gameEndView.SetGameState(data.IsGameOver);
+            
+            Time.timeScale = 0;
+
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
             
             _gameEndView.OpenView();
         }

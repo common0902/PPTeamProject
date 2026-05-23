@@ -5,7 +5,7 @@ namespace HwanLib.Utility
     [DefaultExecutionOrder(-100)]
     public class LightSingleton<T> : MonoBehaviour where T : LightSingleton<T>
     {
-        protected virtual void Awake()
+        protected void Awake()
         {
             T[] managers = FindObjectsByType<T>(FindObjectsSortMode.None);
 
@@ -16,10 +16,12 @@ namespace HwanLib.Utility
                 Initialize();
                 DontDestroyOnLoad(gameObject);
             }
+            
         }
 
         protected virtual void Initialize()
         {
+            
         }
     }
 }

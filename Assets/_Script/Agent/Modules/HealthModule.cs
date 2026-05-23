@@ -50,6 +50,11 @@ namespace _Script.Agent.Modules
             }
         }
 
+        public void Heal(float amount)
+        {
+            CurrentHealth += amount;
+        }
+
         public void ResetHealth()
         {
             _currentHealth = MaxHealth;

@@ -36,7 +36,6 @@ namespace _Works._JTH.Scripts.UI.Setting
             _settingModel.AudioMixer = audioMixer;
             _settingModel.StageInfo = stageInfo;
             _settingModel.OpenUIChannel = openUIEvent;
-            _settingView.IsInGame = SceneManager.GetActiveScene().buildIndex != stageInfo.titleIdx;
             
             openUIEvent.AddListener<OpenSettingEvent>(ShowSetting);
             inputSO.OnOpenSettingUI += OpenSetting;
@@ -62,10 +61,11 @@ namespace _Works._JTH.Scripts.UI.Setting
                 return;
             }
             
+            _settingView.IsInGame = SceneManager.GetActiveScene().buildIndex != stageInfo.titleIdx;
             _settingView.OpenView();
             
             _prevTimeScale = Time.timeScale;
-            Time.timeScale = 0;
+            Time.timeScale = _settingView.IsInGame ? 0 : 1;
 
             _prevLock = !Cursor.visible;
             Cursor.visible = true;

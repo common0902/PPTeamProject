@@ -34,9 +34,9 @@ namespace _Works._CJW.Scripts.Rendering
             cameraEvent.RaiseEvent(CameraEvent.RegisterFovEvent.Init(true, this));
         }
 
-        private void Update()
+        private void OnDestroy()
         {
-            
+            cameraEvent.RaiseEvent(CameraEvent.RegisterFovEvent.Init(false, this));
         }
 
         [ContextMenu("DrawFoV")]

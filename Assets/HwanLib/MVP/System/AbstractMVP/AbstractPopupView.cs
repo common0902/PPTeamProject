@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
+using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.System.BaseMVP.Multiable;
 using HwanLib.MVP.System.GenerateUI;
+using HwanLib.MVP.UIData;
 using HwanLib.Utility;
 using UnityEngine;
 
@@ -26,6 +28,7 @@ namespace HwanLib.MVP.System.AbstractMVP
         protected abstract int WindowFormIndex { get; }
         protected abstract int BackgroundFormIndex { get; }
         protected abstract bool UseBackgroundForm { get; }
+        protected virtual int[] CloseBtnFormIndexes { get; } = { };
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
@@ -37,6 +40,10 @@ namespace HwanLib.MVP.System.AbstractMVP
             _canvasGroup = RootCanvas.gameObject.GetOrAddComponent<CanvasGroup>();
             
             WindowForm.OnAnimationEnd += AnimationEndHandler;
+            for (int i = 0; i < CloseBtnFormIndexes.Length; ++i)
+            {
+                AddFormInteractionListener(CloseView, CloseBtnFormIndexes[i]);
+            }
 
             IsOpen = false;
         }
@@ -46,6 +53,10 @@ namespace HwanLib.MVP.System.AbstractMVP
             base.OnDestroyView();
             
             WindowForm.OnAnimationEnd -= AnimationEndHandler;
+            for (int i = 0; i < CloseBtnFormIndexes.Length; ++i)
+            {
+                RemoveFormInteractionListener(CloseView, CloseBtnFormIndexes[i]);
+            }
         }
 
         public override void OpenView()
@@ -62,6 +73,9 @@ namespace HwanLib.MVP.System.AbstractMVP
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         }
+
+        private void CloseView(int _, UIParam __)
+            => CloseView();
         
         public override void CloseView()
         {
