@@ -3004,6 +3004,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 554315428805803994}
     m_Modifications:
+    - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: spawnPos.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: 'spawnPos.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1448465050}
     - target: {fileID: 852974830850950579, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_Name
       value: Gas Sabotage
@@ -4553,6 +4561,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8919785317165793824, guid: 5750f1dfb9190784d9cc3571e2c225d2, type: 3}
   m_PrefabInstance: {fileID: 708530926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &711173641
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 711173642}
+  m_Layer: 0
+  m_Name: GAS1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &711173642
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 711173641}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -69.9548, y: 2, z: 60.52827}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &718270187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7913,68 +7952,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626938703}
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1001 &1257719341
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -70.1164
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.9999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 60.33709
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6879120616605106191, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-      propertyPath: m_Name
-      value: Gas
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
---- !u!4 &1257719342 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4883108482404321890, guid: c2844f98193f7bd44bb68183ba4e7296, type: 3}
-  m_PrefabInstance: {fileID: 1257719341}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1267830561 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 457904575888286432, guid: 28f134ca011d77047b0fb966f223741f, type: 3}
@@ -8583,6 +8560,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1626938703}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &1448465049
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1448465050}
+  m_Layer: 0
+  m_Name: GAS2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1448465050
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1448465049}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -54.354805, y: 2, z: 51.128273}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1468869225
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11937,7 +11945,7 @@ PrefabInstance:
     - target: {fileID: 476469038417393517, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: 'spawnPos.Array.data[0]'
       value: 
-      objectReference: {fileID: 1257719342}
+      objectReference: {fileID: 711173642}
     - target: {fileID: 852974830850950579, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
       propertyPath: m_Name
       value: Gas Sabotage (1)
@@ -12334,4 +12342,5 @@ SceneRoots:
   - {fileID: 759261289491008071}
   - {fileID: 412163112}
   - {fileID: 1243205158}
-  - {fileID: 1257719341}
+  - {fileID: 711173642}
+  - {fileID: 1448465050}
