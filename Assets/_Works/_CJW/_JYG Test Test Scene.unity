@@ -932,6 +932,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6144672231638561480, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: interactedOutLineColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144672231638561480, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: interactedOutLineColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6144672231638561480, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+      propertyPath: interactedOutLineColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7251,6 +7263,22 @@ PrefabInstance:
       propertyPath: 'sabotages.Array.data[0]'
       value: 
       objectReference: {fileID: 59721555}
+    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667481734461611199, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: interactedOutLineColor.b
+      value: 0.004989147
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667481734461611199, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: interactedOutLineColor.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667481734461611199, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: interactedOutLineColor.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1
@@ -7261,7 +7289,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.4
+      value: 4.925
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalRotation.w
