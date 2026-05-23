@@ -17,9 +17,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 {
     public class Sabotage : ModuleOwner, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        // [SerializeField] private EventChannelSO soundEventChannel;
-        // [SerializeField] private SoundClipSO soundClipData;
-        
         [Header("Sabotage Data")]
         [field: SerializeField] public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
 
