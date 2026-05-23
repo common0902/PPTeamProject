@@ -31,6 +31,8 @@ namespace _Works._JTH.Scripts.UI.InGame
             GetForm<GaugeForm>((int)InGameUIEnum.HpGauge).InitGaugeForm(GaugeType.PosY);
             GetForm<CooldownForm>((int)InGameUIEnum.SprintCover).InitCooldownForm(GaugeType.PosY);
             GetForm<CooldownForm>((int)InGameUIEnum.TopViewCover).InitCooldownForm(GaugeType.PosY);
+
+            _redMarkList = new List<RectTransform>();
         }
 
         public void AddRedMark(RectTransform redMark)

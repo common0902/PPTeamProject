@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.AbstractMVP;
 using HwanLib.MVP.System.GenerateUI;
@@ -11,6 +12,11 @@ namespace _Works._JTH.Scripts.UI.Setting
         protected override int WindowFormIndex => (int)SettingUIEnum.PopupWindow;
         protected override int BackgroundFormIndex => (int)SettingUIEnum.Background;
         protected override bool UseBackgroundForm => true;
+        
+        public bool IsInGame { get; set; }
+
+        private AccessForm _inGameBtns;
+        private ToggleForm _toggle;
 
         public override void InitializeView(GameObject root, List<FormData> formDataList, FormInteracted formInteractedHandler,
             UpdateForm updateFormHandler)
@@ -19,6 +25,17 @@ namespace _Works._JTH.Scripts.UI.Setting
             
             AddFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
             AddFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
+
+            _inGameBtns = GetForm<AccessForm>((int)SettingUIEnum.InGameBtns);
+            _toggle = GetForm<ToggleForm>((int)SettingUIEnum.FullScreenToggle);
+        }
+
+        public override void OpenView()
+        {
+            base.OpenView();
+            
+            _inGameBtns.gameObject.SetActive(IsInGame);
+            _toggle.gameObject.SetActive(!IsInGame);
         }
 
         public override void OnDestroyView()
