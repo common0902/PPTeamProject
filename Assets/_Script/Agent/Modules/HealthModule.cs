@@ -46,9 +46,7 @@ namespace _Script.Agent.Modules
             {
                 Collider targetCollider = _moduleAgent.GetComponent<Collider>();
                 targetCollider.isTrigger = true;
-                //targetCollider.enabled = false;
                 OnDeath?.Invoke();
-                Destroy(_moduleAgent.gameObject, 5f);
             }
         }
 

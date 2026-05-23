@@ -28,6 +28,12 @@ namespace _Works._JYG._Script.Enemy.FSM
         public override void Update()
         {
             base.Update();
+            if (!_enemy.IsRunning)
+            {
+                _navMesh.Navmesh.isStopped = true;
+                return;
+            }
+            _navMesh.Navmesh.isStopped = false; //레전드 스파게티 2
             //만약 시야각에 적이 있다면 chase로 돌입.
             //2026.04.16 기획 변경됨. IDLE로 유저에게 약간의 시간을 주고, Chase로 전환.
             

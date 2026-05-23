@@ -39,7 +39,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         {
             if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
-                damageable.TakeDamage(damage, Vector3.forward, transform.position);
+                damageable.TakeDamage(damage, Vector3.zero, transform.position);
             }
             StopAllCoroutines();
             _poolManager.Push(this);
