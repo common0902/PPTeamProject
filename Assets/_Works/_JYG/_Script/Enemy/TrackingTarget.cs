@@ -28,21 +28,19 @@ namespace _Works._JYG._Script.Enemy
             {
                 StopAllCoroutines();
                 findingSource.Stop();
+                return;
             }
             if (Mathf.Approximately(_enemy.GetEnemyCaution, 1) && !isFind)
             {
                 isFind = true;
-                StartCoroutine(SetActiveFalse());
+                if(_enemy.Calling)
+                    StartCoroutine(SetActiveFalse());
                 return;
             }
-            if (_enemy.GetEnemyCaution > 0.1f)
-            {
-                findingSource.volume = _enemy.GetEnemyCaution;
-            }
+            if(!_enemy.SirenEffect)
+                findingSource.volume = _enemy.GetEnemyCaution > 0.1f ? _enemy.GetEnemyCaution : 0f;
             else
-            {
                 findingSource.volume = 0f;
-            }
         }
 
         private IEnumerator SetActiveFalse()

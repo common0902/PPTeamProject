@@ -20,6 +20,8 @@ namespace HwanLib.MVP.System.BaseMVP
             , FormInteracted formInteractedHandler, UpdateForm updateFormHandler)
         {
             RootCanvas = root.transform.GetChild(0).GetComponent<Canvas>();
+            RootCanvas.vertexColorAlwaysGammaSpace = true;
+            
             _formDict = new Dictionary<int, BaseForm>();
             _lookup = new Dictionary<(Action, int), Action<int>>();
             

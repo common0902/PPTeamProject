@@ -9,10 +9,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
     {
         [SerializeField] protected EventChannelSO soundEventChannel;
         [SerializeField] protected SoundClipSO startSoundClip;
-        
+        [SerializeField] private bool canPlaySound;
         [SerializeField] private LayerMask groundLayer;
         [SerializeField] protected ParticleSystem[] vfXes;
-        [SerializeField] protected int channelNumber;
         protected Sabotage _owner;
         public virtual void Initialize(ModuleOwner moduleOwner)
         {
@@ -21,7 +20,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
         public virtual void UseFunction()
         {
-            soundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, startSoundClip, channelNumber));
+            if(canPlaySound)
+                soundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, startSoundClip));
         }
 
         protected void PlayParticle()

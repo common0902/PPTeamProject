@@ -73,11 +73,13 @@ MonoBehaviour:
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   defaultColor: {r: 0, g: 0, b: 0, a: 0}
   interactColor: {r: 0, g: 0, b: 0, a: 0}
-  sabotageData: {fileID: 0}
   labberTrm: {fileID: 4529453834126031564}
+  targetSabotages:
+  - {fileID: 0}
+  - {fileID: 0}
   defaultRotation: -60
   endRotation: 60
   duration: 7.88
@@ -218,7 +220,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6925860072716292403}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.5, y: 0, z: 0, w: 0.8660254}
+  m_LocalRotation: {x: 0.4007284, y: -0.12161528, z: 0, w: 0.90808946}
   m_LocalPosition: {x: 0, y: 1, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

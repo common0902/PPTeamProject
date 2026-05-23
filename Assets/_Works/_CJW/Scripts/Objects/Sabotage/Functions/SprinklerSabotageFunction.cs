@@ -18,8 +18,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             }
 
             var puddle = Instantiate(puddleObject, new Vector3(transform.position.x,1, transform.position.z), Quaternion.identity);
-            puddle.SetLifetime(duration, () =>
-                soundEventChannel.RaiseEvent(SoundSystemEvents.StopSoundEvent.Init(channelNumber)));
+            puddle.SetLifetime(duration);
             PlayParticle();
         }
     }

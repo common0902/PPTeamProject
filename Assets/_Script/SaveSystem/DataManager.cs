@@ -117,8 +117,6 @@ namespace _Script.SaveSystem
                     restorable.RestoreData(data.SaveData);
                 }
             }
-            
-            DataSaveEventChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
         
         [ContextMenu("Clear Pref Data")]
