@@ -56,7 +56,7 @@ MonoBehaviour:
   markBoxSize: {x: 2, y: 2}
   sabotages:
   - {fileID: 0}
-  <IsLocked>k__BackingField: 1
+  <IsLocked>k__BackingField: 0
 --- !u!65 &2293239939891266438
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -248,7 +248,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.SabotageVisual
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   defaultOutLineColor: {r: 0, g: 0, b: 0, a: 1}
-  interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactedOutLineColor: {r: 0, g: 1, b: 0.08921957, a: 1}
   visualObject: {fileID: 7014905645010439343}
   lockedObject: {fileID: 2025621659250560426}
 --- !u!1001 &1382080281127615639
