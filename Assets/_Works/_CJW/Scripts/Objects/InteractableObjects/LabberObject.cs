@@ -12,8 +12,9 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         [SerializeField] private float endRotation;
         [SerializeField] private float duration;
 
-        private void Awake()
+        protected override void Awake()
         {
+            base.Awake();
             labberTrm.localRotation = Quaternion.Euler(defaultRotation, 0 , 0);
             if (targetSabotages.Length != 0)
             {
@@ -32,7 +33,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             {
                 foreach (Sabotage.Sabotage sabotage in targetSabotages)
                 {
-                    sabotage.UnlockSabotage();
+                    if(!sabotage.IsLocked && !sabotage.IsUsed)
+                        sabotage.UnlockSabotage();
                 }
             }
             StartCoroutine(LabberCoroutine());

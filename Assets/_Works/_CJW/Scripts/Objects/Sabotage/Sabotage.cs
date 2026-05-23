@@ -1,14 +1,10 @@
 using System;
-using System.Diagnostics.Tracing;
 using System.Reflection;
 using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
 using _Works._CJW.Scripts.Objects.Sabotage.Functions;
-using GameLib.SoundSystem;
-using NUnit.Framework.Constraints;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using static _Works._CJW.Scripts.Objects.Sabotage.SabotageVisualModule;
@@ -18,24 +14,24 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
     public class Sabotage : ModuleOwner, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
         [Header("Sabotage Data")]
-        [field: SerializeField] public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
+        [field: SerializeField] public SabotageDataSo SabotageData { get; private set; } 
 
         [Header("Event Channel")]
         [SerializeField] private EventChannelSO cameraEvent;
         [SerializeField] private EventChannelSO sabotageEvent;
-        [SerializeField] private EventChannelSO interactEvent; // 상호작용을 해야 작동할 때 필요한 이벤트
+        [SerializeField] private EventChannelSO interactEvent; 
         [Header("Target Event")]
         [SerializeField] public string targetEventName;
         [Header("Mark Offset")]
-        [SerializeField] public Vector3 markOffset; // 위치가 안맞을 수 있어서 오프셋 추가
-        [SerializeField] public Vector2 markBoxSize; // 마크의 상단을 맞춰줄 박스
+        [SerializeField] public Vector3 markOffset; 
+        [SerializeField] public Vector2 markBoxSize; 
 
         [Header("Together Sabotages")]
         [SerializeField] private Sabotage[] sabotages;
         
-        [field: SerializeField] public bool IsLocked { get; private set; } = false; // 사보타지가 잠금 해제되었는지 여부
+        [field: SerializeField] public bool IsLocked { get; private set; } = false; 
                 
-        public bool ShouldMark { get; private set; } = true; // 마킹해야하는지
+        public bool ShouldMark { get; private set; } = true; 
         public bool IsUsed { get; private set; } = false;
 
         private bool _isTopView;
@@ -59,7 +55,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             
             if (_visual != null)
             {
-                _visual.HandleActivation(visual: true, lockVisual: false);
+                _visual.HandleActivation(true);
                 _visual.HandleOutLineEnable(false);
                 UpdateVisualState();
             }
@@ -68,12 +64,15 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if (_visual == null) return;
 
-            if (IsUsed)
+            if (!_isTopView)
             {
                 _visual.HandleOutLineEnable(false);
                 return;
             }
-            if (IsLocked)
+
+            _visual.HandleOutLineEnable(true);
+
+            if (IsUsed || IsLocked)
             {
                 _visual.SetOutlineState(OutlineState.LOCKED);
             }
@@ -96,30 +95,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         private void HandleOpen(TopViewEvent evt)
         {
             _isTopView = evt.IsTopView;
-            
-            if (_isTopView)
-            {
-                _visual.HandleOutLineEnable(true);
-                
-                if (!IsLocked && !IsUsed)
-                {
-                    _visual.HandleActivation(true, false);
-                }
-                else
-                {
-                    _visual.HandleActivation(false, true);
-                }
-                UpdateVisualState();
-            }
-            else
-            {
-                _visual.HandleActivation( false,  false);
-                _visual.HandleOutLineEnable(false);
-            }
+            UpdateVisualState();
         }
 
-        public void ActiveVisual(bool unlockVisual, bool lockVisual)
-            => _visual.HandleActivation(unlockVisual, lockVisual);
+        public void ActiveVisual(bool showVisual)
+            => _visual.HandleActivation(showVisual);
 
         public void UseFunction()
         {
@@ -127,8 +107,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
     
             IsUsed = true; 
 
-            _visual.HandleOutLineEnable(false);
-            _visual.HandleActivation( false, true);
+            UpdateVisualState();
 
             _functionModule.UseFunction();
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
@@ -141,16 +120,17 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             UseFunction();
             foreach (var sabotage in sabotages)
             {
-                if (sabotage != null) // ✨ 안전장치 추가
+                if (sabotage != null) 
                     sabotage.UseFunction();
             }
-            
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            if(IsUsed || !_isTopView) return;
+            Debug.Log($"used: {IsUsed}/ locked: {IsLocked}/ topView: {_isTopView}");
+            if(IsUsed || IsLocked || !_isTopView) return;
 
-            if (!IsLocked && _visual != null)
+            Debug.Log("ASD");
+            if (_visual != null)
             {
                 _visual.SetOutlineState(OutlineState.INTERACTED);
             }
@@ -159,7 +139,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (IsUsed || !_isTopView) return;
+            if (IsUsed || IsLocked || !_isTopView) return;
             
             UpdateVisualState();
         }
