@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
-using HwanLib.MVP.System;
 using HwanLib.MVP.System.AbstractMVP.Form;
 using HwanLib.MVP.System.BaseMVP;
-using HwanLib.MVP.System.BaseMVP.Form;
 using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.UI;
@@ -83,14 +81,25 @@ namespace HwanLib.MVP.Forms
             Vector2 currentPos = _currentChildren[targetItemIdx].anchoredPosition;
             Vector2 targetPos = _currentChildren[targetIndex].anchoredPosition;
             
+            Vector2 currentSize = _currentChildren[targetIndex].sizeDelta;
+            Vector2 targetSize = _currentChildren[targetIndex].sizeDelta;
+            
             _sequence = DOTween.Sequence();
             _sequence
                 .Append(_currentChildren[targetItemIdx]
                     .DOAnchorPos(targetPos, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true))
+                .Join(_currentChildren[targetItemIdx]
+                    .DOSizeDelta(targetSize, swapDuration)
+                    .SetEase(Ease.OutBack)
+                    .SetUpdate(true))
                 .Join(_currentChildren[targetIndex]
                     .DOAnchorPos(currentPos, swapDuration)
+                    .SetEase(Ease.OutBack)
+                    .SetUpdate(true))
+                .Join(_currentChildren[targetIndex]
+                    .DOSizeDelta(currentSize, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true));
         }

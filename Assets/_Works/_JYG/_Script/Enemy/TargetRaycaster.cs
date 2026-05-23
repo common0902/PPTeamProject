@@ -1,8 +1,5 @@
-﻿using _Script.Agent;
-using _Script.Agent.Modules;
-using Unity.Cinemachine;
+﻿using _Script.Agent.Modules;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 namespace _Works._JYG._Script.Enemy
 {
