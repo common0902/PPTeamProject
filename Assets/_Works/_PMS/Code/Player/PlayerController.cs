@@ -180,6 +180,7 @@ public class PlayerController : Agent
     public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
     {
         base.TakeDamage(damage, hitDirection, attackerPosition);
+        if (hitDirection == Vector3.zero) return;
         Movement.CharacterController.Move(hitDirection.normalized * knockbackForce);
         StartCoroutine(ShakeView());
     }

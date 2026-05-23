@@ -20,7 +20,6 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         Vector3 origin = transform.position + Vector3.up;
         Vector3 direction = transform.forward;
 
-        Debug.Log(10001);
 
         _bullets--;
 
