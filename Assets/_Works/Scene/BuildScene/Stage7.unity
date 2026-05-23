@@ -1526,6 +1526,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
   m_PrefabInstance: {fileID: 107830002}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &107830004 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+  m_PrefabInstance: {fileID: 107830002}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!114 &108176711 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 457904575888286432, guid: 28f134ca011d77047b0fb966f223741f, type: 3}
@@ -2398,6 +2409,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1149087220}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2791,6 +2810,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 624648220}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3564,6 +3591,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6493635833518080735, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
   m_PrefabInstance: {fileID: 299623518}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &299623520 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+  m_PrefabInstance: {fileID: 299623518}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!1001 &318887629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3943,6 +3981,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1242360826}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5779,6 +5825,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1588968667717711304, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
   m_PrefabInstance: {fileID: 624648218}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &624648220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+  m_PrefabInstance: {fileID: 624648218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &625767995
 GameObject:
   m_ObjectHideFlags: 0
@@ -7922,6 +7979,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4940570208834840975, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
   m_PrefabInstance: {fileID: 950021740}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &950021742 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+  m_PrefabInstance: {fileID: 950021740}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a8c530ad979c349b3f54ea38e1c8dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.TankEnemy
 --- !u!1 &952024506
 GameObject:
   m_ObjectHideFlags: 0
@@ -9702,6 +9770,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6316111832099550906}
     m_Modifications:
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: targetEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 299623520}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 107830004}
     - target: {fileID: 895019366676008045, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
       propertyPath: m_Name
       value: Short Circuit Sabotage (1)
@@ -9756,6 +9836,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6106921990152443153, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
   m_PrefabInstance: {fileID: 1149087218}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1149087220 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+  m_PrefabInstance: {fileID: 1149087218}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1001 &1149358606
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10317,6 +10408,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6316111832099550906}
     m_Modifications:
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: targetEnemies.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2120731615}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 950021742}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2019107720}
     - target: {fileID: 895019366676008045, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
       propertyPath: m_Name
       value: Short Circuit Sabotage
@@ -10371,6 +10478,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6106921990152443153, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
   m_PrefabInstance: {fileID: 1208505435}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1208505437 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+  m_PrefabInstance: {fileID: 1208505435}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1210615253
 GameObject:
   m_ObjectHideFlags: 0
@@ -10803,6 +10921,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2671295266545856680, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
   m_PrefabInstance: {fileID: 1242360824}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1242360826 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3831990148443394398, guid: bf1cc78ac6953f44996babd4e600d681, type: 3}
+  m_PrefabInstance: {fileID: 1242360824}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1001 &1255970046
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11576,6 +11705,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1588968667717711304, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
   m_PrefabInstance: {fileID: 1310586619}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1310586621 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
+  m_PrefabInstance: {fileID: 1310586619}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1001 &1326979053
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12928,6 +13068,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1310586621}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -14179,6 +14327,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1208505437}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16936,6 +17092,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4940570208834840975, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
   m_PrefabInstance: {fileID: 2019107718}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2019107720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+  m_PrefabInstance: {fileID: 2019107718}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a8c530ad979c349b3f54ea38e1c8dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.TankEnemy
 --- !u!114 &2046242572 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 457904575888286432, guid: 28f134ca011d77047b0fb966f223741f, type: 3}
@@ -17419,6 +17586,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4940570208834840975, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
   m_PrefabInstance: {fileID: 2120731613}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2120731615 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+  m_PrefabInstance: {fileID: 2120731613}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a8c530ad979c349b3f54ea38e1c8dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.TankEnemy
 --- !u!1001 &2137254144
 PrefabInstance:
   m_ObjectHideFlags: 0

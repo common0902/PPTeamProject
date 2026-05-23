@@ -18,7 +18,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private float lifetime;
         [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private GameObject visualObject;
-        private SabotageVisual _visual;
+        private SabotageVisualModule _visualModule;
         private Rigidbody _rigid;
 
         public override void Initialize(ModuleOwner moduleOwner)
@@ -35,7 +35,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 ExecuteDamage();
 
                 //바닥으로 이동하는 코드
-                transform.DOMoveY(hit.point.y + 1.5f, 0.25f).SetEase(Ease.InSine).OnComplete((() =>
+                transform.DOMoveY(hit.point.y + transform.lossyScale.y, 0.25f).SetEase(Ease.InSine).OnComplete((() =>
                 {
                     PlayParticle();
                     DOVirtual.DelayedCall(lifetime, () =>

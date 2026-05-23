@@ -131,6 +131,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Falling Sabotage
       objectReference: {fileID: 0}
+    - target: {fileID: 818739577147953612, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: <IsLocked>k__BackingField
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: lifetime
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxOffset.y
+      value: -4.75
+      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: 3.9448204
@@ -1649,7 +1661,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.PhysicsRaycaster
   m_EventMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4096
   m_MaxRayIntersections: 0
 --- !u!114 &234729463
 MonoBehaviour:
@@ -4092,6 +4104,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
   m_PrefabInstance: {fileID: 638495222}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &638495224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+  m_PrefabInstance: {fileID: 638495222}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!1001 &648270658
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6651,6 +6674,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 548748929}
     m_Modifications:
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: duration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: targetEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1626686949}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1806931841}
     - target: {fileID: 895019366676008045, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
       propertyPath: m_Name
       value: Short Circuit Sabotage (1)
@@ -6695,6 +6734,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: sabotages.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6705,6 +6748,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6106921990152443153, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
   m_PrefabInstance: {fileID: 1092147574}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1092147576 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+  m_PrefabInstance: {fileID: 1092147574}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1093820139
 GameObject:
   m_ObjectHideFlags: 0
@@ -9289,6 +9343,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
   m_PrefabInstance: {fileID: 1498950590}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1498950592 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+  m_PrefabInstance: {fileID: 1498950590}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!4 &1507642576 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 442080, guid: bf8363b0ff810d34eb188506e160156d, type: 3}
@@ -9936,6 +10001,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
   m_PrefabInstance: {fileID: 1626686947}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1626686949 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+  m_PrefabInstance: {fileID: 1626686947}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!1001 &1631520790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11402,6 +11478,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
   m_PrefabInstance: {fileID: 1806931839}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1806931841 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+  m_PrefabInstance: {fileID: 1806931839}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b981f459cb42dc243b16e46f43eb8a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.AbstractEnemy
 --- !u!1001 &1813270875
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12891,6 +12978,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1092147576}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13265,6 +13360,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Falling Sabotage (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxOffset.y
+      value: -4.53
+      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.597584
@@ -13275,7 +13374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.589382
+      value: 15.289379
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13367,6 +13466,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: LeaverPRop_NoWall (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: targetSabotages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: 'targetSabotages.Array.data[0]'
+      value: 
+      objectReference: {fileID: 7123277132918980820}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -13385,6 +13492,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 548748929}
     m_Modifications:
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: duration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: targetEnemies.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[0]'
+      value: 
+      objectReference: {fileID: 638495224}
+    - target: {fileID: 890301539378715754, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+      propertyPath: 'targetEnemies.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1498950592}
     - target: {fileID: 895019366676008045, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
       propertyPath: m_Name
       value: Short Circuit Sabotage
@@ -13439,6 +13562,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6106921990152443153, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
   m_PrefabInstance: {fileID: 7123277132918980818}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7123277132918980820 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
+  m_PrefabInstance: {fileID: 7123277132918980818}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

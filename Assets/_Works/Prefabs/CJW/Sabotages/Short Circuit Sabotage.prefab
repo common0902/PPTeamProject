@@ -47,14 +47,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
-  <SabotageData>k__BackingField: {fileID: 11400000, guid: 30248d7186831d74b99fbf122cbfe1f7, type: 2}
+  <SabotageData>k__BackingField: {fileID: 11400000, guid: 56b0b159ed8fbea4994accf8989f0c54, type: 2}
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   sabotageEvent: {fileID: 11400000, guid: 02dbf1263ae50ec40ae6a678c9368f9a, type: 2}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
   targetEventName: FireSabotageEvent
   markOffset: {x: 0, y: 0, z: 0}
   markBoxSize: {x: 2, y: 2}
-  <IsLocked>k__BackingField: 0
+  sabotages: []
+  <IsLocked>k__BackingField: 1
 --- !u!65 &537354962449197791
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -233,7 +234,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.SabotageVisual
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   defaultOutLineColor: {r: 0, g: 0, b: 0, a: 1}
-  interactedOutLineColor: {r: 1, g: 1, b: 1, a: 1}
+  interactedOutLineColor: {r: 0, g: 1, b: 0.09019608, a: 1}
   visualObject: {fileID: 7131430902156394130}
   lockedObject: {fileID: 929938810452144330}
 --- !u!1 &7131430902156394130
@@ -392,15 +393,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.Functions.ShortCircuitSabotageFunction
   soundEventChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
   startSoundClip: {fileID: 11400000, guid: 5c5239fc2eb65794cb255bee95cc645e, type: 2}
+  canPlaySound: 0
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
   vfXes:
   - {fileID: 1777842173298393190}
-  channelNumber: 0
   targetEnemies:
   - {fileID: 0}
-  duration: 0
+  duration: 5
 --- !u!1001 &7468770610665614029
 PrefabInstance:
   m_ObjectHideFlags: 0

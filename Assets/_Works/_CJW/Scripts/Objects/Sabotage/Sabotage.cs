@@ -11,14 +11,12 @@ using NUnit.Framework.Constraints;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static _Works._CJW.Scripts.Objects.Sabotage.SabotageVisualModule;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage
 {
     public class Sabotage : ModuleOwner, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        // [SerializeField] private EventChannelSO soundEventChannel;
-        // [SerializeField] private SoundClipSO soundClipData;
-        
         [Header("Sabotage Data")]
         [field: SerializeField] public SabotageDataSo SabotageData { get; private set; } // 사보타지 데이터. 이걸로 어떤 사보타지인지 구별 가능
 
@@ -42,15 +40,14 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         private bool _isTopView;
         private AbstractSabotageEvent _targetEvent;
-        private SabotageVisual _visual;
+        private SabotageVisualModule _visual;
         private ISabotageFunctionModule _functionModule;
         
         protected override void Awake()
         {
             base.Awake();   
             cameraEvent.AddListener<TopViewEvent>(HandleOpen);
-            interactEvent.AddListener<UnlockEvent>(HandleUnlock);
-            _visual = GetModule<SabotageVisual>();
+            _visual = GetModule<SabotageVisualModule>();
             _functionModule = GetModule<ISabotageFunctionModule>();
         }
 
@@ -59,43 +56,64 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             _targetEvent = typeof(SabotageEvents).GetField(targetEventName,
                 BindingFlags.Public | BindingFlags.Static)?.GetValue(null) as AbstractSabotageEvent;
             cameraEvent.RaiseEvent(new RegisterSabotageEvent().Init(this, true));
-            _visual.HandleActivation(true, false);
-            _visual.HandleOutLineEnable(false);
-        }
-
-        private void HandleUnlock(UnlockEvent evt)
-        {
-            if(IsLocked == true
-               && evt.TargetSabotageData != null 
-               && evt.TargetSabotageData == SabotageData)
+            
+            if (_visual != null)
             {
-                IsLocked = false;
-                interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
-                
-                Debug.Log($"{targetEventName} 사보타지 해금");
+                _visual.HandleActivation(visual: true, lockVisual: false);
+                _visual.HandleOutLineEnable(false);
+                UpdateVisualState();
             }
         }
+        private void UpdateVisualState()
+        {
+            if (_visual == null) return;
 
+            if (IsUsed)
+            {
+                _visual.HandleOutLineEnable(false);
+                return;
+            }
+            if (IsLocked)
+            {
+                _visual.SetOutlineState(OutlineState.LOCKED);
+            }
+            else
+            {
+                _visual.SetOutlineState(OutlineState.DEFAULT);
+            }
+        }
+        public void UnlockSabotage()
+        {
+            IsLocked = false;
+            UpdateVisualState();
+        }        
+        public void LockSabotage()
+        {
+            IsLocked = true;
+            UpdateVisualState();
+        }
 
         private void HandleOpen(TopViewEvent evt)
         {
             _isTopView = evt.IsTopView;
             
-            if (_isTopView && !IsLocked)
+            if (_isTopView)
             {
                 _visual.HandleOutLineEnable(true);
-                _visual.HandleActivation(true, false);
-                return;
-            }
-            if ((_isTopView && IsLocked) || IsUsed)
-            {
-                Debug.Log("사용할 수 없음");
-                _visual.HandleOutLineEnable(false);
-                _visual.HandleActivation(false, true);
+                
+                if (!IsLocked && !IsUsed)
+                {
+                    _visual.HandleActivation(true, false);
+                }
+                else
+                {
+                    _visual.HandleActivation(false, true);
+                }
+                UpdateVisualState();
             }
             else
             {
-                _visual.HandleActivation(false, false);
+                _visual.HandleActivation( false,  false);
                 _visual.HandleOutLineEnable(false);
             }
         }
@@ -105,13 +123,15 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void UseFunction()
         {
-            if(IsUsed || IsLocked) return; 
+            if (IsUsed || IsLocked) return; 
     
+            IsUsed = true; 
+
             _visual.HandleOutLineEnable(false);
-            _visual.HandleActivation(false, true);
+            _visual.HandleActivation( false, true);
+
             _functionModule.UseFunction();
             sabotageEvent.RaiseEvent(_targetEvent.Init(true));
-            IsUsed = true;
         }
         
         public void OnPointerClick(PointerEventData eventData)
@@ -121,29 +141,32 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
             UseFunction();
             foreach (var sabotage in sabotages)
             {
-                sabotage.UseFunction();
+                if (sabotage != null) // ✨ 안전장치 추가
+                    sabotage.UseFunction();
             }
             
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
             if(IsUsed || !_isTopView) return;
-            
-            cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, true));
+
+            if (!IsLocked && _visual != null)
+            {
+                _visual.SetOutlineState(OutlineState.INTERACTED);
+            }
             ShouldMark = false;
         }   
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (!_isTopView) return;
+            if (IsUsed || !_isTopView) return;
             
-            cameraEvent.RaiseEvent(new FocusedSabotageEvent().Init(this, false));;
+            UpdateVisualState();
         }
         
         private void OnDestroy()
         {
             cameraEvent.RemoveListener<TopViewEvent>(HandleOpen);
-            interactEvent.RemoveListener<UnlockEvent>(HandleUnlock);
             cameraEvent.RaiseEvent(new RegisterSabotageEvent().Init(this, false));
         }
     }
