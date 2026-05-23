@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
@@ -36,8 +36,7 @@ namespace _Works._CJW.Scripts.Rendering
 
         private void Update()
         {
-            if(Keyboard.current.tabKey.wasPressedThisFrame)
-                DrawFov();
+            
         }
 
         [ContextMenu("DrawFoV")]

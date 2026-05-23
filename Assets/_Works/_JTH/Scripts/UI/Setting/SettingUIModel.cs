@@ -27,22 +27,20 @@ namespace _Works._JTH.Scripts.UI.Setting
 
         public void SetDefaultValue()
         {
-            _settingInfo = new SettingInfo();
+            _settingInfo ??= new SettingInfo();
         }
 
         public string StoreData()
         {
-            Debug.Log("스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨스토어됨");
             return JsonUtility.ToJson(_settingInfo);
         }
 
         public void RestoreData(string data)
         {
             _settingInfo = JsonUtility.FromJson<SettingInfo>(data);
-            Debug.Log(_settingInfo.MasterVolume);
-            AudioMixer.SetFloat("Master", _settingInfo.MasterVolume);
-            AudioMixer.SetFloat("BGM", _settingInfo.BgmVolume);
-            AudioMixer.SetFloat("SFX", _settingInfo.SfxVolume);
+            AudioMixer.SetFloat("Master", Mathf.Log10(_settingInfo.MasterVolume) * 20f);
+            AudioMixer.SetFloat("BGM", Mathf.Log10(_settingInfo.BgmVolume) * 20f);
+            AudioMixer.SetFloat("SFX", Mathf.Log10(_settingInfo.SfxVolume) * 20f);
             
             if (_settingInfo.IsFullScreen)
                 Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);

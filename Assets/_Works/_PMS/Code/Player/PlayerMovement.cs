@@ -13,17 +13,17 @@ public class PlayerMovement : MonoBehaviour, IModule
     private float _verticalVelocity;
     private Vector3 _movementDirection;
     private float _currentSpeedMultiplier = 1f; // 현재 스피드 배수
-    private CharacterController _characterController;
+    public CharacterController CharacterController { get; private set; }
     private ModuleOwner _owner;
 
     public bool CanManualMove { get; set; } = true;
     public Vector3 Velocity => _velocity;
-    public bool IsGround => _characterController.isGrounded;
+    public bool IsGround => CharacterController.isGrounded;
 
     public void Initialize(ModuleOwner owner)
     {
         _owner = owner;
-        _characterController = owner.GetComponent<CharacterController>();
+        CharacterController = owner.GetComponent<CharacterController>();
     }
 
     public void SetMovementDirection(Vector3 direction) => _movementDirection = direction;
@@ -63,6 +63,6 @@ public class PlayerMovement : MonoBehaviour, IModule
 
     private void Move()
     {
-        _characterController.Move(_velocity);
+        CharacterController.Move(_velocity);
     }
 }

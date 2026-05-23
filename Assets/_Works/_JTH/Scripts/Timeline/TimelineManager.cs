@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using GameLib.SoundSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 namespace _Works._JTH.Scripts.Timeline
@@ -47,7 +45,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void Dance2Gunner()
         {
-            gunnerAnimator.CrossFadeInFixedTime(_dance2, 0.1f, 0, 0);
+            gunnerAnimator.CrossFadeInFixedTime(_dance2, 0.25f, 0, 0);
         }
         
         public void StopGunner()

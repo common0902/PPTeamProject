@@ -8,6 +8,7 @@ using _Works._CJW.Scripts.Objects;
 using _Works._CJW.Scripts.Objects.InteractableObjects;
 using _Works._CJW.Scripts.Objects.Sabotage.Functions;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._CJW.Scripts
 {
@@ -17,19 +18,21 @@ namespace _Works._CJW.Scripts
         
         private List<AbstractInteractableObject> _interactableObjects = new();
         private AbstractInteractableObject _currentObject;
-        private Player _owner;
+        private PlayerController _owner;
         public void Initialize(ModuleOwner moduleOwner)
         {
-            _owner = moduleOwner as Player;
+            _owner = moduleOwner as PlayerController;
             // Debug.Assert(_owner != null, "PlayerInteractManageModule must be attached to a Player.");
             interactEvent.AddListener<InteractKeyEvent>(HandleInteractEvent);
             interactEvent.AddListener<ObjectRegisterEvent>(HandleRegister);
+            
+            // _owner.PlayerInput.On
         }
 
-        public void TestInitialize()
+        public void Update()
         {
-            interactEvent.AddListener<InteractKeyEvent>(HandleInteractEvent);
-            interactEvent.AddListener<ObjectRegisterEvent>(HandleRegister);
+            if(Keyboard.current.fKey.wasPressedThisFrame)
+                _currentObject?.HandleInteract();
         }
 
         // 상호작용 오브젝트 범위 내에 들었을 때 실행되는 핸들러
@@ -67,20 +70,20 @@ namespace _Works._CJW.Scripts
 
         private void UpdateFocused()
         {
-            _currentObject?.SetFocused(false);
             if(_interactableObjects.Count == 0) return;
             
             //가장 가까운 오브젝트와 상호작용 가능하게 하고, 시각적으로 표현함
             var nearObject = _interactableObjects.OrderBy
             (interactObject => Vector3.Distance(transform.position
                 , interactObject.transform.position)).FirstOrDefault();
-
+            
             if (_currentObject != nearObject && nearObject != null)
             {
                 interactEvent.RaiseEvent(InteractEvents.ClosestObjectEvent
                     .Init(nearObject.DataSo, nearObject.transform.position));
             }
             
+            _currentObject?.SetFocused(false);
             _currentObject = nearObject;
             _currentObject?.SetFocused(true);
             

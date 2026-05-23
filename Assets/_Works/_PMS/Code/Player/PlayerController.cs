@@ -1,5 +1,8 @@
 ﻿using _Script.Agent;
+using _Works._CJW.Scripts;
 using System;
+using System.Collections;
+using TreeEditor;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -7,14 +10,21 @@ using UnityEngine.InputSystem;
 public class PlayerController : Agent
 {
     [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
-    [SerializeField] private CinemachineCamera _cinemachineCamera;
+    [SerializeField] private CinemachineCamera cinemachineCamera;
+
+    [SerializeField] private float knockbackForce = 3f;
 
     [SerializeField] private float runCooldown = 2f;
     private float _runCooldownTimer;
 
-    #region State에서 참조할 입력 상태값들
+    [SerializeField] private float viewMapCooldown = 5f;
+    private float _viewMapCooldownTimer;
 
-    public CinemachineCamera CinemachineCamera => _cinemachineCamera;
+
+    #region State에서 참조할 입력 상태값들
+    public bool IsViewMapCooldown { get; private set; }
+
+    public CinemachineCamera CinemachineCamera => cinemachineCamera;
     public PlayerMovement Movement { get; private set; }
     public Vector2 MoveInput { get; private set; }
     public WeaponModule WeaponModule { get; private set; }
@@ -23,6 +33,9 @@ public class PlayerController : Agent
     public Transform CameraTransform { get; private set; }
     public bool IsAttackPressed { get; private set; }
     public bool IsViewMap { get; private set; }
+    public CameraController CamController { get; private set; }
+    public CinemachineBasicMultiChannelPerlin perlin { get; private set; }
+
     #endregion
 
     protected override void Initialize()
@@ -30,7 +43,9 @@ public class PlayerController : Agent
         base.Initialize();
         Movement = GetModule<PlayerMovement>();
         WeaponModule = GetModule<WeaponModule>();
-        CameraTransform = _cinemachineCamera.transform;
+        CamController = GetModule<CameraController>();
+        perlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
+        CameraTransform = cinemachineCamera.transform;
     }
 
     protected override void AfterInitialize()
@@ -49,7 +64,7 @@ public class PlayerController : Agent
         //PlayerInput.OnWeaponSwapDown += OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex += OnWeaponSwapIndex;
 
-
+        CamController.OnFirstViewComplete += OnFirstViewComplete;
 
         var stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine?.Setup(this);
@@ -62,12 +77,16 @@ public class PlayerController : Agent
     {
         UpdateRotation();
         UpdateRunCooldown();
+        UpdateViewMapCooldown();
         IsAttackPressed = false;
+        
     }   
 
     
     private void UpdateRotation()
     {
+        if (CamController.IsTransitioning || CamController.IsTopView) return;
+
         Vector3 cameraForward = CameraTransform.forward;
         cameraForward.y = 0;
         if (cameraForward.sqrMagnitude > Mathf.Epsilon)
@@ -84,6 +103,14 @@ public class PlayerController : Agent
         }
     }
 
+    private void UpdateViewMapCooldown()
+    {
+        if (!IsViewMapCooldown) return;
+        _viewMapCooldownTimer -= Time.deltaTime;
+        if (_viewMapCooldownTimer <= 0f)
+            IsViewMapCooldown = false;
+    }
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
@@ -97,7 +124,15 @@ public class PlayerController : Agent
         //PlayerInput.OnWeaponSwapUp -= OnWeaponSwapUp;
         //PlayerInput.OnWeaponSwapDown -= OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex -= OnWeaponSwapIndex;
+
+        CamController.OnFirstViewComplete -= OnFirstViewComplete;
     }
+    private void OnFirstViewComplete()
+    {
+        IsViewMapCooldown = true;
+        _viewMapCooldownTimer = viewMapCooldown;
+    }
+
 
     private void OnMovementChange(Vector2 input)
     {
@@ -119,11 +154,13 @@ public class PlayerController : Agent
 
     private void OnViewMapStarted()
     {
+        if (IsViewMapCooldown) return;
         IsViewMap = true;
     }
     
     private void OnViewMapCanceled()
     {
+        if (!IsViewMap) return;
         IsViewMap = false;
     }
 
@@ -138,5 +175,23 @@ public class PlayerController : Agent
             IsDead = true;
     }
 
+    
 
+    public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
+    {
+        base.TakeDamage(damage, hitDirection, attackerPosition);
+        Movement.CharacterController.Move(hitDirection.normalized * knockbackForce);
+        StartCoroutine(ShakeView());
+    }
+
+    private IEnumerator ShakeView()
+    {
+        float originFrequencyGain = perlin.FrequencyGain;
+        float originAmplitudeGain = perlin.AmplitudeGain;
+        perlin.FrequencyGain = 5f;
+        perlin.AmplitudeGain = 5f;
+        yield return new WaitForSeconds(.06f);
+        perlin.FrequencyGain = originFrequencyGain;
+        perlin.AmplitudeGain = originAmplitudeGain;
+    }
 }

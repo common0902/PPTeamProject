@@ -90,7 +90,6 @@ namespace _Script.SaveSystem
             _unUsedData.Clear();
             if (parsedData.Collection != null)
             {
-                Debug.Log(parsedData.Collection.Count);
                 foreach (SaveData saveData in parsedData.Collection)
                 {
                     IEnumerable<IRestorable> restorables = saveables.Where(s => s.SaveId.Id == saveData.Id);

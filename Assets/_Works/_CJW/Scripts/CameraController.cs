@@ -25,29 +25,23 @@ namespace _Works._CJW.Scripts
         [SerializeField] private float quadViewOffset;
         [SerializeField] private float quadViewDuration;
 
+        #region Player가 사용하는 변수
+        public bool IsTransitioning => _isTransitioning;
+        public bool IsTopView => _isTopView;
+
         private bool _isTransitioning = false;
         private bool _isTopView;
-        
+
+        public event Action OnFirstViewComplete;
+        private bool _hasTopView = false;
+        #endregion
+
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
         [SerializeField] private float rotateStartPercent = 0.4f;
 
         public void Initialize(ModuleOwner moduleOwner)
-        {
-            _thirdPersonFollow = topViewCam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
-        
-            Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
-            
-            _rootTrs = topViewCam.Follow;
-            // _playerTrs = _rootTrs;
-            _tempTrs = new GameObject("CamTempTransform").transform;
-            
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
-        private void Awake()
         {
             _thirdPersonFollow = topViewCam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
         
@@ -147,6 +141,8 @@ namespace _Works._CJW.Scripts
 
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
             _isTransitioning = false;
+
+            _hasTopView = true;
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
@@ -172,6 +168,13 @@ namespace _Works._CJW.Scripts
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
             _isTransitioning = false;
+            
+
+            if (_hasTopView)
+            {
+                _hasTopView = false;
+                OnFirstViewComplete?.Invoke();
+            }
         }
     }
 }

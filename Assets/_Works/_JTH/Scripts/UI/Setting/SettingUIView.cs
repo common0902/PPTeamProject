@@ -12,7 +12,7 @@ namespace _Works._JTH.Scripts.UI.Setting
         protected override int WindowFormIndex => (int)SettingUIEnum.PopupWindow;
         protected override int BackgroundFormIndex => (int)SettingUIEnum.Background;
         protected override bool UseBackgroundForm => true;
-        
+
         public bool IsInGame { get; set; }
 
         private AccessForm _inGameBtns;

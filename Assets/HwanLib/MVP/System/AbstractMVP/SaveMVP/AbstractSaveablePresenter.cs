@@ -36,7 +36,6 @@ namespace HwanLib.MVP.System.AbstractMVP.SaveMVP
 
         public void RestoreData(string data)
         {
-            Debug.Log(Model.GetType());
             Model.RestoreData(data);
             View.UpdateView();
         }
