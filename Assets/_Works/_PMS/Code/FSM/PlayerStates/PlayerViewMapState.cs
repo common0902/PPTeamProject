@@ -3,16 +3,17 @@ using UnityEngine;
 
 public class PlayerViewMapState : State<PlayerController>
 {
-    private CameraController _cameraController;
-
-    protected override void Setup()
-    {
-        _cameraController = Entity.GetModule<CameraController>();
-    }
 
     public override void Enter()
     {
-
+        Debug.Log("ViewMap 시작");
+        Entity.CamController.TransToTopView();
         
+    }
+
+    public override void Exit()
+    {
+        Debug.Log("ViewMap 끝");
+        Entity.CamController.TransToFirstView();
     }
 }

@@ -1,16 +1,18 @@
 ﻿
+using UnityEngine;
+
 public class PlayerAttackState : State<PlayerController>
 {
-    private WeaponModule _weaponModule;
-
-    protected override void Setup()
-    {
-         _weaponModule = Entity.GetModule<WeaponModule>();
-    }
 
     public override void Enter()
     {
-        
-        _weaponModule.Attack();
+        Entity.WeaponModule.Attack();
+        Debug.Log(11111111);
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+        Debug.Log(22222222);
     }
 }

@@ -45,20 +45,6 @@ namespace _Works._CJW.Scripts
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        private void Awake()
-        {
-            _thirdPersonFollow = topViewCam.GetCinemachineComponent(CinemachineCore.Stage.Body) as CinemachineThirdPersonFollow;
-        
-            Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
-            
-            _rootTrs = topViewCam.Follow;
-            // _playerTrs = _rootTrs;
-            _tempTrs = new GameObject("CamTempTransform").transform;
-            
-            Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-        }
-
         //탑뷰로 전환
         public void TransToTopView()
         {

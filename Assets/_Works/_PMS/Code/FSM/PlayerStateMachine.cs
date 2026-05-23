@@ -43,6 +43,8 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
 
         MakeTransition<PlayerAttackState, PlayerNoneState>(state => true, layer: 1);
 
+        MakeTransition<PlayerViewMapState, PlayerNoneState>(state => !Owner.IsDead && !Owner.IsViewMap, layer: 1);
+
     }
 }
 
