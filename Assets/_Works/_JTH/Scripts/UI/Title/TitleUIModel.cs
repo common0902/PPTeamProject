@@ -29,12 +29,18 @@ namespace _Works._JTH.Scripts.UI.Title
         }
 
         public void RestoreData(string data)
-        {
+        {       
             _savedStage = data;
         }
         
         private void NewGameBtnClickHandler(UIParam clickData)
         {
+            if (_savedStage == "0" || _savedStage == "1")
+            {
+                OpenTutorialPopup();
+                return;
+            }
+            
             OpenUIChannel.RaiseEvent(
                 OpenUIEvents.OpenPopupEvent.Init("모든 데이터가 사라집니다. 새 게임을 시작하시겠습니까?"
                     , OpenTutorialPopup, () => { }));

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.SO;
 using _Works._JTH.Scripts.UI.Event;
@@ -13,6 +14,7 @@ namespace _Works._JTH.Scripts.UI.FadeUI
 {
     public class FadeUIPresenter : BasePresenter
     {
+        [SerializeField] private EventChannelSO saveChannel;
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private float fadeDuration = 2;
@@ -57,6 +59,8 @@ namespace _Works._JTH.Scripts.UI.FadeUI
             _fadeModel.CurrentStage = SceneManager.GetActiveScene().buildIndex - stageInfoSO.stageStartIdx + 1;
             StopAllCoroutines();
             _fadeView.OpenView();
+            
+            saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
 
         private void CompleteFadeHandler(bool fadeIn)

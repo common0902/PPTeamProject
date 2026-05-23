@@ -50,6 +50,7 @@ namespace _Works._JTH.Scripts.UI.InGame
 
         private void SceneUnLoadedHandler(Scene _)
         {
+            _sabotageList.Clear();
             _inGameView.OnViewChange(false);
         }
 
@@ -97,11 +98,11 @@ namespace _Works._JTH.Scripts.UI.InGame
         {
             if (data.Register == false)
                 return;
-            if (_sabotageList.Count > _sceneSabotageCounter++)
-                return;
             
-            _inGameView.AddRedMark(Instantiate(redMarkPrefab).GetComponent<RectTransform>());
             _sabotageList.Add(data.Sabotage);
+            if (_inGameView.GetRedMarkCount > _sceneSabotageCounter++)
+                return;
+            _inGameView.AddRedMark(Instantiate(redMarkPrefab).GetComponent<RectTransform>());
         }
 
         private void UseTopViewSkillHandler(TopViewEvent data)
