@@ -20,7 +20,7 @@ namespace _Works._JTH.Scripts.UI.Title
 
         public void SetDefaultValue()
         {
-            _savedStage = NotSavedStage;
+            _savedStage = String.IsNullOrEmpty(_savedStage) ? NotSavedStage : _savedStage;
         }
 
         public string StoreData()

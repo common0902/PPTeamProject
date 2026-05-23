@@ -29,6 +29,7 @@ namespace _Script.SaveSystem
             // 첫 RestoreData(Awake에서 구독하면 호출이 된다.)
             SceneManager.sceneLoaded += RestoreData;
             RestoreData();
+            StoreData();
         }
 
         private void OnDestroy()

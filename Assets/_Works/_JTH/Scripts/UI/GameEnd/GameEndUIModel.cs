@@ -31,8 +31,6 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         
         public void SetDefaultValue()
         {
-            _savedStage = 0;
-            _isGameOver = true;
         }
 
         public string StoreData()

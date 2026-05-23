@@ -1,9 +1,7 @@
-using System;
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using GameLib.SoundSystem;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using UnityEngine.Playables;
 
 namespace _Works._JTH.Scripts.Timeline
@@ -13,6 +11,7 @@ namespace _Works._JTH.Scripts.Timeline
         private readonly int _idle = Animator.StringToHash("IDLE");
         private readonly int _dance1 = Animator.StringToHash("DANCE1");
         private readonly int _dance2 = Animator.StringToHash("DANCE2");
+        private readonly int _change = Animator.StringToHash("CHANGE");
         
         [SerializeField] private EventChannelSO soundChannel;
         [SerializeField] private SoundClipSO bgmClipSO;
@@ -52,7 +51,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void StopGunner()
         {
-            gunnerAnimator.CrossFadeInFixedTime(_idle, 0.3f, 0, 0);
+            gunnerAnimator.CrossFadeInFixedTime(_change, 0.1f, 0, 0);
         }
         
         public void Dance1Sniper()
@@ -62,7 +61,7 @@ namespace _Works._JTH.Scripts.Timeline
         
         public void Dance2Sniper()
         {
-            sniperAnimator.CrossFadeInFixedTime(_dance2, 0.1f, 0, 0);
+            sniperAnimator.CrossFadeInFixedTime(_change, 0.1f, 0, 0);
         }
         
         public void StopSniper()

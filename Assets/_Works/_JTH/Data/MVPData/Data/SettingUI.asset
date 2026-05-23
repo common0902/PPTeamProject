@@ -47,7 +47,7 @@ MonoBehaviour:
       gameObjectName: F_BGMSlider
       formTypeName: SliderForm
       targetInteractMethodName: BGMVolumeChangeHandler
-      targetUpdateMethodName: UpdateSFXVolume
+      targetUpdateMethodName: UpdateBGMVolume
       isInteractable: 1
       isUpdatable: 1
     - childIndex: 27
@@ -87,4 +87,4 @@ MonoBehaviour:
       isUpdatable: 0
   modelTypeName: SettingUIModel
   viewTypeName: SettingUIView
-  selectedChildName: F_TitleBtn
+  selectedChildName: F_SFXSlider
