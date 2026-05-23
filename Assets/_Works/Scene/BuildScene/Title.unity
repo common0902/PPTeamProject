@@ -684,13 +684,25 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+      propertyPath: m_SceneBindings.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+      propertyPath: m_SceneBindings.Array.data[7].key
+      value: 
+      objectReference: {fileID: -1122975547118497764, guid: 3d933e0628168e24fb059e035569a3ec, type: 2}
+    - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+      propertyPath: m_SceneBindings.Array.data[8].key
+      value: 
+      objectReference: {fileID: -589857980053150320, guid: 3d933e0628168e24fb059e035569a3ec, type: 2}
+    - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[7].value
       value: 
-      objectReference: {fileID: 1534093355}
+      objectReference: {fileID: 2141603423}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[8].value
       value: 
-      objectReference: {fileID: 2141603423}
+      objectReference: {fileID: 400208385}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[9].value
       value: 
@@ -1366,11 +1378,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1508231279}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &1534093355 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1042357595083745841, guid: a0e3700cce5793c419ce975e1b067e24, type: 3}
-  m_PrefabInstance: {fileID: 634100366}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1660220272
 PrefabInstance:
   m_ObjectHideFlags: 0

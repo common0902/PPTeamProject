@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using GameLib.PoolObject.Runtime;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.Forms.Module.Gauge;
 using HwanLib.MVP.System;
@@ -11,8 +10,6 @@ namespace _Works._JTH.Scripts.UI.InGame
 {
     public class InGameUIView : BaseView
     {
-        private PoolManagerSO _poolManager;
-        
         private SwapForm _weaponField;
         private AccessForm _sprintSkill;
         private AccessForm _redMarkBoard;
@@ -66,6 +63,12 @@ namespace _Works._JTH.Scripts.UI.InGame
                 _redMarkList[i].position = redMarkScreenPosList[i];
                 _redMarkList[i].gameObject.SetActive(true);
             }
+        }
+
+        public void ClearRedMark()
+        {
+            
+            _redMarkList.Clear();
         }
     }
 }
