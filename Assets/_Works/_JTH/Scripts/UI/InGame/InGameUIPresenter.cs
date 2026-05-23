@@ -44,6 +44,12 @@ namespace _Works._JTH.Scripts.UI.InGame
             AddListener();
             
             SceneManager.sceneLoaded += SceneLoadedHandler;
+            SceneManager.sceneUnloaded += SceneUnLoadedHandler;
+        }
+
+        private void SceneUnLoadedHandler(Scene arg0)
+        {
+            throw new NotImplementedException();
         }
 
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
@@ -53,6 +59,15 @@ namespace _Works._JTH.Scripts.UI.InGame
                 _inGameView.OpenView();
             else
                 _inGameView.CloseView();
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            
+            RemoveListener();
+            SceneManager.sceneLoaded -= SceneLoadedHandler;
+            SceneManager.sceneUnloaded -= SceneUnLoadedHandler;
         }
         
         private void AddListener()
@@ -81,14 +96,6 @@ namespace _Works._JTH.Scripts.UI.InGame
                 return; 
             _inGameView.AddRedMark(Instantiate(redMarkPrefab).GetComponent<RectTransform>());
             _sabotageList.Add(data.Sabotage);
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            
-            RemoveListener();
-            SceneManager.sceneLoaded -= SceneLoadedHandler;
         }
 
         private void UseTopViewSkillHandler(TopViewEvent data)
