@@ -22,29 +22,29 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
 
     protected override void MakeTransitions()
     {
-        // 레이어 0 - 이동
-        MakeTransition<PlayerIdleState, PlayerWalkState>(state => Owner.MoveInput.magnitude > 0.1f);
-        MakeTransition<PlayerIdleState, PlayerRunState>(state => Owner.MoveInput.magnitude > 0.1f && Owner.IsRunning && !Owner.IsRunCooldown);
+        // 레이어 0: 이동
+        MakeTransition<PlayerIdleState, PlayerWalkState>(state => !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f);
 
-        MakeTransition<PlayerWalkState, PlayerIdleState>(state => Owner.MoveInput.magnitude <= 0.1f);
+        MakeTransition<PlayerIdleState, PlayerRunState>(state => !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f && Owner.IsRunning && !Owner.IsRunCooldown);
 
-        MakeTransition<PlayerWalkState, PlayerRunState>(state => Owner.IsRunning && !Owner.IsRunCooldown);
+        MakeTransition<PlayerWalkState, PlayerIdleState>(state => Owner.CamController.IsTransitioning || Owner.CamController.IsTopView || Owner.MoveInput.magnitude <= 0.1f);
 
-        MakeTransition<PlayerRunState, PlayerWalkState>(state => !Owner.IsRunning);
+        MakeTransition<PlayerWalkState, PlayerRunState>(state => !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.IsRunning && !Owner.IsRunCooldown);
 
-        MakeTransition<PlayerRunState, PlayerIdleState>(state => Owner.Movement.Velocity.magnitude <= 0.1f);
+        MakeTransition<PlayerRunState, PlayerWalkState>(state => Owner.CamController.IsTransitioning || Owner.CamController.IsTopView || !Owner.IsRunning);
 
-        // 레이어 1 - 행동
+        MakeTransition<PlayerRunState, PlayerIdleState>(state => Owner.Movement.Velocity.magnitude <= 0.1f);    
+
+        // 레이어 1: 행동
         MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
 
-        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && !Owner.IsViewMap && Owner.IsAttackPressed && Owner.WeaponModule.CanAttack, layer: 1);
+        MakeAnyTransition<PlayerAttackState>(state => !Owner.IsDead && !Owner.IsViewMap && !Owner.CamController.IsTransitioning && Owner.IsAttackPressed && Owner.WeaponModule.CanAttack, layer: 1);
 
-        MakeAnyTransition<PlayerViewMapState>(state => !Owner.IsDead && Owner.IsViewMap, layer: 1);
+        MakeAnyTransition<PlayerViewMapState>(state => !Owner.IsDead && !Owner.IsViewMapCooldown && Owner.IsViewMap, layer: 1);
 
         MakeTransition<PlayerAttackState, PlayerNoneState>(state => true, layer: 1);
 
         MakeTransition<PlayerViewMapState, PlayerNoneState>(state => !Owner.IsDead && !Owner.IsViewMap, layer: 1);
-
     }
 }
 

@@ -25,9 +25,17 @@ namespace _Works._CJW.Scripts
         [SerializeField] private float quadViewOffset;
         [SerializeField] private float quadViewDuration;
 
+        #region Player가 사용하는 변수
+        public bool IsTransitioning => _isTransitioning;
+        public bool IsTopView => _isTopView;
+
         private bool _isTransitioning = false;
         private bool _isTopView;
-        
+
+        public event Action OnFirstViewComplete;
+        private bool _hasTopView = false;
+        #endregion
+
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
@@ -133,6 +141,8 @@ namespace _Works._CJW.Scripts
 
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
             _isTransitioning = false;
+
+            _hasTopView = true;
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
         {
@@ -158,6 +168,13 @@ namespace _Works._CJW.Scripts
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
             _isTransitioning = false;
+            
+
+            if (_hasTopView)
+            {
+                _hasTopView = false;
+                OnFirstViewComplete?.Invoke();
+            }
         }
     }
 }

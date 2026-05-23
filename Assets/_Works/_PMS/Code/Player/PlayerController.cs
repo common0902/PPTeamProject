@@ -17,7 +17,12 @@ public class PlayerController : Agent
     [SerializeField] private float runCooldown = 2f;
     private float _runCooldownTimer;
 
+    [SerializeField] private float viewMapCooldown = 5f;
+    private float _viewMapCooldownTimer;
+
+
     #region State에서 참조할 입력 상태값들
+    public bool IsViewMapCooldown { get; private set; }
 
     public CinemachineCamera CinemachineCamera => cinemachineCamera;
     public PlayerMovement Movement { get; private set; }
@@ -59,7 +64,7 @@ public class PlayerController : Agent
         //PlayerInput.OnWeaponSwapDown += OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex += OnWeaponSwapIndex;
 
-
+        CamController.OnFirstViewComplete += OnFirstViewComplete;
 
         var stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine?.Setup(this);
@@ -72,16 +77,16 @@ public class PlayerController : Agent
     {
         UpdateRotation();
         UpdateRunCooldown();
+        UpdateViewMapCooldown();
         IsAttackPressed = false;
-        if (Keyboard.current.fKey.wasPressedThisFrame)
-        {
-            hiiiiit();
-        }
+        
     }   
 
     
     private void UpdateRotation()
     {
+        if (CamController.IsTransitioning || CamController.IsTopView) return;
+
         Vector3 cameraForward = CameraTransform.forward;
         cameraForward.y = 0;
         if (cameraForward.sqrMagnitude > Mathf.Epsilon)
@@ -98,6 +103,14 @@ public class PlayerController : Agent
         }
     }
 
+    private void UpdateViewMapCooldown()
+    {
+        if (!IsViewMapCooldown) return;
+        _viewMapCooldownTimer -= Time.deltaTime;
+        if (_viewMapCooldownTimer <= 0f)
+            IsViewMapCooldown = false;
+    }
+
     protected override void OnDestroy()
     {
         base.OnDestroy();
@@ -111,7 +124,15 @@ public class PlayerController : Agent
         //PlayerInput.OnWeaponSwapUp -= OnWeaponSwapUp;
         //PlayerInput.OnWeaponSwapDown -= OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex -= OnWeaponSwapIndex;
+
+        CamController.OnFirstViewComplete -= OnFirstViewComplete;
     }
+    private void OnFirstViewComplete()
+    {
+        IsViewMapCooldown = true;
+        _viewMapCooldownTimer = viewMapCooldown;
+    }
+
 
     private void OnMovementChange(Vector2 input)
     {
@@ -133,12 +154,13 @@ public class PlayerController : Agent
 
     private void OnViewMapStarted()
     {
-        
+        if (IsViewMapCooldown) return;
         IsViewMap = true;
     }
     
     private void OnViewMapCanceled()
     {
+        if (!IsViewMap) return;
         IsViewMap = false;
     }
 
@@ -153,11 +175,7 @@ public class PlayerController : Agent
             IsDead = true;
     }
 
-    [ContextMenu("hiiiiiit")]
-    public void hiiiiit()
-    {
-        TakeDamage(0,new Vector3(-1,0,0),new Vector3(0,0,0));
-    }
+    
 
     public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
     {
