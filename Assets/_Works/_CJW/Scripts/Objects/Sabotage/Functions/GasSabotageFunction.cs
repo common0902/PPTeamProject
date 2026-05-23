@@ -25,9 +25,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
         private void OnDrawGizmosSelected()
         {
+            if (spawnPos == null) return;
+
             foreach (var spawnPo in spawnPos)
             {
-                Gizmos.DrawWireCube(spawnPo.position, gasSize);
+                if (spawnPo == null) continue; 
+
+                Gizmos.DrawCube(spawnPo.position, gasSize);
             }
         }
     }
