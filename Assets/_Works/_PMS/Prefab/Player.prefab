@@ -1,5 +1,50 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &950005659403841534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1082153587481870475}
+  - component: {fileID: 4276061947854325924}
+  m_Layer: 3
+  m_Name: InteractableManageModule
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1082153587481870475
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950005659403841534}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2034300838938120125}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4276061947854325924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 950005659403841534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57992cbdbf984b41b2c5129aa0976acf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.PlayerInteractManageModule
+  interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
 --- !u!1 &2449315309668737648
 GameObject:
   m_ObjectHideFlags: 0
@@ -39,6 +84,7 @@ Transform:
   - {fileID: 470124404394043884}
   - {fileID: 1006868963023793765}
   - {fileID: 4656274530333166998}
+  - {fileID: 1082153587481870475}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8873227899710872693
@@ -56,8 +102,8 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
-  <SoundEventChannel>k__BackingField: {fileID: 0}
-  <PlayerEventChannel>k__BackingField: {fileID: 0}
+  <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  <PlayerEventChannel>k__BackingField: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: a8d5899067e2fd14ea0b21be69e99fae, type: 2}
   cinemachineCamera: {fileID: 0}
   knockbackForce: 3
@@ -352,6 +398,7 @@ MonoBehaviour:
   swapAttackDelay: 0.5
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
+  _eventChannel: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
 --- !u!1 &9100324594425151676
 GameObject:
   m_ObjectHideFlags: 0

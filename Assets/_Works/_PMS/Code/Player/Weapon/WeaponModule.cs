@@ -37,7 +37,7 @@ public class WeaponModule : MonoBehaviour, IModule
         if (rangedWeapon != null)
         {
             rangedWeapon.WeaponObject.SetActive(false);
-            rangedWeapon.Initialize(this, playerController.PlayerEventChannel);
+            rangedWeapon.Initialize(this, _eventChannel);
         }
     }
 
