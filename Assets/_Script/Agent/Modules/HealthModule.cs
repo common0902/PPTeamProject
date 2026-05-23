@@ -44,8 +44,15 @@ namespace _Script.Agent.Modules
             CurrentHealth -= damage;
             if (CurrentHealth <= 0)
             {
+                Collider targetCollider = _moduleAgent.GetComponent<Collider>();
+                targetCollider.isTrigger = true;
                 OnDeath?.Invoke();
             }
+        }
+
+        public void Heal(float amount)
+        {
+            CurrentHealth += amount;
         }
 
         public void ResetHealth()

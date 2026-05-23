@@ -1,5 +1,8 @@
 ﻿using _Script.Agent.Modules;
+using _Script.ScriptableObject.Event;
+using _Works._PMS.Code.Event;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using UnityEngine;
 
@@ -9,6 +12,8 @@ public class WeaponModule : MonoBehaviour, IModule
     [SerializeField] private float swapAttackDelay = 0.5f;
     [SerializeField] private MeleeWeapon meleeWeapon;
     [SerializeField] private RangedWeapon rangedWeapon;
+
+    [SerializeField] private EventChannelSO _eventChannel;
 
     private List<IWeapon> _weapons = new();
     private int _currentIndex = 0;
@@ -32,7 +37,7 @@ public class WeaponModule : MonoBehaviour, IModule
         if (rangedWeapon != null)
         {
             rangedWeapon.WeaponObject.SetActive(false);
-            rangedWeapon.Initialize(this);
+            rangedWeapon.Initialize(this, playerController.PlayerEventChannel);
         }
     }
 
@@ -79,6 +84,9 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
+
+        bool isGun = CurrentWeapon is RangedWeapon;
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(isGun));
     }
 
     [ContextMenu("111")]
@@ -98,6 +106,8 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
+
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(true));
     }
 
     public void RemoveCurrentWeapon()
@@ -110,5 +120,7 @@ public class WeaponModule : MonoBehaviour, IModule
         _currentIndex = 0;
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
+
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(false));
     }
 }

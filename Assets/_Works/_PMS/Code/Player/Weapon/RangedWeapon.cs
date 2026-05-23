@@ -1,4 +1,6 @@
-﻿using _Works._JYG._Script.Enemy.CombatSystem;
+﻿using _Script.ScriptableObject.Event;
+using _Works._JYG._Script.Enemy.CombatSystem;
+using _Works._PMS.Code.Event;
 using UnityEngine;
 
 public class RangedWeapon : MonoBehaviour, IWeapon
@@ -7,6 +9,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     [SerializeField] private LayerMask targetLayer;
 
     private WeaponModule _weaponModule;
+    private EventChannelSO _eventChannel;
 
     private Animator _animator;
     private bool _canAttack = true;
@@ -24,9 +27,10 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     {
         _animator = GetComponent<Animator>();
     }
-    public void Initialize(WeaponModule weaponModule)
+    public void Initialize(WeaponModule weaponModule, EventChannelSO eventChannel)
     {
         _weaponModule = weaponModule;
+        _eventChannel = eventChannel;
     }
 
     public void Attack(float damage)
@@ -36,6 +40,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         _canAttack = false;
         _bullets--;
         _animator.CrossFade(AttackHash, 0.5f);
+        _eventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(_bullets));
 
         Vector3 origin = transform.position + Vector3.up;
         Vector3 direction = transform.forward;

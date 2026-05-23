@@ -1,4 +1,4 @@
-using _Script.ScriptableObject.Event;
+﻿using _Script.ScriptableObject.Event;
 using UnityEngine;
 
 namespace GameLib.SoundSystem

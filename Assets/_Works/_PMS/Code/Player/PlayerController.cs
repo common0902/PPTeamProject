@@ -1,5 +1,7 @@
 ﻿using _Script.Agent;
+using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts;
+using _Works._PMS.Code.Event;
 using System;
 using System.Collections;
 using TreeEditor;
@@ -9,6 +11,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : Agent
 {
+    [field: SerializeField] public EventChannelSO PlayerEventChannel { get; private set; }
+
     [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
     [SerializeField] private CinemachineCamera cinemachineCamera;
 
@@ -149,6 +153,7 @@ public class PlayerController : Agent
         IsRunning = false;
         IsRunCooldown = true;
         _runCooldownTimer = runCooldown;
+        PlayerEventChannel.RaiseEvent(PlayerEvents.SprintEndEvent);
     }
     private void OnAttackPressed()
     {
@@ -176,6 +181,9 @@ public class PlayerController : Agent
     {
         if (currentHealth <= 0)
             IsDead = true;
+
+        if (currentHealth != prevHealth) 
+            PlayerEventChannel.RaiseEvent(PlayerEvents.HitEvent.Init(currentHealth));
     }
 
     
