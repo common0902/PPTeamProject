@@ -19,6 +19,8 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     //public event Action OnWeaponSwapUp;
     //public event Action OnWeaponSwapDown;
     public event Action<int> OnWeaponSwapIndex;
+    
+    public event Action OnOpenSettingUI;
 
     private Controls _controls;
     private bool _viewMap = false;
@@ -104,5 +106,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         if (context.performed)
             OnWeaponSwapIndex?.Invoke(1);
+    }
+
+    public void OnOpenSetting(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnOpenSettingUI?.Invoke();
     }
 }
