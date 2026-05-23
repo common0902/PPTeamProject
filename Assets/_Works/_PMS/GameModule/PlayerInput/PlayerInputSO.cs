@@ -19,6 +19,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     //public event Action OnWeaponSwapUp;
     //public event Action OnWeaponSwapDown;
     public event Action<int> OnWeaponSwapIndex;
+    public event Action OnInteractKeyPressed;
     
     public event Action OnOpenSettingUI;
 
@@ -112,5 +113,11 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     {
         if (context.performed)
             OnOpenSettingUI?.Invoke();
+    }
+
+    public void OnInteract(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnInteractKeyPressed?.Invoke();
     }
 }

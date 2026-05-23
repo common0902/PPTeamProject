@@ -7,25 +7,11 @@ namespace _Works._CJW.Scripts.Events
 {
     public static class InteractEvents
     {
-        public static readonly InteractKeyEvent InteractKeyEvent = new();
         public static readonly ObjectRegisterEvent ObjectRegisterEvent = new();
         public static readonly ClosestObjectEvent ClosestObjectEvent = new();
         public static readonly InteractEvent InteractEvent = new();
     }
     
-    // 상호작용 키 이벤트. 플레이어가 상호작용 키를 눌렀을 때 발생.
-    // 매니저 모듈에서 이컬로 메서드 실행시킴
-    // Agent 구현할거 너무 많아서 만든거니 지우고 모듈에서 인풋 리더 구독해서 사용해도 됨
-    public class InteractKeyEvent : GameEvent 
-    {
-        public bool IsInteracted { get; private set; }
-
-        public InteractKeyEvent Init(bool interact)
-        {
-            IsInteracted = interact;
-            return this;
-        }
-    }
     
     // 가장 가까운거 보내주는 이벤트
     public class ClosestObjectEvent : GameEvent

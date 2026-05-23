@@ -23,17 +23,12 @@ namespace _Works._CJW.Scripts
         {
             _owner = moduleOwner as PlayerController;
             // Debug.Assert(_owner != null, "PlayerInteractManageModule must be attached to a Player.");
-            interactEvent.AddListener<InteractKeyEvent>(HandleInteractEvent);
             interactEvent.AddListener<ObjectRegisterEvent>(HandleRegister);
-            
-            // _owner.PlayerInput.On
+
+            _owner.PlayerInput.OnInteractKeyPressed += HandleInteractEvent;
         }
 
-        public void Update()
-        {
-            if(Keyboard.current.fKey.wasPressedThisFrame)
-                _currentObject?.HandleInteract();
-        }
+        
 
         // 상호작용 오브젝트 범위 내에 들었을 때 실행되는 핸들러
         // 실행시 주변 상호작용 오브젝트가 리스트에 등록되고 가까운 오브젝트를 찾음
@@ -63,7 +58,7 @@ namespace _Works._CJW.Scripts
             UpdateFocused();
         }
 
-        private void HandleInteractEvent(InteractKeyEvent obj)
+        private void HandleInteractEvent()
         {
             _currentObject?.HandleInteract();
         }
@@ -87,6 +82,11 @@ namespace _Works._CJW.Scripts
             _currentObject = nearObject;
             _currentObject?.SetFocused(true);
             
+        }
+
+        private void OnDestroy()
+        {
+            _owner.PlayerInput.OnInteractKeyPressed -= HandleInteractEvent;
         }
     }
 }

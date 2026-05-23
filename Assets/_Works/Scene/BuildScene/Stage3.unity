@@ -1811,7 +1811,8 @@ PrefabInstance:
       propertyPath: enemyPatrolRouteList.Array.data[0].waitTime
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 1095137831407765784, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -8587,7 +8588,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2785615579840085316, guid: 2f542ba0d9b8a2042849fe66fb9ba0df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -69.89887
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2785615579840085316, guid: 2f542ba0d9b8a2042849fe66fb9ba0df, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8595,7 +8596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2785615579840085316, guid: 2f542ba0d9b8a2042849fe66fb9ba0df, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 54.20139
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2785615579840085316, guid: 2f542ba0d9b8a2042849fe66fb9ba0df, type: 3}
       propertyPath: m_LocalRotation.w
@@ -13579,6 +13580,10 @@ PrefabInstance:
     - target: {fileID: 2449315309668737648, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: m_Layer
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2449315309668737648, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: m_TagString
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: meleeWeapon

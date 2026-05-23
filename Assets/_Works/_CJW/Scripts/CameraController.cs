@@ -39,7 +39,9 @@ namespace _Works._CJW.Scripts
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
+        private Tween _quadTween;
         [SerializeField] private float rotateStartPercent = 0.4f;
+        private Coroutine _transitionCoroutine;
 
         public void Initialize(ModuleOwner moduleOwner)
         {
@@ -48,8 +50,11 @@ namespace _Works._CJW.Scripts
             Debug.Assert(_thirdPersonFollow != null, "CinemachineThirdPersonFollow component not found on the camera.");
             
             _rootTrs = topViewCam.Follow;
-            // _playerTrs = _rootTrs;
             _tempTrs = new GameObject("CamTempTransform").transform;
+
+            _tempTrs.SetParent(_rootTrs);
+            _tempTrs.localPosition = Vector3.zero;
+            _tempTrs.localRotation = Quaternion.identity;
             
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -58,23 +63,38 @@ namespace _Works._CJW.Scripts
         //탑뷰로 전환
         public void TransToTopView()
         {
-            if (!_isTransitioning && !_isTopView)
+            if (_isTransitioning || _isTopView)
+                return;
+
+            _isTransitioning = true;
+            _isTopView = true;
+            
+            if (_transitionCoroutine != null)
             {
-                _isTransitioning = true;
-                _isTopView = true;
-                TransCameraToQuadView();
+                StopCoroutine(_transitionCoroutine);
+                _transitionCoroutine = null;
             }
+
+            TransCameraToQuadView();
         }
         
         //1인칭으로 전환
         public void TransToFirstView()
         {
-            if (!_isTransitioning && _isTopView)
+            if (_isTransitioning || !_isTopView)
+                return;
+
+            _isTransitioning = true;
+            _isTopView = false;
+            
+            if (_transitionCoroutine != null)
             {
-                _isTopView = false;
-                _isTransitioning = true;
-                StartCoroutine(TransCameraToFirstViewCoroutine());
+                StopCoroutine(_transitionCoroutine);
+                _transitionCoroutine = null;
             }
+
+            _transitionCoroutine =
+                StartCoroutine(TransCameraToFirstViewCoroutine());
         }
 
         private void Update()
@@ -91,11 +111,24 @@ namespace _Works._CJW.Scripts
         {
             Debug.Log("TEMPS : " + _tempTrs.position);
             Debug.Log("Roots : " + _rootTrs.position);
+
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
+
             topViewCam.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
-                .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
+            
+            if (_transitionCoroutine != null)
+            {
+                StopCoroutine(_transitionCoroutine);
+                _transitionCoroutine = null;
+            }
+
+            _quadTween = _tempTrs
+                .DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f)
+                .SetEase(transitionCurve)
+                .OnComplete((() =>
+                    _transitionCoroutine = 
+                        StartCoroutine(TransCameraToQuadViewCoroutine())));
         }
     
         private IEnumerator TransCameraToQuadViewCoroutine() //탑뷰로 올라가기 시작
@@ -142,8 +175,8 @@ namespace _Works._CJW.Scripts
             _thirdPersonFollow.VerticalArmLength = resultHeight;
 
             cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
-            _isTransitioning = false;
 
+            _isTransitioning = false;
             _hasTopView = true;
         }
         private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
