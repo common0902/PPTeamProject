@@ -24,7 +24,8 @@ namespace _Works._JTH.Scripts.UI.InGame
         private InGameUIModel _inGameModel;
         private InGameUIView _inGameView;
 
-        private List<Sabotage> _sabotageList; 
+        private List<Sabotage> _sabotageList;
+        private int _sceneSabotageCounter;
 
         public override void InitializePresenter(List<FormData> formData, Type viewType, Type modelType)
         {
@@ -47,13 +48,15 @@ namespace _Works._JTH.Scripts.UI.InGame
             SceneManager.sceneUnloaded += SceneUnLoadedHandler;
         }
 
-        private void SceneUnLoadedHandler(Scene arg0)
+        private void SceneUnLoadedHandler(Scene _)
         {
-            throw new NotImplementedException();
+            _inGameView.OnViewChange(false);
         }
 
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
         {
+            _sceneSabotageCounter = 0;
+            
             if (scene.buildIndex >= stageInfoSO.stageStartIdx 
                 && scene.buildIndex <= stageInfoSO.stageStartIdx + stageInfoSO.stageCount - 1)
                 _inGameView.OpenView();
@@ -93,7 +96,10 @@ namespace _Works._JTH.Scripts.UI.InGame
         private void AddSabotage(RegisterSabotageEvent data)
         {
             if (data.Register == false)
-                return; 
+                return;
+            if (_sabotageList.Count > _sceneSabotageCounter++)
+                return;
+            
             _inGameView.AddRedMark(Instantiate(redMarkPrefab).GetComponent<RectTransform>());
             _sabotageList.Add(data.Sabotage);
         }
