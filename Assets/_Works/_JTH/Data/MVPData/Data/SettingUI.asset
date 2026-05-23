@@ -18,7 +18,7 @@ MonoBehaviour:
     - childIndex: 2
       gameObjectName: F_Background
       formTypeName: BackgroundForm
-      targetInteractMethodName: CloseBtnClickHandler
+      targetInteractMethodName: None
       targetUpdateMethodName: None
       isInteractable: 1
       isUpdatable: 0
@@ -47,7 +47,7 @@ MonoBehaviour:
       gameObjectName: F_BGMSlider
       formTypeName: SliderForm
       targetInteractMethodName: BGMVolumeChangeHandler
-      targetUpdateMethodName: UpdateSFXVolume
+      targetUpdateMethodName: UpdateBGMVolume
       isInteractable: 1
       isUpdatable: 1
     - childIndex: 27
@@ -64,6 +64,27 @@ MonoBehaviour:
       targetUpdateMethodName: UpdateIsFullScreen
       isInteractable: 1
       isUpdatable: 1
+    - childIndex: 37
+      gameObjectName: F_InGameBtns
+      formTypeName: AccessForm
+      targetInteractMethodName: None
+      targetUpdateMethodName: None
+      isInteractable: 0
+      isUpdatable: 0
+    - childIndex: 38
+      gameObjectName: F_TitleBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: TitleBtnClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
+    - childIndex: 41
+      gameObjectName: F_RestartBtn
+      formTypeName: FadeButtonForm
+      targetInteractMethodName: RestartBtnClickHandler
+      targetUpdateMethodName: None
+      isInteractable: 1
+      isUpdatable: 0
   modelTypeName: SettingUIModel
   viewTypeName: SettingUIView
-  selectedChildName: F_BGMSlider
+  selectedChildName: F_SFXSlider

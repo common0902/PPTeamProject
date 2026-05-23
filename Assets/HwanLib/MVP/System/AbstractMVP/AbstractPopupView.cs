@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.BaseMVP.Multiable;
@@ -13,6 +14,8 @@ namespace HwanLib.MVP.System.AbstractMVP
         public bool CanOpen => !RootCanvas.gameObject.activeSelf;
         public float OpenDuration { get; set; } = 0.25f;
         public float CloseDuration { get; set; } = 0.225f;
+
+        public event Action OnClosed;
 
         protected DoTweenWindowForm WindowForm;
         private BackgroundForm _backgroundForm;
@@ -76,7 +79,10 @@ namespace HwanLib.MVP.System.AbstractMVP
         protected void AnimationEndHandler()
         {
             if (IsOpen == false)
+            {
                 RootCanvas.gameObject.SetActive(false);
+                OnClosed?.Invoke();
+            }
         }
     }
 }

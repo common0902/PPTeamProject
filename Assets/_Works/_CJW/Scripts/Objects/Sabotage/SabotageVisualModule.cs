@@ -16,12 +16,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         }
         [SerializeField] private EventChannelSO cameraEvent;
         
-        [SerializeField] private Color defaultOutLineColor;      // 기본 상태 
-        [SerializeField] private Color lockedOutLineColor;       // 잠금 상태
-        [SerializeField] private Color interactedOutLineColor;   // 마우스 올라온 상태
+        [SerializeField] private Color defaultOutLineColor;      
+        [SerializeField] private Color lockedOutLineColor;       
+        [SerializeField] private Color interactedOutLineColor;   
         
         [SerializeField] private GameObject visualObject;
-        [SerializeField] private GameObject lockedObject;
         
         private Outline _outline;
         private ModuleOwner _owner;
@@ -32,17 +31,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             _outline = visualObject.GetComponent<Outline>();
             _owner = moduleOwner;
-            SetOutlineState(OutlineState.DEFAULT);
-            HandleActivation(false, false);
         }
         
 
-        public void HandleActivation(bool visual, bool lockVisual)
+        public void HandleActivation(bool showVisual)
         {
             if (visualObject != null)
-                visualObject.SetActive(visual);
-            if (lockedObject != null) 
-                lockedObject.SetActive(lockVisual);
+                visualObject.SetActive(showVisual);
         }
 
         public void HandleOutLineEnable(bool enable)

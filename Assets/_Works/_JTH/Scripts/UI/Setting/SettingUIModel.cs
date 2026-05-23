@@ -1,9 +1,11 @@
 ﻿using _Script.ScriptableObject.Event;
-using HwanLib.MVP.System;
+using _Works._JTH.Scripts.SO;
+using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.UIData;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Setting
 {
@@ -18,11 +20,14 @@ namespace _Works._JTH.Scripts.UI.Setting
         }
         
         public AudioMixer AudioMixer { get; set; }
+        public StageInfoSO StageInfo { get; set; }
+        public EventChannelSO OpenUIChannel { get; set; }
+
         private SettingInfo _settingInfo;
 
         public void SetDefaultValue()
         {
-            _settingInfo = new SettingInfo();
+            _settingInfo ??= new SettingInfo();
         }
 
         public string StoreData()
@@ -33,9 +38,9 @@ namespace _Works._JTH.Scripts.UI.Setting
         public void RestoreData(string data)
         {
             _settingInfo = JsonUtility.FromJson<SettingInfo>(data);
-            AudioMixer.SetFloat("Master", _settingInfo.MasterVolume);
-            AudioMixer.SetFloat("BGM", _settingInfo.BgmVolume);
-            AudioMixer.SetFloat("SFX", _settingInfo.SfxVolume);
+            AudioMixer.SetFloat("Master", Mathf.Log10(_settingInfo.MasterVolume) * 20f);
+            AudioMixer.SetFloat("BGM", Mathf.Log10(_settingInfo.BgmVolume) * 20f);
+            AudioMixer.SetFloat("SFX", Mathf.Log10(_settingInfo.SfxVolume) * 20f);
             
             if (_settingInfo.IsFullScreen)
                 Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
@@ -73,6 +78,17 @@ namespace _Works._JTH.Scripts.UI.Setting
                 Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
             else
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
+        }
+
+        private void TitleBtnClickHandler(UIParam data)
+        {
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(StageInfo.titleIdx, false, false));
+        }
+        
+        private void RestartBtnClickHandler(UIParam data)
+        {
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
+                .Init(SceneManager.GetActiveScene().buildIndex, false, false));
         }
         
         private UIParam UpdateMasterVolume() => UIParams.UIFloatParam.Init(_settingInfo.MasterVolume);

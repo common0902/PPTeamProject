@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using HwanLib.Utility;
@@ -25,12 +26,16 @@ namespace _Script.SaveSystem
 
         private void Start()
         {
-            saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
+            // 첫 RestoreData(Awake에서 구독하면 호출이 된다.)
+            SceneManager.sceneLoaded += RestoreData;
+            RestoreData();
+            StoreData();
         }
 
         private void OnDestroy()
         {
             SceneManager.sceneUnloaded += StoreData;
+            SceneManager.sceneLoaded -= RestoreData;
         }
 
         private IEnumerator RepeatSave()
@@ -48,5 +53,11 @@ namespace _Script.SaveSystem
         
         private void StoreData()
             => saveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
+        
+        private void RestoreData(Scene arg0, LoadSceneMode arg1)
+            => RestoreData();
+        
+        private void RestoreData()
+            => saveChannel.RaiseEvent(SaveEvents.RestoreDataEvent);
     }
 }

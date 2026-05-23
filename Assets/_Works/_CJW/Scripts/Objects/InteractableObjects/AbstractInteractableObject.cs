@@ -19,7 +19,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         private Outline _outline;
         public bool IsUsed { get; private set; }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             _outline = GetComponent<Outline>();
             Debug.Assert(_outline != null, "Outline not found.");
@@ -29,13 +29,16 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         private void OnTriggerEnter(Collider other)
         {
             // 플레이어가 트리거 범위에 들면 관리 모듈에 등록함
-            if ((playerLayer & (1 << other.gameObject.layer)) != 0)
+            if (other.gameObject.CompareTag("Player"))
             {
                 if (_isRegistered || IsPlayerInRange || IsUsed) return;
             
                 Debug.Log("Player entered interaction range.");
                 _isRegistered = true;
                 IsPlayerInRange = true;
+                Debug.Log(_outline);
+                _outline.OutlineColor = interactColor;
+                
                 interactEvent.RaiseEvent(InteractEvents.ObjectRegisterEvent.Init(_isRegistered, this));
             }
         }
@@ -43,12 +46,14 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
         private void OnTriggerExit(Collider other)
         {
             // 플레이어가 트리거 범위에서 나가면 관리 모듈에서 등록 해제
-            if ((playerLayer & (1 << other.gameObject.layer)) != 0)
+            if (other.gameObject.CompareTag("Player"))
             {
                 if (!_isRegistered || !IsPlayerInRange) return;
             
                 _isRegistered = false;
                 IsPlayerInRange = false;
+                _outline.OutlineColor = defaultColor;
+                
                 interactEvent.RaiseEvent(InteractEvents.ObjectRegisterEvent.Init(_isRegistered, this));
             }
         }
@@ -68,15 +73,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
                 _outline.OutlineColor = interactColor;
             else
                 _outline.OutlineColor = defaultColor;
-            Debug.Log(focused);
         }
 
-        private void OnDrawGizmos()
-        {
-            Gizmos.color = Color.red;
-            var col = GetComponent<SphereCollider>();
-            if (col != null)
-                Gizmos.DrawWireSphere(transform.position, col.radius);
-        }
     }
 }
