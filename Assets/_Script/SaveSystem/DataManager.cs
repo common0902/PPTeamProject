@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using _Script.ScriptableObject.Event;
+using HwanLib.Utility;
 using UnityEngine;
 
 namespace _Script.SaveSystem
 {
-    public class DataManager : MonoBehaviour
+    public class DataManager : LightSingleton<DataManager>
     {
         [Serializable]
         public struct SaveData //세이브 할 데이터들이다. Json으로 저장하기 떄문에 Data = string. Id 기반으로 특정 데이터를 불러온다.
@@ -26,8 +27,10 @@ namespace _Script.SaveSystem
         private List<SaveData> _unUsedData = new List<SaveData>(); // 사용하지 않는 데이터들을 담는 List이다.
         [field: SerializeField] public EventChannelSO DataSaveEventChannel { get; private set; }
 
-        private void Awake()
+        protected override void Initialize()
         {
+            base.Initialize();
+            
             DataSaveEventChannel.AddListener<StoreDataEvent>(HandleStorePrefEvent);
             DataSaveEventChannel.AddListener<RestoreDataEvent>(HandleRestorePrefEvent);
             DataSaveEventChannel.AddListener<SyncDataEvent>(HandleSyncDataEvent);
@@ -42,6 +45,7 @@ namespace _Script.SaveSystem
 
         private void HandleStorePrefEvent(StoreDataEvent @event)
         {
+            Debug.Log("SDfsf");
             string saveData = GetSceneSaveData();       //Save Data : 씬 전체를 스캔떠서 IStorable요소를 string으로 저장한다.
             PlayerPrefs.SetString(prefKey, saveData);
             Debug.Log($"Data Save!! {saveData}");

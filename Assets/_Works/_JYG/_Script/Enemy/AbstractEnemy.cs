@@ -144,6 +144,7 @@ namespace _Works._JYG._Script.Enemy
             base.OnDestroy();
             PlayerFindEventChannel.RemoveListener<EnemyChangeState>(HandleEnemyChange);
             CameraEventChannel.RemoveListener<TopViewEvent>(HandleCameraTopViewEvent);
+            
         }
 
         public void ChangeState(int index) => _stateMachine.ChangeState(index);

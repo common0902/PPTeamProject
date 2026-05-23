@@ -25,7 +25,10 @@ namespace _Works._JYG._Script
         {
             base.Awake();
             //Application.targetFrameRate = 240; //프레임 고정하기
-            EnemyCount = enemyGroup.transform.childCount;
+            if (enemyGroup != null)
+                EnemyCount = enemyGroup.transform.childCount;
+            else
+                EnemyCount = 0;
         }
 
         [ContextMenu("EnemySiren")]

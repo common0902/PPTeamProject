@@ -10,6 +10,7 @@ namespace _Works._JYG._Script.Enemy
         [SerializeField] private AudioSource findingSource;
 
         private AbstractEnemy _enemy;
+        private Outline _outline;
 
         private bool isFind = false;
 
@@ -19,6 +20,8 @@ namespace _Works._JYG._Script.Enemy
             if(findingSource == null)
                 findingSource = GetComponent<AudioSource>();
             
+            _outline = GetComponent<Outline>();
+            
             findingSource.pitch = Random.Range(0.5f, 1f);
         }
 
@@ -27,6 +30,7 @@ namespace _Works._JYG._Script.Enemy
             if (!_enemy.IsRunning)
             {
                 findingSource.volume = 0f;
+                return;
             }
             if (_enemy.IsDead)
             {
