@@ -37,23 +37,36 @@ namespace _Works._CJW.Scripts.Rendering
 
         private void CombineMesh(TopViewEvent evt)
         {
+	        Debug.Log(evt.IsTopView);
 	        if (evt.IsTopView)
 	        {
 		        _meshRenderer.enabled = true;
-				foreach (FOVRendering child in _registeredFovs)
-				{
-					child.gameObject.SetActive(true);
-					child.DrawFov();
-				}
-		    	       
-				if(evt.IsTopView)
-            		_meshFilter.mesh = MeshCombiner.CombineMesh(gameObject, _registeredFovs);
+
+		        foreach (FOVRendering child in _registeredFovs)
+		        {
+			        child.gameObject.SetActive(true);
+			        child.DrawFov();
+		        }
+
+		        if (_meshFilter.mesh != null)
+		        {
+			        Destroy(_meshFilter.mesh);
+			        _meshFilter.mesh = null;
+		        }
+
+		        _meshFilter.mesh =
+			        MeshCombiner.CombineMesh(gameObject, _registeredFovs);
 	        }
 	        else
 	        {
+		        if (_meshFilter.mesh != null)
+		        {
+			        Destroy(_meshFilter.mesh);
+			        _meshFilter.mesh = null;
+		        }
+
 		        _meshRenderer.enabled = false;
 	        }
-	        
         }
 
         private void OnDestroy()

@@ -42,6 +42,7 @@ namespace _Works._CJW.Scripts.Rendering
         [ContextMenu("DrawFoV")]
         public void DrawFov()
         {
+            Debug.Log("Draw Fov");
             FovCheck();
             
             int vertexCount = _fovInfos.Count + 1;
@@ -68,6 +69,8 @@ namespace _Works._CJW.Scripts.Rendering
 
         private void FovCheck()
         {
+            _fovInfos.Clear();
+            
             RaycastHit hitTemp;
             int stepCount = Mathf.RoundToInt(angle * maxResolution);
             float stepAngleSize = angle / stepCount;
