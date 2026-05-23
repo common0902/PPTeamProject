@@ -18,6 +18,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private float lifetime;
         [SerializeField] private LayerMask enemyLayer;
         [SerializeField] private GameObject visualObject;
+        
         private SabotageVisualModule _visualModule;
         private Rigidbody _rigid;
 
@@ -25,42 +26,43 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         {
             base.Initialize(moduleOwner);
         }
+
         public override void UseFunction()
         {
             base.UseFunction();
-            visualObject.SetActive(true);
-            _owner.ActiveVisual(false, false);
+
             if (GetGround(out var hit))
             {
-                ExecuteDamage();
+                _owner.ActiveVisual(false);
+                visualObject.SetActive(true);
 
-                //바닥으로 이동하는 코드
-                transform.DOMoveY(hit.point.y + transform.lossyScale.y, 0.25f).SetEase(Ease.InSine).OnComplete((() =>
+                float targetY = hit.point.y + (visualObject.transform.lossyScale.y * 0.5f);
+
+                transform.DOMoveY(targetY, 0.4f).SetEase(Ease.InQuad).OnComplete(() =>
                 {
+                    ExecuteDamage();
                     PlayParticle();
+
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
                         visualObject.SetActive(false);
-                        _owner.ActiveVisual(false, false);
+                        _owner.ActiveVisual(true);
                     });
-                }));
+                });
             }
-
         }
 
         private void ExecuteDamage()
         {
-            //에너미에 대미지를 가하는 코드
             Collider[] hits = new Collider[maxDetectCount];
-            Physics.OverlapBoxNonAlloc(transform.position + boxOffset, boxSize, hits, Quaternion.identity,enemyLayer);
+            Physics.OverlapBoxNonAlloc(transform.position + boxOffset, boxSize, hits, Quaternion.identity, enemyLayer);
             foreach (Collider c in hits)
             {
-                if(c == null) continue;
+                if (c == null) continue;
                 if (c.TryGetComponent<IDamageable>(out var damageable))
                 {
                     Vector3 dir = c.transform.position - transform.position;
-                    damageable.TakeDamage
-                        (damage, dir.normalized, transform.position);
+                    damageable.TakeDamage(damage, dir.normalized, transform.position);
                 }
             }
         }
