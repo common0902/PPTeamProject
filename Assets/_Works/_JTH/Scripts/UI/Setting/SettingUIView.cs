@@ -12,6 +12,20 @@ namespace _Works._JTH.Scripts.UI.Setting
         protected override int WindowFormIndex => (int)SettingUIEnum.PopupWindow;
         protected override int BackgroundFormIndex => (int)SettingUIEnum.Background;
         protected override bool UseBackgroundForm => true;
+        protected override int[] CloseBtnFormIndexes
+        {
+            get
+            {
+                _closeBtnFormIndexes ??= new[]
+                {
+                    (int)SettingUIEnum.CloseBtn, (int)SettingUIEnum.Background
+                    , (int)SettingUIEnum.RestartBtn, (int)SettingUIEnum.TitleBtn
+                };
+                return _closeBtnFormIndexes;
+            }
+        }
+
+        private int[] _closeBtnFormIndexes;
 
         public bool IsInGame { get; set; }
 
@@ -23,9 +37,6 @@ namespace _Works._JTH.Scripts.UI.Setting
         {
             base.InitializeView(root, formDataList, formInteractedHandler, updateFormHandler);
             
-            AddFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
-            AddFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
-
             _inGameBtns = GetForm<AccessForm>((int)SettingUIEnum.InGameBtns);
             _toggle = GetForm<ToggleForm>((int)SettingUIEnum.FullScreenToggle);
         }
@@ -36,14 +47,6 @@ namespace _Works._JTH.Scripts.UI.Setting
             
             _inGameBtns.gameObject.SetActive(IsInGame);
             _toggle.gameObject.SetActive(!IsInGame);
-        }
-
-        public override void OnDestroyView()
-        {
-            base.OnDestroyView();
-            
-            RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.CloseBtn);
-            RemoveFormInteractionListener(CloseView, (int)SettingUIEnum.Background);
         }
     }
 }

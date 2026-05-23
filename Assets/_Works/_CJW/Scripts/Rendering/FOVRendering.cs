@@ -42,7 +42,6 @@ namespace _Works._CJW.Scripts.Rendering
         [ContextMenu("DrawFoV")]
         public void DrawFov()
         {
-            Debug.Log("DrawFov");
             FovCheck();
             
             int vertexCount = _fovInfos.Count + 1;

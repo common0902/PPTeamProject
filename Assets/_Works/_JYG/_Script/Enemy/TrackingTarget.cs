@@ -24,6 +24,10 @@ namespace _Works._JYG._Script.Enemy
 
         private void Update()
         {
+            if (!_enemy.IsRunning)
+            {
+                findingSource.volume = 0f;
+            }
             if (_enemy.IsDead)
             {
                 StopAllCoroutines();

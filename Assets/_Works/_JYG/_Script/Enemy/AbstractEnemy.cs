@@ -214,8 +214,14 @@ namespace _Works._JYG._Script.Enemy
             {
                 SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, PlayerFoundSound));
             }
-            
-            yield return new WaitForSeconds(t);
+            WaitUntil waitUntil = new WaitUntil(() => IsRunning);
+            float curT = 0;
+            while (curT < t)
+            {
+                curT += Time.deltaTime;
+                yield return null;
+                yield return waitUntil;
+            }
             if (!IsDead && !SirenEffect)
             {
                 PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.EnemyChangeState.Init(EnemyState.CHASE));
