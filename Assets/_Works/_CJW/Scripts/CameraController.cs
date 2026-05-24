@@ -23,8 +23,8 @@ namespace _Works._CJW.Scripts
         [SerializeField] private CinemachineCamera firstViewCam;
         [Header("Top View Setting")]
         [SerializeField] private Vector3 topViewEuler;
-        [SerializeField] private float quadViewOffset;
-        [SerializeField] private float quadViewDuration;
+        [SerializeField] private float topViewOffset;
+        [SerializeField] private float topViewDuration;
 
         #region Player가 사용하는 변수
         public bool IsTransitioning => _isTransitioning;
@@ -97,7 +97,7 @@ namespace _Works._CJW.Scripts
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             topViewCam.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * topViewOffset), 0.1f).SetEase(transitionCurve)
                 .OnComplete((() => StartCoroutine(TransCameraToTopViewCoroutine())));
         }
     

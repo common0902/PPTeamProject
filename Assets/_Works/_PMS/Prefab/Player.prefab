@@ -216,7 +216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CameraController
   cameraEvent: {fileID: 11400000, guid: cd2f519404abfa4448dd3299c7ec16bb, type: 2}
   defaultHeight: 0.5
-  resultHeight: 36
+  resultHeight: 20
   durationTime: 2
   transitionCurve:
     serializedVersion: 2
@@ -244,8 +244,9 @@ MonoBehaviour:
     m_RotationOrder: 4
   topViewCam: {fileID: 0}
   firstViewCam: {fileID: 0}
-  quadViewOffset: 0.5
-  quadViewDuration: 1
+  topViewEuler: {x: 0, y: 0, z: 0}
+  topViewOffset: 0.5
+  topViewDuration: 1
   _inputAxisController: {fileID: 0}
   rotateStartPercent: 0.4
 --- !u!1 &5568813029457620153
