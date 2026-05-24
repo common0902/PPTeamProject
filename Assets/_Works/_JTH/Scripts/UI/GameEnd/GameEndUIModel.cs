@@ -22,7 +22,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _isGameOver = isGameOver;
             int nextStage = SceneManager.GetActiveScene().buildIndex - StageInfoSO.stageStartIdx + 2;
             
-            if (isGameOver == false && _savedStage < nextStage && nextStage <= StageInfoSO.stageCount)
+            if (isGameOver == false && _savedStage < nextStage && nextStage <= StageInfoSO.stageCount + 1)
             {
                 _savedStage = nextStage;
             }
