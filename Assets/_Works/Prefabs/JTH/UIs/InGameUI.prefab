@@ -843,7 +843,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 100/100
+  m_text: '{0}'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ac60c214fca48d428fdcc082f27ed05, type: 2}
   m_sharedMaterial: {fileID: 3603215953104013587, guid: 3ac60c214fca48d428fdcc082f27ed05, type: 2}
@@ -1036,8 +1036,12 @@ PrefabInstance:
       value: BulletInfo
       objectReference: {fileID: 0}
     - target: {fileID: 6343514907150422791, guid: 249953572ea4dcf43b872e2a3af9991d, type: 3}
+      propertyPath: m_text
+      value: '{0}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 6343514907150422791, guid: 249953572ea4dcf43b872e2a3af9991d, type: 3}
       propertyPath: m_fontSize
-      value: 91
+      value: 81.85
       objectReference: {fileID: 0}
     - target: {fileID: 7913905766919175779, guid: 249953572ea4dcf43b872e2a3af9991d, type: 3}
       propertyPath: m_AnchorMax.y

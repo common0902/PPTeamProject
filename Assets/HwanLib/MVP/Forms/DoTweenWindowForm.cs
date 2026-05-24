@@ -31,7 +31,6 @@ namespace HwanLib.MVP.Forms
                 _sequence.Kill();
                 OnAnimationEnd?.Invoke();
             }
-            
             transform.localScale = isOpen ? Vector3.zero : transform.localScale;
             float curDuration = isOpen ? Mathf.Clamp01(1 - transform.localScale.x) * duration
                 : transform.localScale.x * closeDuration;

@@ -37,13 +37,20 @@ namespace _Works._JTH.Scripts.UI.InGame
             _sabotageList = new List<Sabotage>();
             
             _inGameModel.SetEventChannel(openUIChannel);
-            _inGameModel.InitializeData(new InGameUIData
-                ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
 
             AddListener();
             
             SceneManager.sceneLoaded += SceneLoadedHandler;
             SceneManager.sceneUnloaded += SceneUnLoadedHandler;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            
+            RemoveListener();
+            SceneManager.sceneLoaded -= SceneLoadedHandler;
+            SceneManager.sceneUnloaded -= SceneUnLoadedHandler;
         }
 
         private void SceneUnLoadedHandler(Scene _)
@@ -55,21 +62,14 @@ namespace _Works._JTH.Scripts.UI.InGame
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
         {
             _sceneSabotageCounter = 0;
-            
-            if (scene.buildIndex >= stageInfoSO.stageStartIdx 
+            _inGameModel.InitializeData(new InGameUIData
+                ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
+            _inGameView.UpdateView();
+            if (scene.buildIndex >= stageInfoSO.tutorialIdx 
                 && scene.buildIndex <= stageInfoSO.stageStartIdx + stageInfoSO.stageCount - 1)
                 _inGameView.OpenView();
             else
                 _inGameView.CloseView();
-        }
-
-        protected override void OnDestroy()
-        {
-            base.OnDestroy();
-            
-            RemoveListener();
-            SceneManager.sceneLoaded -= SceneLoadedHandler;
-            SceneManager.sceneUnloaded -= SceneUnLoadedHandler;
         }
         
         private void AddListener()

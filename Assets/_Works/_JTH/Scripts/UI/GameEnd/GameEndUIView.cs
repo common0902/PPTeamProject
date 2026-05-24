@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
@@ -14,6 +15,8 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             GameOver,
             GameClear,
         }
+
+        public Action OnCloseView;
 
         private AccessForm _clearUI;
         private AccessForm _gameOverUI;
@@ -53,6 +56,12 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         {
             if (fadeIn == false)
                 CloseView();
+        }
+
+        public override void CloseView()
+        {
+            base.CloseView();
+            OnCloseView?.Invoke();
         }
 
         public override void OpenView()

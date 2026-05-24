@@ -43,7 +43,11 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
         }
 
         private void GetMainCamera(Scene _, LoadSceneMode __)
-            => _mainCam = Camera.main;
+        {
+            _mainCam = Camera.main;
+            _interactiveBtnUIView.CloseView();
+            _targetObjectTrm = null;
+        }
 
         private void SabotageInteractiveHandler(ObjectRegisterEvent data)
         {
@@ -66,7 +70,7 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
 
         private void Update()
         {
-            if (_targetObjectTrm != null)
+            if (_targetObjectTrm != null )
                 _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm);
         }
 

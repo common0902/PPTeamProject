@@ -85,6 +85,8 @@ namespace _Works._CJW.Scripts
         private void OnDestroy()
         {
             _owner.PlayerInput.OnInteractKeyPressed -= HandleInteractEvent;
+
+            interactEvent.RemoveListener<ObjectRegisterEvent>(HandleRegister);
         }
     }
 }

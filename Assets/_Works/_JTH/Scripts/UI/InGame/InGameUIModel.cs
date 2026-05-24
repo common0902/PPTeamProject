@@ -3,6 +3,7 @@ using _Works._JTH.Scripts.UI.Event;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.UIData;
+using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.InGame
 {
@@ -15,10 +16,10 @@ namespace _Works._JTH.Scripts.UI.InGame
             => _openUIChannel = openUIChannel;
 
         private UIParam UpdateHpText()
-            => UIParams.UIStringParam.Init(_inGameData.CurrentHp.ToString());
+            => UIParams.UIStringParam.Init($"{_inGameData.CurrentHp}/{_inGameData.MaxHp}");
 
         private UIParam UpdateBulletText()
-            => UIParams.UIStringParam.Init(_inGameData.RemainingBullets.ToString());
+            => UIParams.UIStringParam.Init($"{_inGameData.RemainingBullets : 00}");
 
         private UIParam UpdateTopViewSkillCover()
             => UIParams.UICooldownParam.Init(_inGameData.RemainingTabSkillCooldown, 

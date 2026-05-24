@@ -689,6 +689,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 4152209728038442369}
+        m_TargetAssemblyTypeName: _Works._CJW.Scripts.Rendering.FOVRendering, Assembly-CSharp
+        m_MethodName: DisableRender
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <MaxHealth>k__BackingField: 1
 --- !u!1 &5663390159802345553
 GameObject:
@@ -809,7 +821,7 @@ MonoBehaviour:
   <WaterSpeed>k__BackingField: 0.5
   <ChaseSpeed>k__BackingField: 2.5
   <RotateSpeed>k__BackingField: 5
-  callingDuration: 5
+  callingDuration: 3
   <PlayerFoundSound>k__BackingField: {fileID: 11400000, guid: 49ed5f6430da3d94490ed258e247070b, type: 2}
   <HitSound>k__BackingField: {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
   <ForceXParam>k__BackingField: {fileID: 11400000, guid: 9b677280e9dd5504bb9dc740700cc4fd, type: 2}
@@ -860,8 +872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64606df1c46e32428cfc6b432e85e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.ViewCaster
-  <Distance>k__BackingField: 60
-  <Angle>k__BackingField: 160
+  <Distance>k__BackingField: 12
+  <Angle>k__BackingField: 30
 --- !u!1 &7819578369922147538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1776,6 +1788,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6406800111252289608, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
   m_PrefabInstance: {fileID: 8391986016953563866}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &4152209728038442369 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5614245383613509467, guid: 3d88cfad30fb5d244ab922915806fbed, type: 3}
+  m_PrefabInstance: {fileID: 8391986016953563866}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4160d1bb88157814d80ac0e3851303bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Rendering.FOVRendering
 --- !u!1001 &9115613660200805697
 PrefabInstance:
   m_ObjectHideFlags: 0
