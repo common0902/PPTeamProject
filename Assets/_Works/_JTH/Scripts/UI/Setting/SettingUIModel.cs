@@ -43,7 +43,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             AudioMixer.SetFloat("SFX", Mathf.Log10(_settingInfo.SfxVolume) * 20f);
             
             if (_settingInfo.IsFullScreen)
-                Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
+                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
             else
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         }
@@ -75,7 +75,7 @@ namespace _Works._JTH.Scripts.UI.Setting
             _settingInfo.IsFullScreen = isFullScreen;
             
             if (_settingInfo.IsFullScreen)
-                Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
+                Screen.SetResolution(1920, 1080, FullScreenMode.FullScreenWindow);
             else
                 Screen.SetResolution(1920, 1080, FullScreenMode.Windowed);
         }

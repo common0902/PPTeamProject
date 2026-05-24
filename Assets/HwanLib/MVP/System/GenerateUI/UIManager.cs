@@ -34,7 +34,6 @@ namespace HwanLib.MVP.System.GenerateUI
         protected override void Initialize()
         {
             base.Initialize();
-            Screen.SetResolution(1920, 1080, FullScreenMode.ExclusiveFullScreen);
             
             Instantiate(worldUICamera, Camera.main.transform);
 
