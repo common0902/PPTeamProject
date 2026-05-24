@@ -71,6 +71,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.InteractableObjects.LabberObject
   <DataSo>k__BackingField: {fileID: 11400000, guid: f9dcb3c943cbe98459e8b85b86cf1ef8, type: 2}
+  soundChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  soundData: {fileID: 11400000, guid: c09c4231346f6574eaff639240906312, type: 2}
   <UiShowPos>k__BackingField: {fileID: 5715615531627413794}
   interactEvent: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
   playerLayer:
@@ -83,7 +85,7 @@ MonoBehaviour:
   - {fileID: 0}
   defaultRotation: -60
   endRotation: 60
-  duration: 7.88
+  duration: 0.5
 --- !u!114 &2759636588038828685
 MonoBehaviour:
   m_ObjectHideFlags: 0

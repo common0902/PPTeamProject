@@ -310,6 +310,10 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1882305497766934235}
+    - target: {fileID: 4727646418719387076, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+      propertyPath: attackRange
+      value: 0.8
+      objectReference: {fileID: 0}
     - target: {fileID: 5325314875577271691, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.058441162
@@ -327,28 +331,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
---- !u!114 &2864964771902997765 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7610667951973316390, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
-  m_PrefabInstance: {fileID: 5646634778814378531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76752ba54eb82a94e835358c2d150c21, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MeleeWeapon
---- !u!114 &3624287515631710921 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8939907086008221930, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
-  m_PrefabInstance: {fileID: 5646634778814378531}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93a1d8e5a7a4b504f9680ffdd634ba3e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RangedWeapon
 --- !u!114 &6620057530964772690 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1550306266744026481, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
@@ -447,14 +429,6 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
-      propertyPath: meleeWeapon
-      value: 
-      objectReference: {fileID: 2864964771902997765}
-    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
-      propertyPath: rangedWeapon
-      value: 
-      objectReference: {fileID: 3624287515631710921}
     - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: topViewCam
       value: 

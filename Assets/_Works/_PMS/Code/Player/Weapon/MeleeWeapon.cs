@@ -1,4 +1,6 @@
-﻿using _Works._JYG._Script.Enemy.CombatSystem;
+﻿using _Script.ScriptableObject.Event;
+using _Works._JYG._Script.Enemy.CombatSystem;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 public class MeleeWeapon : MonoBehaviour, IWeapon
@@ -7,6 +9,12 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
     [SerializeField] private float attackRadius = 0.5f;
     [SerializeField] private LayerMask targetLayer;
     [SerializeField] private LayerMask wallLayer;
+
+    [SerializeField] private SoundClipSO attack1Sound;
+    [SerializeField] private SoundClipSO attack2Sound;
+    [SerializeField] private SoundClipSO attack3Sound;
+    [SerializeField] private SoundClipSO swapSound;
+    private EventChannelSO _soundChannel;
 
     private Animator _animator;
     private int _comboCount = 0;
@@ -22,7 +30,15 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
     public GameObject WeaponObject => gameObject;
     public bool CanAttack => _canAttack;
 
-    private void Awake() => _animator = GetComponent<Animator>();
+    public void Initialize(EventChannelSO soundChannel)
+    {
+        _soundChannel = soundChannel;
+    }
+
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     public void Attack(float damage)
     {
@@ -51,14 +67,19 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
 
     private void PlayAttackAnimation()
     {
-        int hash = _comboCount switch
+        int hash;
+        SoundClipSO sound;
+
+        switch (_comboCount)
         {
-            0 => Attack1Hash,
-            1 => Attack2Hash,
-            2 => Attack3Hash,
-            _ => Attack1Hash
-        };
+            case 0: hash = Attack1Hash; sound = attack1Sound; break;
+            case 1: hash = Attack2Hash; sound = attack2Sound; break;
+            case 2: hash = Attack3Hash; sound = attack3Sound; break;
+            default: hash = Attack1Hash; sound = attack1Sound; break;
+        }
+
         _animator.CrossFade(hash, 0.05f);
+        PlaySound(sound);
         _comboCount = (_comboCount + 1) % 3;
     }
 
@@ -84,6 +105,13 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
         _canCombo = false;
         _comboCount = 0;
         _animator.Play(SwapHash);
+        PlaySound(swapSound);
+    }
+
+    private void PlaySound(SoundClipSO sound)
+    {
+        if (sound == null || _soundChannel == null) return;
+        _soundChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, sound));
     }
 
     private void OnDrawGizmosSelected()

@@ -2,6 +2,7 @@
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts;
 using _Works._PMS.Code.Event;
+using GameLib.SoundSystem;
 using System;
 using System.Collections;
 using TreeEditor;
@@ -12,6 +13,9 @@ using UnityEngine.InputSystem;
 public class PlayerController : Agent
 {
     [field: SerializeField] public EventChannelSO PlayerEventChannel { get; private set; }
+
+    [SerializeField] private SoundClipSO hitSound;
+    [SerializeField] private SoundClipSO deadSound;
 
     [field: SerializeField] public PlayerInputSO PlayerInput { get; private set; }
     [SerializeField] private CinemachineCamera cinemachineCamera;
@@ -180,7 +184,10 @@ public class PlayerController : Agent
     protected override void HandleHealthChaged(float prevHealth, float currentHealth, float max)
     {
         if (currentHealth <= 0)
+        {
             IsDead = true;
+            SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, deadSound));
+        }
 
         if (currentHealth != prevHealth) 
             PlayerEventChannel.RaiseEvent(PlayerEvents.HitEvent.Init(currentHealth));
@@ -193,6 +200,7 @@ public class PlayerController : Agent
         base.TakeDamage(damage, hitDirection, attackerPosition);
         if (hitDirection == Vector3.zero) return;
         Movement.CharacterController.Move(hitDirection.normalized * knockbackForce);
+        SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, hitSound));
         StartCoroutine(ShakeView());
     }
 
