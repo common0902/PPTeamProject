@@ -49,7 +49,7 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
         {
             if (data.IsRegistered == false)
             {
-                if (data.InteractableObject.transform == _targetObjectTrm)
+                if (data.InteractableObject.UiShowPos == _targetObjectTrm)
                 {
                     _interactiveBtnUIView.CloseView();
                     _targetObjectTrm = null;
@@ -60,14 +60,14 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
 
             if (TryOpen?.Invoke(this) is true)
             {
-                _targetObjectTrm = data.InteractableObject?.transform;
+                _targetObjectTrm = data.InteractableObject.UiShowPos;
             }
         }
 
         private void Update()
         {
             if (_targetObjectTrm != null)
-                _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm.transform);
+                _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm);
         }
 
         public void OpenUI()
