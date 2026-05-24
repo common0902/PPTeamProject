@@ -54,6 +54,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
         private void ExecuteDamage()
         {
+            
             Collider[] hits = new Collider[maxDetectCount];
             Physics.OverlapBoxNonAlloc(transform.position + boxOffset, boxSize * 0.5F, hits, Quaternion.identity, enemyLayer);
             foreach (Collider c in hits)
