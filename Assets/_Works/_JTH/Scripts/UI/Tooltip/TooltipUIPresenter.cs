@@ -8,6 +8,7 @@ using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Tooltip
 {
@@ -36,7 +37,6 @@ namespace _Works._JTH.Scripts.UI.Tooltip
         
         private void ShowTooltip(FocusedSabotageEvent eventData)
         {
-            Debug.Log("sfsfdfsd");
             if (eventData.IsFocused == false)
             {
                 CloseTooltip();

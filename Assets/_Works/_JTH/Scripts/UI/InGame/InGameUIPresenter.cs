@@ -110,15 +110,16 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameView.OnViewChange(data.IsTopView);
             if (data.IsTopView == false)
                 return;
+            Debug.Log("탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰");
 
-            Func<Vector3, Vector3> getScreenPos = Camera.main.WorldToScreenPoint;
+            Camera cam = Camera.main;
             List<Vector2> redMarkScreenPosList = new List<Vector2>();
             for (int i = 0; i < _sabotageList.Count; ++i)
             {
                 Vector2 boxSize = _sabotageList[i].markBoxSize;
                 if (_sabotageList[i].ShouldMark == true)
                 {
-                    redMarkScreenPosList.Add(getScreenPos(
+                    redMarkScreenPosList.Add(cam.WorldToScreenPoint(
                         new Vector3(boxSize.x, 0, boxSize.y) + _sabotageList[i].transform.position));
                 }
             }

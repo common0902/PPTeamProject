@@ -1083,14 +1083,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (4)
       objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 6
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3624,14 +3616,6 @@ PrefabInstance:
     - target: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_Name
       value: E_Tank Variant (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6243,14 +6227,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1508223660905346535}
     m_Modifications:
-    - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
       value: E_Sniper (6)
@@ -6407,14 +6383,6 @@ PrefabInstance:
     - target: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_Name
       value: E_Tank Variant (7)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -7761,14 +7729,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1508223660905346535}
     m_Modifications:
-    - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 60
-      objectReference: {fileID: 0}
-    - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 16
-      objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
       value: E_Sniper (7)
@@ -8112,6 +8072,10 @@ PrefabInstance:
       propertyPath: topViewCam
       value: 
       objectReference: {fileID: 1612676320}
+    - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: durationTime
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: firstViewCam
       value: 
@@ -9677,6 +9641,10 @@ PrefabInstance:
       propertyPath: Target.TrackingTarget
       value: 
       objectReference: {fileID: 1243205159}
+    - target: {fileID: 4727646418719387076, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+      propertyPath: attackRange
+      value: 1.9
+      objectReference: {fileID: 0}
     - target: {fileID: 5325314875577271691, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.6337776
@@ -12365,10 +12333,6 @@ PrefabInstance:
     - target: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_Name
       value: E_Tank Variant (5)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

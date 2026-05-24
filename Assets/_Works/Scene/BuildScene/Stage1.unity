@@ -13363,7 +13363,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 997219901953574640, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: durationTime
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 997219901953574640, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: transitionCurve.m_Curve.Array.data[0].inSlope
@@ -13388,6 +13388,10 @@ PrefabInstance:
     - target: {fileID: 997219901953574640, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: transitionCurve.m_Curve.Array.data[1].tangentMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1136905144830681063, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: attackRange
+      value: 1.9
       objectReference: {fileID: 0}
     - target: {fileID: 1439085880819836554, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: m_Name

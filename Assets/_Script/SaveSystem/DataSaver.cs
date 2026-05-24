@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using _Script.ScriptableObject.Event;
 using HwanLib.Utility;
