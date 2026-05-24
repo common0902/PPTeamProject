@@ -38,6 +38,15 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _gameEndView.FadeAlpha = fadeInAlpha;
             
             openUIChannel.AddListener<OpenGameEndEvent>(OpenUI);
+            _gameEndView.OnCloseView += CloseViewHandler;
+        }
+
+        private void CloseViewHandler()
+        {
+            Time.timeScale = 1;
+            
+            Cursor.visible = false;
+            Cursor.lockState = CursorLockMode.Locked;
         }
 
         protected override void OnDestroy()
@@ -45,6 +54,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             base.OnDestroy();
             
             openUIChannel.RemoveListener<OpenGameEndEvent>(OpenUI);
+            _gameEndView.OnCloseView -= CloseViewHandler;
         }
 
         private void OpenUI(OpenGameEndEvent data)
