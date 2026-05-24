@@ -34,16 +34,14 @@ namespace HwanLib.MVP.Forms
             _sequence = DOTween.Sequence();
         }
         
+        //그냥 enable을 끄면 Layout 깨짐.
         private void SetOffLayoutGroup()
         {
             VerticalLayoutGroup layoutGroup = GetComponent<VerticalLayoutGroup>();
             if (layoutGroup == null || layoutGroup.enabled == false)
                 return;
             
-            layoutGroup.CalculateLayoutInputHorizontal();
-            layoutGroup.CalculateLayoutInputVertical();
-            layoutGroup.SetLayoutHorizontal();
-            layoutGroup.SetLayoutVertical();            
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)layoutGroup.transform);
             
             layoutGroup.enabled = false;
         }
@@ -70,7 +68,7 @@ namespace HwanLib.MVP.Forms
                 = (_childDict[targetItemIdx], _childDict[targetIndex]);
         }
 
-        private void DoMove(Sequence seq, int targetItemIdx, int targetIndex)
+        private void DoMove(Sequence seq, int item1Idx, int item2Idx)
         {
             if (_sequence.IsActive() == true)
             {
@@ -78,28 +76,28 @@ namespace HwanLib.MVP.Forms
                 _sequence.Kill();
             }
                 
-            Vector2 currentPos = _currentChildren[targetItemIdx].anchoredPosition;
-            Vector2 targetPos = _currentChildren[targetIndex].anchoredPosition;
+            Vector2 item1Pos = _currentChildren[item1Idx].anchoredPosition;
+            Vector2 item2Pos = _currentChildren[item2Idx].anchoredPosition;
             
-            Vector2 currentSize = _currentChildren[targetIndex].sizeDelta;
-            Vector2 targetSize = _currentChildren[targetIndex].sizeDelta;
+            Vector2 item1Size = _currentChildren[item1Idx].sizeDelta;
+            Vector2 item2Size = _currentChildren[item2Idx].sizeDelta;
             
             _sequence = DOTween.Sequence();
             _sequence
-                .Append(_currentChildren[targetItemIdx]
-                    .DOAnchorPos(targetPos, swapDuration)
+                .Append(_currentChildren[item1Idx]
+                    .DOAnchorPos(item2Pos, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true))
-                .Join(_currentChildren[targetItemIdx]
-                    .DOSizeDelta(targetSize, swapDuration)
+                .Join(_currentChildren[item1Idx]
+                    .DOSizeDelta(item2Size, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true))
-                .Join(_currentChildren[targetIndex]
-                    .DOAnchorPos(currentPos, swapDuration)
+                .Join(_currentChildren[item2Idx]
+                    .DOAnchorPos(item1Pos, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true))
-                .Join(_currentChildren[targetIndex]
-                    .DOSizeDelta(currentSize, swapDuration)
+                .Join(_currentChildren[item2Idx]
+                    .DOSizeDelta(item1Size, swapDuration)
                     .SetEase(Ease.OutBack)
                     .SetUpdate(true));
         }

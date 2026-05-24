@@ -1,5 +1,6 @@
 ﻿using System;
 using TMPro;
+using UnityEngine;
 
 namespace HwanLib.MVP.Forms.Module
 {
@@ -22,8 +23,10 @@ namespace HwanLib.MVP.Forms.Module
         
         public void UpdateText(string text)
         {
-            if (!String.IsNullOrEmpty(text))
+            if (text != null)
                 Text = String.Format(_originalText, text);
+            else
+                Debug.LogError("Text는 null일 수 없습니다.");
         }
     }
 }

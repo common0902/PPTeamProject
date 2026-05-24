@@ -4,6 +4,7 @@ using HwanLib.MVP.System;
 using HwanLib.MVP.System.AbstractMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace _Works._JTH.Scripts.UI.InteractiveBtn
 {
@@ -22,16 +23,10 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
             
             _window = GetForm<DoTweenWindowForm>((int)InteractiveBtnUIEnum.Window)
                 .GetComponent<RectTransform>();
-
-            _window.anchorMin = Vector2.one / 2;
-            _window.anchorMax = Vector2.one / 2;
         }
 
         public void MoveToTargetTransform(Camera mainCam, Transform targetTransform)
         {
-            if (targetTransform == null)
-                return;
-            
             Vector2 pos = mainCam.WorldToScreenPoint(targetTransform.position);
             _window.anchoredPosition = pos;
         }
