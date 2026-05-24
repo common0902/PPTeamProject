@@ -25,10 +25,9 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
                 .GetComponent<RectTransform>();
         }
 
-        public void MoveToTargetTransform(Camera mainCam, Transform targetTransform)
+        public void MoveToTargetTransform(Vector2 movePos)
         {
-            Vector2 pos = mainCam.WorldToScreenPoint(targetTransform.position);
-            _window.anchoredPosition = pos;
+            _window.anchoredPosition = movePos;
         }
     }
 }
