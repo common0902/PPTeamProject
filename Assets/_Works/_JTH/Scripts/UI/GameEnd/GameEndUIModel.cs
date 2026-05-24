@@ -22,7 +22,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             _isGameOver = isGameOver;
             int nextStage = SceneManager.GetActiveScene().buildIndex - StageInfoSO.stageStartIdx + 2;
             
-            if (isGameOver == false && _savedStage < nextStage && nextStage <= StageInfoSO.stageCount + 1)
+            if (isGameOver == false && _savedStage < nextStage && nextStage <= StageInfoSO.stageCount)
             {
                 _savedStage = nextStage;
             }
@@ -63,7 +63,11 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             => LoadSavedStage();
 
         private void NextBtnHandler(UIParam clickData)
-            => LoadSavedStage();
+        {
+            CloseViewAction?.Invoke();
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
+                .Init(SceneManager.GetActiveScene().buildIndex + 1, false, true));
+        }
 
         private void LoadSavedStage()
         {

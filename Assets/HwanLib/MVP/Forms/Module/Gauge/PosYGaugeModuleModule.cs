@@ -19,7 +19,7 @@ namespace HwanLib.MVP.Forms.Module.Gauge
         public override void SetGauge(float ratio, float duration = 0, Ease ease = Ease.Linear)
         {
             _targetTransform.DOKill(true);
-            _targetTransform.DOScaleY(ratio, duration).SetEase(ease);
+            _targetTransform.DOScaleY(ratio, duration).SetEase(ease).SetUpdate(true);
         }
 
         public override void OnDestroy()
