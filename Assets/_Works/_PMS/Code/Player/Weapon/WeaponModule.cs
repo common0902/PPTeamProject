@@ -108,6 +108,7 @@ public class WeaponModule : MonoBehaviour, IModule
         _swapDelayTimer = swapAttackDelay;
 
         _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(true));
+        _eventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(5));
     }
 
     public void RemoveCurrentWeapon()
