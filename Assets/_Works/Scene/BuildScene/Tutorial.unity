@@ -1045,6 +1045,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4374634295295572758, guid: 28f134ca011d77047b0fb966f223741f, type: 3}
   m_PrefabInstance: {fileID: 282918572}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &354670636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 354670637}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &354670637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354670636}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.60814, y: -2.2, z: 0.09422}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &369629526
 GameObject:
   m_ObjectHideFlags: 0
@@ -9026,6 +9057,10 @@ PrefabInstance:
       value: Lever (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
+      propertyPath: duration
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5680086294075683215, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: 'targetSabotages.Array.data[0]'
       value: 
       objectReference: {fileID: 1750501073}
@@ -10387,3 +10422,4 @@ SceneRoots:
   - {fileID: 2115944078}
   - {fileID: 1313314623}
   - {fileID: 1187215678}
+  - {fileID: 354670637}
