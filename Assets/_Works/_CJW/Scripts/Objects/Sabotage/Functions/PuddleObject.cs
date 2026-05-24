@@ -18,7 +18,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
         protected override void OnTriggerEnterEnemy(AbstractEnemy enemy)
         {
-            enemy.isWater = true;
+            enemy.ChangeWaterState(true);
         }
         public override void InitSize(Vector3 size)
         {
@@ -27,7 +27,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         }
         protected override void OnTriggerExitEnemy(AbstractEnemy enemy)
         {
-            enemy.isWater = false;
+            enemy.ChangeWaterState(false);
         }
         
     }
