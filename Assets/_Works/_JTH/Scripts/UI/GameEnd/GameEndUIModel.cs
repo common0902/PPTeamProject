@@ -63,7 +63,11 @@ namespace _Works._JTH.Scripts.UI.GameEnd
             => LoadSavedStage();
 
         private void NextBtnHandler(UIParam clickData)
-            => LoadSavedStage();
+        {
+            CloseViewAction?.Invoke();
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
+                .Init(SceneManager.GetActiveScene().buildIndex + 1, false, true));
+        }
 
         private void LoadSavedStage()
         {

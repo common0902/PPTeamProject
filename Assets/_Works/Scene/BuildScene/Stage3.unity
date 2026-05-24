@@ -1753,7 +1753,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
@@ -2629,7 +2629,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: <WaterSpeed>k__BackingField
@@ -3864,7 +3864,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
@@ -5040,7 +5040,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: <WaterSpeed>k__BackingField
@@ -6766,7 +6766,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
@@ -7729,6 +7729,14 @@ PrefabInstance:
       propertyPath: sabotages.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxSize.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxSize.z
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -55.48777
@@ -8255,7 +8263,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: <WaterSpeed>k__BackingField
@@ -13243,6 +13251,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3138916523232349625}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 3138916523232349626}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 
       objectReference: {fileID: 3138916523232349624}
@@ -13262,6 +13274,10 @@ PrefabInstance:
       propertyPath: _inputAxisController
       value: 
       objectReference: {fileID: 646428701}
+    - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weapons
+      value: 
+      objectReference: {fileID: 3138916523232349626}
     - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: cinemachineCamera
       value: 
@@ -13864,6 +13880,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76752ba54eb82a94e835358c2d150c21, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MeleeWeapon
+--- !u!1 &3138916523232349626 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 3138916523232349623}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4663289209349290445
 GameObject:
   m_ObjectHideFlags: 0

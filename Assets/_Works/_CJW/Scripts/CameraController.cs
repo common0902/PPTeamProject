@@ -7,6 +7,7 @@ using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace _Works._CJW.Scripts
 {
@@ -84,16 +85,7 @@ namespace _Works._CJW.Scripts
                 StartCoroutine(TransCameraToFirstViewCoroutine());
             }
         }
-
-        private void Update()
-        {
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                TransToTopView();
-            }
-            if(Keyboard.current.tKey.wasPressedThisFrame)
-                TransToFirstView();
-        }
+        
 
         private void TransCameraToTopView()
         {

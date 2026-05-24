@@ -31,7 +31,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         {
             base.UseFunction();
 
-            ExecuteDamage();
             if (GetGround(out var hit))
             {
                 _owner.ActiveVisual(false);
@@ -47,6 +46,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                     {
                         visualObject.SetActive(false);
                         _owner.ActiveVisual(true);
+                        ExecuteDamage();
                     });
                 });
             }

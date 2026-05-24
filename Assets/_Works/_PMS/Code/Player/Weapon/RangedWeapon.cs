@@ -24,6 +24,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     private static readonly int AttackHash = Animator.StringToHash("ATTACK");
     private static readonly int SwapHash = Animator.StringToHash("SWAP");
     private static readonly int IdleHash = Animator.StringToHash("IDLE");
+    private Camera _mainCam;
 
     public GameObject WeaponObject => gameObject;
     public bool CanAttack => _canAttack && _bullets > 0;
@@ -36,6 +37,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         _weaponModule = weaponModule;
         _playerEventChannel = playerEventChannel;
         _soundChannel = soundChannel;
+        _mainCam = Camera.main;
     }
 
     public void Attack(float damage)
@@ -50,7 +52,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         _playerEventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(_bullets));
 
         Vector3 origin = transform.position + Vector3.up;
-        Vector3 direction = transform.forward;
+        Vector3 direction = _mainCam.gameObject.transform.forward;
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, range, targetLayer))
         {
@@ -88,7 +90,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + Vector3.up, transform.forward * range);
+        // Gizmos.DrawRay(transform.position + Vector3.up, _mainCam.gameObject.transform.forward * range);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + Vector3.up, 0.05f);
     }

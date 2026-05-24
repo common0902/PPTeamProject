@@ -29,6 +29,8 @@ namespace _Works._JTH.Scripts.UI
                 SceneManager.LoadScene(7);
             if (Keyboard.current.digit0Key.wasPressedThisFrame)
                 SceneManager.LoadScene(8);
+            if (Keyboard.current.minusKey.wasPressedThisFrame)
+                openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(false));
         }
     }
 }

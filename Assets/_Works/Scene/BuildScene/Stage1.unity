@@ -137,11 +137,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: boxSize.x
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: boxSize.z
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: boxOffset.y
@@ -5172,6 +5172,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365739443}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (13)
@@ -5796,6 +5800,11 @@ Transform:
   - {fileID: 4678038981734462906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &976796161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 35440806039189356, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+  m_PrefabInstance: {fileID: 1785200577349727801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &981764362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7236,6 +7245,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365739443}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (21)
@@ -9065,6 +9078,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365739443}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (3)
@@ -9514,6 +9531,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365739443}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (18)
@@ -9998,7 +10019,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
@@ -10265,6 +10286,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1365739443}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (5)
@@ -11566,7 +11591,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: enemyCautionDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
@@ -13361,6 +13386,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 900418944586597921, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: weapons
+      value: 
+      objectReference: {fileID: 976796161}
     - target: {fileID: 997219901953574640, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: durationTime
       value: 1
@@ -13405,6 +13434,10 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 1785200577349727803}
+    - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 976796161}
     - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: rangedWeapon
       value: 

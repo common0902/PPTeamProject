@@ -2597,6 +2597,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1584306286}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 1027097862}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 
       objectReference: {fileID: 1584306285}
@@ -2616,6 +2620,10 @@ PrefabInstance:
       propertyPath: _inputAxisController
       value: 
       objectReference: {fileID: 1584306287}
+    - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weapons
+      value: 
+      objectReference: {fileID: 1027097862}
     - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: cinemachineCamera
       value: 
@@ -2753,6 +2761,14 @@ PrefabInstance:
     - target: {fileID: 692073761874894415, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_Name
       value: Falling Sabotage
+      objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxSize.x
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 939764974225252019, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
+      propertyPath: boxSize.z
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5939928553388843326, guid: 246d8c7ba99494047b3b8cc8517c49d1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3018,7 +3034,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: enemyCautionDelay
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4922777290325876265, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: <Angle>k__BackingField
@@ -6088,6 +6104,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 426290, guid: 5ac3edd53f963024ebc36254c7e55dee, type: 3}
   m_PrefabInstance: {fileID: 1023830138}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1027097862 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 1584306283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1040986348
 PrefabInstance:
