@@ -21,7 +21,7 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
     private bool _canCombo = false;
     private bool _canAttack = true;
 
-    private float _pendingDamage;
+    private float _damage;
 
     private static readonly int Attack1Hash = Animator.StringToHash("ATTACK 1");
     private static readonly int Attack2Hash = Animator.StringToHash("ATTACK 2");
@@ -47,12 +47,12 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
         if (!_canAttack) return;
         _canAttack = false;
         _canCombo = false;
-        _pendingDamage = damage;
+        _damage = damage;
         PlayAttackAnimation();
     }
     public void OnAttackHit()
     {
-        ExecuteAttack(_pendingDamage);
+        ExecuteAttack(_damage);
     }
 
     private void ExecuteAttack(float damage)

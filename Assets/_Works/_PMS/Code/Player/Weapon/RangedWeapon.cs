@@ -21,6 +21,8 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     private bool _canAttack = true;
     private int _bullets = 5;
 
+    private float _damage;
+
     private static readonly int AttackHash = Animator.StringToHash("ATTACK");
     private static readonly int SwapHash = Animator.StringToHash("SWAP");
     private static readonly int IdleHash = Animator.StringToHash("IDLE");
@@ -45,19 +47,22 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         if (!CanAttack) return;
         _canAttack = false;
         _bullets--;
-
+        _damage = damage;
         PlaySound(attackSound);
-
         _animator.CrossFade(AttackHash, 0.05f);
         _playerEventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(_bullets));
+        
+    }
 
+    public void OnAttackHit()
+    {
         Vector3 origin = transform.position + Vector3.up;
         Vector3 direction = _mainCam.gameObject.transform.forward;
 
         if (Physics.Raycast(origin, direction, out RaycastHit hit, range, targetLayer))
         {
             if (hit.collider.TryGetComponent(out IDamageable damageable))
-                damageable.TakeDamage(damage, direction, origin);
+                damageable.TakeDamage(_damage, direction, origin);
         }
     }
 
