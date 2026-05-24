@@ -5796,6 +5796,11 @@ Transform:
   - {fileID: 4678038981734462906}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &976796161 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 35440806039189356, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+  m_PrefabInstance: {fileID: 1785200577349727801}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &981764362
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13405,6 +13410,10 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 1785200577349727803}
+    - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 976796161}
     - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: rangedWeapon
       value: 

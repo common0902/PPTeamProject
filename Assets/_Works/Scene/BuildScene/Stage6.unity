@@ -2983,10 +2983,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (7)
       objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 8
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -4816,6 +4812,11 @@ MonoBehaviour:
 Transform:
   m_CorrespondingSourceObject: {fileID: 1588968667717711304, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
   m_PrefabInstance: {fileID: 420880633}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &429012217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 515188681}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &432151862
 GameObject:
@@ -6731,14 +6732,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Gunner
       objectReference: {fileID: 0}
-    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 120
-      objectReference: {fileID: 0}
-    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 8
-      objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -17.905148
@@ -7952,14 +7945,6 @@ PrefabInstance:
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (4)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
-      propertyPath: <Angle>k__BackingField
-      value: 90
-      objectReference: {fileID: 0}
-    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -12528,6 +12513,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 515188683}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 429012217}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 
       objectReference: {fileID: 515188682}
@@ -13202,10 +13191,6 @@ PrefabInstance:
     - target: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_Name
       value: E_Tank Variant (6)
-      objectReference: {fileID: 0}
-    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
-      propertyPath: <Distance>k__BackingField
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

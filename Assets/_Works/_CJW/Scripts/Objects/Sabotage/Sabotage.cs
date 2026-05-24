@@ -95,6 +95,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         private void HandleOpen(TopViewEvent evt)
         {
             _isTopView = evt.IsTopView;
+
+            if (!_isTopView)
+            {
+                ShouldMark = true;
+                cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
+            }
+
             UpdateVisualState();
         }
 
@@ -138,11 +145,13 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void OnPointerExit(PointerEventData eventData)
         {
-            if (IsLocked || !_isTopView)
-                cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
-                
-            if (IsUsed || IsLocked || !_isTopView) return;
-            
+            cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
+
+            ShouldMark = true;
+
+            if (IsUsed || IsLocked || !_isTopView) 
+                return;
+
             UpdateVisualState();
         }
         
