@@ -13,6 +13,7 @@ namespace _Works._JTH.Scripts.UI.InGame
         private SwapForm _weaponField;
         private AccessForm _sprintSkill;
         private AccessForm _redMarkBoard;
+        private AccessForm _crossHair;
 
         private List<RectTransform> _redMarkList;
         
@@ -26,6 +27,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             _weaponField = GetForm<SwapForm>((int)InGameUIEnum.WeaponField);
             _sprintSkill = GetForm<AccessForm>((int)InGameUIEnum.SprintSkill);
             _redMarkBoard = GetForm<AccessForm>((int)InGameUIEnum.RedMarkBoard);
+            _crossHair = GetForm<AccessForm>((int)InGameUIEnum.CrossHair);
             
             GetForm<GaugeForm>((int)InGameUIEnum.HpGauge).InitGaugeForm(GaugeType.PosY);
             GetForm<CooldownForm>((int)InGameUIEnum.SprintCover).InitCooldownForm(GaugeType.PosY);
@@ -47,11 +49,13 @@ namespace _Works._JTH.Scripts.UI.InGame
             {
                 _weaponField.gameObject.SetActive(false);
                 _sprintSkill.gameObject.SetActive(false);
+                _crossHair.gameObject.SetActive(false);
             }
             else
             {
                 _weaponField.gameObject.SetActive(true);
                 _sprintSkill.gameObject.SetActive(true);
+                _crossHair.gameObject.SetActive(true);
                 
                 foreach (var redMark in _redMarkList)
                     redMark.gameObject.SetActive(false);
@@ -65,12 +69,6 @@ namespace _Works._JTH.Scripts.UI.InGame
                 _redMarkList[i].position = redMarkScreenPosList[i];
                 _redMarkList[i].gameObject.SetActive(true);
             }
-        }
-
-        public void ClearRedMark()
-        {
-            
-            _redMarkList.Clear();
         }
     }
 }
