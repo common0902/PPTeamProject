@@ -1479,10 +1479,34 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1336679818}
     m_Modifications:
+    - target: {fileID: 43004195835106446, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: swapSound
+      value: 
+      objectReference: {fileID: 11400000, guid: fc72188e9a297b947bd10775c7f92253, type: 2}
+    - target: {fileID: 43004195835106446, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: attackSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 85b4d7cedfd750a4487ce5c91dc2906f, type: 2}
     - target: {fileID: 1436142050582694987, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
       propertyPath: m_Name
       value: FirstViewCam
       objectReference: {fileID: 0}
+    - target: {fileID: 3221824127835795870, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: swapSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 7ca6c68dd2ba20a4c877d9154d8e293e, type: 2}
+    - target: {fileID: 3221824127835795870, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: attack1Sound
+      value: 
+      objectReference: {fileID: 11400000, guid: 19b6548ee1ad46a479299ed3489396ac, type: 2}
+    - target: {fileID: 3221824127835795870, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: attack2Sound
+      value: 
+      objectReference: {fileID: 11400000, guid: 708489cbd7b3b7a43b152abdf4977525, type: 2}
+    - target: {fileID: 3221824127835795870, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
+      propertyPath: attack3Sound
+      value: 
+      objectReference: {fileID: 11400000, guid: 7fe42c4b714c2e848953a792c8da2014, type: 2}
     - target: {fileID: 5875103068870072499, guid: c6f7ac8c30b1a664998d3605d7b5bf29, type: 3}
       propertyPath: Target.TrackingTarget
       value: 
@@ -1604,6 +1628,14 @@ PrefabInstance:
       propertyPath: _inputAxisController
       value: 
       objectReference: {fileID: 1743322847}
+    - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: hitSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 238f2e627e829894faf768f6c4766083, type: 2}
+    - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: deadSound
+      value: 
+      objectReference: {fileID: 11400000, guid: 9d866dc38ac6481439785a402ac31f48, type: 2}
     - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: cinemachineCamera
       value: 
