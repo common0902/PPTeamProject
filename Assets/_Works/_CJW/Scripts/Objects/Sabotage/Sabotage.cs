@@ -138,9 +138,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
 
         public void OnPointerExit(PointerEventData eventData)
         {
+            if (IsLocked || !_isTopView)
+                cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
+                
             if (IsUsed || IsLocked || !_isTopView) return;
             
-            cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
             UpdateVisualState();
         }
         
