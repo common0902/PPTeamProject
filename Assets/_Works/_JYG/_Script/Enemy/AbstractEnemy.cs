@@ -62,11 +62,14 @@ namespace _Works._JYG._Script.Enemy
 
         public bool isWater = false;
 
+        public Outline EnemyOutline { get; private set; }
+
         protected override void Awake()
         {
             base.Awake();
             PlayerFindEventChannel.AddListener<EnemyChangeState>(HandleEnemyChange);
             _fovRenderer = GetComponentInChildren<FOVRendering>();
+            EnemyOutline = GetComponentInChildren<Outline>();
         }
 
         private void Start()

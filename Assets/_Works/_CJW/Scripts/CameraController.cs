@@ -21,9 +21,10 @@ namespace _Works._CJW.Scripts
         [SerializeField] private AnimationCurve transitionCurve;
         [SerializeField] private CinemachineCamera topViewCam;
         [SerializeField] private CinemachineCamera firstViewCam;
-        [Header("Quad View Setting")]
-        [SerializeField] private float quadViewOffset;
-        [SerializeField] private float quadViewDuration;
+        [Header("Top View Setting")]
+        [SerializeField] private Vector3 topViewEuler;
+        [SerializeField] private float topViewOffset;
+        [SerializeField] private float topViewDuration;
 
         #region Player가 사용하는 변수
         public bool IsTransitioning => _isTransitioning;
@@ -38,6 +39,7 @@ namespace _Works._CJW.Scripts
         [SerializeField] private CinemachineInputAxisController _inputAxisController;
         #endregion
 
+        private Quaternion _topViewRotation;
         private Transform _rootTrs;
         private Transform _tempTrs;
         private CinemachineThirdPersonFollow _thirdPersonFollow;
@@ -52,6 +54,7 @@ namespace _Works._CJW.Scripts
             _rootTrs = topViewCam.Follow;
             // _playerTrs = _rootTrs;
             _tempTrs = new GameObject("CamTempTransform").transform;
+            _topViewRotation = Quaternion.Euler(topViewEuler);
             
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -64,7 +67,7 @@ namespace _Works._CJW.Scripts
             {
                 _isTransitioning = true;
                 _isTopView = true;
-                TransCameraToQuadView();
+                TransCameraToTopView();
             }
         }
         
@@ -89,21 +92,22 @@ namespace _Works._CJW.Scripts
                 TransToFirstView();
         }
 
-        private void TransCameraToQuadView()
+        private void TransCameraToTopView()
         {
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             topViewCam.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * quadViewOffset), 0.1f).SetEase(transitionCurve)
-                .OnComplete((() => StartCoroutine(TransCameraToQuadViewCoroutine())));
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * topViewOffset), 0.1f).SetEase(transitionCurve)
+                .OnComplete((() => StartCoroutine(TransCameraToTopViewCoroutine())));
         }
     
-        private IEnumerator TransCameraToQuadViewCoroutine() //탑뷰로 올라가기 시작
+        private IEnumerator TransCameraToTopViewCoroutine()
         {
             _inputAxisController.enabled = false;
+
             Cursor.visible = true;
             Cursor.lockState = CursorLockMode.Confined;
-            
+
             topViewCam.Priority.Value = 1;
             firstViewCam.Priority.Value = 0;
 
@@ -111,75 +115,119 @@ namespace _Works._CJW.Scripts
 
             float startVal = _thirdPersonFollow.VerticalArmLength;
 
+            Quaternion startRotation = _tempTrs.rotation;
 
             while (t < durationTime)
             {
                 t += Time.deltaTime;
 
                 float percent = Mathf.Clamp01(t / durationTime);
-                cameraEvent.RaiseEvent(CameraEvent.CameraElapseEvent.Init(percent));
-            
-                // 0.4 이전까지는 그대로
+
+                cameraEvent.RaiseEvent(
+                    CameraEvent.CameraElapseEvent.Init(percent));
+
+                float curveValue =
+                    transitionCurve.Evaluate(percent);
+
+                // 회전
+                _tempTrs.rotation =
+                    Quaternion.Slerp(
+                        startRotation,
+                        _topViewRotation,
+                        curveValue);
+
+                // 높이
                 if (percent < rotateStartPercent)
                 {
                     _thirdPersonFollow.VerticalArmLength = startVal;
                 }
                 else
                 {
-                    // 0.4 ~ 1 구간을 다시 0 ~ 1로 변환
                     float movePercent =
-                        Mathf.InverseLerp(rotateStartPercent, 1f, percent);
+                        Mathf.InverseLerp(
+                            rotateStartPercent,
+                            1f,
+                            percent);
 
-                    float curveValue =
+                    float heightCurve =
                         transitionCurve.Evaluate(movePercent);
 
                     _thirdPersonFollow.VerticalArmLength =
-                        Mathf.Lerp(startVal, resultHeight, curveValue);
+                        Mathf.Lerp(
+                            startVal,
+                            resultHeight,
+                            heightCurve);
                 }
 
                 yield return null;
             }
 
+            _tempTrs.rotation = _topViewRotation;
+
             _thirdPersonFollow.VerticalArmLength = resultHeight;
 
-            cameraEvent.RaiseEvent(CameraEvent.TopViewEvent.Init(true));
+            cameraEvent.RaiseEvent(
+                CameraEvent.TopViewEvent.Init(true));
+
             _isTransitioning = false;
-
-
 
             _hasTopView = true;
         }
-        private IEnumerator TransCameraToFirstViewCoroutine() // 카메라를 1인칭으로 바꾸는 코루틴
+        private IEnumerator TransCameraToFirstViewCoroutine()
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
-            
+
             cameraEvent?.RaiseEvent(CameraEvent.TopViewEvent.Init(false));
+
             float t = 0;
+
             float startVal = _thirdPersonFollow.VerticalArmLength;
-            Quaternion endRotation = _rootTrs.rotation;
+
+            Quaternion startRotation = _tempTrs.rotation;
+            Quaternion endRotation = _rootTrs.parent.rotation;
+    
             _tempTrs.position = _rootTrs.position;
+
             while (t < durationTime)
             {
                 t += Time.deltaTime;
-                float percent = t / durationTime;
+
+                float percent = Mathf.Clamp01(t / durationTime);
+
                 float curveValue = transitionCurve.Evaluate(percent);
-            
-                _tempTrs.rotation = Quaternion.Slerp(_tempTrs.rotation, endRotation, percent * curveValue);
-                _thirdPersonFollow.VerticalArmLength = Mathf.SmoothStep(startVal, defaultHeight, percent * curveValue);
+
+                _tempTrs.rotation =
+                    Quaternion.Slerp(
+                        startRotation,
+                        endRotation,
+                        curveValue);
+
+                _thirdPersonFollow.VerticalArmLength =
+                    Mathf.Lerp(
+                        startVal,
+                        defaultHeight,
+                        curveValue);
+
                 yield return null;
             }
+
             topViewCam.Follow = _rootTrs;
+
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
+
             _isTransitioning = false;
+
             _inputAxisController.enabled = true;
 
             if (_hasTopView)
             {
                 _hasTopView = false;
-                if (cameraEvent != null) 
-                    cameraEvent.RaiseEvent(CameraEvent.FirstViewComplete.Init(true));
+
+                cameraEvent?.RaiseEvent(
+                    CameraEvent.FirstViewComplete.Init(true));
+
                 OnFirstViewComplete?.Invoke();
             }
         }
