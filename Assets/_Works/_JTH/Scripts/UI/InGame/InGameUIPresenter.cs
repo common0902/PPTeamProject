@@ -65,7 +65,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameModel.InitializeData(new InGameUIData
                 ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
             _inGameView.UpdateView();
-            if (scene.buildIndex >= stageInfoSO.stageStartIdx 
+            if (scene.buildIndex >= stageInfoSO.tutorialIdx 
                 && scene.buildIndex <= stageInfoSO.stageStartIdx + stageInfoSO.stageCount - 1)
                 _inGameView.OpenView();
             else
