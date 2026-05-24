@@ -10,6 +10,7 @@ namespace _Works._CJW.Scripts.Events
         public static readonly TopViewEvent TopViewEvent = new();
         public static readonly RegisterFovEvent RegisterFovEvent = new();
         public static readonly FocusedSabotageEvent FocusedSabotageEvent = new();
+        public static readonly FirstViewComplete FirstViewComplete = new();
         public static readonly CameraElapseEvent CameraElapseEvent = new();
     }
 
@@ -20,6 +21,16 @@ namespace _Works._CJW.Scripts.Events
         public TopViewEvent Init(bool isTopView)
         {
             IsTopView = isTopView;
+            return this;
+        }
+    } 
+    public class FirstViewComplete : GameEvent
+    {
+        public bool IsFirstViewComplete = false;
+
+        public FirstViewComplete Init(bool isFirstViewComplete)
+        {
+            IsFirstViewComplete = isFirstViewComplete;
             return this;
         }
     }

@@ -178,6 +178,8 @@ namespace _Works._CJW.Scripts
             if (_hasTopView)
             {
                 _hasTopView = false;
+                if (cameraEvent != null) 
+                    cameraEvent.RaiseEvent(CameraEvent.FirstViewComplete.Init(true));
                 OnFirstViewComplete?.Invoke();
             }
         }
