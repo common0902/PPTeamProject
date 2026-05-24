@@ -12782,6 +12782,14 @@ PrefabInstance:
       propertyPath: enemyGroup
       value: 
       objectReference: {fileID: 1365739442}
+    - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: meleeWeapon
+      value: 
+      objectReference: {fileID: 1785200577349727803}
+    - target: {fileID: 3427768620065906384, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+      propertyPath: rangedWeapon
+      value: 
+      objectReference: {fileID: 1785200577349727802}
     - target: {fileID: 4794976508767414783, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.058441162
@@ -12839,6 +12847,28 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+--- !u!114 &1785200577349727802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2587853290515954423, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+  m_PrefabInstance: {fileID: 1785200577349727801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93a1d8e5a7a4b504f9680ffdd634ba3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RangedWeapon
+--- !u!114 &1785200577349727803 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1136905144830681063, guid: 8f6149f8ebdcda0478377f9c125bd9bd, type: 3}
+  m_PrefabInstance: {fileID: 1785200577349727801}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76752ba54eb82a94e835358c2d150c21, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MeleeWeapon
 --- !u!1001 &4503912662129892059
 PrefabInstance:
   m_ObjectHideFlags: 0
