@@ -44,7 +44,13 @@ namespace _Works._JTH.Scripts.UI.Title
         private void SceneLoadedHandler(Scene scene, LoadSceneMode __)
         {
             if (scene.buildIndex == stageInfoSO.titleIdx)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+
+                Time.timeScale = 1;
                 _titleView.OpenView();
+            }
             else
                 _titleView.CloseView();
         }
