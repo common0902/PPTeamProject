@@ -37,8 +37,6 @@ namespace _Works._JTH.Scripts.UI.Tooltip
         
         private void ShowTooltip(FocusedSabotageEvent eventData)
         {
-            Debug.Log(eventData.IsFocused);
-
             if (eventData.IsFocused == false)
             {
                 CloseTooltip();
