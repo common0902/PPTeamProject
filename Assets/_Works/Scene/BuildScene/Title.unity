@@ -704,7 +704,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].key
@@ -746,6 +746,10 @@ PrefabInstance:
       propertyPath: m_SceneBindings.Array.data[9].key
       value: 
       objectReference: {fileID: -323916831624833153, guid: 3d933e0628168e24fb059e035569a3ec, type: 2}
+    - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+      propertyPath: m_SceneBindings.Array.data[10].key
+      value: 
+      objectReference: {fileID: -3370287190272229376, guid: 3d933e0628168e24fb059e035569a3ec, type: 2}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[0].value
       value: 
@@ -789,7 +793,7 @@ PrefabInstance:
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_SceneBindings.Array.data[10].value
       value: 
-      objectReference: {fileID: 634100368}
+      objectReference: {fileID: 634100367}
     - target: {fileID: 1575669925351784070, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_ExposedReferences.m_References.Array.data[0].second
       value: 
@@ -882,6 +886,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: TitleTimeline
       objectReference: {fileID: 0}
+    - target: {fileID: 8400214707233329125, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8971083627885776942, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.70388
@@ -924,6 +932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3555020364653845060, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
+    - {fileID: 5065307577575336854, guid: 23594f84fb57cd24f89ed706c3327eb7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -1554,27 +1563,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 14.81
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.91
+      value: 12.83
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.13376983
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.99101245
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1586,19 +1595,45 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -164.625
+      value: 195.375
       objectReference: {fileID: 0}
     - target: {fileID: 1117225804180921274, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2402361307768373613, guid: de680d00106161145a430e92a0c8282b, type: 3}
+      propertyPath: m_UpdateMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402361307768373613, guid: de680d00106161145a430e92a0c8282b, type: 3}
+      propertyPath: m_CullingMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402361307768373613, guid: de680d00106161145a430e92a0c8282b, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402361307768373613, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_WarningMessage
-      value: 
+      value: "\nBinding warning: Some generic clip(s) animate transforms that are
+        already bound by a Humanoid avatar. These transforms can only be changed
+        by Humanoid clips.\n\tTransform 'mixamorig:RightFoot'\n\tTransform 'mixamorig:LeftLeg'\n\tTransform
+        'mixamorig:LeftHand'\n\tTransform 'mixamorig:LeftToeBase'\n\tTransform 'mixamorig:Spine1'\n\tTransform
+        'mixamorig:Spine2'\n\tTransform 'mixamorig:LeftHandPinky3'\n\tTransform 'mixamorig:LeftHandThumb1'\n\tTransform
+        'mixamorig:RightHandPinky3'\n\tTransform 'mixamorig:LeftHandRing2'\n\tand
+        more ..."
+      objectReference: {fileID: 0}
+    - target: {fileID: 2402361307768373613, guid: de680d00106161145a430e92a0c8282b, type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7019726244604254940, guid: de680d00106161145a430e92a0c8282b, type: 3}
       propertyPath: m_Name
       value: Dancer_Gunner
+      objectReference: {fileID: 0}
+    - target: {fileID: 7019726244604254940, guid: de680d00106161145a430e92a0c8282b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
