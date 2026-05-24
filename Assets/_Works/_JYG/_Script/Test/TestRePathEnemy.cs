@@ -23,7 +23,6 @@ namespace _Works._JYG._Script.Test
 
         private IEnumerator SetEnemyPos()
         {
-            
             IAISystem aiSystem = TargetEnemy.AiSystem;
             aiSystem.RouteRePath(transform.position);
             yield return new WaitForSeconds(0.5f);  //0.5초 딜레이 안걸어주면 Path 재설정 하기 전에 Patrol에서 도착했다고 판단 해 안되네.

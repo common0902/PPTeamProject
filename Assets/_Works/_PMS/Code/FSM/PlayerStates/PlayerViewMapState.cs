@@ -3,17 +3,24 @@ using UnityEngine;
 
 public class PlayerViewMapState : State<PlayerController>
 {
-
     public override void Enter()
     {
-        Debug.Log("ViewMap 시작");
         Entity.CamController.TransToTopView();
-        
+        Entity.Visual.SetActive(true);
+        Entity.Weapons.SetActive(false);
+
+        Entity.CamController.OnFirstViewComplete += OnFirstViewComplete;
     }
 
     public override void Exit()
     {
-        Debug.Log("ViewMap 끝");
         Entity.CamController.TransToFirstView();
+        Entity.Visual.SetActive(false); 
+    }
+
+    private void OnFirstViewComplete()
+    {
+        Entity.CamController.OnFirstViewComplete -= OnFirstViewComplete;
+        Entity.Weapons.SetActive(true);
     }
 }
