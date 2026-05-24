@@ -115,8 +115,10 @@ namespace _Works._JTH.Scripts.UI.InGame
             {
                 Vector2 boxSize = _sabotageList[i].markBoxSize;
                 if (_sabotageList[i].ShouldMark == true)
+                {
                     redMarkScreenPosList.Add(getScreenPos(
                         new Vector3(boxSize.x, 0, boxSize.y) + _sabotageList[i].transform.position));
+                }
             }
             _inGameView.SetRedMark(redMarkScreenPosList);
         }

@@ -70,8 +70,15 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
 
         private void Update()
         {
-            if (_targetObjectTrm != null )
-                _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm);
+            if (_targetObjectTrm != null)
+            {
+                float dot = Vector3.Dot(_targetObjectTrm.position - _mainCam.transform.position, _mainCam.transform.forward);
+                if (dot < 0)
+                    return;
+            
+                Vector2 pos = _mainCam.WorldToScreenPoint(_targetObjectTrm.position);
+                _interactiveBtnUIView.MoveToTargetTransform(pos);
+            }
         }
 
         public void OpenUI()

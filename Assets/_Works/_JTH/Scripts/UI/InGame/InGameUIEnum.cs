@@ -2,6 +2,6 @@ namespace _Works._JTH.Scripts.UI.InGame
 {
     public enum InGameUIEnum
     {
-        RedMarkBoard = 2, HpGauge = 6, HpText = 7, WeaponField = 9, BulletText = 12, TopViewCover = 20, SprintSkill = 21, SprintCover = 24, SettingButton = 27
+        RedMarkBoard = 3, HpGauge = 7, HpText = 8, WeaponField = 10, BulletText = 13, TopViewCover = 21, SprintSkill = 22, SprintCover = 25, SettingButton = 28
     }
 }
