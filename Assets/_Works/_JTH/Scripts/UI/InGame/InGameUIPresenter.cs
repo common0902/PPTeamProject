@@ -39,8 +39,6 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameModel.SetEventChannel(openUIChannel);
             _inGameModel.InitializeData(new InGameUIData
                 ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
-            _inGameModel.InitializeData(new InGameUIData
-                (1, 1, 1, true));
 
             AddListener();
             
@@ -124,16 +122,30 @@ namespace _Works._JTH.Scripts.UI.InGame
         }
 
         private void SprintEndEventHandler(SprintEndEvent data)
-            => _inGameModel.SetSprintSkillCooldown();
-        
+        {
+            _inGameModel.SetSprintSkillCooldown();
+            _inGameView.UpdateForm((int)InGameUIEnum.SprintCover);
+        }
+
         private void HitEventEventHandler(HitEvent data)
-            => _inGameModel.SetCurrentHp((int)data.Hp);
-                
+        {
+            _inGameModel.SetCurrentHp((int)data.Hp);
+            _inGameView.UpdateForm((int)InGameUIEnum.HpGauge);
+            _inGameView.UpdateForm((int)InGameUIEnum.HpText);
+        }
+
         private void BulletChangeEventHandler(BulletChangeEvent data)
-            => _inGameModel.SetCurrentBullet(data.Bullet);
-                
+        {
+            _inGameModel.SetCurrentBullet(data.Bullet);
+            _inGameView.UpdateForm((int)InGameUIEnum.BulletText);
+        }
+
         private void WeaponChangeEventHandler(WeaponChangeEvent data)
-            => _inGameModel.SetCurrentWeapon(data.IsGun 
-                ? (int)InGameUIData.WeaponType.Gun : (int)InGameUIData.WeaponType.Sword);
+        {
+            _inGameModel.SetCurrentWeapon(data.IsGun
+                ? (int)InGameUIData.WeaponType.Gun
+                : (int)InGameUIData.WeaponType.Sword);
+            _inGameView.UpdateForm((int)InGameUIEnum.WeaponField);
+        }
     }
 }
