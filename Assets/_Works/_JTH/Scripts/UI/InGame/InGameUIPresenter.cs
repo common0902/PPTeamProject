@@ -97,6 +97,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             playerChannel.RemoveListener<HitEvent>(HitEventEventHandler);
             playerChannel.RemoveListener<BulletChangeEvent>(BulletChangeEventHandler);
             playerChannel.RemoveListener<WeaponChangeEvent>(WeaponChangeEventHandler);
+            playerChannel.RemoveListener<BulletShortageEvent>(BulletShortageEventHandler);
         }
 
         private void AddSabotage(RegisterSabotageEvent data)
