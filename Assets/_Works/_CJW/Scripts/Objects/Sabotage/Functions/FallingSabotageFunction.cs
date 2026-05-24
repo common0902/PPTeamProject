@@ -17,7 +17,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private float damage;
         [SerializeField] private float lifetime;
         [SerializeField] private LayerMask enemyLayer;
-        [SerializeField] private GameObject visualObject;
+        [SerializeField] private GameObject[] visualObject;
         
         private SabotageVisualModule _visualModule;
         private Rigidbody _rigid;
@@ -34,9 +34,10 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             if (GetGround(out var hit))
             {
                 _owner.ActiveVisual(false);
-                visualObject.SetActive(true);
+                visualObject[0].SetActive(true);
+                visualObject[1].SetActive(true);
 
-                float targetY = hit.point.y + (visualObject.transform.lossyScale.y * 0.5f);
+                float targetY = hit.point.y + (visualObject[0].transform.lossyScale.y * 0.5f);
 
                 transform.DOMoveY(targetY, 0.4f).SetEase(Ease.InQuad).OnComplete(() =>
                 {
@@ -44,9 +45,10 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
-                        visualObject.SetActive(false);
                         _owner.ActiveVisual(true);
                         ExecuteDamage();
+                        visualObject[0].SetActive(false);
+                        visualObject[1].SetActive(false);
                     });
                 });
             }
