@@ -1992,6 +1992,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1102676980}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &535265563 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 1643515165}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575398670
 GameObject:
   m_ObjectHideFlags: 0
@@ -6438,6 +6443,10 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 1643515167}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 535265563}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 

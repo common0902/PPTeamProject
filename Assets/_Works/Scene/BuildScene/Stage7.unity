@@ -4074,6 +4074,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 761775345}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 610491437}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 
       objectReference: {fileID: 761775344}
@@ -6648,6 +6652,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9227051d58db614ea14eba78f6521be, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.Enemy.PatrolSystem.PatrolFlag
+--- !u!1 &610491437 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 761775343}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &612470476
 PrefabInstance:
   m_ObjectHideFlags: 0

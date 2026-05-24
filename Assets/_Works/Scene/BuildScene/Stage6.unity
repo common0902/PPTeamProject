@@ -4817,6 +4817,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1588968667717711304, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
   m_PrefabInstance: {fileID: 420880633}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &429012217 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5629791264113952079, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 515188681}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &432151862
 GameObject:
   m_ObjectHideFlags: 0
@@ -12527,6 +12532,10 @@ PrefabInstance:
       propertyPath: meleeWeapon
       value: 
       objectReference: {fileID: 515188683}
+    - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: weaponsRoot
+      value: 
+      objectReference: {fileID: 429012217}
     - target: {fileID: 6398215286344221828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: rangedWeapon
       value: 

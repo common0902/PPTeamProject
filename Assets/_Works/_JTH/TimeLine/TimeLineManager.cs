@@ -14,7 +14,7 @@ namespace _Works._JTH.TimeLine
 
         private IEnumerator WaitForStart(PlayableDirector director)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
             director.Play();
         }
     }

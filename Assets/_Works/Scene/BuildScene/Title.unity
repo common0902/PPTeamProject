@@ -1101,8 +1101,30 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1413957327605652291, guid: 5e30cf18382f83343843c9cd46148338, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 984813961}
   m_SourcePrefab: {fileID: 100100000, guid: 5e30cf18382f83343843c9cd46148338, type: 3}
+--- !u!1 &984813960 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1413957327605652291, guid: 5e30cf18382f83343843c9cd46148338, type: 3}
+  m_PrefabInstance: {fileID: 984813959}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &984813961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 984813960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31cd3835286465689e4fc512352fab4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::_Works._JTH.Scripts.UI.UITester
+  openUIChannel: {fileID: 11400000, guid: fe5b3ecdbfa43714390f2943249b64ac, type: 2}
+  interactChannel: {fileID: 11400000, guid: 2c1ff80eee8c2ba479fe9868c429e2b6, type: 2}
 --- !u!1 &1106604719 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7005422716450296802, guid: de680d00106161145a430e92a0c8282b, type: 3}
