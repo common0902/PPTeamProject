@@ -1,13 +1,13 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1102 &-6452259166984474429
+--- !u!1102 &-5280384554358602164
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: IDLE
+  m_Name: SWAP
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -20,7 +20,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d446074a8c2ed9c4bad0fc60fd474f30, type: 2}
+  m_Motion: {fileID: 7400000, guid: d6911eda57678b2429bdccaa4484c9a7, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -58,14 +58,14 @@ AnimatorStateMachine:
   m_Name: Base Layer
   m_ChildStates:
   - serializedVersion: 1
-    m_State: {fileID: 5402607732584768852}
-    m_Position: {x: 500, y: 160, z: 0}
+    m_State: {fileID: 4539965851086971555}
+    m_Position: {x: 507.00336, y: 340.01227, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 7812150213087993085}
-    m_Position: {x: 429.24054, y: 90.14084, z: 0}
+    m_State: {fileID: 1655982231303793279}
+    m_Position: {x: 267.80597, y: 264.11316, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: -6452259166984474429}
-    m_Position: {x: 398.63, y: 257.5948, z: 0}
+    m_State: {fileID: -5280384554358602164}
+    m_Position: {x: 310, y: 80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -75,15 +75,15 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 5402607732584768852}
---- !u!1102 &5402607732584768852
+  m_DefaultState: {fileID: -5280384554358602164}
+--- !u!1102 &1655982231303793279
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SWAP
+  m_Name: IDLE
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -96,13 +96,13 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 7676c66e464b448478a9d5d7459a41bb, type: 2}
+  m_Motion: {fileID: 7400000, guid: 2be633deacdf6d34897a5724a3279254, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
---- !u!1102 &7812150213087993085
+--- !u!1102 &4539965851086971555
 AnimatorState:
   serializedVersion: 6
   m_ObjectHideFlags: 1
@@ -122,7 +122,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 9ca8103932c1153478b8b4d66648471e, type: 2}
+  m_Motion: {fileID: 7400000, guid: 9cb44d83e027d6744997f422b0b959d4, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

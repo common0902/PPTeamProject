@@ -10,7 +10,6 @@ public class RangedWeapon : MonoBehaviour, IWeapon
 
     private WeaponModule _weaponModule;
     private EventChannelSO _eventChannel;
-
     private Animator _animator;
     private bool _canAttack = true;
     private int _bullets = 5;
@@ -23,10 +22,8 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public bool CanAttack => _canAttack && _bullets > 0;
     public int Bullets => _bullets;
 
-    private void Awake()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    private void Awake() => _animator = GetComponent<Animator>();
+
     public void Initialize(WeaponModule weaponModule, EventChannelSO eventChannel)
     {
         _weaponModule = weaponModule;
@@ -36,10 +33,9 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public void Attack(float damage)
     {
         if (!CanAttack) return;
-
         _canAttack = false;
         _bullets--;
-        _animator.CrossFade(AttackHash, 0.5f);
+        _animator.CrossFade(AttackHash, 0.05f);
         _eventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(_bullets));
 
         Vector3 origin = transform.position + Vector3.up;
@@ -55,14 +51,15 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public void OnAttackEnd()
     {
         _canAttack = true;
-
-        if (_bullets == 0)
-            _weaponModule.RemoveCurrentWeapon();
-        else
-            _animator.CrossFade(IdleHash, 0.2f);
+        _animator.CrossFade(IdleHash, 0.1f);
     }
 
-    public void OnSwap() => _animator.Play(SwapHash);
+    public void OnSwap()
+    {
+        _canAttack = true;
+        _animator.Play(SwapHash);
+    }
+
     public void Reroad() => _bullets = 5;
 
     private void OnDrawGizmosSelected()

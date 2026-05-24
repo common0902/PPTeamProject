@@ -27,8 +27,6 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
     public void Attack(float damage)
     {
         if (!_canAttack) return;
-
-        Debug.Log(123123123);
         _canAttack = false;
         _canCombo = false;
         ExecuteAttack(damage);
@@ -66,24 +64,27 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
 
     public void CanCombo()
     {
-        Debug.Log(231231231);
-
         _canCombo = true;
         _canAttack = true;
     }
 
     public void CanNotCombo()
     {
-        Debug.Log(312312312);
         _canCombo = false;
         if (_canAttack)
         {
             _comboCount = 0;
-            _animator.Play(IdleHash);
+            _animator.CrossFade(IdleHash, 0.1f);
         }
     }
 
-    public void OnSwap() => _animator.Play(SwapHash);
+    public void OnSwap()
+    {
+        _canAttack = true;
+        _canCombo = false;
+        _comboCount = 0;
+        _animator.Play(SwapHash);
+    }
 
     private void OnDrawGizmosSelected()
     {
