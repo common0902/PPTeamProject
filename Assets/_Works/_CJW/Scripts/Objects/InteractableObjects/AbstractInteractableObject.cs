@@ -32,7 +32,9 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             // 플레이어가 트리거 범위에 들면 관리 모듈에 등록함
             if (other.gameObject.CompareTag("Player"))
             {
+                Debug.Log("HIT");
                 if (_isRegistered || IsPlayerInRange || IsUsed) return;
+                Debug.Log("HIT12312");
             
                 _isRegistered = true;
                 IsPlayerInRange = true;

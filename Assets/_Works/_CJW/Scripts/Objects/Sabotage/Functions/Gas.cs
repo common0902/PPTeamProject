@@ -40,11 +40,9 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             yield return new WaitForSeconds(lifeTime - 2f);
 
             _particle.Stop(true, ParticleSystemStopBehavior.StopEmitting);
-            //현재 파티클 입자들을 가져올 배열을 지역변수로 선언.
             ParticleSystem.Particle[] particles =
                 new ParticleSystem.Particle[_particle.particleCount];
 
-            //파티클을 담을 배열을 파라미터로 넘겨서 값을 받아옴
             int count = _particle.GetParticles(particles);
 
             
