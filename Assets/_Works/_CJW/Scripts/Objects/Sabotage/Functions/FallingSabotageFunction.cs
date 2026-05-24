@@ -31,6 +31,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         {
             base.UseFunction();
 
+            ExecuteDamage();
             if (GetGround(out var hit))
             {
                 _owner.ActiveVisual(false);
@@ -40,7 +41,6 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
 
                 transform.DOMoveY(targetY, 0.4f).SetEase(Ease.InQuad).OnComplete(() =>
                 {
-                    ExecuteDamage();
                     PlayParticle();
 
                     DOVirtual.DelayedCall(lifetime, () =>
