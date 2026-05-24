@@ -1,9 +1,6 @@
-using System;
 using System.Collections;
-using _Script.ScriptableObject.Event;
-using _Works._CJW.Scripts.Events;
+using System.Collections.Generic;
 using _Works._JYG._Script.Enemy;
-using DG.Tweening;
 using UnityEngine;
 
 namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
@@ -11,6 +8,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
     [RequireComponent(typeof(BoxCollider))]
     public class Gas : AbstractObject
     {
+        private List<AbstractEnemy> _enemyList = new List<AbstractEnemy>();
+        
         private BoxCollider _collider;
         private ParticleSystem _particle;
 
@@ -59,15 +58,28 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         }
         protected override void OnTriggerEnterEnemy(AbstractEnemy enemy)
         {
+            _enemyList.Add(enemy);
             enemy.ChangeWaterState(true);
             enemy.EnemyOutline.enabled = true;
+            enemy.GetModule<TargetRaycaster>().enabled = false;
         }
 
         protected override void OnTriggerExitEnemy(AbstractEnemy enemy)
         {
-            
+            _enemyList.Remove(enemy);
             enemy.ChangeWaterState(false);
             enemy.EnemyOutline.enabled = false;
+            enemy.GetModule<TargetRaycaster>().enabled = true;
+        }
+        
+        protected override void OnDestroy()
+        {
+            foreach (AbstractEnemy enemy in _enemyList)
+            {
+                enemy.ChangeWaterState(false);
+                enemy.EnemyOutline.enabled = false;
+                enemy.GetModule<TargetRaycaster>().enabled = true;
+            }
         }
     }
 }
