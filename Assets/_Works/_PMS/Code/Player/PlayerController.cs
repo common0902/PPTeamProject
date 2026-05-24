@@ -7,6 +7,8 @@ using System;
 using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 public class PlayerController : Agent
 {
@@ -28,6 +30,9 @@ public class PlayerController : Agent
 
     [SerializeField] private GameObject visual;
     [SerializeField] private GameObject weapons;
+
+    [SerializeField] private Volume globalVolume;
+    private Vignette _vignette;
 
 
     #region State에서 참조할 입력 상태값들
@@ -65,6 +70,9 @@ public class PlayerController : Agent
         // 3인칭이면 bool값 반전 
         visual.SetActive(false);
         weapons.SetActive(true);
+
+        // 글로벌 볼륨 야르띠띠 가져오는 코드
+        globalVolume.profile.TryGet(out _vignette);
     }
 
     protected override void AfterInitialize()
@@ -204,10 +212,22 @@ public class PlayerController : Agent
     public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
     {
         base.TakeDamage(damage, hitDirection, attackerPosition);
-        if (hitDirection == Vector3.zero) return;
+        // hitDirection이 없는 총에만 빨갛게 깜빡 해주기
+        if (hitDirection == Vector3.zero)
+        {
+            StartCoroutine(RedFlash());
+            return;
+        }
         Movement.CharacterController.Move(hitDirection.normalized * knockbackForce);
         SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, hitSound));
         StartCoroutine(ShakeView());
+    }
+
+    private IEnumerator RedFlash()
+    {
+        _vignette.intensity.Override(.5f);
+        yield return new WaitForSeconds(.1f);
+        _vignette.intensity.Override(0f);
     }
 
     private IEnumerator ShakeView()

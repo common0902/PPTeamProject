@@ -32,7 +32,10 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public bool CanAttack => _canAttack && _bullets > 0;
     public int Bullets => _bullets;
 
-    private void Awake() => _animator = GetComponent<Animator>();
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     public void Initialize(WeaponModule weaponModule, EventChannelSO playerEventChannel, EventChannelSO soundChannel)
     {
@@ -44,7 +47,12 @@ public class RangedWeapon : MonoBehaviour, IWeapon
 
     public void Attack(float damage)
     {
-        if (!CanAttack) return;
+        if (!CanAttack)
+        {
+            if (_bullets <= 0)
+                _playerEventChannel.RaiseEvent(PlayerEvents.BulletShortageEvent);
+            return;
+        }
         _canAttack = false;
         _bullets--;
         _damage = damage;
@@ -69,9 +77,8 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public void OnAttackEnd()
     {
         _canAttack = true;
-        _animator.CrossFade(IdleHash, 0.1f);
+        _animator.Play(IdleHash);
     }
-
     public void OnSwap()
     {
         _canAttack = true;
