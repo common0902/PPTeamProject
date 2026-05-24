@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5662021799447146300}
   - component: {fileID: 3668331467078790823}
   - component: {fileID: 5731299833551455575}
-  - component: {fileID: 5641148403045680813}
   - component: {fileID: 2454760190351547339}
   - component: {fileID: 2842906891431660332}
+  - component: {fileID: 2553550346806878264}
   m_Layer: 11
   m_Name: GunBox
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8737123214307812270}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: -0.6816386, y: -2.4912395, z: -2.8654232}
   m_LocalScale: {x: 1.2, y: 1.5, z: 1}
   m_ConstrainProportionsScale: 0
@@ -111,21 +111,6 @@ MonoBehaviour:
   itemDatas:
   - {fileID: 11400000, guid: 0d39a6fa3c2230c4e8a450da2b6306dd, type: 2}
   - {fileID: 11400000, guid: a68ec05feb3e32e448259b8acb3def7b, type: 2}
---- !u!114 &5641148403045680813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8737123214307812270}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6691f0cc94764576af8b930202d877b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Box.DropItem
-  bounceHeight: 0.1
-  bounceDuration: 5
-  bounceSpeed: 2
 --- !u!65 &2454760190351547339
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,3 +159,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2553550346806878264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8737123214307812270}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []

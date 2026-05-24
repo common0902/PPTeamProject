@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 3387932612583239191}
   - component: {fileID: 1295962205997033964}
   - component: {fileID: 2276397250994076238}
-  - component: {fileID: 6473866841126457032}
   - component: {fileID: 2931802599958129343}
   - component: {fileID: 972459868817437680}
+  - component: {fileID: -2141890342886563854}
   m_Layer: 11
   m_Name: HealBox
   m_TagString: Untagged
@@ -111,21 +111,6 @@ MonoBehaviour:
   itemDatas:
   - {fileID: 11400000, guid: 81af2c41e7958674094362122159bc60, type: 2}
   - {fileID: 11400000, guid: 3aa7c9e2ff7e66c4d9d0499e610bb3fb, type: 2}
---- !u!114 &6473866841126457032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2707045207409312212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6691f0cc94764576af8b930202d877b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Box.DropItem
-  bounceHeight: 0.1
-  bounceDuration: 5
-  bounceSpeed: 2
 --- !u!65 &2931802599958129343
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -174,3 +159,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-2141890342886563854
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2707045207409312212}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Outline
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
