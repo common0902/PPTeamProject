@@ -45,7 +45,6 @@ namespace _Script.SaveSystem
 
         private void HandleStorePrefEvent(StoreDataEvent @event)
         {
-            Debug.Log("SDfsf");
             string saveData = GetSceneSaveData();       //Save Data : 씬 전체를 스캔떠서 IStorable요소를 string으로 저장한다.
             PlayerPrefs.SetString(prefKey, saveData);
             Debug.Log($"Data Save!! {saveData}");
