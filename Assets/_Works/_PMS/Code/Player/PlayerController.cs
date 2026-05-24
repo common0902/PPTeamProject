@@ -60,6 +60,7 @@ public class PlayerController : Agent
     protected override void Initialize()
     {
         base.Initialize();
+        globalVolume = Instantiate(globalVolume).GetComponent<Volume>();
         Movement = GetModule<PlayerMovement>();
         WeaponModule = GetModule<WeaponModule>();
         CamController = GetModule<CameraController>();
