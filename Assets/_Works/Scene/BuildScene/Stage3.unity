@@ -592,6 +592,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1512,6 +1520,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1669,6 +1685,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Gunner (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.2108917
@@ -1804,9 +1828,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (12)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2610,9 +2646,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3016,6 +3064,14 @@ PrefabInstance:
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3600,6 +3656,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Gunner (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 160
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.989109
@@ -3911,9 +3975,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5018,9 +5094,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -5563,6 +5651,14 @@ PrefabInstance:
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (18)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6190,6 +6286,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6627,6 +6731,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Gunner (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5891075
@@ -6712,9 +6820,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8197,9 +8317,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 494883328475756439, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -8418,6 +8550,14 @@ PrefabInstance:
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (14)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -10922,6 +11062,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Gunner (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x
       value: -8.010895
@@ -11139,6 +11287,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2238861770099347978}
     m_Modifications:
+    - target: {fileID: 653424261506751428, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4940570208834840975, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.789253
@@ -11206,6 +11358,10 @@ PrefabInstance:
     - target: {fileID: 5770815740749513473, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
       propertyPath: m_Name
       value: E_Tank Variant (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 160
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -12646,6 +12802,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: E_Tank Variant (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Angle>k__BackingField
+      value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 6548056641048573305, guid: 9df98639bfc4a484ea18fbab2a3e77d4, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -12729,6 +12893,10 @@ PrefabInstance:
     - target: {fileID: 5039422013865032929, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_Name
       value: E_Gunner (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5703473689106352793, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
+      propertyPath: <Distance>k__BackingField
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 5866501077239895663, guid: 373d98af0fd0211429645c6dd07357e0, type: 3}
       propertyPath: m_LocalPosition.x

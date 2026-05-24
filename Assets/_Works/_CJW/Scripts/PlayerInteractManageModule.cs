@@ -63,7 +63,6 @@ namespace _Works._CJW.Scripts
 
         private void UpdateFocused()
         {
-            Debug.Log(_interactableObjects.Count);
             if(_interactableObjects.Count == 0) return;
             
             //가장 가까운 오브젝트와 상호작용 가능하게 하고, 시각적으로 표현함

@@ -2,8 +2,6 @@
 using _Script.ScriptableObject.Event;
 using _Works._PMS.Code.Event;
 using System.Collections.Generic;
-using System.Diagnostics.Tracing;
-using System.Linq;
 using UnityEngine;
 
 public class WeaponModule : MonoBehaviour, IModule
@@ -12,16 +10,11 @@ public class WeaponModule : MonoBehaviour, IModule
     [SerializeField] private float swapAttackDelay = 0.5f;
     [SerializeField] private MeleeWeapon meleeWeapon;
     [SerializeField] private RangedWeapon rangedWeapon;
-
     [SerializeField] private EventChannelSO _eventChannel;
 
     private List<IWeapon> _weapons = new();
     private int _currentIndex = 0;
     private float _swapDelayTimer = 0f;
-
-    public float DEBUG_SwapTimer => _swapDelayTimer;
-    public IWeapon DEBUG_CurrentWeapon => CurrentWeapon;
-    public bool DEBUG_WeaponCanAttack => CurrentWeapon?.CanAttack ?? false;
 
     public IWeapon CurrentWeapon => _weapons.Count > 0 ? _weapons[_currentIndex] : null;
     public bool CanAttack => _swapDelayTimer <= 0f && CurrentWeapon != null && CurrentWeapon.CanAttack;
@@ -51,8 +44,6 @@ public class WeaponModule : MonoBehaviour, IModule
     {
         if (!CanAttack) return;
         CurrentWeapon.Attack(damage);
-
-        
     }
 
     public void SwapNext()
@@ -63,6 +54,7 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(CurrentWeapon is RangedWeapon));
     }
 
     public void SwapPrev()
@@ -73,6 +65,7 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(CurrentWeapon is RangedWeapon));
     }
 
     public void SwapWeaponIndex(int index)
@@ -84,12 +77,10 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
-
-        bool isGun = CurrentWeapon is RangedWeapon;
-        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(isGun));
+        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(CurrentWeapon is RangedWeapon));
     }
 
-    [ContextMenu("111")]
+    [ContextMenu("aaaaa")]
     public void AddGun()
     {
         if (rangedWeapon == null) return;
@@ -97,6 +88,7 @@ public class WeaponModule : MonoBehaviour, IModule
         if (_weapons.Contains(rangedWeapon))
         {
             rangedWeapon.Reroad();
+            _eventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(5));
             return;
         }
 
@@ -106,22 +98,7 @@ public class WeaponModule : MonoBehaviour, IModule
         CurrentWeapon.WeaponObject.SetActive(true);
         CurrentWeapon.OnSwap();
         _swapDelayTimer = swapAttackDelay;
-
         _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(true));
         _eventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(5));
-    }
-
-    public void RemoveCurrentWeapon()
-    {
-        CurrentWeapon.WeaponObject.SetActive(false);
-        _weapons.RemoveAt(_currentIndex);
-
-        if (_weapons.Count == 0) return;
-
-        _currentIndex = 0;
-        CurrentWeapon.WeaponObject.SetActive(true);
-        CurrentWeapon.OnSwap();
-
-        _eventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(false));
     }
 }
