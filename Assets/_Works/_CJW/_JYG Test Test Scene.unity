@@ -961,17 +961,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
---- !u!114 &915673354 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2225947955629714541, guid: 2ab6c247061a0cf4fb7aa7a6356f004b, type: 3}
-  m_PrefabInstance: {fileID: 915673353}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1094395728
 GameObject:
   m_ObjectHideFlags: 0
@@ -6565,71 +6554,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
---- !u!1001 &1374001077
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 3.5644674
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.00000014901161
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.6003876
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.8694215
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.49407104
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -59.217
-      objectReference: {fileID: 0}
-    - target: {fileID: 1387353877205230594, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3400369946695543483, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: m_Name
-      value: Lever_Prefab
-      objectReference: {fileID: 0}
-    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: 'targetSabotages.Array.data[0]'
-      value: 
-      objectReference: {fileID: 915673354}
-    - target: {fileID: 5680086294075683215, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
-      propertyPath: 'targetSabotages.Array.data[1]'
-      value: 
-      objectReference: {fileID: 1834624612}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ac9229be5b7be554b945cbc96b4055c0, type: 3}
 --- !u!1001 &1423239520
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6950,17 +6874,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
---- !u!114 &1834624612 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7443911186355670952, guid: 59b04dedd9742af418662dafe22b97c5, type: 3}
-  m_PrefabInstance: {fileID: 1834624611}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 559df33149666db4baa1d6a85453491f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::_Works._CJW.Scripts.Objects.Sabotage.AbstractSabotage
 --- !u!1 &1836710758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4532322350316919045, guid: c967cf1649b4ddb48b3cd998fdf3083c, type: 3}
@@ -7174,8 +7087,10 @@ MonoBehaviour:
     m_RotationOrder: 4
   topViewCam: {fileID: 1895085356}
   firstViewCam: {fileID: 105320138}
-  quadViewOffset: 0.5
-  quadViewDuration: 1
+  topViewEuler: {x: 0, y: 0, z: 0}
+  topViewOffset: 0
+  topViewDuration: 0
+  _inputAxisController: {fileID: 0}
   rotateStartPercent: 0.4
 --- !u!114 &1895085354
 MonoBehaviour:
@@ -8108,5 +8023,4 @@ SceneRoots:
   - {fileID: 1834624611}
   - {fileID: 1778522688}
   - {fileID: 1967182796}
-  - {fileID: 1374001077}
   - {fileID: 72355836}
