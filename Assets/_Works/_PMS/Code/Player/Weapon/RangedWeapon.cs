@@ -32,7 +32,10 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public bool CanAttack => _canAttack && _bullets > 0;
     public int Bullets => _bullets;
 
-    private void Awake() => _animator = GetComponent<Animator>();
+    private void Awake()
+    {
+        _animator = GetComponent<Animator>();
+    }
 
     public void Initialize(WeaponModule weaponModule, EventChannelSO playerEventChannel, EventChannelSO soundChannel)
     {
@@ -69,9 +72,8 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     public void OnAttackEnd()
     {
         _canAttack = true;
-        _animator.CrossFade(IdleHash, 0.1f);
+        _animator.Play(IdleHash);
     }
-
     public void OnSwap()
     {
         _canAttack = true;

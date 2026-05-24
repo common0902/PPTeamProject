@@ -49,6 +49,9 @@ public class WeaponModule : MonoBehaviour, IModule
     {
         if (!CanAttack) return;
         CurrentWeapon.Attack(damage);
+
+        if (CurrentWeapon is RangedWeapon ranged && ranged.Bullets <= 0)
+            SwapWeaponIndex(0);
     }
 
     public void SwapNext()
