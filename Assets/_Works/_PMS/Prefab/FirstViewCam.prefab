@@ -480,7 +480,7 @@ MonoBehaviour:
   range: 50
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
 --- !u!1001 &5737657048992738129
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1101,7 +1101,10 @@ MonoBehaviour:
   attackRadius: 0.5
   targetLayer:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 2176
+  wallLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!95 &4933588055501165422
 Animator:
   serializedVersion: 7
