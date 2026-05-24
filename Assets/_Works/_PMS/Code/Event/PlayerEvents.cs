@@ -8,6 +8,7 @@ namespace _Works._PMS.Code.Event
         public static HitEvent HitEvent = new HitEvent();
         public static BulletChangeEvent BulletChangeEvent = new BulletChangeEvent();
         public static WeaponChangeEvent WeaponChangeEvent = new WeaponChangeEvent();
+        public static BulletShortageEvent BulletShortageEvent = new BulletShortageEvent();
     }
 
     public class SprintEndEvent : GameEvent
@@ -46,5 +47,10 @@ namespace _Works._PMS.Code.Event
             IsGun = isGun;
             return this;
         }
+    }
+    
+    public class BulletShortageEvent : GameEvent
+    {
+        
     }
 }

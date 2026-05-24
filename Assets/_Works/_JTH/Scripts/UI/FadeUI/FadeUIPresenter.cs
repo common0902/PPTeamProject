@@ -14,6 +14,8 @@ namespace _Works._JTH.Scripts.UI.FadeUI
 {
     public class FadeUIPresenter : BasePresenter
     {
+        public static bool FadeUIOpen = false;
+        
         [SerializeField] private EventChannelSO saveChannel;
         [SerializeField] private EventChannelSO openUIChannel;
         [SerializeField] private StageInfoSO stageInfoSO;
