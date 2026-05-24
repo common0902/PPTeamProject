@@ -77,6 +77,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             cameraChannel.AddListener<TopViewEvent>(UseTopViewSkillHandler);
             cameraChannel.AddListener<RegisterSabotageEvent>(AddSabotage);
             playerChannel.AddListener<SprintEndEvent>(SprintEndEventHandler);
+            cameraChannel.AddListener<FirstViewComplete>(OnFirstViewEventHandler);
             playerChannel.AddListener<HitEvent>(HitEventEventHandler);
             playerChannel.AddListener<BulletChangeEvent>(BulletChangeEventHandler);
             playerChannel.AddListener<WeaponChangeEvent>(WeaponChangeEventHandler);
@@ -87,6 +88,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             cameraChannel.RemoveListener<TopViewEvent>(UseTopViewSkillHandler);
             cameraChannel.RemoveListener<RegisterSabotageEvent>(AddSabotage);
             playerChannel.RemoveListener<SprintEndEvent>(SprintEndEventHandler);
+            cameraChannel.RemoveListener<FirstViewComplete>(OnFirstViewEventHandler);
             playerChannel.RemoveListener<HitEvent>(HitEventEventHandler);
             playerChannel.RemoveListener<BulletChangeEvent>(BulletChangeEventHandler);
             playerChannel.RemoveListener<WeaponChangeEvent>(WeaponChangeEventHandler);
@@ -127,6 +129,15 @@ namespace _Works._JTH.Scripts.UI.InGame
         {
             _inGameModel.SetSprintSkillCooldown();
             _inGameView.UpdateForm((int)InGameUIEnum.SprintCover);
+        }
+        
+        private void OnFirstViewEventHandler(FirstViewComplete data)
+        {
+            if (data.IsFirstViewComplete == false)
+                return;
+            
+            _inGameModel.SetTopViewSkillCooldown();
+            _inGameView.UpdateForm((int)InGameUIEnum.TopViewCover);
         }
 
         private void HitEventEventHandler(HitEvent data)
