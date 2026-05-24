@@ -12,18 +12,12 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         [SerializeField] private Vector3 detectSize;
         public override void UseFunction()
         {
-            base.UseFunction();
-            foreach (ParticleSystem vfx in vfXes)
-            {
-                var main = vfx.main;
-                main.duration = duration;
-            }
+            base.UseFunction(); 
 
             var puddle = Instantiate(puddleObject, new Vector3(transform.position.x,1, transform.position.z), Quaternion.identity);
             puddle.SetLifetime(duration);
             puddle.InitSize(detectSize);
-            PlayParticle();
-        }
+            }
 
         private void OnDrawGizmosSelected()
         {

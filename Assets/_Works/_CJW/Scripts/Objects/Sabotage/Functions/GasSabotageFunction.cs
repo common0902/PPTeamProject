@@ -20,6 +20,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             {
                 var gas = Instantiate(gasObject, trm.position, Quaternion.identity);
                 gas.InitSize(gasSize);
+                gas.SetLifetime(duration);
             }
         }
 
