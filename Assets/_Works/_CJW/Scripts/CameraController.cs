@@ -143,20 +143,14 @@ namespace _Works._CJW.Scripts
                 }
                 else
                 {
-                    float movePercent =
-                        Mathf.InverseLerp(
-                            rotateStartPercent,
-                            1f,
-                            percent);
+                    float movePercent = Mathf.InverseLerp
+                    (rotateStartPercent, 1f, percent);
 
                     float heightCurve =
                         transitionCurve.Evaluate(movePercent);
 
-                    _thirdPersonFollow.VerticalArmLength =
-                        Mathf.Lerp(
-                            startVal,
-                            resultHeight,
-                            heightCurve);
+                    _thirdPersonFollow.VerticalArmLength = Mathf.Lerp
+                    (startVal, resultHeight, heightCurve);
                 }
 
                 yield return null;
