@@ -4,6 +4,7 @@ using _Works._JTH.Scripts.UI.Event;
 using HwanLib.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI
 {
@@ -14,20 +15,20 @@ namespace _Works._JTH.Scripts.UI
 
         private void Update()
         {
-            if (Keyboard.current.qKey.wasPressedThisFrame)
-                openUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(3, false, true));
-            else if (Keyboard.current.wKey.wasPressedThisFrame)
-                openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(false));
-            else if (Keyboard.current.eKey.wasPressedThisFrame)
-                openUIChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(true));
-            else if (Keyboard.current.rKey.wasPressedThisFrame)
-                openUIChannel.RaiseEvent((OpenUIEvents.OpenSettingEvent));
-            else if (Keyboard.current.tKey.wasPressedThisFrame)
-                interactChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
-                    .Init(true, null));
-            else if (Keyboard.current.yKey.wasPressedThisFrame)
-                interactChannel.RaiseEvent(InteractEvents.ObjectRegisterEvent
-                    .Init(false, null));
+            if (Keyboard.current.digit4Key.wasPressedThisFrame)
+                SceneManager.LoadScene(2);
+            if (Keyboard.current.digit5Key.wasPressedThisFrame)
+                SceneManager.LoadScene(3);
+            if (Keyboard.current.digit6Key.wasPressedThisFrame)
+                SceneManager.LoadScene(4);
+            if (Keyboard.current.digit7Key.wasPressedThisFrame)
+                SceneManager.LoadScene(5);
+            if (Keyboard.current.digit8Key.wasPressedThisFrame)
+                SceneManager.LoadScene(6);
+            if (Keyboard.current.digit9Key.wasPressedThisFrame)
+                SceneManager.LoadScene(7);
+            if (Keyboard.current.digit0Key.wasPressedThisFrame)
+                SceneManager.LoadScene(8);
         }
     }
 }
