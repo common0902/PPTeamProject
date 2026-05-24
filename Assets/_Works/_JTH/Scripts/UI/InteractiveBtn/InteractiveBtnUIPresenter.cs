@@ -29,6 +29,7 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
             _interactiveBtnUIView = View as InteractiveBtnUIView;
             
             _interactiveBtnUIView.OpenDuration = 0.1f;
+            _interactiveBtnUIView.CloseDuration = 0.1f;
 
             interactObjectChannel.AddListener<ObjectRegisterEvent>(SabotageInteractiveHandler);
             SceneManager.sceneLoaded += GetMainCamera;
@@ -46,23 +47,27 @@ namespace _Works._JTH.Scripts.UI.InteractiveBtn
 
         private void SabotageInteractiveHandler(ObjectRegisterEvent data)
         {
-            if (data.IsRegistered == false && data.InteractableObject.transform == _targetObjectTrm)
+            if (data.IsRegistered == false)
             {
-                _interactiveBtnUIView.CloseView();
-                _targetObjectTrm = null;
+                if (data.InteractableObject.UiShowPos == _targetObjectTrm)
+                {
+                    _interactiveBtnUIView.CloseView();
+                    _targetObjectTrm = null;
+                }
+
                 return;
             }
 
             if (TryOpen?.Invoke(this) is true)
             {
-                _targetObjectTrm = data.InteractableObject?.transform;
+                _targetObjectTrm = data.InteractableObject.UiShowPos;
             }
         }
 
         private void Update()
         {
-            if (_interactiveBtnUIView.RootCanvas.gameObject.activeSelf)
-                _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm.transform);
+            if (_targetObjectTrm != null)
+                _interactiveBtnUIView.MoveToTargetTransform(_mainCam, _targetObjectTrm);
         }
 
         public void OpenUI()

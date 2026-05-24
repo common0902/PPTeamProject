@@ -73,9 +73,6 @@ namespace HwanLib.MVP.System.AbstractMVP
             _canvasGroup.interactable = true;
             _canvasGroup.blocksRaycasts = true;
         }
-
-        private void CloseView(int _, UIParam __)
-            => CloseView();
         
         public override void CloseView()
         {
