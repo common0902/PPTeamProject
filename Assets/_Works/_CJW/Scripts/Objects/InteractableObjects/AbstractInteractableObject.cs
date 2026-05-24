@@ -2,6 +2,7 @@
 
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
+using GameLib.SoundSystem;
 using UnityEngine;
 
 namespace _Works._CJW.Scripts.Objects.InteractableObjects
@@ -10,6 +11,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
     public abstract class AbstractInteractableObject : MonoBehaviour, IInteractableObject
     {
         [field: SerializeField] public InteractableObjectDataSo DataSo { get; private set; }
+        [SerializeField] private EventChannelSO soundChannel;
+        [SerializeField] private SoundClipSO soundData;
         [field: SerializeField] public Transform UiShowPos { get; private set; }
         [SerializeField] private EventChannelSO interactEvent;
         [SerializeField] private LayerMask playerLayer;
@@ -64,6 +67,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             if (IsUsed) return;
             IsUsed = true;
             interactEvent.RaiseEvent(InteractEvents.InteractEvent); // 상호작용 이벤트 발생하도록
+            soundChannel.RaiseEvent( SoundSystemEvents.PlaySoundEvent.Init(transform.position, soundData));
             // 상호작용 세부 구현은 자식에서
         }
         
