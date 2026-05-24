@@ -33,7 +33,7 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             {
                 foreach (Sabotage.Sabotage sabotage in targetSabotages)
                 {
-                    if(!sabotage.IsLocked && !sabotage.IsUsed)
+                    // if(sabotage.IsLocked && !sabotage.IsUsed)
                         sabotage.UnlockSabotage();
                 }
             }
