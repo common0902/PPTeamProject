@@ -4,6 +4,7 @@ using _Script.SaveSystem;
 using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.SO;
 using _Works._JTH.Scripts.UI.Event;
+using _Works._JTH.Scripts.UI.GameEnd;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.System.GenerateUI;
 using HwanLib.MVP.UIData;
@@ -55,6 +56,9 @@ namespace _Works._JTH.Scripts.UI.Setting
         
         private void ShowSetting(OpenSettingEvent eventData)
         {
+            if (GameEndUIPresenter.IsGameEnd)
+                return;
+            
             if (_settingView.CanOpen == false)
             {
                 _settingView.CloseView();

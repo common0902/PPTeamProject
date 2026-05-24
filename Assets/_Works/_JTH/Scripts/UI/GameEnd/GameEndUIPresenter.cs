@@ -12,6 +12,8 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 {
     public class GameEndUIPresenter : AbstractSaveablePresenter
     {
+        public static bool IsGameEnd = false;
+        
         [SerializeField] private StageInfoSO stageInfoSO;
         [SerializeField] private float fadeDuration = 2;
         [SerializeField] private float fadeInAlpha;
@@ -43,6 +45,7 @@ namespace _Works._JTH.Scripts.UI.GameEnd
 
         private void CloseViewHandler()
         {
+            IsGameEnd = false;
             Time.timeScale = 1;
             
             Cursor.visible = false;
@@ -61,7 +64,8 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         {
             _gameEndModel.SetGame(data.IsGameOver, SaveId.Id);
             _gameEndView.SetGameState(data.IsGameOver);
-            
+
+            IsGameEnd = true;
             Time.timeScale = 0;
 
             Cursor.visible = true;
