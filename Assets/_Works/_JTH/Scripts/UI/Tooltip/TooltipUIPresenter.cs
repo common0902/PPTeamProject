@@ -46,7 +46,7 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             
             Vector2 tooltipPos = Camera.main.WorldToScreenPoint(sabotage.transform.position);
             _tooltipView.OpenView();
-            _tooltipView.SetPosition(tooltipPos);
+            _tooltipView.SetPosition(tooltipPos + new Vector2(sabotage.markBoxSize.x, sabotage.markBoxSize.y));
         }
 
         private void CloseTooltip()
