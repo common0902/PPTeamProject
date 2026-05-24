@@ -41,8 +41,10 @@ namespace HwanLib.MVP.Forms
             if (layoutGroup == null || layoutGroup.enabled == false)
                 return;
             
-            // lay
-            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)layoutGroup.transform);
+            layoutGroup.CalculateLayoutInputHorizontal();
+            layoutGroup.CalculateLayoutInputVertical();
+            layoutGroup.SetLayoutHorizontal();
+            layoutGroup.SetLayoutVertical();
             
             layoutGroup.enabled = false;
         }
