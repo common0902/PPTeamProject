@@ -53,7 +53,6 @@ namespace _Works._CJW.Scripts.Rendering
             if (transitionCount % 2 == 1)
             {
                 transitionCount = 0;
-                Debug.LogError("트랜지션 횟수는 짝수여야함");
             }
             
         }

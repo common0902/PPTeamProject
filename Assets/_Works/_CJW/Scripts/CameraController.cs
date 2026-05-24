@@ -91,8 +91,6 @@ namespace _Works._CJW.Scripts
 
         private void TransCameraToQuadView()
         {
-            Debug.Log("TEMPS : " + _tempTrs.position);
-            Debug.Log("Roots : " + _rootTrs.position);
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             topViewCam.Follow = _tempTrs;

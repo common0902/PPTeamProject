@@ -33,10 +33,8 @@ namespace _Works._CJW.Scripts.Objects.InteractableObjects
             {
                 if (_isRegistered || IsPlayerInRange || IsUsed) return;
             
-                Debug.Log("Player entered interaction range.");
                 _isRegistered = true;
                 IsPlayerInRange = true;
-                Debug.Log(_outline);
                 _outline.OutlineColor = interactColor;
                 
                 interactEvent.RaiseEvent(InteractEvents.ObjectRegisterEvent.Init(_isRegistered, this));

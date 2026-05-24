@@ -126,10 +126,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         }
         public void OnPointerEnter(PointerEventData eventData)
         {
-            Debug.Log($"used: {IsUsed}/ locked: {IsLocked}/ topView: {_isTopView}");
             if(IsUsed || IsLocked || !_isTopView) return;
 
-            Debug.Log("ASD");
             if (_visual != null)
             {
                 _visual.SetOutlineState(OutlineState.INTERACTED);
