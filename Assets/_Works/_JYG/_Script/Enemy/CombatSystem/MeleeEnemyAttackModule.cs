@@ -22,7 +22,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
             {
                 if (player[0].TryGetComponent<IDamageable>(out IDamageable damageable))
                 {
-                    damageable.TakeDamage(0, transform.forward, transform.position);
+                    damageable.TakeDamage(10, transform.forward, transform.position);
                 }
             }
         }

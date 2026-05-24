@@ -832,6 +832,10 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
+  attack1Sound: {fileID: 11400000, guid: 19b6548ee1ad46a479299ed3489396ac, type: 2}
+  attack2Sound: {fileID: 11400000, guid: 708489cbd7b3b7a43b152abdf4977525, type: 2}
+  attack3Sound: {fileID: 11400000, guid: 7fe42c4b714c2e848953a792c8da2014, type: 2}
+  swapSound: {fileID: 11400000, guid: 7ca6c68dd2ba20a4c877d9154d8e293e, type: 2}
 --- !u!4 &789826804749704118 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 71ef0184771b1be4ab660a4a6d13420f, type: 3}
@@ -1474,6 +1478,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93a1d8e5a7a4b504f9680ffdd634ba3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RangedWeapon
+  attackSound: {fileID: 11400000, guid: 85b4d7cedfd750a4487ce5c91dc2906f, type: 2}
+  swapSound: {fileID: 11400000, guid: fc72188e9a297b947bd10775c7f92253, type: 2}
   range: 50
   targetLayer:
     serializedVersion: 2

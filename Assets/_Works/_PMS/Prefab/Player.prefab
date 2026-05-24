@@ -105,6 +105,8 @@ MonoBehaviour:
       m_Calls: []
   <SoundEventChannel>k__BackingField: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
   <PlayerEventChannel>k__BackingField: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
+  hitSound: {fileID: 11400000, guid: 238f2e627e829894faf768f6c4766083, type: 2}
+  deadSound: {fileID: 11400000, guid: 9d866dc38ac6481439785a402ac31f48, type: 2}
   <PlayerInput>k__BackingField: {fileID: 11400000, guid: a8d5899067e2fd14ea0b21be69e99fae, type: 2}
   cinemachineCamera: {fileID: 0}
   knockbackForce: 3
@@ -423,7 +425,8 @@ MonoBehaviour:
   swapAttackDelay: 0.5
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}
-  _eventChannel: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
+  _playerEventChannel: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
+  _soundChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
 --- !u!1 &9100324594425151676
 GameObject:
   m_ObjectHideFlags: 0

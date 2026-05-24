@@ -23,9 +23,9 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
     protected override void MakeTransitions()
     {
         // 레이어 0: 이동
-        MakeTransition<PlayerIdleState, PlayerWalkState>(state => !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f);
+        MakeTransition<PlayerIdleState, PlayerWalkState>(state => !Owner.IsDead && !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f);
 
-        MakeTransition<PlayerIdleState, PlayerRunState>(state => !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f && Owner.IsRunning && !Owner.IsRunCooldown);
+        MakeTransition<PlayerIdleState, PlayerRunState>(state => !Owner.IsDead && !Owner.CamController.IsTransitioning && !Owner.CamController.IsTopView && Owner.MoveInput.magnitude > 0.1f && Owner.IsRunning && !Owner.IsRunCooldown);
 
         MakeTransition<PlayerWalkState, PlayerIdleState>(state => Owner.CamController.IsTransitioning || Owner.CamController.IsTopView || Owner.MoveInput.magnitude <= 0.1f);
 
@@ -33,7 +33,9 @@ public class PlayerStateMachine : MonoStateMachine<PlayerController>
 
         MakeTransition<PlayerRunState, PlayerWalkState>(state => Owner.CamController.IsTransitioning || Owner.CamController.IsTopView || !Owner.IsRunning);
 
-        MakeTransition<PlayerRunState, PlayerIdleState>(state => Owner.Movement.Velocity.magnitude <= 0.1f);    
+        MakeTransition<PlayerRunState, PlayerIdleState>(state => Owner.Movement.Velocity.magnitude <= 0.1f);
+
+        MakeAnyTransition<PlayerIdleState>(state => Owner.IsDead, layer: 0);
 
         // 레이어 1: 행동
         MakeAnyTransition<PlayerDeadState>(state => Owner.IsDead, layer: 1);
