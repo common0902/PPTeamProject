@@ -37,9 +37,8 @@ namespace _Works._JTH.Scripts.UI.InGame
             _sabotageList = new List<Sabotage>();
             
             _inGameModel.SetEventChannel(openUIChannel);
-
-            AddListener();
             
+            AddListener();
             SceneManager.sceneLoaded += SceneLoadedHandler;
             SceneManager.sceneUnloaded += SceneUnLoadedHandler;
         }
@@ -81,6 +80,12 @@ namespace _Works._JTH.Scripts.UI.InGame
             playerChannel.AddListener<HitEvent>(HitEventEventHandler);
             playerChannel.AddListener<BulletChangeEvent>(BulletChangeEventHandler);
             playerChannel.AddListener<WeaponChangeEvent>(WeaponChangeEventHandler);
+            playerChannel.AddListener<BulletShortageEvent>(BulletShortageEventHandler);
+        }
+
+        private void BulletShortageEventHandler(BulletShortageEvent data)
+        {
+            _inGameView.BulletWarning();
         }
 
         private void RemoveListener()

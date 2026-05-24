@@ -52,10 +52,17 @@ namespace _Works._JTH.Scripts.UI.FadeUI
         public override void OpenView()
         {
             base.OpenView();
-            
+            FadeUIPresenter.FadeUIOpen = true;
+
             BackgroundForm.DoFade(true, FadeDuration, 1);
             if (DrawCurDayText && !_stageTextForm.Text.Contains("0"))
                 _stageTextForm.DrawerModule.Draw(true, DrawDuration / 2, true);
+        }
+
+        public override void CloseView()
+        {
+            base.CloseView();
+            FadeUIPresenter.FadeUIOpen = false;
         }
 
         public void StartClose()

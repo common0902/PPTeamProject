@@ -1,9 +1,11 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using HwanLib.MVP.Forms;
 using HwanLib.MVP.Forms.Module.Gauge;
 using HwanLib.MVP.System;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
+using TMPro;
 using UnityEngine;
 
 namespace _Works._JTH.Scripts.UI.InGame
@@ -14,6 +16,7 @@ namespace _Works._JTH.Scripts.UI.InGame
         private AccessForm _sprintSkill;
         private AccessForm _redMarkBoard;
         private AccessForm _crossHair;
+        private TextMeshProUGUI _bulletWarningTmp;
 
         private List<RectTransform> _redMarkList;
         
@@ -28,6 +31,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             _sprintSkill = GetForm<AccessForm>((int)InGameUIEnum.SprintSkill);
             _redMarkBoard = GetForm<AccessForm>((int)InGameUIEnum.RedMarkBoard);
             _crossHair = GetForm<AccessForm>((int)InGameUIEnum.CrossHair);
+            _bulletWarningTmp = GetForm<AccessForm>((int)InGameUIEnum.BulletWarningText).GetComponent<TextMeshProUGUI>();
             
             GetForm<GaugeForm>((int)InGameUIEnum.HpGauge).InitGaugeForm(GaugeType.PosY);
             GetForm<CooldownForm>((int)InGameUIEnum.SprintCover).InitCooldownForm(GaugeType.PosY);
@@ -69,6 +73,17 @@ namespace _Works._JTH.Scripts.UI.InGame
                 _redMarkList[i].position = redMarkScreenPosList[i];
                 _redMarkList[i].gameObject.SetActive(true);
             }
+        }
+
+        public void BulletWarning()
+        {
+            _bulletWarningTmp.DOComplete();
+            _bulletWarningTmp.DOKill();
+            
+            _bulletWarningTmp.DOFade(1, 0.5f).OnComplete(() =>
+            {
+                _bulletWarningTmp.DOFade(0, 0.5f);
+            });
         }
     }
 }
