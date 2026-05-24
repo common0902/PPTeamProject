@@ -113,7 +113,7 @@ MonoBehaviour:
   runCooldown: 2
   viewMapCooldown: 5
   visual: {fileID: 6254122432358933010}
-  weapons: {fileID: 8250809114417472686}
+  weapons: {fileID: 0}
 --- !u!114 &7739873473474901341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,6 +429,7 @@ MonoBehaviour:
   rangedWeapon: {fileID: 0}
   _playerEventChannel: {fileID: 11400000, guid: 4fb5afe8db85a144892526b90a6e1adc, type: 2}
   _soundChannel: {fileID: 11400000, guid: 53ec8c8c27508434f88bf39df0e8a577, type: 2}
+  weaponsRoot: {fileID: 0}
 --- !u!1 &9100324594425151676
 GameObject:
   m_ObjectHideFlags: 0
@@ -828,6 +829,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 64e0fef2c6656fd418e411bc2caa9a7e, type: 2}
     - target: {fileID: 6097975782525654849, guid: 36078ea4a8c3073418bc0cf00732b38f, type: 3}
       propertyPath: m_IsActive
       value: 0
