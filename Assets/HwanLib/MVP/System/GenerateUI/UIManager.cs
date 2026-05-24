@@ -37,7 +37,8 @@ namespace HwanLib.MVP.System.GenerateUI
         {
             base.Initialize();
             
-            Instantiate(eventSystemPrefab, transform);
+            if (FindAnyObjectByType<EventSystem>() == null)
+                Instantiate(eventSystemPrefab, transform);
             Instantiate(worldUICamera, Camera.main.transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
