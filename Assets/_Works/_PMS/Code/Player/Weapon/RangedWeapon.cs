@@ -47,12 +47,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
 
     public void Attack(float damage)
     {
-        if (!CanAttack)
-        {
-            if (_bullets <= 0)
-                _playerEventChannel.RaiseEvent(PlayerEvents.BulletShortageEvent);
-            return;
-        }
+        if (!CanAttack) return;
         _canAttack = false;
         _bullets--;
         _damage = damage;

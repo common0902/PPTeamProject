@@ -47,10 +47,15 @@ public class WeaponModule : MonoBehaviour, IModule
 
     public void Attack()
     {
-        if (!CanAttack) return;
+        if (!CanAttack)
+        {
+            if (CurrentWeapon is RangedWeapon ranged && ranged.Bullets <= 0)
+                _playerEventChannel.RaiseEvent(PlayerEvents.BulletShortageEvent);
+            return;
+        }
         CurrentWeapon.Attack(damage);
 
-        if (CurrentWeapon is RangedWeapon ranged && ranged.Bullets <= 0)
+        if (CurrentWeapon is RangedWeapon r && r.Bullets <= 0)
             SwapWeaponIndex(0);
     }
 
