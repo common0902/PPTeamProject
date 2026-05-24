@@ -44,6 +44,8 @@ public class PlayerController : Agent
     public CameraController CamController { get; private set; }
     public CinemachineBasicMultiChannelPerlin perlin { get; private set; }
 
+    public EventChannelSO OpenUIEventChannel { get; private set; }
+
     #endregion
 
     protected override void Initialize()
