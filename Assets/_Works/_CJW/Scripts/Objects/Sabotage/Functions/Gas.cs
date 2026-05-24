@@ -31,7 +31,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             base.InitSize(size);
             _collider.size = size;
             var shape = _particle.shape;
-            shape.scale = size;
+            shape.scale = size * 3 / 2;
         }
 
         private IEnumerator FadeOutGas()
@@ -74,8 +74,10 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         
         protected override void OnDestroy()
         {
+            base.OnDestroy();
             foreach (AbstractEnemy enemy in _enemyList)
             {
+                if (enemy == null) continue;
                 enemy.ChangeWaterState(false);
                 enemy.EnemyOutline.enabled = false;
                 enemy.GetModule<TargetRaycaster>().enabled = true;
