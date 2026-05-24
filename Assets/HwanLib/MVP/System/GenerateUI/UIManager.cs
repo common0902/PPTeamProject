@@ -24,9 +24,7 @@ namespace HwanLib.MVP.System.GenerateUI
     
     public class UIManager : LightSingleton<UIManager>
     {
-        // [SerializeField] private Input
         [SerializeField] private MVPDataListSO mvpDataList;
-        [SerializeField] private EventSystem eventSystemPrefab;
         [SerializeField] private WorldUICamera worldUICamera;
         [SerializeField] private LayerMask uiLayer = 1 << 5;
  
@@ -37,8 +35,6 @@ namespace HwanLib.MVP.System.GenerateUI
         {
             base.Initialize();
             
-            if (FindAnyObjectByType<EventSystem>() == null)
-                Instantiate(eventSystemPrefab, transform);
             Instantiate(worldUICamera, Camera.main.transform);
 
             _multiableUIDict = new Dictionary<Type, MultiableUIs>();
