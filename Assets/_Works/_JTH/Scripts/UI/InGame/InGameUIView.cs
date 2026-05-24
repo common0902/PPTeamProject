@@ -38,6 +38,10 @@ namespace _Works._JTH.Scripts.UI.InGame
             GetForm<CooldownForm>((int)InGameUIEnum.TopViewCover).InitCooldownForm(GaugeType.PosY);
 
             _redMarkList = new List<RectTransform>();
+
+            var color = _bulletWarningTmp.color;
+            color.a = 0;
+            _bulletWarningTmp.color = color;
         }
 
         public void AddRedMark(RectTransform redMark)
@@ -80,7 +84,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             _bulletWarningTmp.DOComplete();
             _bulletWarningTmp.DOKill();
             
-            _bulletWarningTmp.DOFade(1, 0.5f).OnComplete(() =>
+            _bulletWarningTmp.DOFade(1, 0.5f).SetEase(Ease.OutExpo).OnComplete(() =>
             {
                 _bulletWarningTmp.DOFade(0, 0.5f);
             });

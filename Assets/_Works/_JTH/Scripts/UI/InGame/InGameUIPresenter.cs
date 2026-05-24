@@ -115,7 +115,6 @@ namespace _Works._JTH.Scripts.UI.InGame
             _inGameView.OnViewChange(data.IsTopView);
             if (data.IsTopView == false)
                 return;
-            Debug.Log("탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰탑뷰");
 
             Camera cam = Camera.main;
             List<Vector2> redMarkScreenPosList = new List<Vector2>();
