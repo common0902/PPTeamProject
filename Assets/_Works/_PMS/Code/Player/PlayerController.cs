@@ -5,7 +5,6 @@ using _Works._PMS.Code.Event;
 using GameLib.SoundSystem;
 using System;
 using System.Collections;
-using TreeEditor;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -28,8 +27,16 @@ public class PlayerController : Agent
     [SerializeField] private float viewMapCooldown = 5f;
     private float _viewMapCooldownTimer;
 
+    [SerializeField] private GameObject visual;
+    [SerializeField] private GameObject weapons;
+
+
+
 
     #region State에서 참조할 입력 상태값들
+
+    public GameObject Visual => visual;
+    public GameObject Weapons => weapons;
     public bool IsViewMapCooldown { get; private set; }
 
     public CinemachineCamera CinemachineCamera => cinemachineCamera;
@@ -56,6 +63,11 @@ public class PlayerController : Agent
         CamController = GetModule<CameraController>();
         perlin = cinemachineCamera.GetComponent<CinemachineBasicMultiChannelPerlin>();
         CameraTransform = cinemachineCamera.transform;
+
+
+        // 3인칭이면 bool값 반전 
+        visual.SetActive(false);
+        weapons.SetActive(true);
     }
 
     protected override void AfterInitialize()

@@ -48,6 +48,7 @@ namespace _Works._JYG._Script.Enemy
 
         [field: SerializeField] public SoundClipSO PlayerFoundSound { get; private set; }
         [field: SerializeField] public SoundClipSO HitSound { get; private set; }
+        [field: SerializeField] public SoundClipSO SirenSound { get; private set; }
         
         [field: SerializeField] public AnimationHashSO ForceXParam { get; private set; }
         [field: SerializeField] public AnimationHashSO ForceYParam { get; private set; }
@@ -176,9 +177,14 @@ namespace _Works._JYG._Script.Enemy
         {
             if (!IsRunning) return;
             if (enemyCurrentCaution >= 0)
-                enemyCurrentCaution += Time.deltaTime * cautionRatio; //cautionRatio : Distance비례 증가값
+                enemyCurrentCaution += Time.deltaTime * cautionRatio * 2; //cautionRatio : Distance비례 증가값
             else
                 enemyCurrentCaution = 0;
+        }
+
+        public void EnemyDeath()
+        {
+            IsRunning = false;
         }
         
         #region Enemy Siren Behaviour
@@ -200,6 +206,7 @@ namespace _Works._JYG._Script.Enemy
                 EnemyState.PATROL => 0,                 //Patrol상태라면, 진정된거니 0으로 초기화.
                 _ => enemyCurrentCaution                //나머지는 변함 없음.
             };
+            StopAllCoroutines();
         }
         
         public void SetSirenEffect(bool isEffected) => SirenEffect = isEffected;
@@ -230,6 +237,7 @@ namespace _Works._JYG._Script.Enemy
             {
                 PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.EnemyChangeState.Init(EnemyState.CHASE));
                 PlayerFindEventChannel.RaiseEvent(PlayerFindEvents.SirenCameraEffect);
+                SoundEventChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, SirenSound));
             }
         }
         

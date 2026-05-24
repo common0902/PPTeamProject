@@ -51,10 +51,10 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
 
     private void ExecuteAttack(float damage)
     {
-        Vector3 origin = transform.position + Vector3.up;
+        Vector3 origin = transform.position + Vector3.up - transform.forward * attackRadius * 2;
         Vector3 direction = transform.forward;
 
-        float range = attackRange;
+        float range = attackRange + attackRadius;
         if (Physics.Raycast(origin, direction, out RaycastHit wallHit, attackRange, wallLayer))
             range = wallHit.distance;
 
@@ -116,9 +116,11 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
 
     private void OnDrawGizmosSelected()
     {
+        Vector3 origin = transform.position + Vector3.up - transform.forward * attackRadius * 2;
+
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position + Vector3.up, attackRadius);
+        Gizmos.DrawWireSphere(origin, attackRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position + Vector3.up + transform.forward * attackRange, attackRadius);
+        Gizmos.DrawWireSphere(origin + transform.forward * (attackRange + attackRadius), attackRadius);
     }
 }

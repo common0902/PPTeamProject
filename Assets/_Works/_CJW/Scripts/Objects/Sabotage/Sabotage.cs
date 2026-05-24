@@ -127,7 +127,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         public void OnPointerEnter(PointerEventData eventData)
         {
             if(IsUsed || IsLocked || !_isTopView) return;
-
+            
+            cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, true));
             if (_visual != null)
             {
                 _visual.SetOutlineState(OutlineState.INTERACTED);
@@ -139,6 +140,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage
         {
             if (IsUsed || IsLocked || !_isTopView) return;
             
+            cameraEvent.RaiseEvent(CameraEvent.FocusedSabotageEvent.Init(this, false));
             UpdateVisualState();
         }
         

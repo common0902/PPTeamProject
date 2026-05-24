@@ -16,6 +16,8 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             PlayParticle();
             foreach (AbstractEnemy enemy in targetEnemies)
             {
+                if(enemy == null) continue;
+                
                 enemy.AiSystem.RouteRePath(transform.position);
                 enemy.ChangeState((int)EnemyState.PATROL);
             }
