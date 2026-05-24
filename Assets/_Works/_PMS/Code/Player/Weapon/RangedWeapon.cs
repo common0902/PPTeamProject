@@ -90,7 +90,7 @@ public class RangedWeapon : MonoBehaviour, IWeapon
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(transform.position + Vector3.up, _mainCam.gameObject.transform.forward * range);
+        // Gizmos.DrawRay(transform.position + Vector3.up, _mainCam.gameObject.transform.forward * range);
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position + Vector3.up, 0.05f);
     }

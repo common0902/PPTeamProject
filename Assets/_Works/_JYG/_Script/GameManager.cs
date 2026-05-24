@@ -1,8 +1,6 @@
-﻿using System;
-using _Script.ScriptableObject.Event;
+﻿using _Script.ScriptableObject.Event;
 using _Script.Tools.Utility;
 using _Works._JTH.Scripts.UI.Event;
-using _Works._JYG._Script.Enemy;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using GameLib.PoolObject.Runtime;
