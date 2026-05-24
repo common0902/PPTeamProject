@@ -114,6 +114,13 @@ public class MeleeWeapon : MonoBehaviour, IWeapon
         _soundChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, sound));
     }
 
+    public void ForceReset()
+    {
+        _canAttack = true;
+        _canCombo = false;
+        _comboCount = 0;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Vector3 origin = transform.position + Vector3.up - transform.forward * attackRadius * 2;

@@ -31,8 +31,6 @@ public class PlayerController : Agent
     [SerializeField] private GameObject weapons;
 
 
-
-
     #region State에서 참조할 입력 상태값들
 
     public GameObject Visual => visual;
@@ -74,26 +72,21 @@ public class PlayerController : Agent
     {
         base.AfterInitialize();
 
-        // 입력 이벤트 연결
         PlayerInput.OnMovementChange += OnMovementChange;
         PlayerInput.OnRunStarted += OnRunStarted;
         PlayerInput.OnRunCanceled += OnRunCanceled;
         PlayerInput.OnAttackKeyPressed += OnAttackPressed;
         PlayerInput.OnViewMapStarted += OnViewMapStarted;
         PlayerInput.OnViewMapCanceled += OnViewMapCanceled;
-
-        //PlayerInput.OnWeaponSwapUp += OnWeaponSwapUp;
-        //PlayerInput.OnWeaponSwapDown += OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex += OnWeaponSwapIndex;
 
         CamController.OnFirstViewComplete += OnFirstViewComplete;
 
         var stateMachine = GetComponent<PlayerStateMachine>();
         stateMachine?.Setup(this);
-
     }
 
-    
+
 
     protected override void Update()
     {
@@ -142,19 +135,19 @@ public class PlayerController : Agent
         PlayerInput.OnAttackKeyPressed -= OnAttackPressed;
         PlayerInput.OnViewMapStarted -= OnViewMapStarted;
         PlayerInput.OnViewMapCanceled -= OnViewMapCanceled;
-
-        //PlayerInput.OnWeaponSwapUp -= OnWeaponSwapUp;
-        //PlayerInput.OnWeaponSwapDown -= OnWeaponSwapDown;
         PlayerInput.OnWeaponSwapIndex -= OnWeaponSwapIndex;
 
         CamController.OnFirstViewComplete -= OnFirstViewComplete;
     }
+
     private void OnFirstViewComplete()
     {
         IsViewMapCooldown = true;
         _viewMapCooldownTimer = viewMapCooldown;
-    }
 
+        visual.SetActive(false);
+        WeaponModule.RestoreCurrentWeapon();
+    }
 
     private void OnMovementChange(Vector2 input)
     {
@@ -207,7 +200,7 @@ public class PlayerController : Agent
             PlayerEventChannel.RaiseEvent(PlayerEvents.HitEvent.Init(currentHealth));
     }
 
-    
+
 
     public override void TakeDamage(float damage, Vector3 hitDirection, Vector3 attackerPosition)
     {
