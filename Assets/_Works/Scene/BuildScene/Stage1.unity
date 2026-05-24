@@ -4855,6 +4855,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4374634295295572758, guid: 28f134ca011d77047b0fb966f223741f, type: 3}
   m_PrefabInstance: {fileID: 80311424}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &852666035 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3261136257094558936, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 2044893332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
 --- !u!1001 &862256661
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8692,6 +8703,18 @@ PrefabInstance:
       propertyPath: rangedWeapon
       value: 
       objectReference: {fileID: 2044893333}
+    - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: topViewCam
+      value: 
+      objectReference: {fileID: 852666035}
+    - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: firstViewCam
+      value: 
+      objectReference: {fileID: 2044893335}
+    - target: {fileID: 8830487630922865828, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
+      propertyPath: _inputAxisController
+      value: 
+      objectReference: {fileID: 2044893341}
     - target: {fileID: 8873227899710872693, guid: 85e3323d26a3d3f438a0857e047f9923, type: 3}
       propertyPath: cinemachineCamera
       value: 
@@ -12637,6 +12660,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9dfa5b682dcd46bda6128250e975f58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
+--- !u!114 &2044893341 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1550306266744026481, guid: ef6891b78d96c0f4d8ed8b0841745d18, type: 3}
+  m_PrefabInstance: {fileID: 2044893332}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89875cdc57c54474a8a74efd9b2a3b5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineInputAxisController
 --- !u!1001 &2048689627
 PrefabInstance:
   m_ObjectHideFlags: 0
