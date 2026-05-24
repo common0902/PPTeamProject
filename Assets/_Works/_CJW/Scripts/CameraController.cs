@@ -7,6 +7,7 @@ using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace _Works._CJW.Scripts
 {
@@ -93,6 +94,8 @@ namespace _Works._CJW.Scripts
             }
             if(Keyboard.current.tKey.wasPressedThisFrame)
                 TransToFirstView();
+            if (Keyboard.current.yKey.wasPressedThisFrame)
+                SceneManager.LoadScene("_Works/Scene/BuildScene/Stage6");
         }
 
         private void TransCameraToTopView()
