@@ -85,18 +85,7 @@ namespace _Works._CJW.Scripts
                 StartCoroutine(TransCameraToFirstViewCoroutine());
             }
         }
-
-        private void Update()
-        {
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-            {
-                TransToTopView();
-            }
-            if(Keyboard.current.tKey.wasPressedThisFrame)
-                TransToFirstView();
-            if (Keyboard.current.yKey.wasPressedThisFrame)
-                SceneManager.LoadScene("_Works/Scene/BuildScene/Stage6");
-        }
+        
 
         private void TransCameraToTopView()
         {
