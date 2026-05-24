@@ -37,7 +37,6 @@ namespace _Works._CJW.Scripts.Rendering
 
         private void CombineMesh(TopViewEvent evt)
         {
-	        Debug.Log(evt.IsTopView);
 	        if (evt.IsTopView)
 	        {
 		        _meshRenderer.enabled = true;

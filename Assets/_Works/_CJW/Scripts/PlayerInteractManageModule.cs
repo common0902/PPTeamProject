@@ -39,7 +39,6 @@ namespace _Works._CJW.Scripts
                 if (!_interactableObjects.Contains(obj.InteractableObject))
                 {
                     _interactableObjects.Add(obj.InteractableObject);
-                    Debug.Log($"Registered object");
                 }
             }
             else
@@ -47,7 +46,6 @@ namespace _Works._CJW.Scripts
                 if (_interactableObjects.Contains(obj.InteractableObject))
                 {
                     _interactableObjects.Remove(obj.InteractableObject);
-                    Debug.Log($"Unregistered object");
                 }
             }
             UpdateFocused();
