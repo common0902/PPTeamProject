@@ -160,6 +160,7 @@ namespace _Works._CJW.Scripts
 
             _thirdPersonFollow.VerticalArmLength = resultHeight;
 
+            Debug.Log("끝");
             cameraEvent.RaiseEvent(
                 CameraEvent.TopViewEvent.Init(true));
 
