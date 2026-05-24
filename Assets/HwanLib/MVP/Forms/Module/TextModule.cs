@@ -25,8 +25,6 @@ namespace HwanLib.MVP.Forms.Module
         {
             if (text != null)
                 Text = String.Format(_originalText, text);
-            else
-                Debug.LogError("Text는 null일 수 없습니다.");
         }
     }
 }

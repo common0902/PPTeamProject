@@ -37,7 +37,6 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         }
         private void OnCollisionEnter(Collision collision)
         {
-            Debug.Log(collision.gameObject.name);
             if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
                 damageable.TakeDamage(damage, Vector3.zero, transform.position);

@@ -52,6 +52,18 @@ namespace _Works._JYG._Script
                 OpenUIEventChannel.RaiseEvent(OpenUIEvents.OpenGameEndEvent.Init(false));
             }
         }
+
+        [ContextMenu("Time 0")]
+        private void TimeScale2Zero()
+        {
+            Time.timeScale = 0;
+        }
+
+        [ContextMenu("Time 1")]
+        private void TimeScale2One()
+        {
+            Time.timeScale = 1;
+        }
         
     }
 }

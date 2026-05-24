@@ -35,7 +35,7 @@ namespace _Works._JTH.Scripts.UI.Title
         
         private void NewGameBtnClickHandler(UIParam clickData)
         {
-            if (_savedStage == "0" || _savedStage == "1")
+            if (_savedStage is "0" or "1")
             {
                 OpenTutorialPopup();
                 return;

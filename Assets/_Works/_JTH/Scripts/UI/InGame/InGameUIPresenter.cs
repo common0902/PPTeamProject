@@ -64,7 +64,7 @@ namespace _Works._JTH.Scripts.UI.InGame
             _sceneSabotageCounter = 0;
             _inGameModel.InitializeData(new InGameUIData
                 ((int)playerStat.Hp, playerStat.ViewMapCooldown, playerStat.RunCooldown, playerStat.IsGun));
-
+            _inGameView.UpdateView();
             if (scene.buildIndex >= stageInfoSO.stageStartIdx 
                 && scene.buildIndex <= stageInfoSO.stageStartIdx + stageInfoSO.stageCount - 1)
                 _inGameView.OpenView();

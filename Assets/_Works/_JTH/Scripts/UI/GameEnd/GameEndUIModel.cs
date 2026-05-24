@@ -16,17 +16,20 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         private const string GameOverTitle = "GAME OVER";
         private const string GameClearTitle = "CLEAR";
         private bool _isGameOver;
-        private int _nextStage;
 
         public void SetGame(bool isGameOver, int saveDataId)
         {
             _isGameOver = isGameOver;
-            _nextStage = SceneManager.GetActiveScene().buildIndex - StageInfoSO.stageStartIdx + 2;
-            if (_nextStage < 1 || isGameOver || _savedStage >= _nextStage || _nextStage > StageInfoSO.stageCount)
-                return;
+            int nextStage = SceneManager.GetActiveScene().buildIndex - StageInfoSO.stageStartIdx + 2;
             
+            if (isGameOver == false && _savedStage < nextStage && nextStage <= StageInfoSO.stageCount)
+            {
+                _savedStage = nextStage;
+            }
+
             SaveChannel.RaiseEvent(SaveEvents.SyncDataEvent
-                    .Init(saveDataId, _nextStage.ToString()));
+                    .Init(saveDataId, _savedStage.ToString()));
+            SaveChannel.RaiseEvent(SaveEvents.StoreDataEvent);
         }
         
         public int StageStartIndex { get; set; }
@@ -57,23 +60,22 @@ namespace _Works._JTH.Scripts.UI.GameEnd
         private UIParam UpdateDescText() => UIParams.UIStringParam.Init((_isGameOver ? _savedStage : _savedStage - 1).ToString());
 
         private void ContinueBtnHandler(UIParam clickData)
-        {
-            CloseViewAction?.Invoke();
-            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
-                .Init(_nextStage - 1, false, _savedStage != 0));
-        }
+            => LoadSavedStage();
 
         private void NextBtnHandler(UIParam clickData)
+            => LoadSavedStage();
+
+        private void LoadSavedStage()
         {
             CloseViewAction?.Invoke();
             OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
-                .Init(_nextStage - 1, false, true));
+                .Init(StageInfoSO.stageStartIdx + _savedStage - 1, false, true));
         }
 
         private void QuitBtnHandler(UIParam clickData)
         {
             CloseViewAction?.Invoke();
-            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(0, false, false));
+            OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent.Init(StageInfoSO.titleIdx, false, false));
         }
     }
 }
