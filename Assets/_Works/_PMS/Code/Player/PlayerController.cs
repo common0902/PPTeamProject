@@ -5,7 +5,6 @@ using _Works._PMS.Code.Event;
 using GameLib.SoundSystem;
 using System;
 using System.Collections;
-using TreeEditor;
 using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -43,6 +42,8 @@ public class PlayerController : Agent
     public bool IsViewMap { get; private set; }
     public CameraController CamController { get; private set; }
     public CinemachineBasicMultiChannelPerlin perlin { get; private set; }
+
+    public EventChannelSO OpenUIEventChannel { get; private set; }
 
     #endregion
 
