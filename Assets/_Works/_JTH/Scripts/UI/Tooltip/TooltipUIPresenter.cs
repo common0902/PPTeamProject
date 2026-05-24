@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._CJW.Scripts.Objects.Sabotage;
-using HwanLib.MVP.Forms;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.SceneManagement;
 
 namespace _Works._JTH.Scripts.UI.Tooltip
 {
