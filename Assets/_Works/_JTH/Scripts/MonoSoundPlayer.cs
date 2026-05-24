@@ -28,7 +28,7 @@ namespace _Works._JTH.Scripts
         private void SceneLoadHandler(Scene scene, LoadSceneMode arg1)
         {
             int buildIdx = scene.buildIndex;
-            if (buildIdx >= stageInfoSO.stageStartIdx
+            if (buildIdx >= stageInfoSO.tutorialIdx
                 && buildIdx <= stageInfoSO.stageStartIdx + stageInfoSO.stageCount - 1)
             {
                 soundChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(Vector3.zero, clipSO));

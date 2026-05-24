@@ -41,6 +41,7 @@ namespace HwanLib.MVP.Forms
             if (layoutGroup == null || layoutGroup.enabled == false)
                 return;
             
+            // lay
             LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)layoutGroup.transform);
             
             layoutGroup.enabled = false;
