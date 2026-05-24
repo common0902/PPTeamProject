@@ -1,4 +1,3 @@
-using System;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
 using _Works._JYG._Script.Enemy;
@@ -38,7 +37,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
             Destroy(gameObject, lifeTime);
         }
 
-        private void OnDestroy()
+        protected virtual void OnDestroy()
         {
             _audioSource.Stop();
             cameraEvent.RemoveListener<TopViewEvent>(OnTopViewEvent);
