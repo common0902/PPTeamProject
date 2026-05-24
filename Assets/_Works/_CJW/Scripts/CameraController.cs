@@ -25,6 +25,8 @@ namespace _Works._CJW.Scripts
         [SerializeField] private Vector3 topViewEuler;
         [SerializeField] private float topViewOffset;
         [SerializeField] private float topViewDuration;
+        
+        [SerializeField] private float firstViewDelayTime = 0.3f;
 
         #region Player가 사용하는 변수
         public bool IsTransitioning => _isTransitioning;
@@ -181,7 +183,7 @@ namespace _Works._CJW.Scripts
 
             Quaternion startRotation = _tempTrs.rotation;
             Quaternion endRotation = _rootTrs.parent.rotation;
-    
+
             _tempTrs.position = _rootTrs.position;
 
             while (t < durationTime)
@@ -211,6 +213,8 @@ namespace _Works._CJW.Scripts
 
             topViewCam.Priority.Value = 0;
             firstViewCam.Priority.Value = 1;
+
+            yield return new WaitForSeconds(firstViewDelayTime);
 
             _isTransitioning = false;
 
