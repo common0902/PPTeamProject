@@ -36,6 +36,7 @@ namespace _Works._CJW.Scripts
         private bool _isTopView;
 
         public event Action OnFirstViewComplete;
+        public event Action OnTopViewComplete;
         private bool _hasTopView = false;
 
         [SerializeField] private CinemachineInputAxisController _inputAxisController;
@@ -169,6 +170,7 @@ namespace _Works._CJW.Scripts
             _isTransitioning = false;
 
             _hasTopView = true;
+            OnTopViewComplete?.Invoke();
         }
         private IEnumerator TransCameraToFirstViewCoroutine()
         {

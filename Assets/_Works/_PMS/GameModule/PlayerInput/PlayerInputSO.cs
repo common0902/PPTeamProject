@@ -9,18 +9,12 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     public event Action<Vector2> OnMovementChange;
     public event Action OnAttackKeyPressed;
     public event Action OnJumpKeyPressed;
-
     public event Action OnRunStarted;
     public event Action OnRunCanceled;
-
     public event Action OnViewMapStarted;
     public event Action OnViewMapCanceled;
-
-    //public event Action OnWeaponSwapUp;
-    //public event Action OnWeaponSwapDown;
     public event Action<int> OnWeaponSwapIndex;
     public event Action OnInteractKeyPressed;
-    
     public event Action OnOpenSettingUI;
 
     private Controls _controls;
@@ -37,9 +31,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
     }
 
     private void OnDisable()
-    {
-        _controls.Player.Disable();
-    }
+        => _controls.Player.Disable();
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -69,14 +61,13 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnMap(InputAction.CallbackContext context)
     {
-
         if (context.performed)
         {
             if (!_viewMap)
             {
                 OnViewMapStarted?.Invoke();
                 _viewMap = true;
-            }   
+            }
             else
             {
                 OnViewMapCanceled?.Invoke();
@@ -117,7 +108,7 @@ public class PlayerInputSO : ScriptableObject, Controls.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (context.performed)
             OnInteractKeyPressed?.Invoke();
     }
 }

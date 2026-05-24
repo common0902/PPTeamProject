@@ -80,6 +80,11 @@ public class RangedWeapon : MonoBehaviour, IWeapon
         _soundChannel.RaiseEvent(SoundSystemEvents.PlaySoundEvent.Init(transform.position, sound));
     }
 
+    public void ForceReset()
+    {
+        _canAttack = true;
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;

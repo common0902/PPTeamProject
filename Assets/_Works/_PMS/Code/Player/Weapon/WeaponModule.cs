@@ -14,6 +14,8 @@ public class WeaponModule : MonoBehaviour, IModule
     [SerializeField] private EventChannelSO _playerEventChannel;
     [SerializeField] private EventChannelSO _soundChannel;
 
+    [SerializeField] private GameObject weaponsRoot;
+
     private List<IWeapon> _weapons = new();
     private int _currentIndex = 0;
     private float _swapDelayTimer = 0f;
@@ -103,5 +105,25 @@ public class WeaponModule : MonoBehaviour, IModule
         _swapDelayTimer = swapAttackDelay;
         _playerEventChannel.RaiseEvent(PlayerEvents.WeaponChangeEvent.Init(true));
         _playerEventChannel.RaiseEvent(PlayerEvents.BulletChangeEvent.Init(5));
+    }
+
+    public void ResetWeaponState()
+    {
+        if (CurrentWeapon is MeleeWeapon melee)
+        {
+            melee.ForceReset();
+        }
+        else if (CurrentWeapon is RangedWeapon ranged)
+        {
+            ranged.ForceReset();
+        }
+        weaponsRoot.SetActive(false);
+    }
+
+    public void RestoreCurrentWeapon()
+    {
+        weaponsRoot.SetActive(true);
+        for (int i = 0; i < _weapons.Count; i++)
+            _weapons[i].WeaponObject.SetActive(i == _currentIndex);
     }
 }
