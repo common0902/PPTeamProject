@@ -22,7 +22,9 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         {
             base.HandleAgentAttack();
             EnemyBullet bullet = PoolManager.Pop<EnemyBullet>(BulletData.PoolItemSO);
-            bullet.GetComponent<Rigidbody>().linearVelocity = (_playerTrm.position - FirePosition.position).normalized * BulletData.BulletSpeed;
+            Vector3 targetTrm = _playerTrm.position;
+            targetTrm.y += 1;
+            bullet.GetComponent<Rigidbody>().linearVelocity = (targetTrm - FirePosition.position).normalized * BulletData.BulletSpeed;
             bullet.transform.position = FirePosition.position;
         }
     }
