@@ -701,6 +701,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 984552210703328039}
+        m_TargetAssemblyTypeName: _Works._JYG._Script.Enemy.AbstractEnemy, Assembly-CSharp
+        m_MethodName: EnemyDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   <MaxHealth>k__BackingField: 1
 --- !u!1 &5663390159802345553
 GameObject:
@@ -815,7 +827,7 @@ MonoBehaviour:
   <stateListSO>k__BackingField: {fileID: 11400000, guid: f781bd68529cba648be9e2e0407f698f, type: 2}
   enemyCurrentCaution: 0
   cautionRatio: 1
-  enemyCautionDelay: 3
+  enemyCautionDelay: 1
   <AttackDistance>k__BackingField: 60
   <PatrolSpeed>k__BackingField: 1.5
   <WaterSpeed>k__BackingField: 0.5
@@ -824,6 +836,7 @@ MonoBehaviour:
   callingDuration: 3
   <PlayerFoundSound>k__BackingField: {fileID: 11400000, guid: 49ed5f6430da3d94490ed258e247070b, type: 2}
   <HitSound>k__BackingField: {fileID: 11400000, guid: 047dce6ef25847340aa1a6f4521c496a, type: 2}
+  <SirenSound>k__BackingField: {fileID: 11400000, guid: fadadad7a59bfe74fa1c9414bc7d0125, type: 2}
   <ForceXParam>k__BackingField: {fileID: 11400000, guid: 9b677280e9dd5504bb9dc740700cc4fd, type: 2}
   <ForceYParam>k__BackingField: {fileID: 11400000, guid: 305fc9c946551d84d8777723461bac50, type: 2}
   <IsRunning>k__BackingField: 1
@@ -872,7 +885,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64606df1c46e32428cfc6b432e85e54, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::_Works._JYG._Script.ViewCaster
-  <Distance>k__BackingField: 12
+  <Distance>k__BackingField: 16
   <Angle>k__BackingField: 30
 --- !u!1 &7819578369922147538
 GameObject:

@@ -947,7 +947,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.228653
+      value: -0.215
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -955,11 +955,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9386101
+      value: 0.2613907
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalRotation.x
@@ -967,7 +967,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalRotation.z
@@ -979,7 +979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 1387353877205230594, guid: 6d1121831efb8a349ad57e5bb04355bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
@@ -1497,6 +1497,85 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 415934, guid: 90ee87c3535ae7a4bb03b7a82142209c, type: 3}
   m_PrefabInstance: {fileID: 281763543}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &293866498
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 293866501}
+  - component: {fileID: 293866500}
+  - component: {fileID: 293866499}
+  m_Layer: 0
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &293866499
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293866498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.UI.InputSystemUIInputModule
+  m_SendPointerHoverToParent: 1
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_PointAction: {fileID: -1654692200621890270, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MoveAction: {fileID: -8784545083839296357, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_SubmitAction: {fileID: 392368643174621059, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_CancelAction: {fileID: 7727032971491509709, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_LeftClickAction: {fileID: 3001919216989983466, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_MiddleClickAction: {fileID: -2185481485913320682, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_RightClickAction: {fileID: -4090225696740746782, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_ScrollWheelAction: {fileID: 6240969308177333660, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDevicePositionAction: {fileID: 6564999863303420839, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
+  m_CursorLockBehavior: 0
+  m_ScrollDeltaPerTick: 6
+--- !u!114 &293866500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293866498}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventSystem
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!4 &293866501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 293866498}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &294777831
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4133,6 +4212,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1508223660905346535}
     m_Modifications:
+    - target: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
       value: E_Sniper (2)
@@ -5604,6 +5687,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1508223660905346535}
     m_Modifications:
+    - target: {fileID: 984552210703328039, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
+      propertyPath: enemyCautionDelay
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5663390159802345553, guid: cded014eabeb5fa42857e174dfdcf7dd, type: 3}
       propertyPath: m_Name
       value: E_Sniper (1)
@@ -12774,6 +12861,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 293866501}
   - {fileID: 93398495}
   - {fileID: 7292047734970729287}
   - {fileID: 554315428805803994}
