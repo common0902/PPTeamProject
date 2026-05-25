@@ -1,6 +1,8 @@
-﻿using _Script.ScriptableObject.Event;
+﻿using System;
+using _Script.ScriptableObject.Event;
 using _Script.Tools.Utility;
 using _Works._JTH.Scripts.UI.Event;
+using _Works._JTH.Scripts.UI.GameEnd;
 using _Works._JYG._Script.EventChannel.SystemEvent;
 using Agents.FSM;
 using GameLib.PoolObject.Runtime;
@@ -29,7 +31,6 @@ namespace _Works._JYG._Script
                 EnemyCount = 0;
             Time.timeScale = 1f;
         }
-
         [ContextMenu("EnemySiren")]
         public void PiiyongPPiyongEnemy()
         {
