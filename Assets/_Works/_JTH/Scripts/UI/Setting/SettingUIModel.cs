@@ -1,6 +1,7 @@
 ﻿using _Script.ScriptableObject.Event;
 using _Works._JTH.Scripts.SO;
 using _Works._JTH.Scripts.UI.Event;
+using _Works._JYG._Script;
 using HwanLib.MVP.System.AbstractMVP.SaveMVP;
 using HwanLib.MVP.UIData;
 using UnityEngine;
@@ -89,6 +90,7 @@ namespace _Works._JTH.Scripts.UI.Setting
         {
             OpenUIChannel.RaiseEvent(OpenUIEvents.OpenFadeUIEvent
                 .Init(SceneManager.GetActiveScene().buildIndex, false, false));
+            GameManager.Instance.Player.GetComponent<CapsuleCollider>().enabled = false;
         }
         
         private UIParam UpdateMasterVolume() => UIParams.UIFloatParam.Init(_settingInfo.MasterVolume);
