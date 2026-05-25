@@ -37,7 +37,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 visualObject[0].SetActive(true);
                 visualObject[1].SetActive(true);
 
-                float targetY = hit.point.y + (visualObject[0].transform.lossyScale.y * 0.5f);
+                float targetY = hit.point.y + (visualObject[0].transform.lossyScale.y);
 
                 transform.DOMoveY(targetY, 0.4f).SetEase(Ease.InQuad).OnComplete(() =>
                 {
