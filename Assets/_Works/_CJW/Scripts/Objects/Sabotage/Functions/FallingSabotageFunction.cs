@@ -42,11 +42,11 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
                 transform.DOMoveY(targetY, 0.4f).SetEase(Ease.InQuad).OnComplete(() =>
                 {
                     PlayParticle();
+                    ExecuteDamage();
 
                     DOVirtual.DelayedCall(lifetime, () =>
                     {
                         _owner.ActiveVisual(true);
-                        ExecuteDamage();
                         visualObject[0].SetActive(false);
                         visualObject[1].SetActive(false);
                     });
@@ -57,7 +57,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         private void ExecuteDamage()
         {
             Collider[] hits = new Collider[maxDetectCount];
-            Physics.OverlapBoxNonAlloc(transform.position + boxOffset, boxSize * 0.5F, hits, Quaternion.identity, enemyLayer);
+            Physics.OverlapBoxNonAlloc(transform.position, boxSize * 0.5F, hits, Quaternion.identity, enemyLayer);
             foreach (Collider c in hits)
             {
                 if (c == null) continue;
