@@ -3,6 +3,7 @@ using System.Collections;
 using _Script.Agent.Modules;
 using _Script.ScriptableObject.Event;
 using _Works._CJW.Scripts.Events;
+using _Works._JYG._Script;
 using DG.Tweening;
 using Unity.Cinemachine;
 using UnityEngine;
@@ -92,12 +93,13 @@ namespace _Works._CJW.Scripts
             _tempTrs.position = _rootTrs.position;
             _tempTrs.rotation = _rootTrs.rotation;
             topViewCam.Follow = _tempTrs;
-            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * topViewOffset), 0.1f).SetEase(transitionCurve)
+            _tempTrs.DOMove(_rootTrs.position + -(_rootTrs.forward * topViewOffset), 0.1f)
                 .OnComplete((() => StartCoroutine(TransCameraToTopViewCoroutine())));
         }
     
         private IEnumerator TransCameraToTopViewCoroutine()
         {
+            GameManager.Instance.Player.GetComponent<CapsuleCollider>().enabled = false;
             _inputAxisController.enabled = false;
 
             Cursor.visible = true;
@@ -221,6 +223,7 @@ namespace _Works._CJW.Scripts
                     CameraEvent.FirstViewComplete.Init(true));
 
                 OnFirstViewComplete?.Invoke();
+                GameManager.Instance.Player.GetComponent<CapsuleCollider>().enabled = true;
             }
         }
     }
