@@ -27,6 +27,7 @@ namespace _Works._JYG._Script
                 EnemyCount = enemyGroup.transform.childCount;
             else
                 EnemyCount = 0;
+            Time.timeScale = 1f;
         }
 
         [ContextMenu("EnemySiren")]
