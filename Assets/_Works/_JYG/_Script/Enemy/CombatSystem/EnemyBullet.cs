@@ -39,6 +39,7 @@ namespace _Works._JYG._Script.Enemy.CombatSystem
         {
             if (collision.gameObject.TryGetComponent<IDamageable>(out IDamageable damageable))
             {
+                Debug.Log(collision.gameObject.name + "을 감지함.");
                 damageable.TakeDamage(damage, Vector3.zero, transform.position);
             }
             StopAllCoroutines();

@@ -23,7 +23,7 @@ namespace _Works._JYG._Script.UI
             bar.fillAmount = caution;
             bar.color = cautionGradient.Evaluate(caution);
             
-            if (caution <= 0 || caution >= 1)    //Caution이 0이나 1이 되면 사라진다.
+            if (caution <= 0 || caution >= 1 || _enemy.IsDead)    //Caution이 0이나 1이 되면 사라진다.
             {
                 bar.gameObject.SetActive(false);
             }
