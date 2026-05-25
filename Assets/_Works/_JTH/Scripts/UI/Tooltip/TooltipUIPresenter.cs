@@ -6,6 +6,7 @@ using _Works._CJW.Scripts.Objects.Sabotage;
 using HwanLib.MVP.System.BaseMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Works._JTH.Scripts.UI.Tooltip
 {
@@ -43,10 +44,11 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             Sabotage sabotage = eventData.Sabotage;
             _tooltipModel.SetText(sabotage.SabotageData.SabotageName, 
                 sabotage.SabotageData.SabotageDesc);
-            
+
             Vector2 tooltipPos = Camera.main.WorldToScreenPoint(sabotage.transform.position);
             _tooltipView.OpenView();
-            _tooltipView.SetPosition(tooltipPos + new Vector2(sabotage.markBoxSize.x, sabotage.markBoxSize.y));
+            _tooltipView.SetSize();
+            _tooltipView.SetPosition(tooltipPos);
         }
 
         private void CloseTooltip()
