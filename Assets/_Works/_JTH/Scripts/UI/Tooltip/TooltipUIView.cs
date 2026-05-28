@@ -5,6 +5,7 @@ using HwanLib.MVP.System;
 using HwanLib.MVP.System.AbstractMVP;
 using HwanLib.MVP.System.GenerateUI;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace _Works._JTH.Scripts.UI.Tooltip
 {
@@ -14,6 +15,7 @@ namespace _Works._JTH.Scripts.UI.Tooltip
         
         private AccessForm _lockIcon;
         private TextForm _desc;
+        private ContentSizeFitter _contentSizeFitter;
 
         protected override int WindowFormIndex => (int)TooltipUIEnum.Window;
         protected override int BackgroundFormIndex => -1;
@@ -28,6 +30,7 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             _desc = GetForm<TextForm>((int)TooltipUIEnum.Desc);
             
             _windowRectTrm = WindowForm.GetComponent<RectTransform>();
+            _contentSizeFitter = WindowForm.GetComponent<ContentSizeFitter>();
         }
 
         public override void OpenView()
@@ -55,6 +58,11 @@ namespace _Works._JTH.Scripts.UI.Tooltip
             offset.x = tooltipPos.x >= screenSize.x / 2f ? -offset.x : offset.x;
             offset.y = tooltipPos.y >= screenSize.y / 2f ? -offset.y : offset.y;
             _windowRectTrm.anchoredPosition = tooltipPos + offset;
+        }
+
+        public void SetSize()
+        {
+            LayoutRebuilder.ForceRebuildLayoutImmediate((RectTransform)_contentSizeFitter.transform);
         }
     }
 }
