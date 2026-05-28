@@ -57,7 +57,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         private void ExecuteDamage()
         {
             Collider[] hits = new Collider[maxDetectCount];
-            Physics.OverlapBoxNonAlloc(transform.position, boxSize * 0.5F, hits, Quaternion.identity, enemyLayer);
+            Physics.OverlapBoxNonAlloc(transform.position, boxSize * 0.25f, hits, Quaternion.identity, enemyLayer);
             foreach (Collider c in hits)
             {
                 if (c == null) continue;
@@ -73,7 +73,7 @@ namespace _Works._CJW.Scripts.Objects.Sabotage.Functions
         private void OnDrawGizmosSelected()
         {
             Gizmos.color = Color.blue;
-            Gizmos.DrawCube(transform.position + boxOffset, boxSize* 0.5F);
+            Gizmos.DrawCube(transform.position + boxOffset, boxSize);
         }
     }
 }
