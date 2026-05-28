@@ -50,6 +50,7 @@ MonoBehaviour:
   bounceHeight: 0.1
   bounceDuration: 5
   bounceSpeed: 2
+  timer: 0.8
 --- !u!54 &-7381244050009657454
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -96,8 +97,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.8, y: 0.8, z: 0.8}
+  m_Center: {x: 0.06, y: -0.06981124, z: 0}
 --- !u!1001 &3503840271828233898
 PrefabInstance:
   m_ObjectHideFlags: 0
