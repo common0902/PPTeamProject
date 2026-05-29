@@ -9,12 +9,21 @@ namespace _Works._CJW.Scripts.Objects.Box
         [SerializeField] private float bounceHeight = 0.5f;
         [SerializeField] private float bounceDuration = 0.5f;
         [SerializeField] private float bounceSpeed;
+        [SerializeField] private float timer;
+        private BoxCollider _collider;
 
         private void Start()
         {
+            _collider = GetComponent<BoxCollider>();
+            StartCoroutine(fTime());
             StartCoroutine(BouncingCoroutine());
         }
-
+        private IEnumerator fTime()
+        {
+            _collider.enabled = false;
+            yield return new WaitForSeconds(timer);
+            _collider.enabled = true;
+        }
         private IEnumerator BouncingCoroutine()
         {
             float t = 0;
